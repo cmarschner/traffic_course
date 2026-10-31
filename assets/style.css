@@ -233,3 +233,22 @@ figure.photo figcaption { font-family: var(--sans); font-size: .8rem; color: var
 .tenet p { font-size: 1.05rem; }
 figure.chart { max-width: 26rem; margin: 1.2rem auto; }
 figure.chart img { border: 1px solid var(--rule); }
+
+/* people and stories */
+.person { display: grid; grid-template-columns: 88px 1fr; gap: 1rem; margin: 1.4rem 0; padding: 1rem 1.1rem;
+  border: 1px solid var(--rule); border-radius: 10px; background: var(--card); }
+.person img, .person .noimg { width: 88px; height: 108px; object-fit: cover; border-radius: 8px; filter: grayscale(15%); }
+.person .noimg { display: flex; align-items: center; justify-content: center; background: var(--note-soft);
+  color: var(--ink-3); font-family: var(--sans); font-size: 2rem; }
+.person p { margin: .3rem 0; font-size: .95rem; }
+.person-name { font-family: var(--sans); font-weight: 700; font-size: .98rem !important; margin-top: 0 !important; }
+.person-name span { font-weight: 400; color: var(--ink-3); font-size: .85rem; margin-left: .3rem; }
+.person .credit, .story .credit { font-size: .74rem; color: var(--ink-3); font-family: var(--sans); }
+.box.story { background: var(--warn-soft); border-color: transparent; }
+.box.story::after { content: ""; display: block; clear: both; }
+figure.photo.inset { float: right; width: 42%; margin: .2rem 0 .6rem 1rem; }
+@media (max-width: 640px) {
+  .person { grid-template-columns: 64px 1fr; gap: .8rem; }
+  .person img, .person .noimg { width: 64px; height: 80px; }
+  figure.photo.inset { float: none; width: 100%; margin: .5rem 0; }
+}
