@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Objective explorer — Welfare-Centred Transport Planning</title>
+<meta name="description" content="Interactive: rank four corridor plans under different national readings of the welfare objective.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+<script defer src="assets/explorer.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="syllabus.html">Syllabus</a>
+    <a href="countries/index.html">Countries</a>
+    <a href="sources/index.html">Sources &amp; translations</a>
+    <a href="explorer.html" aria-current="page">Objective explorer</a>
+    <a href="about.html">About</a>
+  </nav>
+</div></header>
+
+<main class="wide">
+<p class="kicker">Interactive</p>
+<h1>Objective explorer</h1>
+<p class="lede" style="max-width:46rem">The same four plans for one congested 3 km urban arterial, ranked by the welfare objective \(W\) under different parameter choices. Pick a national preset, then move the sliders and watch the ranking change.</p>
+
+<div class="explorer">
+<div>
+  <fieldset>
+    <legend>Reading of \(W\)</legend>
+    <label for="preset">Preset</label>
+    <select id="preset"></select>
+    <label for="horizon">Time horizon</label>
+    <select id="horizon">
+      <option value="short">Short run: fixed demand</option>
+      <option value="long">Long run: induced demand, mode shift</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>Prices</legend>
+    <label for="vtts">Value of travel time (€/h) <span class="val" id="vtts-v"></span></label>
+    <input type="range" id="vtts" min="0" max="40" step="1">
+    <label for="carbon">Carbon value (€/t CO₂) <span class="val" id="carbon-v"></span></label>
+    <input type="range" id="carbon" min="0" max="1000" step="10">
+    <label for="airnoise">Air pollution + noise (€/vehicle-km) <span class="val" id="airnoise-v"></span></label>
+    <input type="range" id="airnoise" min="0" max="0.15" step="0.01">
+    <label for="ksi">Value per killed or seriously injured, average (M€) <span class="val" id="ksi-v"></span></label>
+    <input type="range" id="ksi" min="0" max="3" step="0.1">
+    <label for="health">Health benefit (€/active km) <span class="val" id="health-v"></span></label>
+    <input type="range" id="health" min="0" max="1.5" step="0.05">
+    <label for="land">Land opportunity cost \(r\) (€/m²/year) <span class="val" id="land-v"></span></label>
+    <input type="range" id="land" min="0" max="400" step="5">
+    <label for="mu">Marginal cost of public funds \(\mu\) <span class="val" id="mu-v"></span></label>
+    <input type="range" id="mu" min="0" max="0.5" step="0.05">
+  </fieldset>
+  <fieldset>
+    <legend>Hard constraints</legend>
+    <label><input type="checkbox" id="cSafety"> Vision Zero: no plan may increase KSI</label>
+    <label><input type="checkbox" id="cCarbon"> Carbon budget: no plan may increase CO₂</label>
+    <label><input type="checkbox" id="cLand"> Land cap: no plan may take more land</label>
+  </fieldset>
+</div>
+
+<div>
+  <h3 style="margin-top:0">Ranking by \(W\) (change vs. do-nothing, M€ per year)</h3>
+  <div id="bars"></div>
+  <p class="meta">Greyed plans violate an active constraint and rank last, whatever their \(W\).</p>
+  <h3>Breakdown by term</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Plan</th><th class="num">A access</th><th class="num">B health</th><th class="num">C externalities</th><th class="num">D land</th><th class="num">E public cost</th><th class="num">W</th></tr></thead>
+    <tbody id="breakdown"></tbody>
+  </table></div>
+</div>
+</div>
+
+<h2>Things to try</h2>
+<ol style="max-width:46rem">
+<li>Start with <em>Classic traffic engineering</em>. Widening wins. Switch the horizon to <em>long run</em> without changing anything else: induced demand erodes most of its time savings.</li>
+<li>Choose <em>Sweden</em>. Widening is ruled out by the Vision Zero constraint, not by its price. Untick the constraint and see whether the crash price alone would have excluded it.</li>
+<li>Choose <em>Singapore</em>, then drag the land value \(r\) down to zero. Which plan does a land-abundant city prefer?</li>
+<li>In any long-run preset, set the carbon value to €1,000/t. At corridor scale CO₂ rarely decides the ranking. Crashes, health and land usually matter more. Why, and what does that imply for climate policy at network scale?</li>
+<li>Pricing (D) has a large revenue term. Why does that revenue not count as a benefit in itself? Look at Terms A and E together and see <a href="modules/m13-pricing.html">Module 13</a>.</li>
+</ol>
+
+<h2>The model behind the explorer</h2>
+<div class="box caution" style="max-width:46rem">
+<div class="box-title">Illustrative numbers</div>
+<p>The physical effects of each plan are invented but plausible teaching values for a single corridor. The presets caricature each tradition's emphasis as described in <a href="modules/m01-objective.html#role-models">Module 1</a>. They are <strong>not official national parameter values</strong>. For the real values and how they are derived, see <a href="modules/m02-valuing-access.html">Module 2</a> (time), <a href="modules/m03-externalities.html">Module 3</a> (externalities) and <a href="modules/m14-appraisal.html">Module 14</a> (national appraisal frameworks).</p>
+</div>
+<p style="max-width:46rem">For each plan the explorer computes, in M€ per year:</p>
+<ul style="max-width:46rem">
+<li><strong>A</strong> = VTTS × net user benefit in person-hour equivalents − tolls and fares paid. The short-run figure assumes fixed demand. The long-run figure includes induced traffic, rerouting and mode shift, with benefits to new users counted by the rule of half (<a href="modules/m02-valuing-access.html">Module 2</a>).</li>
+<li><strong>B</strong> = health value × change in walking and cycling km.</li>
+<li><strong>C</strong> = −(carbon value × CO₂ at 170 g/vehicle-km + air/noise value × vehicle-km + KSI value × change in KSI).</li>
+<li><strong>D</strong> = −\(r\) × change in land used for roads.</li>
+<li><strong>E</strong> = −(1 + \(\mu\)) × (annualised capital + operating cost − revenue).</li>
+</ul>
+<div class="table-wrap" style="max-width:56rem"><table>
+<tr><th>Plan</th><th class="num">hours (M) short / long</th><th class="num">vehicle-km (M) short / long</th><th class="num">active km (M) short / long</th><th class="num">KSI short / long</th><th class="num">land (ha)</th><th class="num">capex + opex (M€)</th><th class="num">revenue (M€)</th></tr>
+<tr><td>A · Widen</td><td class="num">+0.40 / +0.10</td><td class="num">+0.5 / +6.0</td><td class="num">−0.1 / −0.3</td><td class="num">+1.0 / +1.5</td><td class="num">+2.5</td><td class="num">4.3</td><td class="num">0</td></tr>
+<tr><td>B · Road diet</td><td class="num">−0.25 / −0.05</td><td class="num">−0.5 / −4.0</td><td class="num">+1.5 / +3.0</td><td class="num">−2.5 / −3.0</td><td class="num">−1.5</td><td class="num">1.6</td><td class="num">0</td></tr>
+<tr><td>C · BRT</td><td class="num">+0.15 / +0.45</td><td class="num">−1.0 / −5.0</td><td class="num">+0.5 / +0.8</td><td class="num">−0.8 / −1.0</td><td class="num">0</td><td class="num">4.2</td><td class="num">0.6</td></tr>
+<tr><td>D · Congestion charge</td><td class="num">+0.20 / +0.20</td><td class="num">−4.0 / −5.0</td><td class="num">+0.4 / +0.6</td><td class="num">−0.6 / −0.8</td><td class="num">0</td><td class="num">3.0</td><td class="num">6.0</td></tr>
+</table></div>
+<p class="meta">Source code: <a href="assets/explorer.js">assets/explorer.js</a>. Change the numbers to your own corridor; the page needs no build step.</p>
+</main>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

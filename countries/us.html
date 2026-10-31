@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>United States · Role model country — Welfare-Centred Transport Planning</title>
+<meta name="description" content="How the United States reads the welfare objective W: capacity and level of service, federal benefit–cost analysis, California's switch from LOS to VMT, congestion pricing in New York and Vision Zero in Hoboken.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html">Syllabus</a>
+    <a href="../countries/index.html" aria-current="page">Countries</a>
+    <a href="../sources/index.html">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Role model country</p>
+<h1>United States</h1>
+<p class="meta">≈ 2 hours · Read after <a href="../modules/m01-objective.html">Module 1</a> · Key terms: A (time savings), C (crash, CO₂), E, constraints</p>
+
+<p class="lede">The United States built the toolkit the rest of the world uses to measure traffic: the Highway Capacity Manual, level of service, the four-step model, and federal benefit–cost analysis with a value of a statistical life. It also built the clearest example of what happens when that toolkit is aimed at one term of \(W\) only. Today the country is the most varied of the role models: Houston and Manhattan, Caltrans and the Texas DOT, practise almost opposite readings of the same objective.</p>
+
+<div class="box key">
+<div class="box-title">What to take from this page</div>
+<ul>
+<li>Describe the classic US reading of \(W\): Term A reduced to vehicle time savings under fixed demand, enforced through level-of-service (LOS) standards.</li>
+<li>Explain how federal benefit–cost guidance prices crashes and (until 2025) carbon, and how its discount rate and scope changed in 2025.</li>
+<li>Explain California's SB 743 as a change of objective written into law, and work out a VMT threshold.</li>
+<li>Assess three US case studies (Katy Freeway, New York congestion pricing, Hoboken) in terms of \(W\).</li>
+<li>Find free US teaching material and the main graduate programmes.</li>
+</ul>
+</div>
+
+<h2>1. Snapshot</h2>
+<div class="table-wrap"><table>
+<tr><th>Indicator</th><th>Value</th><th>Source, year</th></tr>
+<tr><td>Population</td><td>≈ 340 million</td><td>US Census Bureau, Vintage 2024 estimate (1 July 2024)</td></tr>
+<tr><td>Urban form</td><td>Mostly low-density metropolitan regions organised around the Interstate and arterial grid. A few dense, transit-based cores (New York, and to a lesser degree Washington, Boston, Chicago, San Francisco). Zoning, parking requirements and much of the street network are controlled locally.</td><td>qualitative</td></tr>
+<tr><td>Representative city: modal split for the journey to work, City of Houston (1.11 million workers)</td><td>drove alone 69.7% · carpool 10.1% · public transport 3.2% (bus 2.9%, rail 0.3%) · walk 1.9% · bicycle 0.4% · other 2.5% · worked from home 11.7%</td><td><a href="https://pwehelp.houstontx.gov/planning/Demographics/2023-cd-demog-profiles-released-2024-dec/demo-tables/18-Means-of-Transportation-to-Work.pdf">City of Houston Planning Dept., from ACS 2019–2023 5-year estimates</a></td></tr>
+<tr><td>Road deaths</td><td>40,901 deaths in 2023 = <strong>12.21 per 100,000</strong> population (1.26 per 100 million vehicle-miles). Of these, 7,314 were pedestrians and 1,166 cyclists. Preliminary 2024: 39,345 deaths, 1.20 per 100 million vehicle-miles.</td><td><a href="https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/813738">NHTSA, Traffic Safety Facts 2023 (DOT HS 813 738)</a>; NHTSA early estimate for 2024</td></tr>
+<tr><td>Vehicle travel</td><td>≈ 3.25 trillion vehicle-miles (2023)</td><td>NHTSA, Traffic Safety Facts 2023</td></tr>
+<tr><td>Key institutions</td><td>US Department of Transportation (FHWA, FTA, NHTSA); 50 state DOTs; metropolitan planning organisations (MPOs); transit agencies; AASHTO; Transportation Research Board (TRB); Institute of Transportation Engineers (ITE); Council on Environmental Quality (NEPA)</td><td>—</td></tr>
+</table></div>
+<p>The Houston figures are a 5-year average and refer to commuting only, which is about a fifth of all trips. Note the 11.7% working from home, a post-2020 phenomenon that is larger than walking, cycling and transit combined. Nationally the picture is similar. New York City, where a majority of workers commute without a car, is the large exception, not the rule.</p>
+
+<h2>2. The US reading of \(W\)</h2>
+<p>Module 1 summarises the US reading as: historically, Term A as vehicle time savings under fixed demand, enforced by LOS standards; today, federal benefit–cost guidance that monetises safety and emissions, and California moving to VMT. In detail:</p>
+
+<h3>Term A: time savings, and the LOS habit <span class="term">A</span></h3>
+<p>Two different mechanisms carry Term A in US practice.</p>
+<ul>
+<li><strong>Design and operations: LOS.</strong> The <em>Highway Capacity Manual</em> (HCM, TRB, 7th edition 2022) grades facilities from LOS A (free flow) to F (breakdown) by delay or density. Local general plans, state DOT policies and, until 2020 in California, environmental review treated a drop in LOS as an "impact" to be mitigated, usually by adding lanes or turn pockets. This is the classic objective \(\min\sum_a q_a t_a\) of Module 1, applied junction by junction and with demand held fixed. It counts vehicles, not people, and treats a pedestrian's wait as zero.</li>
+<li><strong>Appraisal: benefit–cost analysis (BCA).</strong> USDOT's <em>Benefit–Cost Analysis Guidance for Discretionary Grant Programs</em>, updated almost annually, prices travel-time savings with a value of travel time, vehicle operating costs, crashes, emissions and residual value. It is a consumer-surplus framework, so in principle it can handle induced demand through the rule of half (<a href="../modules/m02-valuing-access.html">Module 2</a>). In practice it is used to rank grant applications, not to set network-wide objectives, and most formula-funded highway money is not allocated by BCA at all.</li>
+</ul>
+<p>Equity weights \(\omega_g\) are a moving target. Between 2021 and 2024, federal programmes added equity screens (Justice40). A Secretarial order of January 2025 (<em>Ensuring Reliance Upon Sound Economic Analysis</em>) removed these, required rigorous BCA for grants, and introduced other selection priorities, including communities with higher marriage and birth rates and "user-pays" funding models. In \(W\)'s terms, \(\omega_g\) was changed by executive order, twice in four years.</p>
+
+<h3>Term B: health <span class="term">B</span></h3>
+<p>Rarely monetised in project appraisal. It appears in public-health practice (CDC, county health departments) and in some MPO active-transportation plans rather than in highway BCA.</p>
+
+<h3>Term C: externalities <span class="term">C</span></h3>
+<p>Crashes are priced: USDOT publishes a value of a statistical life (VSL), revised annually for inflation and income, together with injury values on the KABCO or AIS scales. Noise and local air pollutants are partly covered. Carbon has swung with administrations: the 2024–25 guidance valued CO₂ using the social cost of greenhouse gases with a lower discount rate. In 2025 the administration directed agencies to stop monetising climate damages, and FTA announced in November 2025 that it "will no longer consider the social cost of carbon" when rating transit Capital Investment Grants. At the federal level, then, \(p_{\mathrm{CO_2}}\) is currently zero. California, by contrast, regulates carbon through VMT (SB 743) and through regional greenhouse-gas targets for MPOs (SB 375, 2008).</p>
+
+<h3>Term D: land <span class="term">D</span></h3>
+<p>Effectively \(r=0\). Right-of-way already owned by a DOT carries no opportunity cost in appraisal, and minimum parking requirements in local zoning codes force land into car storage. The parking critique (Donald Shoup, UCLA) is an American invention, and several US jurisdictions have since abolished minimums: Buffalo (2017), Minneapolis (2021), and California near major transit stops (AB 2097, 2022).</p>
+
+<h3>Term E: public cost <span class="term">E</span></h3>
+<p>The federal fuel tax (18.4 cents per gallon for petrol) has not changed since 1993, and the Highway Trust Fund has relied on general-fund transfers since 2008. Revenue \(R\) therefore covers a shrinking share of \(K\). USDOT does not apply a marginal cost of public funds (\(\mu=0\)). In May 2025 the BCA guidance returned to the discount rates of OMB Circular A-94 (1992), i.e. 7% real, from the 3.1% used in 2024. A higher discount rate penalises long-lived investments such as rail more than short-lived ones.</p>
+
+<h3>Constraints <span class="term">constraints</span></h3>
+<p>Federal policy has no binding safety or carbon constraint. The 2022 National Roadway Safety Strategy adopted the Safe System Approach and a long-term goal of zero deaths, and the 2021 Infrastructure Investment and Jobs Act created the Safe Streets and Roads for All grant programme (US$5 billion over five years). Many cities, beginning with New York in 2014, have adopted Vision Zero, which in Module 1's language is \(F\le\bar F\) imposed locally. The binding US constraint is often a legal one: the <em>fiscal constraint</em> on MPO long-range plans, which must be affordable with reasonably expected revenue.</p>
+
+<div class="box note">
+<div class="box-title">The US reading in one line</div>
+<p>Federal practice: \(\max\) time savings \(-\) VSL\(\cdot\)crashes \(-\) cost, with \(r=0\), \(\mu=0\), a 7% discount rate and currently \(p_{\mathrm{CO_2}}=0\). California: the same, plus a quasi-constraint on VMT per capita and binding regional GHG targets. New York: a direct price on external congestion. This is our <em>interpretation</em>; agencies do not state it this way.</p>
+</div>
+
+<h2>3. Institutions and standards</h2>
+<div class="table-wrap"><table>
+<tr><th>Body or document</th><th>Role</th><th>Link to \(W\)</th></tr>
+<tr><td><strong>FHWA</strong> (Federal Highway Administration)</td><td>Distributes federal highway funds to states, approves Interstate changes, publishes the <a href="https://mutcd.fhwa.dot.gov/">MUTCD</a> (11th edition, effective January 2024) and the <a href="https://ops.fhwa.dot.gov/publications/fhwahop18036/chapter5.htm">Traffic Analysis Toolbox</a></td><td>Instruments; models for A</td></tr>
+<tr><td><strong>FTA</strong> (Federal Transit Administration)</td><td>Funds transit capital; rates major projects (Capital Investment Grants) on mobility, cost-effectiveness, environment, land use</td><td>A, C, E</td></tr>
+<tr><td><strong>NHTSA</strong></td><td>Vehicle safety standards; FARS crash database</td><td>Safety constraint, C</td></tr>
+<tr><td><strong>AASHTO</strong> <em>Green Book</em> (A Policy on Geometric Design of Highways and Streets, 7th ed. 2018)</td><td>Design speeds, lane widths, sight distances. The 8th edition, in preparation, is organised around context classification and multimodal design (<a href="https://onlinepubs.trb.org/onlinepubs/nchrp/docs/NCHRP_20-07(423)_GB8_Vision_and_Roadmap.pdf">NCHRP vision and roadmap</a>)</td><td>Instruments; implicitly C</td></tr>
+<tr><td><strong>Highway Capacity Manual</strong> (TRB, 7th ed. 2022)</td><td>Capacity and LOS for freeways, arterials, junctions; includes multimodal LOS for pedestrians, cyclists and transit</td><td>A (time); <a href="../modules/m08-capacity-los.html">Module 8</a></td></tr>
+<tr><td><strong>MPOs</strong></td><td>Required for every urbanised area over 50,000 people. Produce a fiscally constrained long-range plan (20+ years) and a Transportation Improvement Program (<a href="https://www.fhwa.dot.gov/planning/processes/metropolitan/">FHWA overview</a>)</td><td>Regional \(W\), constraint on E</td></tr>
+<tr><td><strong>USDOT BCA Guidance</strong></td><td>Values of time, VSL, emissions, discount rate for discretionary grants</td><td>A, C, E; <a href="../modules/m14-appraisal.html">Module 14</a></td></tr>
+<tr><td><strong>NEPA</strong> (1970)</td><td>Environmental review of federal actions: purpose and need, alternatives, impacts (<a href="https://nepa.gov/">nepa.gov</a>). In 2025 the CEQ withdrew its government-wide NEPA regulations and the Supreme Court's <em>Seven County Infrastructure Coalition v. Eagle County</em> decision narrowed the scope of review.</td><td>Procedure for C</td></tr>
+<tr><td><strong>California SB 743</strong> (2013) and CEQA Guidelines §15064.3</td><td>Replaces auto delay (LOS) with vehicle-miles travelled (VMT) as the transport impact metric in state environmental review, mandatory statewide from 1 July 2020 (<a href="https://lci.ca.gov/ceqa/sb-743/">state SB 743 page</a>)</td><td>Weight moved from A (time) to C</td></tr>
+<tr><td><strong>ITE, NACTO</strong></td><td>ITE: Trip Generation Manual, Traffic Engineering Handbook. NACTO: city-led <em>Urban Street Design Guide</em> (2013) and <em>Transit Street Design Guide</em></td><td>Instruments; <a href="../modules/m12-street-design.html">Module 12</a></td></tr>
+</table></div>
+<p>Two features of the system matter for \(W\). First, <strong>fragmentation</strong>: the state DOT owns the highways, the city owns local streets, the county or a regional agency runs transit, and the municipality controls land use. Nobody owns the whole objective. Second, <strong>standards are defaults with legal weight</strong>. Deviating from AASHTO or MUTCD requires a documented design exception, so a city that wants narrower lanes carries the burden of proof. This is the opposite of the Swedish logic in Module 1, where the design must show it is safe.</p>
+
+<h2>4. Signature ideas and documented weaknesses</h2>
+<h3>What the world can learn</h3>
+<ul>
+<li><strong>Quantification.</strong> The HCM, the four-step model, FARS and the National Household Travel Survey made traffic measurable. Germany's HBS and many national manuals descend from the HCM.</li>
+<li><strong>Monetising safety.</strong> The VSL approach, developed largely by US economists and agencies, makes crash reduction commensurable with time savings, which is a precondition for Term C.</li>
+<li><strong>Empirical evidence on induced demand.</strong> Duranton and Turner (2011) found that vehicle-kilometres in US metros rise roughly one-for-one with lane-kilometres. California built this into a tool: the <a href="https://travelcalculator.ncst.ucdavis.edu/">California Induced Travel Calculator</a> (UC Davis, NCST), which Caltrans recommends for estimating the VMT induced by highway expansions.</li>
+<li><strong>Changing the objective in law.</strong> SB 743 is the clearest case anywhere of a legislature replacing a congestion metric with a VMT metric.</li>
+<li><strong>Pricing.</strong> Express (HOT) lanes, first on California's SR 91 (1995), and New York's cordon charge (2025).</li>
+<li><strong>Parking reform</strong> from Shoup's work, now being adopted city by city.</li>
+<li><strong>Bottom-up innovation.</strong> Cities such as New York (Vision Zero 2014, plaza programme), Hoboken and Washington DC tested low-cost street redesigns faster than many national systems would allow.</li>
+</ul>
+<h3>Documented weaknesses</h3>
+<ul>
+<li><strong>High and rising road deaths.</strong> At 12.2 per 100,000 (2023), the US rate is several times those of the other role models on this site. Pedestrians made up about 18% of deaths (7,314 in 2023). Analyses such as Smart Growth America's <a href="https://www.smartgrowthamerica.org/signature-reports/dangerous-by-design/">Dangerous by Design</a> link this to wide, fast arterials and larger vehicles.</li>
+<li><strong>Capacity-led planning.</strong> LOS standards and fixed-demand models systematically favoured widening (Module 1, section 3).</li>
+<li><strong>Speed limits from observed speeds.</strong> Limits were long set near the 85th-percentile speed of free-flowing traffic, which ratchets limits upward as roads are designed for higher speeds. The 2023 MUTCD gives engineers more latitude to consider other factors.</li>
+<li><strong>Very high transit construction costs.</strong> The NYU <a href="https://transitcosts.com/">Transit Costs Project</a> found US urban rail among the most expensive per kilometre in the world, which inflates \(K\) in Term E.</li>
+<li><strong>Policy volatility.</strong> Carbon values, equity weights and the discount rate changed twice between 2021 and 2025. An appraisal can rank the same project differently depending on the year it was submitted.</li>
+<li><strong>Underfunded maintenance</strong> and an unindexed fuel tax.</li>
+</ul>
+
+<h2>5. Case studies</h2>
+<h3>Katy Freeway, Houston (2003–2008)</h3>
+<p>Interstate 10 west of downtown was rebuilt to as many as 26 lanes, counting frontage roads, for about US$2.8 billion. Travel times fell immediately after the 2008 opening. Using Houston TranStar data, City Observatory reported that between 2011 and 2014 the morning peak trip on two corridor segments became 25 minutes (30%) longer and the afternoon trip 23 minutes (55%) longer (<a href="https://cityobservatory.org/reducing-congestion-katy-didnt/">Cortright, 2015</a>). Defenders note the corridor's rapid population and job growth and the much larger number of people it now carries. In \(W\) terms: Term A for <em>new</em> trips (more people living and working in west Houston) is positive. The claimed time savings for <em>existing</em> trips vanished. Terms C and D were never counted. See <a href="../modules/m05-accessibility-land-use.html">Module 5</a> for the induced-demand mechanics.</p>
+
+<h3>New York congestion pricing (from 5 January 2025)</h3>
+<p>The MTA's Congestion Relief Zone charges most cars US$9 once per day at peak times to enter Manhattan south of 60th Street. The scheme was authorised by state law in 2019, paused in June 2024 at a planned US$15, relaunched at US$9, and challenged by USDOT in 2025. According to the New York State Governor's office, the first year brought about 73,000 fewer vehicles per day entering the zone (−11%), morning peak speeds 23% higher, crashes 7% and injuries 8% lower, transit ridership up 7%, and net revenue of US$518 million by November 2025 (<a href="https://www.governor.ny.gov/news/less-traffic-better-transit-its-first-anniversary-governor-hochul-celebrates-transformational">Governor's office, January 2026</a>). These are official figures from the scheme's promoters; independent evaluations are still appearing. In \(W\): a price on external congestion (Term C) whose revenue funds MTA capital (Term E). See <a href="../modules/m13-pricing.html">Module 13</a>.</p>
+
+<h3>Hoboken, New Jersey: zero traffic deaths</h3>
+<p>Hoboken (about 60,000 residents on two square miles) has recorded no traffic death since early 2017, a streak reported as nine years in March 2026 (<a href="https://www.opb.org/article/2026/03/16/portland-traffic-deaths-hoboken/">OPB, 2026</a>). The tools were cheap and passive: daylighting (removing parking next to crossings so drivers and pedestrians can see each other), curb extensions, leading pedestrian intervals, no right turn on red at some junctions, and a citywide 20 mph limit (<a href="https://www.hobokennj.gov/resources/vision-zero">City of Hoboken Vision Zero</a>). Its target is zero deaths and serious injuries by 2030. It shows that the safety constraint \(F\le\bar F\) can be met in a US setting, at least in a small, dense, grid city. See <a href="../modules/m11-safety.html">Module 11</a> and <a href="../modules/m12-street-design.html">Module 12</a>.</p>
+
+<h3>California SB 743: a worked example</h3>
+<p>Under the state's technical advisory, a residential project has a significant transport impact if its home-based VMT per resident exceeds 85% of the existing regional (or city) average. Suppose the regional average is 20 VMT per resident per day.</p>
+$$\text{threshold}=0.85\times 20=17\ \text{VMT/resident/day}.$$
+<p>A greenfield subdivision modelled at 23 VMT must mitigate (for example, with transit passes, unbundled parking or more housing near jobs) or document a significant impact. An infill project near a rail station at 12 VMT is presumed to have none. Under LOS, the infill project could have been the one that failed, because it adds turning traffic at a congested downtown junction. The reversal is the point: the law changed which term of \(W\) the review protects. With an <em>illustrative</em> external cost of US$0.10 per vehicle-mile, avoiding 6 VMT per resident per day saves about US$220 per resident per year in Term C.</p>
+
+<h2>6. Where to study</h2>
+<h3>Degree programmes and research centres</h3>
+<ul>
+<li><strong>MIT</strong>: interdepartmental <a href="https://catalog.mit.edu/degree-charts/master-transportation/">Master of Science in Transportation</a> (demand modelling, transit, economics).</li>
+<li><strong>UC Berkeley</strong>: <a href="https://its.berkeley.edu/">Institute of Transportation Studies</a>, with civil engineering and city planning programmes. Traditions in traffic flow theory (Daganzo), demand (McFadden), and policy.</li>
+<li><strong>UC Davis</strong> ITS and the National Center for Sustainable Transportation (induced travel, VMT policy). <strong>UCLA</strong> <a href="https://its.ucla.edu/">Institute of Transportation Studies</a> (parking, travel behaviour, Shoup's school).</li>
+<li><strong>UT Austin</strong>: <a href="https://caee.utexas.edu/research/research-areas/transportation-engineering/">Transportation Engineering programme</a> and the <a href="https://ctr.utexas.edu/">Center for Transportation Research</a> (network modelling, travel demand).</li>
+</ul>
+<h3>Free teaching material</h3>
+<ul>
+<li>MIT OpenCourseWare: <a href="https://ocw.mit.edu/courses/1-201j-transportation-systems-analysis-demand-and-economics-fall-2008/">1.201J Transportation Systems Analysis: Demand and Economics</a>, <a href="https://ocw.mit.edu/courses/1-201j-introduction-to-transportation-systems-fall-2006/">1.201J Introduction to Transportation Systems</a>, <a href="https://ocw.mit.edu/courses/1-258j-public-transportation-systems-spring-2017/">1.258J Public Transportation Systems</a>.</li>
+<li>David Levinson's <a href="https://www.youtube.com/playlist?list=PLlggjH3GFI_SEj54luHq-qPQD3kgkM3dq">Introduction to Transportation Engineering</a> video lectures (University of Minnesota CE 3201), paired with the open wikibook <a href="https://en.wikibooks.org/wiki/Fundamentals_of_Transportation">Fundamentals of Transportation</a>.</li>
+<li>University of Arizona, <a href="https://www.youtube.com/playlist?list=PLh5cH2ljScBYA3ZodNj1k8h2RNLZdRpWC">CE 463/563 Traffic Flow and Capacity Analysis</a> (Spring 2018 lecture videos).</li>
+<li>FHWA guidance, free: the Traffic Analysis Toolbox, the MUTCD, and the National Highway Institute's web-based courses, several of which are free for practitioners (check fees in the NHI catalogue).</li>
+</ul>
+
+<h2>7. Key passages from primary documents</h2>
+<p>The central US documents are in English, so no translation is needed. Three short passages show the change of objective in California law.</p>
+<div class="box note">
+<div class="box-title">California Public Resources Code §21099(b)(1), via the OPR Technical Advisory</div>
+<p>The criteria for determining the significance of transportation impacts must "promote the reduction of greenhouse gas emissions, the development of multimodal transportation networks, and a diversity of land uses."</p>
+</div>
+<div class="box note">
+<div class="box-title">OPR Technical Advisory on Evaluating Transportation Impacts in CEQA (December 2018)</div>
+<p>"…automobile delay, as measured by 'level of service' and other similar metrics, generally no longer constitutes a significant environmental effect under CEQA."</p>
+<p>"…OPR recommends that a per capita or per employee VMT that is fifteen percent below that of existing development may be a reasonable threshold."</p>
+<p class="small">Source: <a href="https://lci.ca.gov/wp-content/uploads/20190122-743_Technical_Advisory.pdf">OPR (now Governor's Office of Land Use and Climate Innovation), Technical Advisory, PDF</a>.</p>
+</div>
+<p>Read against \(W\): the first passage names three outcomes (carbon, multimodal choice, land-use mix) that live in Terms C and A. The second deletes the old metric. The third turns Term C into a quasi-constraint, a per-capita VMT ceiling that projects must meet or mitigate.</p>
+
+<h2>8. Links into the course</h2>
+<div class="table-wrap"><table>
+<tr><th>Module</th><th>US material used there</th></tr>
+<tr><td><a href="../modules/m01-objective.html">1 · Objective</a></td><td>Katy Freeway, SB 743, Duranton–Turner</td></tr>
+<tr><td><a href="../modules/m02-valuing-access.html">2 · Valuing access</a></td><td>USDOT value of travel time</td></tr>
+<tr><td><a href="../modules/m03-externalities.html">3 · Externalities</a></td><td>USDOT VSL; federal carbon valuation history</td></tr>
+<tr><td><a href="../modules/m04-demand-mode-choice.html">4 · Demand</a></td><td>Four-step model, MPO models, NHTS</td></tr>
+<tr><td><a href="../modules/m05-accessibility-land-use.html">5 · Land use and induced demand</a></td><td>Induced travel calculator, parking minimums</td></tr>
+<tr><td><a href="../modules/m08-capacity-los.html">8 · Capacity and LOS</a></td><td>HCM, LOS critique, SB 743</td></tr>
+<tr><td><a href="../modules/m10-simulation-validation.html">10 · Simulation</a></td><td>FHWA Traffic Analysis Toolbox calibration guidance</td></tr>
+<tr><td><a href="../modules/m11-safety.html">11 · Safety</a></td><td>NRSS Safe System Approach, Vision Zero cities, Hoboken</td></tr>
+<tr><td><a href="../modules/m12-street-design.html">12 · Street design</a></td><td>AASHTO vs NACTO, daylighting</td></tr>
+<tr><td><a href="../modules/m13-pricing.html">13 · Pricing</a></td><td>New York cordon charge, express lanes</td></tr>
+<tr><td><a href="../modules/m14-appraisal.html">14 · Appraisal</a></td><td>USDOT BCA guidance, discount-rate changes</td></tr>
+</table></div>
+
+<div class="box exercise">
+<div class="box-title">Discussion questions</div>
+<ol>
+<li>The USDOT discount rate moved from 7% to 3.1% and back to 7% between 2023 and 2025. For a rail project with costs in years 0–5 and constant benefits in years 6–50, which way does the change move the benefit–cost ratio, and roughly by how much? Is the discount rate a technical parameter or a value judgement?</li>
+<li>Was the Katy Freeway widening a failure? State the counterfactual you would need, the terms of \(W\) you would estimate, and which of them the original appraisal set to zero.</li>
+<li>Hoboken met \(F=0\) for nine years with paint, posts and a 20 mph limit. Which features of Hoboken make this transferable, or not, to a Sun Belt city with 45 mph arterials?</li>
+<li>SB 743 is sometimes criticised for discouraging rural and exurban housing. Write the VMT rule as a constraint, then as a price. Which formulation would you defend, and why?</li>
+<li>New York's cordon revenue is earmarked for transit capital. In Module 1's notation, does earmarking change \(W\)? (Hint: think about \(\mu\) and about what the money would otherwise fund.)</li>
+</ol>
+</div>
+
+<h2>Readings and resources</h2>
+<ul class="resources">
+<li data-type="data"><a href="https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/813738">NHTSA — Traffic Safety Facts 2023 (DOT HS 813 738)</a> <span class="why">Official national crash statistics, including the rate per 100,000 population and pedestrian and cyclist deaths.</span></li>
+<li data-type="data"><a href="https://pwehelp.houstontx.gov/planning/Demographics/2023-cd-demog-profiles-released-2024-dec/demo-tables/18-Means-of-Transportation-to-Work.pdf">City of Houston — Means of transportation to work (ACS 2019–2023)</a> <span class="why">Source for the modal split in the snapshot.</span></li>
+<li data-type="link"><a href="https://lci.ca.gov/ceqa/sb-743/">California — SB 743 implementation page</a> <span class="why">Statute, CEQA Guidelines and technical advisory for the switch from LOS to VMT.</span></li>
+<li data-type="pdf"><a href="https://lci.ca.gov/wp-content/uploads/20190122-743_Technical_Advisory.pdf">OPR — Technical Advisory on Evaluating Transportation Impacts in CEQA (2018)</a> <span class="why">The 15% threshold and its rationale. Short and readable.</span></li>
+<li data-type="tool"><a href="https://travelcalculator.ncst.ucdavis.edu/">UC Davis NCST — California Induced Travel Calculator</a> <span class="why">Induced-demand elasticities turned into a planning tool.</span></li>
+<li data-type="link"><a href="https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2616">Duranton &amp; Turner (2011) — The Fundamental Law of Road Congestion</a> <span class="why">The core empirical paper on induced demand in US metros.</span></li>
+<li data-type="link"><a href="https://cityobservatory.org/reducing-congestion-katy-didnt/">City Observatory — Reducing congestion: Katy didn't (2015)</a> <span class="why">TranStar travel-time data for the Katy Freeway after widening. An advocacy source; read with the counter-arguments.</span></li>
+<li data-type="link"><a href="https://www.governor.ny.gov/news/less-traffic-better-transit-its-first-anniversary-governor-hochul-celebrates-transformational">New York State — First-anniversary results of congestion pricing (January 2026)</a> <span class="why">Official first-year figures for traffic, speeds, crashes, ridership and revenue.</span></li>
+<li data-type="link"><a href="https://www.hobokennj.gov/resources/vision-zero">City of Hoboken — Vision Zero</a> <span class="why">Programme page: 20 mph citywide, street design guide, action plan.</span></li>
+<li data-type="link"><a href="https://www.fhwa.dot.gov/planning/processes/metropolitan/">FHWA — Metropolitan transportation planning</a> <span class="why">How MPOs, long-range plans and TIPs work.</span></li>
+<li data-type="link"><a href="https://mutcd.fhwa.dot.gov/">FHWA — Manual on Uniform Traffic Control Devices</a> <span class="why">The legally binding US standard for signs, signals and markings (11th edition, 2023).</span></li>
+<li data-type="pdf"><a href="https://ops.fhwa.dot.gov/publications/fhwahop18036/chapter5.htm">FHWA — Traffic Analysis Toolbox III, Chapter 5: Model Calibration</a> <span class="why">Practical microsimulation calibration guidance (Module 10).</span></li>
+<li data-type="link"><a href="https://www.smartgrowthamerica.org/signature-reports/dangerous-by-design/">Smart Growth America — Dangerous by Design</a> <span class="why">Recurring analysis of US pedestrian deaths by metro area.</span></li>
+<li data-type="link"><a href="https://transitcosts.com/">NYU Marron Institute — Transit Costs Project</a> <span class="why">Why US rail construction costs so much: comparative case studies.</span></li>
+<li data-type="link"><a href="https://content.govdelivery.com/accounts/USDOTFTA/bulletins/3fb4e3a">FTA bulletin (November 2025) — CIG policy guidance removes the social cost of carbon</a> <span class="why">Primary record of the 2025 change in federal carbon valuation.</span></li>
+<li data-type="course"><a href="https://ocw.mit.edu/courses/1-201j-transportation-systems-analysis-demand-and-economics-fall-2008/">MIT OCW 1.201J — Transportation Systems Analysis: Demand and Economics</a> <span class="why">Free lecture notes on demand, choice and economics.</span></li>
+<li data-type="course"><a href="https://ocw.mit.edu/courses/1-258j-public-transportation-systems-spring-2017/">MIT OCW 1.258J — Public Transportation Systems (2017)</a> <span class="why">Transit service planning, operations and fares.</span></li>
+<li data-type="video"><a href="https://www.youtube.com/playlist?list=PLlggjH3GFI_SEj54luHq-qPQD3kgkM3dq">David Levinson — Introduction to Transportation Engineering (YouTube playlist)</a> <span class="why">Complete introductory lecture series. Pairs with the wikibook.</span></li>
+<li data-type="video"><a href="https://www.youtube.com/playlist?list=PLh5cH2ljScBYA3ZodNj1k8h2RNLZdRpWC">University of Arizona — CE 463/563 Traffic Flow (YouTube playlist, 2018)</a> <span class="why">Graduate traffic-flow and HCM capacity lectures.</span></li>
+<li data-type="book"><a href="https://en.wikibooks.org/wiki/Fundamentals_of_Transportation">Fundamentals of Transportation (open wikibook)</a> <span class="why">Free undergraduate textbook covering planning, demand, flow and queueing.</span></li>
+<li data-type="book"><span>Transportation Research Board — <em>Highway Capacity Manual</em>, 7th edition (2022)</span> <span class="why">The US capacity and LOS reference. Paid.</span></li>
+<li data-type="book"><span>AASHTO — <em>A Policy on Geometric Design of Highways and Streets</em> ("Green Book"), 7th edition (2018)</span> <span class="why">US geometric design standard. Paid.</span></li>
+<li data-type="book"><span>Donald Shoup — <em>The High Cost of Free Parking</em> (APA Planners Press, 2005; updated 2011)</span> <span class="why">The economic case against parking minimums and for priced curbs: Term D in practice.</span></li>
+</ul>
+
+<nav class="pager">
+  <a href="index.html">← All countries</a>
+  <a href="germany.html">Germany →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japan · Role model country — Welfare-Centred Transport Planning</title>
+<meta name="description" content="Japan as a reading of the welfare objective: accessibility through rail-oriented urban structure, a deliberately narrow three-benefit road appraisal, compact-plus-network planning law, and their documented weaknesses.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html">Syllabus</a>
+    <a href="../countries/index.html" aria-current="page">Countries</a>
+    <a href="../sources/index.html">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Role model country</p>
+<h1>Japan</h1>
+<p class="meta">Reading time ≈ 40 minutes · Related modules: 2, 4, 5, 6, 11, 14 · Key terms: <span class="term">A</span> <span class="term">D</span> <span class="term">E</span> <span class="term">constraints</span></p>
+
+<p class="lede">Japan is the clearest large-scale example of a country that delivers Term A, access to opportunities, through <em>urban structure</em> rather than vehicle speed. In Tokyo and Osaka, private railway companies built lines and towns together and recovered the cost from fares and land. Yet the national road appraisal is one of the narrowest in the OECD: it counts only three benefits. And outside the big metropolitan areas, most trips are made by car. This page is about all three Japans.</p>
+
+<div class="box key">
+<div class="box-title">What to take from this page</div>
+<ul>
+<li>Why the Tokyo region reaches a rail share of about a third of all trips, and what role private railways and land readjustment played.</li>
+<li>What MLIT's road cost–benefit manual counts (time, operating cost, crashes) and what it deliberately leaves out.</li>
+<li>How the Location Normalisation Plan (<em>立地適正化計画</em>, 2014) writes "compact plus network" into planning law, and why it nudges rather than regulates.</li>
+<li>Strengths (rail-and-property value capture, person-trip surveys, the garage certificate, a new 30 km/h default) and documented weaknesses (crowding, car-dependent regions, pedestrian deaths, shrinking demand).</li>
+</ul>
+</div>
+
+<h2>1. Snapshot</h2>
+<div class="table-wrap"><table>
+<tr><th>Indicator</th><th>Value</th><th>Source, year</th></tr>
+<tr><td>Population</td><td>122.69 million, falling by about 0.5 million a year</td><td><a href="https://www.stat.go.jp/data/jinsui/new.html">Statistics Bureau of Japan, population estimate</a>, 1 October 2026 (provisional)</td></tr>
+<tr><td>Urban form</td><td>Three large metropolitan regions (Tokyo, Keihanshin = Osaka–Kyoto–Kobe, Chūkyō = Nagoya) with dense, mixed-use development around rail stations. Many mid-sized and small cities have spread out along roads since the 1970s and are now shrinking and ageing.</td><td>qualitative</td></tr>
+<tr><td>Representative city: Tokyo metropolitan area, weekday trips by main mode</td><td>rail 33.2 %, bus 2.8 %, car 27.0 %, two-wheelers (bicycle and motorcycle) 14.0 %, walk and other 22.9 %</td><td>6th Tokyo Metropolitan Area Person Trip Survey (2018), as tabulated in <a href="https://www.mlit.go.jp/road/toukei_chousa/road_db/pdf/2024/15-5.pdf">MLIT road statistics, table 15-5</a> (2024 edition)</td></tr>
+<tr><td>For contrast: Chūkyō (Nagoya) area, weekday</td><td>rail 10.7 %, bus 1.2 %, car 62.7 %, two-wheelers 11.0 %, walk and other 14.4 %</td><td>5th Chūkyō Person Trip Survey (2011), same MLIT table</td></tr>
+<tr><td>Road fatality rate</td><td><strong>2.6 per 100,000</strong> population, fifth lowest of the 35 IRTAD countries</td><td>Cabinet Office, <a href="https://www8.cao.go.jp/koutu/taisaku/r08kou_haku/zenbun/keikaku/sanko/sanko_2.html">White Paper on Traffic Safety 2026</a>, using IRTAD data for 2024</td></tr>
+<tr><td>Key institutions</td><td>Ministry of Land, Infrastructure, Transport and Tourism (MLIT: Road Bureau, City Bureau, Railway Bureau), National Police Agency and prefectural Public Safety Commissions (speed limits, signals), NEXCO and metropolitan expressway companies, six JR companies, large private railways, municipalities, National Institute for Land and Infrastructure Management (NILIM), Japan Society of Traffic Engineers (JSTE), Japan Society of Civil Engineers (JSCE)</td><td>—</td></tr>
+</table></div>
+<p>Two details matter when you compare these shares with other countries. A person trip survey (<em>パーソントリップ調査</em>) records the <em>main mode</em> (<em>代表交通手段</em>) of each purpose trip: a walk–bus–rail–walk journey counts as rail. And Japanese tables group bicycles with motorcycles as "two-wheelers", so the bicycle share alone is not in this table. The contrast between the Tokyo and Nagoya rows is the most useful fact on this page: both regions are Japanese, wealthy and industrial, yet their car shares differ by a factor of more than two.</p>
+
+<h2>2. Japan's reading of \(W\)</h2>
+<p>Module 1 summarised Japan as "Term A as <em>accessibility through urban structure</em>: dense development around rail stations, built and financed by private railways. Road appraisal counts only three benefits." This section unpacks both halves, because they describe different decision processes.</p>
+
+<h3>Metropolitan rail: Term A through \(\ln O_j\), not \(\beta_t t\) <span class="term">A</span> <span class="term">D</span></h3>
+<p>Recall the utility of alternative \(j\): \(V_{nj} = \beta_t t_{nj} + \beta_c c_{nj} + \beta_x^{\top} x_{nj} + \ln O_j\). A road-centred plan raises the logsum mainly by reducing \(t\). The Japanese metropolitan model raises it mainly by putting more opportunities \(O_j\) within a short walk of a station, and by putting homes within walking distance of the same line. Speeds are moderate. Peak trains are crowded, which is a large negative term in \(x\). But the number of destinations reachable in 45 minutes without a car is very high.</p>
+<p>Two features make this a welfare reading rather than just a density statistic:</p>
+<ul>
+<li><strong>Land is used at its opportunity cost.</strong> Little urban land goes to parking because of the garage certificate rule (section 4). The station area is the most valuable land in the region, and it is used for shops and offices, not park-and-ride. In terms of Term D, \(r\) is high and \(L\) is kept small.</li>
+<li><strong>The operator internalises the accessibility benefit.</strong> A private railway that owns land along its line captures part of the access gain as higher land values and rents. Its private objective (fare revenue plus property profit) then lines up with part of Term A, something a pure transit operator cannot do. Section 5 gives the Tokyu example.</li>
+</ul>
+
+<h3>Road appraisal: Term A as three monetised benefits, fixed demand <span class="term">A</span> <span class="term">E</span></h3>
+<p>National road projects are appraised with MLIT's <em>費用便益分析マニュアル</em> (cost–benefit analysis manual), first issued as a draft in 1998. The edition in use was revised in February 2025 and corrected in August 2025, which updated the unit values to 2024 prices (<a href="https://www.ktr.mlit.go.jp/ktr_content/content/000926078.pdf">MLIT Kantō Regional Bureau explainer, 2025</a>). The manual counts exactly three benefits:</p>
+$$B = \underbrace{\big(T^{\text{without}} - T^{\text{with}}\big)}_{\text{走行時間短縮便益: travel time}} + \underbrace{\big(C^{\text{without}} - C^{\text{with}}\big)}_{\text{走行経費減少便益: operating cost}} + \underbrace{\big(A^{\text{without}} - A^{\text{with}}\big)}_{\text{交通事故減少便益: crash losses}}$$
+<p>Each term is the money value of total time, operating cost and crash losses on the network, computed from an assignment of forecast traffic. Benefits are discounted at 4 % over 50 years after opening. Since fiscal 2023, results at 2 % and 1 % are also reported as reference values (same source). The manual's own text explains why only three: they are the effects that can, with current knowledge, be measured "with sufficient accuracy" and expressed in money (translated in section 7).</p>
+<p>In the notation of the course this is the classic special case from Module 1, with two improvements. It counts money costs as well as time, and it prices one externality, crashes. It sets every other \(p_k=0\): no CO₂, air pollution, noise or severance. It sets \(r=0\) for land already in public hands. It has no health term B. Wider benefits (reliability, disaster resilience, regional development) are reported separately as non-monetised "objective evaluation indicators" alongside the B/C ratio. That makes the B/C ratio a <em>conservative test</em> for most road projects, as MLIT's own evaluation-method committee papers noted: leaving benefits out makes a ratio above 1 harder to reach. But it is <em>not</em> conservative for a road that adds traffic through a town, because the omitted noise, air pollution and severance would count against it.</p>
+<div class="box note">
+<div class="box-title">Railways are appraised differently</div>
+<p>MLIT's Railway Bureau uses a separate manual, the <a href="https://www.mlit.go.jp/tetudo/tetudo_fr1_000040.html"><em>鉄道プロジェクトの評価手法マニュアル</em></a> (2012 edition, partly amended March 2025). It distinguishes user benefits, supplier (operator) benefits and environmental benefits, so rail appraisal reaches further into Term C than road appraisal does. A comparison of the two manuals is a good exercise in how the choice of benefit list tilts modal decisions (Module 14).</p>
+</div>
+
+<h3>Constraints <span class="term">constraints</span></h3>
+<ul>
+<li><strong>Population decline as a binding budget.</strong> The Japanese government frames the compact-city policy as a response to falling population and rising per-capita infrastructure cost, not mainly as a climate policy. In terms of \(W\), it bears on Term E: fewer taxpayers must maintain the same network, so \(K\) per resident rises unless the urban footprint shrinks.</li>
+<li><strong>Safety.</strong> The Traffic Safety Basic Plans set national casualty targets, but crashes are priced in appraisal rather than treated as a hard constraint in the Swedish sense. The new 30 km/h default speed on residential streets (section 4) is the closest Japan has come to building the constraint into the rules.</li>
+<li><strong>Equity floor.</strong> The 2007 Act on the Revitalisation of Regional Public Transport, amended several times since, provides for municipal local public transport plans (<em>地域公共交通計画</em>). Since 2020, municipalities are expected to make them, although this is a duty to make efforts, not a strict obligation. By the end of fiscal 2024, 1,184 such plans had been published (<a href="https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2322000.html">MLIT White Paper 2025</a>). They are about keeping a minimum service for people without a car, \(A_g \ge A_{\min}\), in shrinking towns.</li>
+</ul>
+
+<h2>3. Institutions and standards</h2>
+<h3>Who plans what</h3>
+<ul>
+<li><strong>MLIT</strong> owns national roads, sets road design standards, funds urban planning, licenses railways and approves their fares. Within MLIT, the Road Bureau, City Bureau and Railway Bureau each have their own appraisal manuals and guidance.</li>
+<li><strong>The police</strong>, not road authorities, set speed limits, install and time traffic signals and decide most traffic regulations. Prefectural Public Safety Commissions do this under the Road Traffic Act. Changing a junction therefore needs two agencies: the road authority for geometry and the police for control. This split is a frequent source of friction in street redesign.</li>
+<li><strong>Railways</strong> are mostly run by companies: the six passenger JR companies (from the 1987 privatisation of Japanese National Railways), large private railways (<em>大手私鉄</em>) such as Tokyu, Odakyu, Hankyu and Kintetsu, subways run by city governments or companies, and many small regional lines. Most metropolitan operating costs are covered by fares and related businesses, not by operating subsidies.</li>
+<li><strong>Municipalities</strong> write city master plans, Location Normalisation Plans and local public transport plans. Since 2014 these plans are meant to be written together.</li>
+</ul>
+
+<h3>Standards and guidance</h3>
+<div class="table-wrap"><table>
+<tr><th>Document</th><th>What it does</th><th>Term of \(W\)</th></tr>
+<tr><td><a href="https://laws.e-gov.go.jp/law/345CO0000000320"><em>道路構造令</em> Road Structure Ordinance</a> (Cabinet Order No. 320 of 1970)</td><td>National geometric standards: road classes, design speed, lane widths, sidewalks, cycle tracks and, since a later amendment, on-carriageway cycle lanes (<em>自転車通行帯</em>). Lane numbers are chosen from the design traffic volume, defined as a <em>daily motor-vehicle</em> volume (section 7).</td><td>A (vehicle time), C (safety by design)</td></tr>
+<tr><td>MLIT <em>費用便益分析マニュアル</em> (roads, 2025 edition)</td><td>Three-benefit cost–benefit analysis, 4 % discount rate, 50 years</td><td>A, part of C, E</td></tr>
+<tr><td>MLIT <em>鉄道プロジェクトの評価手法マニュアル</em> (2012, amended 2025)</td><td>Rail project appraisal with user, supplier and environmental benefits</td><td>A, C, E</td></tr>
+<tr><td>Japan Road Association, <em>道路の交通容量</em> (road capacity), and JSTE manuals such as <em>平面交差の計画と設計</em> (planning and design of at-grade junctions)</td><td>Capacity and junction design, the Japanese counterparts of the HCM and HBS (paid publications)</td><td>A (operations)</td></tr>
+<tr><td><a href="https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000031.html">Person trip surveys</a> and the <a href="https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000024.html">Urban Transport Survey Guidance</a> (June 2024)</td><td>Household travel surveys, roughly every ten years in each region. The first was in Hiroshima in 1967; by the end of fiscal 2023, 148 surveys had been carried out in 65 urban regions. Tokyo ran a trial for its 7th survey in autumn 2026.</td><td>data for A</td></tr>
+<tr><td><a href="https://www.mlit.go.jp/en/toshi/city_plan/compactcity_network.html">Location Normalisation Plans</a> (<em>立地適正化計画</em>), Urban Renaissance Special Measures Act, art. 81 (2014 amendment)</td><td>Municipal plans with residential inducement zones and urban-function inducement zones, linked to public transport plans</td><td>A (\(O_j\) near transit), D, E</td></tr>
+<tr><td><a href="https://www.mlit.go.jp/toshi/toshi_gairo_tk_000036.html">Rail Corridor Town Planning Guidelines</a> (<em>鉄道沿線まちづくりガイドライン</em>)</td><td>Coordination of municipalities and railway operators along a line. A second volume on "collaboration and co-creation" was added in October 2026.</td><td>A, E</td></tr>
+</table></div>
+
+<h2>4. Signature ideas and documented weaknesses</h2>
+<h3>Ideas the world can learn from</h3>
+<ol>
+<li><strong>Railway plus property.</strong> Private railways built lines into farmland, developed housing and shopping at stations, and ran department stores at the terminals. The value created by access was captured by the investor. This is the strongest real-world example of financing Term A out of the land value it creates. The World Bank study <a href="https://openknowledge.worldbank.org/handle/10986/12233"><em>Transforming Cities with Transit</em></a> (Suzuki, Cervero and Iuchi, 2013) uses Tokyo as a central case.</li>
+<li><strong>Land readjustment (<em>土地区画整理</em>).</strong> Landowners pool their plots. Each gets back a smaller but serviced plot, and the land contributed pays for roads, parks and part of the infrastructure. This avoids large compulsory purchases and is how much of suburban Tokyo was built.</li>
+<li><strong>The garage certificate.</strong> Since 1962 a car can be registered in most of Japan only with proof of an off-street parking space near the owner's home, and long-term on-street parking, including more than eight hours at night, is prohibited. The land cost of storing a car (Term D) is paid by the car owner, not by the street. Few countries have dared to copy this.</li>
+<li><strong>Person-based travel surveys at regional scale,</strong> repeated for almost sixty years, which give unusually long comparable series on mode choice (Module 4).</li>
+<li><strong>Compact plus network in planning law.</strong> Since 2014 a municipality can define where it will encourage housing and services, tied to public transport. By 31 July 2026, 972 municipalities had made or were actively working on such a plan (<a href="https://www.mlit.go.jp/en/toshi/city_plan/compactcity_network.html">MLIT, 2026</a>). At the end of fiscal 2024, 636 had published one.</li>
+<li><strong>A default of 30 km/h.</strong> The Road Traffic Act Enforcement Order now sets the statutory maximum speed on ordinary roads with no centre line, no lane markings and no physical separation of directions at 30 km/h, instead of 60 km/h (<a href="https://laws.e-gov.go.jp/law/335CO0000000270">art. 11</a>, current text). This complements area-wide "Zone 30" schemes. Japan has had them since 2011, and since 2021 "Zone 30 Plus" combines the limit with physical measures such as humps and narrowings.</li>
+<li><strong>Testing traffic simulators against shared benchmarks.</strong> JSTE has run a scheme in which simulation packages are checked against standard test cases and published validation datasets, an idea developed further in Module 10.</li>
+</ol>
+
+<h3>Documented weaknesses and criticisms</h3>
+<ol>
+<li><strong>Crowding.</strong> Average peak-hour load on 31 major Tokyo-area rail sections was 221 % of nominal capacity in fiscal 1975 and still 163 % in fiscal 2019. It fell to 107 % in the pandemic year and was back up to 143 % in fiscal 2025 (<a href="https://www.mlit.go.jp/tetudo/content/002016574.pdf">MLIT Railway Bureau</a>). Crowding is a real cost in Term A (the \(x\) attributes). A system can have high accessibility and still impose a daily disutility that a fare-box-funded operator has little incentive to remove.</li>
+<li><strong>Narrow road appraisal.</strong> With only three benefits and a fixed land-use forecast, the road B/C ratio ignores environmental costs and long-run induced traffic. In Module 1 terms, it inherits most of the bias of \(\min \sum q t\). <em>Course judgement:</em> the bias is less serious in Japan than in a country that builds most of its urban growth around roads, but it matters for bypasses and widenings in regional cities.</li>
+<li><strong>Two Japans.</strong> Outside the big three regions, and in Chūkyō itself, car shares look North American. Many regional cities spread out along roads with large out-of-town retail. The rail model is a metropolitan model, not a national one.</li>
+<li><strong>Vulnerable road users.</strong> Japan's overall fatality rate is low, but a large share of those killed are pedestrians, many of them elderly. Many residential streets have no sidewalks. The 30 km/h default and Zone 30 Plus respond to this.</li>
+<li><strong>Location Normalisation Plans are weak instruments.</strong> They work through notifications, subsidies and incentives, not prohibitions. <em>Commentators have criticised</em> plans whose residential inducement zones cover most of the existing built-up area, which leaves little real concentration. Since a 2020 amendment the plans must also include a disaster-prevention guideline, because some inducement zones lay in flood-risk areas.</li>
+<li><strong>Shrinking demand.</strong> Rail and property value capture depends on growth. In older suburbs and regional cities, ageing, vacant homes and falling ridership weaken the business model. Some regional lines have closed or been converted to bus services.</li>
+<li><strong>Prices that are not congestion prices.</strong> Expressways are tolled, but the tolls were designed to repay construction debt, not to internalise congestion. Urban street congestion is unpriced. Parking minimums for large buildings still exist, although MLIT now <a href="https://www.mlit.go.jp/toshi/toshi_gairo_tk_000040.html">advises municipalities to consolidate and relocate required parking</a>.</li>
+</ol>
+
+<h2>5. Case studies</h2>
+<h3>Tokyu Den-en-toshi Line and Tama Den-en-toshi <span class="term">A</span> <span class="term">D</span> <span class="term">E</span></h3>
+<p>In 1953 Keita Gotō, head of the Tokyu group, presented a plan to develop the hills south-west of Tokyo around a new railway. Tokyu acted as agent for landowner associations in land readjustment (the <em>一括代行方式</em>). It paid for site works in advance and was repaid with reserved plots that it sold. Between 1959 and 2000, 55 readjustment districts covering 3,204 ha were developed. The Den-en-toshi Line opened in stages from 1966 and today links the area to central Tokyo with through-running into the Hanzōmon subway line. The Tama Den-en-toshi area covers about 5,000 ha across four cities, with about 620,000 residents in 2017 (municipal and company figures as reported in the <a href="https://ja.wikipedia.org/wiki/%E5%A4%9A%E6%91%A9%E7%94%B0%E5%9C%92%E9%83%BD%E5%B8%82">Japanese Wikipedia article</a>, which cites them).</p>
+<p><strong>Reading with \(W\).</strong> The railway raised \(O_j\)-weighted access for hundreds of thousands of households (A). The land was readjusted rather than bought, which kept the public cost E low. Profits from the land financed the line. The line has been among Tokyo's most crowded, and since the 2010s the earliest neighbourhoods have aged, with vacant houses appearing far from stations. Tokyu and Yokohama City signed an agreement in 2012 on "next-generation suburban town-making" to respond.</p>
+<div class="box note">
+<div class="box-title">Worked example: why the railway builds the town</div>
+<p><em>Hypothetical numbers, for illustration only.</em> A new line costs ¥100 bn. Discounted fare surplus over the appraisal period is ¥60 bn, so a pure rail operator would not build it. The line raises the value of 1,000 ha of land within walking distance of stations by ¥8,000 per m², a total of ¥80 bn. If the railway owns or readjusts a quarter of that land, it captures ¥20 bn, which is still not enough. If, in addition, it builds stations, shops and housing that generate ¥30 bn of discounted property profit, the project pays: \(60+20+30 = 110 > 100\).</p>
+<p>The welfare gain is larger than the operator's profit, because most of the land-value rise goes to other owners. The land-value rise is also largely a <em>capitalisation</em> of the same accessibility gain measured by the logsum. Adding it to the logsum in Term A would double-count. Value capture is a financing tool for Term E, not an extra benefit.</p>
+</div>
+
+<h3>Toyama: compact city along light rail <span class="term">A</span> <span class="term">E</span> <span class="term">constraints</span></h3>
+<p>Toyama, a prefectural capital of about 400,000 people on the Sea of Japan coast, is the best-known Japanese compact-city case. Its official policy is "compact town-making with concentrated hubs, built on public transport" (<em>公共交通を軸とした拠点集中型のコンパクトなまちづくり</em>), described on the <a href="https://www.city.toyama.lg.jp/shisei/machizukuri/1015125/1006102.html">city's planning page</a>. The policy is often summarised as "skewers and dumplings": transit lines are the skewers and walkable centres the dumplings. Key steps:</p>
+<ul>
+<li><strong>2006:</strong> the declining JR Toyamakō Line was converted into a light rail line, Portram, run by the public–private company Toyama Light Rail with higher frequencies and low-floor trams.</li>
+<li><strong>2009:</strong> a city-centre tram loop was completed.</li>
+<li><strong>2020:</strong> tracks were connected through the rebuilt Toyama Station, joining the northern and southern tram networks.</li>
+<li>Alongside: subsidies for housing in the city centre and along the corridors, and later a Location Normalisation Plan.</li>
+</ul>
+<p><strong>Reading with \(W\).</strong> The policy was justified explicitly through Term E (the cost of serving a dispersed, ageing population) and the equity floor (residents who cannot drive), more than through Term C. Its limits are also instructive. The region remains car-oriented, and the city itself says that "the real era of population decline is only beginning", with public transport facing driver shortages and rising costs. Compact-city policy here slows dispersal. It does not reverse it.</p>
+<p>A newer case worth following is Utsunomiya, which opened Japan's first entirely new light rail line in decades in August 2023, planned together with the city's "network compact city" strategy.</p>
+
+<h2>6. Where to study</h2>
+<h3>Degree programmes and chairs</h3>
+<ul>
+<li><strong>University of Tokyo, <a href="https://www.civil.t.u-tokyo.ac.jp/">Department of Civil Engineering</a>.</strong> Transport planning, behaviour and urban design. Example: the <a href="https://www.trip.t.u-tokyo.ac.jp/">Behavior in Networks studies unit</a> (activity-based and network behaviour models, urban simulation, slow-mode street design). English-taught graduate courses are available. The Department of Urban Engineering covers land use and city planning.</li>
+<li><strong>Kyoto University, <a href="https://www.ce.t.kyoto-u.ac.jp/">Graduate School of Engineering, Department of Urban Management</a>.</strong> Its <a href="http://trans.kuciv.kyoto-u.ac.jp/">Chair of Transportation Engineering and Management</a> includes the travel-behaviour group (Satoshi Fujii, known for mobility management, and Jan-Dirk Schmöcker) and the transport information group (Tadashi Yamada, city logistics).</li>
+<li>Other strong programmes, not linked here: Institute of Science Tokyo (formerly Tokyo Institute of Technology), Tohoku University, Nagoya University, Yokohama National University and the University of Tsukuba.</li>
+</ul>
+
+<h3>Free Japanese-language teaching material</h3>
+<p>The most useful free material is official guidance written for municipal planners. It explains methods step by step, with worked examples.</p>
+<ul>
+<li>MLIT, <a href="https://www.mlit.go.jp/en/toshi/city_plan/content/001741220.pdf"><em>立地適正化計画の手引き【基本編】</em></a> (Location Normalisation Plan handbook, basic volume, April 2025) <span class="lang">(Japanese)</span>. From diagnosis to zones, targets and KPIs.</li>
+<li>MLIT, <a href="https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000024.html"><em>都市交通調査ガイダンス</em></a> (Urban Transport Survey Guidance, 2024) <span class="lang">(Japanese)</span>. How person trip and other urban travel surveys are designed and used.</li>
+<li>MLIT Kantō Regional Bureau, <a href="https://www.ktr.mlit.go.jp/ktr_content/content/000926078.pdf">explainer on the three-benefit road appraisal</a> (2025) <span class="lang">(Japanese)</span>. A short teaching deck with the formulas and the discounting procedure.</li>
+<li>Tokyo Metropolitan Region Transportation Planning Council, <a href="https://www.tokyo-pt.jp/">person trip survey site</a> <span class="lang">(Japanese)</span>. Results, infographics, data request procedures and planning guidance.</li>
+<li>JSTE, <a href="https://www.jste.or.jp/aboutus/committees/study-subcommittee-on-living-roads/comm-zone/">traffic safety on residential streets</a> <span class="lang">(Japanese)</span>. Material on Zone 30 and physical traffic calming.</li>
+<li>Video: the <a href="https://www.youtube.com/@mlitchannel">MLIT YouTube channel</a> <span class="lang">(Japanese)</span> carries policy explainers. The <a href="https://www.youtube.com/@KyoDaiOcw">Kyoto University OCW channel</a> <span class="lang">(Japanese)</span> hosts open lectures across faculties.</li>
+</ul>
+<div class="box caution">
+<div class="box-title">On university OpenCourseWare</div>
+<p>The University of Tokyo (<a href="https://ocw.u-tokyo.ac.jp/">UTokyo OCW</a>) and Kyoto University both run OpenCourseWare portals. While this page was being prepared (October 2026), we could not confirm a specific, complete transport-planning course page on either: the UTokyo search is script-driven, and Kyoto OCW was down for maintenance. Search the portals for <em>交通</em> (transport), <em>都市計画</em> (city planning) and <em>土木計画学</em> (infrastructure planning) before relying on a particular course.</p>
+</div>
+
+<h2>7. Translated key passages</h2>
+<div class="box translation">
+<div class="box-title">MLIT road cost–benefit manual: why only three benefits</div>
+<p class="original" lang="ja">それらの効果のうち、現時点における知見により、十分な精度で計測が可能でかつ金銭表現が可能である、「走行時間短縮」、「走行経費減少」、「交通事故減少」の項目について、道路投資の評価手法として定着している消費者余剰を計測することにより便益を算出する。</p>
+<p>Of these effects, the benefits are calculated for the items that, given current knowledge, can be measured with sufficient accuracy and expressed in money, namely "travel time savings", "reduction in vehicle operating costs" and "reduction in traffic accidents". This is done by measuring consumer surplus, the established method for appraising road investment.</p>
+<p class="small">Source: MLIT Road Bureau, <a href="https://www.mlit.go.jp/road/ir/iinkai/2pdf/2-3.pdf"><em>費用便益分析マニュアル（案）</em></a>, committee draft, 2003, section 1(1). The preceding sentence lists the effects left out, including driving comfort, roadside environment, disaster-time alternative routes, wider exchange and new industrial location. The same wording is quoted for the 2025 edition in the <a href="https://www.ktr.mlit.go.jp/ktr_content/content/000926078.pdf">Kantō Bureau explainer</a>. Translated by the course authors (machine-assisted).</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">Urban Renaissance Special Measures Act, art. 81(1): the Location Normalisation Plan. Statutory text, translated in full</div>
+<p class="original" lang="ja">市町村は、単独で又は共同して、都市計画法第四条第二項に規定する都市計画区域内の区域について、都市再生基本方針に基づき、住宅及び都市機能増進施設（医療施設、福祉施設、商業施設その他…）の立地の適正化を図るための計画（以下「立地適正化計画」という。）を作成することができる。</p>
+<p>A municipality, alone or jointly, may prepare, for an area within a city planning area as defined in article 4(2) of the City Planning Act and on the basis of the Basic Policy for Urban Renaissance, a plan for the optimisation of the location of housing and of urban-function-enhancing facilities ("Location Normalisation Plan"). Urban-function-enhancing facilities means medical facilities, welfare facilities, commercial facilities and other facilities necessary for the common welfare or convenience of the city's residents that contribute significantly to the enhancement of urban functions.</p>
+<p class="small">Source: <a href="https://laws.e-gov.go.jp/law/414AC0000000022">都市再生特別措置法 (Act No. 22 of 2002)</a>, art. 81(1), current text on e-Gov. Paragraph 2 requires the plan to define a residential inducement zone (<em>居住誘導区域</em>), with measures "such as improving the living environment and securing public transport", and an urban-function inducement zone (<em>都市機能誘導区域</em>). Note the verb: the municipality <em>may</em> prepare a plan, and the plan <em>induces</em> rather than restricts. Translated by the course authors (machine-assisted). Only the Japanese text is legally binding.</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">Road Structure Ordinance, art. 2(22)–(23): the design variables are motor-vehicle quantities</div>
+<p class="original" lang="ja">二十二 計画交通量 道路の設計の基礎とするために、当該道路の存する地域の発展の動向、将来の自動車交通の状況等を勘案して…定める自動車の日交通量をいう。 二十三 設計速度 道路の設計の基礎とする自動車の速度をいう。</p>
+<p>(22) "Design traffic volume" means the daily volume of motor vehicles, determined […] as the basis for the design of the road, taking into account the development trends of the area in which the road is located, the future state of motor-vehicle traffic and so on. (23) "Design speed" means the speed of motor vehicles that is the basis for the design of the road.</p>
+<p class="small">Source: <a href="https://laws.e-gov.go.jp/law/345CO0000000320">道路構造令 (Cabinet Order No. 320 of 1970)</a>, art. 2, current text on e-Gov. The omitted words specify who sets the volume under ministerial ordinance. Compare the welfare objective: neither people, nor pedestrians, nor cyclists appear in the two variables that size the road. Translated by the course authors (machine-assisted).</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Discussion questions</div>
+<ol>
+<li>Tokyo and Nagoya differ by more than a factor of two in car share. List three causes (history, railway ownership, industry structure, land readjustment, road investment) and say which term of \(W\) each acts on. Which of them could a city outside Japan actually copy?</li>
+<li>The road manual counts three benefits because they can be measured "with sufficient accuracy". Is leaving out an effect better than including it with a wide error band? Answer separately for a rural bypass and for an urban widening.</li>
+<li>In the worked example in section 5, the railway captures part of the land-value rise. Show why adding the land-value rise to the logsum in Term A double-counts. When might land values capture <em>more</em> than the access benefit, for example through agglomeration?</li>
+<li>Peak crowding of 140–160 % is a cost to passengers but not, at the margin, to the operator. Write down the external crowding cost as a term \(p_k E_k\). What instrument would internalise it: fares by time of day, capacity investment or something else?</li>
+<li>The garage certificate makes every car owner pay for Term D. Model it as a fixed cost in the car-ownership choice and discuss its effect on the equity floor in a rural town without buses.</li>
+<li>A Location Normalisation Plan "may" be prepared and "induces" rather than restricts. Is a nudge-based instrument the right choice when the problem is long-run decline? What would a binding version look like, and who would lose?</li>
+</ol>
+</div>
+
+<h2>8. Links into the course and resources</h2>
+<div class="table-wrap"><table>
+<tr><th>Module</th><th>Japanese material to use there</th></tr>
+<tr><td><a href="../modules/m02-valuing-access.html">2 Valuing time, access and choice</a></td><td>Vehicle-type time values in the road CBA manual; crowding as an attribute \(x\)</td></tr>
+<tr><td><a href="../modules/m03-externalities.html">3 Externalities</a></td><td>What the three-benefit appraisal leaves out; rail manual's environmental benefits</td></tr>
+<tr><td><a href="../modules/m04-demand-mode-choice.html">4 Demand and mode choice</a></td><td>Person trip surveys since 1967; Tokyo vs Chūkyō mode shares</td></tr>
+<tr><td><a href="../modules/m05-accessibility-land-use.html">5 Accessibility and land use</a></td><td>Tama Den-en-toshi, land readjustment, Location Normalisation Plans, rail corridor guidelines</td></tr>
+<tr><td><a href="../modules/m06-transit-active-modes.html">6 Public transport and active modes</a></td><td>Private railways, through-running, Toyama and Utsunomiya light rail, crowding data</td></tr>
+<tr><td><a href="../modules/m10-simulation-validation.html">10 Simulation and validation</a></td><td>JSTE benchmark testing of traffic simulators</td></tr>
+<tr><td><a href="../modules/m11-safety.html">11 Safety</a></td><td>Pedestrian and elderly fatalities, Zone 30 Plus, the 30 km/h default</td></tr>
+<tr><td><a href="../modules/m12-street-design.html">12 Street design</a></td><td>Road Structure Ordinance, streets without sidewalks, police–road authority split</td></tr>
+<tr><td><a href="../modules/m13-pricing.html">13 Pricing</a></td><td>Expressway tolls as debt repayment rather than congestion prices; garage certificate as a quantity instrument</td></tr>
+<tr><td><a href="../modules/m14-appraisal.html">14 Appraisal</a></td><td>Three-benefit B/C, 4 % with 2 % and 1 % reference rates, road vs rail manuals</td></tr>
+</table></div>
+
+<h3>Resources</h3>
+<ul class="resources">
+<li data-type="pdf"><a href="https://www.ktr.mlit.go.jp/ktr_content/content/000926078.pdf">MLIT Kantō Regional Bureau — 費用便益分析の基本的な考え方 (cost–benefit analysis explainer, 2025)</a> <span class="lang">(Japanese)</span> <span class="why">The three benefits, discounting and the 2025 unit-value update, in a few slides.</span></li>
+<li data-type="pdf"><a href="https://www.mlit.go.jp/road/ir/iinkai/2pdf/2-3.pdf">MLIT — 費用便益分析マニュアル（案）, 2003 committee draft</a> <span class="lang">(Japanese)</span> <span class="why">Full structure of the road manual; the logic has stayed the same through later editions.</span></li>
+<li data-type="link"><a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ir-hyouka.html">MLIT Road Bureau — individual road project evaluations</a> <span class="lang">(Japanese)</span> <span class="why">Published B/C sheets for real projects, for exercises in re-appraising with \(W\).</span></li>
+<li data-type="link"><a href="https://www.mlit.go.jp/tetudo/tetudo_fr1_000040.html">MLIT — 鉄道プロジェクトの評価手法マニュアル</a> <span class="lang">(Japanese)</span> <span class="why">Rail appraisal manual, 2012 edition amended 2025.</span></li>
+<li data-type="link"><a href="https://www.mlit.go.jp/en/toshi/city_plan/compactcity_network.html">MLIT — 立地適正化計画とコンパクト・プラス・ネットワーク</a> <span class="lang">(Japanese)</span> <span class="why">Portal for the Location Normalisation Plan: handbooks, Q&amp;A, KPI examples, adoption counts and GIS data.</span></li>
+<li data-type="pdf"><a href="https://www.mlit.go.jp/en/toshi/city_plan/content/001741220.pdf">MLIT — 立地適正化計画の手引き【基本編】 (April 2025)</a> <span class="lang">(Japanese)</span> <span class="why">Step-by-step method for compact-plus-network planning.</span></li>
+<li data-type="link"><a href="https://www.mlit.go.jp/toshi/toshi_gairo_tk_000036.html">MLIT — 鉄道沿線まちづくりガイドライン</a> <span class="lang">(Japanese)</span> <span class="why">Rail corridor town planning; second volume added October 2026.</span></li>
+<li data-type="link"><a href="https://laws.e-gov.go.jp/law/414AC0000000022">e-Gov — 都市再生特別措置法</a> and <a href="https://laws.e-gov.go.jp/law/345CO0000000320">道路構造令</a> <span class="lang">(Japanese)</span> <span class="why">Official statutory texts.</span></li>
+<li data-type="data"><a href="https://www.mlit.go.jp/road/toukei_chousa/road_db/pdf/2024/15-5.pdf">MLIT — Person trip survey summary table (road statistics 2024, 15-5)</a> <span class="lang">(Japanese)</span> <span class="why">Mode shares by purpose for Tokyo, Keihanshin and Chūkyō.</span></li>
+<li data-type="data"><a href="https://www.tokyo-pt.jp/">Tokyo Metropolitan Region Transportation Planning Council — person trip surveys</a> <span class="lang">(Japanese)</span> <span class="why">Results and data access for the 6th survey; 7th survey under way.</span></li>
+<li data-type="data"><a href="https://www.mlit.go.jp/tetudo/content/002016574.pdf">MLIT — average peak crowding in the three metropolitan areas, FY1975–FY2025</a> <span class="lang">(Japanese)</span> <span class="why">The crowding series quoted in section 4.</span></li>
+<li data-type="data"><a href="https://www8.cao.go.jp/koutu/taisaku/r08kou_haku/zenbun/keikaku/sanko/sanko_2.html">Cabinet Office — White Paper on Traffic Safety 2026, international comparison</a> <span class="lang">(Japanese)</span> <span class="why">Fatality rates per 100,000 from IRTAD.</span></li>
+<li data-type="link"><a href="https://www.city.toyama.lg.jp/shisei/machizukuri/1015125/1006102.html">Toyama City — コンパクトなまちづくり</a> <span class="lang">(Japanese)</span> <span class="why">The city's own statement of its compact-city policy and its current problems.</span></li>
+<li data-type="pdf"><a href="https://openknowledge.worldbank.org/handle/10986/12233">Suzuki, Cervero &amp; Iuchi (2013) — Transforming Cities with Transit (World Bank, open access)</a> <span class="why">Transit and land-use integration with Tokyo as a central case; value capture explained.</span></li>
+<li data-type="link"><a href="https://www.jtlu.org/index.php/jtlu/article/view/280">Calimente (2012) — Rail integrated communities in Tokyo, Journal of Transport and Land Use</a> <span class="why">Open-access analysis of station-area development by Tokyo's railways.</span></li>
+<li data-type="link"><a href="https://www.jste.or.jp/">Japan Society of Traffic Engineers (JSTE)</a> <span class="lang">(Japanese)</span> <span class="why">Seminars, glossary, junction design manuals and simulation benchmarking.</span></li>
+<li data-type="book"><span>André Sorensen — <em>The Making of Urban Japan: Cities and Planning from Edo to the Twenty-First Century</em> (Routledge, 2002)</span> <span class="why">The standard English history of Japanese planning, including land readjustment and weak land-use control.</span></li>
+<li data-type="translation"><a href="../sources/index.html">Sources &amp; translations</a> <span class="why">Further translated digests of Japanese documents.</span></li>
+</ul>
+
+<nav class="pager">
+  <a href="germany.html">← Germany</a>
+  <a href="singapore.html">Singapore →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

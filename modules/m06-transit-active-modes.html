@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 6 · Public transport and active modes — Welfare-Centred Transport Planning</title>
+<meta name="description" content="Person throughput per metre of street, transit network design, integrated timetables and fares, BRT, rail crowding in Japan, cycling and walking as systems, the WHO HEAT method for health benefits, micromobility, and the option value of modes.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html" aria-current="page">Syllabus</a>
+    <a href="../countries/index.html">Countries</a>
+    <a href="../sources/index.html">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Part II · People and places · Module 6</p>
+<h1>Public transport and active modes</h1>
+<p class="meta">≈ 5 hours · Prerequisites: <a href="m04-demand-mode-choice.html">Module 4</a>, <a href="m05-accessibility-land-use.html">Module 5</a> · Key terms: <span class="term">A</span>, <span class="term">B</span>, <span class="term">D</span>, <span class="term">E</span></p>
+
+<p class="lede">A street is a fixed amount of land. How many people it serves depends on the modes it gives space to. This module covers how public transport networks, timetables and fares are designed, how bus rapid transit and Japanese commuter rail reach very high capacities, how cycling and walking work as networks rather than as facilities, and how their health benefits enter the objective as Term B. The thread through all of it is the logsum: each good option enlarges the choice set, and that has value even for people who do not use it every day.</p>
+
+<div class="box key">
+<div class="box-title">Learning outcomes</div>
+<ul>
+<li>Compare modes by person throughput per metre of street width, and state the assumptions behind such comparisons.</li>
+<li>Explain the ridership–coverage trade-off and the role of frequency in network design.</li>
+<li>Describe the Swiss integrated clock-face timetable (node principle) and German fare integration, from the 1965 Hamburg Verkehrsverbund to the 2023 Deutschlandticket.</li>
+<li>Explain what makes BRT high-capacity, using Bogotá and Curitiba, and how the ITDP BRT Standard scores corridors.</li>
+<li>Read Japanese rail crowding statistics and represent crowding in utility functions.</li>
+<li>Apply CROW's five requirements for cycle networks and explain why network effects matter.</li>
+<li>Compute a Term B health benefit with the WHO HEAT method.</li>
+<li>Explain the option value of a mode with the logsum, and why mode-share targets are instruments rather than objectives.</li>
+</ul>
+</div>
+
+<h2>1. People per metre of street <span class="term">D</span></h2>
+<p>Traffic engineering counts vehicles per lane per hour. The welfare objective counts people, and Term D counts the land they use. A useful bridge is <strong>person throughput per metre of street width</strong>. The following figures are <em>derived illustrations</em>, not design values. They show orders of magnitude under stated assumptions; actual capacities depend on junctions, stops, enforcement and demand.</p>
+<div class="table-wrap"><table>
+<tr><th>Mode (one direction)</th><th>Assumptions</th><th>People/h</th><th>Width</th><th>People/h per metre</th></tr>
+<tr><td>Car, urban signalised lane</td><td>700–900 veh/h (signals take about half the time), 1.3 occupants</td><td>900–1,200</td><td>3.5 m</td><td>≈ 250–350</td></tr>
+<tr><td>Bus lane, mixed stops</td><td>40 buses/h × 60 passengers</td><td>≈ 2,400</td><td>3.5 m</td><td>≈ 700</td></tr>
+<tr><td>BRT trunk with overtaking at stations</td><td>Bogotá's Avenida Caracas, commonly cited at about 45,000 passengers/h/direction</td><td>≈ 45,000</td><td>≈ 7 m (two lanes)</td><td>≈ 6,000</td></tr>
+<tr><td>Cycle track</td><td>Steady flow at 15 km/h, about 2 s headway per 1 m sub-lane</td><td>≈ 1,800 per metre</td><td>2 m</td><td>≈ 1,800</td></tr>
+<tr><td>Footway</td><td>US Highway Capacity Manual walkway capacity, about 75 persons/min per metre (crowded)</td><td>≈ 4,500 per metre</td><td>—</td><td>≈ 4,500 (at capacity)</td></tr>
+<tr><td>Metro (grade-separated)</td><td>Tokyo Metro Tōzai line, Kiba → Monzen-nakachō, 7:50–8:50: 27 ten-car trains, rated capacity 40,500, carrying 60,750 (FY2024)</td><td>60,750</td><td>not on street</td><td>—</td></tr>
+</table></div>
+<p>Two lessons follow. First, a car lane is the least space-efficient use of a street by an order of magnitude, which is why Term D, and not taste, drives cities with high land values toward transit and active modes. Second, throughput is not welfare. A footway at capacity is unpleasant; a Tōzai line train at 150% is worse. The quality of the space enters Term A through comfort and crowding attributes in \(V\).</p>
+
+<h2>2. Designing a transit network <span class="term">A</span> <span class="term">E</span></h2>
+<h3>Frequency is freedom</h3>
+<p>For a service running at headway \(h\) with random passenger arrivals, the average wait is \(h/2\). Travellers value waiting time at roughly 1.5 to 2.5 times in-vehicle time, so a 20-minute headway adds about 10 minutes of waiting worth 15–25 in-vehicle minutes. Long headways also force people to plan around the timetable, and make transfers costly. At headways of about 10–15 minutes or less, people stop consulting timetables ("turn up and go"), and a <em>network</em> of connecting lines becomes usable, because transfers no longer cost much.</p>
+<p>The planner's budget constraint is the fleet. A route with cycle time \(C\) (round trip including layover) needs \(N = C/h\) vehicles. The same buses can run one route at high frequency or two routes at half the frequency.</p>
+
+<h3>Ridership versus coverage</h3>
+<p>Jarrett Walker frames this as a choice between two goals. The <strong>ridership goal</strong> concentrates service on dense corridors where frequent service attracts many riders per service hour. The <strong>coverage goal</strong> spreads service so that everyone is near some service, even if few use it. Within a fixed budget, more of one means less of the other. Walker argues the split is a value judgement, not a technical one.</p>
+<p>In \(W\), this is a choice of group weights \(\omega_g\) and equity floors \(A_g\ge A_{\min}\). A pure ridership network maximises the unweighted logsum per euro. A coverage network buys a floor for low-density areas and for people without a car. Making the trade-off explicit, for example as "60% of service hours for ridership, 40% for coverage", is the honest equivalent of writing down \(\omega_g\).</p>
+
+<h3>The integrated clock-face timetable</h3>
+<p>Switzerland pioneered a different idea for networks where frequency cannot be high everywhere: make <em>connections</em> reliable. In the <strong>integrated clock-face timetable</strong> (<em>Integraler Taktfahrplan</em>), trains run at fixed intervals and meet at node stations at the same minutes every hour (e.g., just before :00 and :30) so that passengers can change in every direction within a few minutes. The national clock-face timetable began in 1982. The <strong>Bahn 2000</strong> programme, approved by Swiss voters in 1987, then built the infrastructure needed to make it work. Infrastructure was chosen to <em>fit the timetable</em>: travel times between major nodes were cut to just under multiples of 30 minutes, so that trains could arrive at both ends in time for connections. The first stage opened in December 2004.</p>
+<p>The design rule is that the running time between two adjacent nodes, plus dwell, must be slightly less than \(kT/2\) for a clock period \(T\) and integer \(k\). Building a line to cut 10 minutes may be worthless if it misses a node, while cutting 3 minutes that bring a link inside the 30-minute slot can unlock connections across the network. A time-savings appraisal that does not model transfers will undervalue the second project and overvalue the first. Germany's planned <em>Deutschlandtakt</em> applies the same principle at a national scale.</p>
+
+<div class="box translation">
+<div class="box-title">German · Swiss Federal Office of Transport, evaluation of Bahn 2000 stage 1 (2007)</div>
+<p class="original">Die Abstimmung zwischen Fern- und Regionalverkehr kann als gut gelungen beurteilt werden. Der Grund dafür liegt im Knotenprinzip mit Fokussierung auf die Transportkette.</p>
+<p>"Coordination between long-distance and regional services can be judged a success. The reason lies in the node principle, with its focus on the whole transport chain."</p>
+<p class="original">Nur ein kleiner Teil dieses Nachfragewachstum dürfte jedoch auf echte UmsteigerInnen von der Strasse zurückzuführen sein.</p>
+<p>"Only a small part of this growth in demand, however, is likely to come from genuine switchers from the road."</p>
+<p>The independent evaluation (by INFRAS for the BAV) found that long-distance passenger-kilometres rose 27.5% between 1996 and 2005, with somewhat less than half of the growth attributed to the improved service. Final costs were below the approved budget. The second quotation is a useful caution against assuming that rail investment mainly shifts car drivers. <em>Source: BAV/UVEK, Evaluation 1. Etappe BAHN 2000, 3 May 2007. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<h3>Fare integration: from the Verkehrsverbund to the Deutschlandticket</h3>
+<p>Before 1965, a journey across Hamburg could require several tickets from different operators. The <strong>Hamburger Verkehrsverbund</strong> (HVV), founded on 29 November 1965, was the world's first transport association: operators kept their companies but adopted one tariff, one timetable and coordinated routes. Munich, Frankfurt, Stuttgart, the Rhine-Ruhr and most German regions followed, and the model spread to Austria and Switzerland. In \(W\), fare integration removes a transfer penalty and a money cost that had no resource basis, which raises Term A at modest cost to Term E.</p>
+<p>The <strong>Deutschlandticket</strong>, introduced on 1 May 2023 at €49 a month, extended integration to the whole country: one monthly subscription is valid on all local and regional public transport, regardless of state, association or tariff zone. The price rose to €58 in 2025 and €63 in January 2026. The federal government reports about 14.5 million users and a further rise to €66.80 from January 2027 under a price index agreed by the states. MiD 2023 found it was already the usual ticket for 16% of respondents, and for 33% in the largest cities.</p>
+
+<div class="box translation">
+<div class="box-title">German · Fare integration in two quotations</div>
+<p class="original">Unter dem Leitgedanken „Eine Fahrkarte, ein Tarif, ein Fahrplan" schufen die beteiligten Partner Schritt für Schritt einen Gemeinschaftstarif, einen gemeinsamen Fahrplan sowie neue Linienführungen und abgestimmte Verkehrsplanungen.</p>
+<p>"Under the guiding idea 'one ticket, one tariff, one timetable', the partners step by step created a joint tariff, a common timetable, new routes and coordinated transport planning." <em>(HVV press release on its 60th anniversary, 27 November 2025.)</em></p>
+<p class="original">Digital, bundesweit gültig und monatlich kündbar: Mit dem Deutschlandticket ist der öffentliche Nahverkehr in ganz Deutschland nutzbar – unabhängig von Bundesland, Verkehrsverbund oder Tarifgebiet.</p>
+<p>"Digital, valid nationwide and cancellable monthly: with the Deutschlandticket, local public transport can be used throughout Germany, regardless of federal state, transport association or fare zone." <em>(Federal Government, Deutschlandticket Q&amp;A.)</em> Translated by the course authors (machine-assisted).</p>
+</div>
+
+<p><strong>Welfare reading.</strong> A fare cut is a transfer from the public budget to users. It raises Term A, with the rule of half applied to new users, and lowers revenue \(R\), which costs \((1+\mu)\) per euro in Term E. It is welfare-improving only if the behaviour change (new trips with value, car trips avoided, lower Term C) outweighs the \(\mu\) premium on lost revenue, and if capacity can absorb the new riders. Evaluations of the Deutschlandticket's effect on car use differ, and the course treats that question as open.</p>
+
+<h2>3. Bus rapid transit</h2>
+<p>BRT gives buses the features that make rail fast: segregated running ways, off-board fare collection, level boarding, stations rather than stops, and priority at junctions. <strong>Curitiba</strong> (Brazil) began building express busways in the 1970s under Jaime Lerner, integrating them with zoning that permitted density along the corridors. <strong>TransMilenio</strong> in Bogotá opened in December 2000. Its key innovation was capacity: two lanes per direction at stations, so express services overtake stopping services, with multiple docking bays.</p>
+
+<div class="box translation">
+<div class="box-title">Spanish · World Bank blog on TransMilenio's capacity</div>
+<p class="original">… la concepción de TransMilenio basada en expresos y corrientes le permite mover hasta 350 buses por hora, cada uno con capacidad para 160 pasajeros, lo que permite tener una capacidad de hasta 56,000 pasajeros por hora en un sentido …</p>
+<p>"… TransMilenio's design, based on express and local services, allows it to move up to 350 buses per hour, each with a capacity of 160 passengers, giving a capacity of up to 56,000 passengers per hour in one direction …"</p>
+<p class="original">La red de rutas de TransMilenio es innecesariamente compleja.</p>
+<p>"TransMilenio's route network is unnecessarily complex."</p>
+<p>The same post notes that the original plan for building trunk corridors was not followed, limiting the system's ability to respond to rapid demand growth. The 56,000 figure is a theoretical maximum; commonly cited operating figures for the Avenida Caracas trunk are around 45,000. <em>Source: World Bank, Latin America and Caribbean blog. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<p>TransMilenio also shows BRT's weaknesses: severe crowding, user dissatisfaction and political conflict over fares and expansion. Bogotá is building a metro line partly because the Caracas corridor is overloaded. The <strong>ITDP BRT Standard</strong> scores corridors on design and operations (gold, silver, bronze, basic BRT). Its 2024 edition, the first comprehensive update since 2016, added deductions for overcrowding, long signal waits and bus bunching. That is a welcome shift from rating infrastructure toward rating the service users experience.</p>
+
+<h2>4. Rail operations and crowding: Japan and Singapore <span class="term">A</span></h2>
+<p>Tokyo's commuter rail network carries more passengers than any other urban rail system, and most of it is run by commercially operated companies that covered their costs from fares and property before the pandemic. Its weakness has long been crowding. MLIT publishes crowding rates (混雑率) every year: the ratio of passengers to rated capacity in the busiest hour on the busiest section of each line.</p>
+<div class="table-wrap"><table>
+<tr><th>Fiscal year</th><th>1975</th><th>1998</th><th>2008</th><th>2019</th><th>2020</th><th>2024</th></tr>
+<tr><td>Tokyo area, average of 31 main sections</td><td>221%</td><td>183%</td><td>171%</td><td>163%</td><td>107%</td><td>139%</td></tr>
+<tr><td>Capacity index (1975 = 100)</td><td>100</td><td>161</td><td>162</td><td>167</td><td>166</td><td>158</td></tr>
+</table></div>
+<p><em>Source: MLIT, 都市鉄道の混雑率調査結果 (FY2024), Annex 1.</em> Between 1975 and 2019, capacity on the main sections rose by about two-thirds through longer and more frequent trains and quadruple-tracking, and crowding fell from 221% to 163%. The pandemic cut it to 107%. By FY2024 it had recovered to 139%, still well below pre-pandemic levels, as hybrid work persisted.</p>
+
+<div class="box translation">
+<div class="box-title">Japanese · MLIT crowding statistics (press release, 29 July 2025)</div>
+<p class="original">令和６年度の三大都市圏における平均混雑率は、東京圏：１３９％、大阪圏：１１６％、名古屋圏：１２６％となり、東京圏は３ポイント、大阪圏は１ポイント、名古屋圏は３ポイントの増加となりました。</p>
+<p>"In FY2024, the average crowding rates in the three major metropolitan areas were Tokyo 139%, Osaka 116% and Nagoya 126%, increases of 3, 1 and 3 points respectively."</p>
+<p class="original">混雑率：最混雑時間帯１時間の平均（主に令和６年１０月～１１月の１日又は複数日の乗車人員データを基に計算したもの）</p>
+<p>"Crowding rate: average over the busiest one-hour period (calculated mainly from ridership data for one or more days in October–November 2024)." <em>Source: MLIT Railway Bureau. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<p><strong>Crowding in \(W\).</strong> Crowding is a cost to passengers, and models represent it with a multiplier on in-vehicle time that rises with load factor. For example, \(V = \beta_t\,m(\ell)\,t\), with \(m=1\) when seats are available and values around 1.5–2 or more at crush loads in published reviews (check your national guidance). It is also an <em>externality</em> among passengers: each additional rider makes the train more crowded for everyone else, the transit equivalent of road congestion. That externality justifies peak/off-peak fare differentiation, and some Japanese operators have introduced cheaper off-peak commuter passes. A model that counts only seated capacity, or that ignores crowding, will overvalue peak demand growth and undervalue capacity investment.</p>
+<p><strong>Singapore</strong> opened its first MRT line in 1987 and has expanded the network continuously; its master plans aim for 8 in 10 households to live within a 10-minute walk of a train station. Bus and rail use integrated distance-based fares, so transfers carry no fare penalty. Singapore shows a different equilibrium from Tokyo: the government owns the rail infrastructure, operators run it under licence, and car ownership is capped by quota and priced by road charges, so transit faces less price competition from cars.</p>
+
+<h2>5. Cycling as a system <span class="term">A</span> <span class="term">B</span></h2>
+<p>A single cycle lane rarely changes behaviour. What matters is whether people can reach most destinations on routes they find safe and direct. That is a property of the <em>network</em>, and the value of a new link depends on what it connects to.</p>
+<h3>The Dutch design requirements</h3>
+<p>The CROW <em>Design Manual for Bicycle Traffic</em> (Dutch: <em>Ontwerpwijzer fietsverkeer</em>) sets out five main requirements:</p>
+<ol>
+<li><strong>Cohesion</strong> (coherence): the network connects all origins and destinations, with a fine mesh and continuous routes.</li>
+<li><strong>Directness</strong>: routes are short in distance and time. One measure is the detour factor, network distance divided by straight-line distance.</li>
+<li><strong>Safety</strong>: following the Sustainable Safety principles (<a href="m11-safety.html">Module 11</a>), separate cyclists from fast and heavy traffic, or reduce motor-vehicle speeds where they share space.</li>
+<li><strong>Comfort</strong>: smooth surfaces, few stops, little interaction with motor traffic, limited noise and pollution.</li>
+<li><strong>Attractiveness</strong>: pleasant, socially safe surroundings.</li>
+</ol>
+<p>US research on <em>low-stress</em> networks (Mekuria, Furth and Nixon, 2012) makes the same point quantitatively. It classifies each link by level of traffic stress and measures how many origin–destination pairs are connected using only low-stress links. A city can have many kilometres of cycle lanes and very little low-stress connectivity if gaps and hostile junctions break the network.</p>
+<h3>Copenhagen and the Netherlands</h3>
+<p>Copenhagen measures its cycling performance in a biennial <em>Bicycle Account</em>. The city reports that 44% of trips to work and education were by bicycle in 2019, falling to 35% in 2021 during pandemic home-working guidance. Its target was 50%. The Netherlands has the highest cycling share of any country, the result of decades of network investment and of short distances in a dense country. Dutch cycling is not without problems: cycle-parking shortages at stations, conflicts on busy paths as e-bikes and mopeds share them, and rising serious injuries among older cyclists.</p>
+<p>In \(W\), cycling investment raises Term A through new and better alternatives (lower time, higher perceived safety in the ASC), Term B through physical activity, and lowers Term C where car trips are replaced. The comfort and safety improvements often show up in the ASC rather than in measured time, which is why appraisals that count only time savings undervalue cycling schemes.</p>
+
+<h2>6. Health benefits with HEAT <span class="term">B</span></h2>
+<p>The WHO Regional Office for Europe's <strong>Health Economic Assessment Tool (HEAT)</strong> for walking and cycling estimates the value of reduced mortality from physical activity. It also has modules for air pollution exposure, crash risk and carbon. The 2017 methods guide uses relative risks from meta-analyses:</p>
+<ul>
+<li>Cycling: relative risk of all-cause mortality \(RR = 0.90\) for 100 minutes per week, for adults aged 20–64. The benefit is capped at a 45% risk reduction (reached at 447 minutes per week).</li>
+<li>Walking: \(RR = 0.89\) for 168 minutes per week, for adults aged 20–74, capped at 30%.</li>
+</ul>
+<p>Within the cap, HEAT scales the risk reduction linearly with activity:</p>
+$$\Delta\text{deaths} = N \cdot m \cdot (1 - RR)\cdot\frac{\text{minutes per week}}{\text{reference minutes}},\qquad H = \Delta\text{deaths}\times VSL,$$
+<p>where \(N\) is the number of people who take up the activity and \(m\) their baseline annual mortality rate.</p>
+
+<h3>Worked example</h3>
+<p>A new cycle network leads 1,000 adults aged 20–64 to start cycling to work, 100 minutes per week (two 10-minute trips, five days a week). Assume a baseline mortality rate of 250 per 100,000 per year (0.0025; use your national life table for that age group) and an illustrative VSL of €3.5 million (use your national appraisal value; <a href="m03-externalities.html">Module 3</a>).</p>
+$$\Delta\text{deaths} = 1{,}000 \times 0.0025 \times 0.10 = 0.25\ \text{per year},\qquad H = 0.25 \times 3.5\text{ M€} = €875{,}000\ \text{per year}.$$
+<p>Three corrections before this goes into \(W\):</p>
+<ol>
+<li><strong>Substitution.</strong> If some new cyclists previously walked the same trip, subtract their lost walking benefit. If they previously went to a gym, their net activity change is smaller.</li>
+<li><strong>Crash and air pollution risk.</strong> HEAT's other modules estimate the increased exposure of cyclists. In most published HEAT applications the activity benefit exceeds these risks by a wide margin, but check locally, and note that safety improvements also enter the safety constraint.</li>
+<li><strong>Double counting.</strong> If travellers already value health in their mode choice, part of \(H\) is inside the logsum. Most appraisal guidance assumes they largely do not, and counts health separately. State your assumption.</li>
+</ol>
+<p>Even with corrections, Term B often rivals or exceeds the time benefits of cycling schemes. That is why Dutch, Danish and UK cycling business cases usually include it.</p>
+
+<h2>7. Walking and micromobility</h2>
+<p>Every public-transport trip starts and ends on foot, and walking is the most common mode for short trips: MiD 2023 found 26% of all trips in Germany were made entirely on foot, 31% in the largest cities. Yet walking is the mode traffic models handle worst. Intrazonal trips are dropped (<a href="m04-demand-mode-choice.html">Module 4</a>), pedestrian delay at signals is invisible in vehicle-based optimisation (<a href="m09-junctions.html">Module 9</a>), and severance by busy roads is rarely costed. In \(W\), pedestrian waiting time belongs in Term A at the same value as anyone's time, and severance in Term C.</p>
+<p><strong>Micromobility</strong> covers e-bikes, shared bicycles, e-scooters and similar light vehicles. Electric assistance extends the practical cycling range and flattens hills: MiD 2023 reports pedelec ownership in Germany rising from about 50 to just over 140 per 1,000 people between 2017 and 2023. Shared e-scooters have more contested effects. Studies in several cities found that many trips replace walking or public transport rather than car trips, which lowers Term B and does little for Term C. Their safety record and the clutter they create on footways are debated. Their main welfare role may be as a feeder to rail, which a logsum model captures as a better access option.</p>
+
+<h2>8. The option value of modes <span class="term">A</span></h2>
+<p>From <a href="m04-demand-mode-choice.html">Module 4</a>, adding an alternative \(j^*\) raises the logsum by</p>
+$$\Delta \text{logsum} = \ln\Big(1 + \frac{e^{V_{j^*}}}{\sum_{k\ne j^*} e^{V_k}}\Big) > 0.$$
+<p>In Exercise 1.2 of Module 1, a car-only commuter with \(V_{\text{car}} = -1\) gains 0.127 utils from a poor cycling option (\(V = -3\)) and 0.474 utils from a good one (\(V = -1.5\)). Divided by \(\lambda\), these are money values, and they accrue to everyone with the option, including people who still drive. This has three consequences for practice:</p>
+<ul>
+<li><strong>Mode share is an instrument, not an objective.</strong> A city can raise cycling's share by making driving worse, which lowers the logsum. It can also raise welfare substantially without changing mode share much, by improving options people use occasionally. Targets such as "50% cycling" are useful management indicators, but \(W\) is what matters.</li>
+<li><strong>Resilience.</strong> A household with good transit, cycling and walking options loses less when one fails (a strike, a broken car, a fuel price shock). The logsum captures part of this; the rest needs scenario analysis.</li>
+<li><strong>Caution.</strong> Option values computed for new alternatives depend heavily on the alternative-specific constant, which must be estimated, not assumed. Inflated ASCs are a common way to overstate the case for any new mode.</li>
+</ul>
+
+<div class="box exercise">
+<div class="box-title">Exercise 6.1 · Ridership or coverage?</div>
+<p>A town has 14 buses. Area A (dense, 20,000 residents) and area B (sparse, 6,000 residents) both lie on the way to the centre. A combined route through A only has a 70-minute cycle; a route serving both has a 90-minute cycle; separate routes have 70 and 60 minutes.</p>
+<ol>
+<li>Compute the headway for (i) all buses on the A route, (ii) all buses on the combined route, and (iii) 10 buses on A and 4 on B.</li>
+<li>Using waiting time = \(h/2\), a walking time of 5 minutes in A and 12 minutes in B (8 minutes if B gets its own route), and the utility function of Module 4 (with waiting time weighted 2×), compute the bus logsum change for each area.</li>
+<li>Which option maximises the unweighted sum? What weight \(\omega_B\) on area B residents would reverse the ranking? Is there an equity floor that rules out option (i)?</li>
+</ol>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 6.2 · Term B for a cycle highway</div>
+<p>A regional cycle highway is forecast to attract 2,500 regular users, of whom 60% previously drove, 25% used transit and 15% cycled on another route. New users cycle on average 150 minutes per week.</p>
+<ol>
+<li>Compute the annual Term B benefit with HEAT parameters, your national mortality rate for ages 20–64 and your national VSL. Who should be excluded?</li>
+<li>Estimate the car-kilometres removed if trips average 8 km and occur 200 days a year, and the resulting Term C benefit using the values of <a href="m03-externalities.html">Module 3</a>.</li>
+<li>Compare B and C with the time benefits in Term A. Which dominates?</li>
+</ol>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 6.3 · Throughput audit</div>
+<p>Pick a 20–30 m wide street in your city. Measure the width allocated to each mode and count people (not vehicles) by mode in a peak hour. Compute people per hour per metre for each allocation, and the annual land cost of each using Term D from <a href="m05-accessibility-land-use.html">Module 5</a>. Propose a reallocation and state which terms of \(W\) it would change.</p>
+</div>
+
+<h2>Readings and resources</h2>
+<ul class="resources">
+<li data-type="link"><a href="https://humantransit.org/2018/02/basics-the-ridership-coverage-tradeoff.html">Jarrett Walker — Basics: The Ridership–Coverage Tradeoff (Human Transit)</a> <span class="why">The clearest short statement of the core trade-off in network design.</span></li>
+<li data-type="book"><span>Jarrett Walker — <em>Human Transit: How Clearer Thinking about Public Transit Can Enrich Our Communities and Our Lives</em> (Island Press, 2011)</span> <span class="why">Frequency, connections, network geometry and the values behind them, for non-specialists and professionals.</span></li>
+<li data-type="pdf"><a href="https://www.newsd.admin.ch/newsd/message/attachments/8351.pdf">BAV — Evaluation 1. Etappe BAHN 2000 (2007)</a> <span class="lang">(German)</span> <span class="why">Summary of the independent evaluation of Switzerland's integrated timetable programme.</span></li>
+<li data-type="pdf"><a href="https://www.hvv.de/resource/blob/154486/fd090dfcca956ee35251d46699c8c569/PM251127_60%20Jahre%20hvv.pdf">HVV — 60 Jahre hvv (press release, 2025)</a> <span class="lang">(German)</span> <span class="why">History of the first Verkehrsverbund and its fare-integration principles.</span></li>
+<li data-type="link"><a href="https://www.bundesregierung.de/breg-de/aktuelles/deutschlandticket-2134074">Bundesregierung — Fragen und Antworten zum Deutschlandticket</a> · <a href="https://www.deutschlandticket.de/">deutschlandticket.de</a> <span class="lang">(German)</span> <span class="why">Official facts on price, validity and user numbers.</span></li>
+<li data-type="link"><a href="https://itdp.org/library/standards-and-guides/the-brt-standard/">ITDP — The BRT Standard</a> <span class="why">The scoring system for BRT corridors, 2024 edition.</span></li>
+<li data-type="link"><a href="https://brtguide.itdp.org/">ITDP — BRT Planning Guide</a> <span class="why">Free, detailed guide to planning, designing and operating BRT.</span></li>
+<li data-type="link"><a href="https://blogs.worldbank.org/es/latinamerica/el-problema-de-transmilenio-y-la-soluci-n-de-guillermo-ram-rez">World Bank blog — El problema de TransMilenio y la solución de Guillermo Ramírez</a> <span class="lang">(Spanish)</span> <span class="why">Capacity, route complexity and expansion problems of Bogotá's BRT, from a practitioner.</span></li>
+<li data-type="link"><a href="https://www.transmilenio.gov.co/">TransMilenio S.A.</a> <span class="lang">(Spanish)</span> <span class="why">The operator's site, with system data and plans.</span></li>
+<li data-type="data"><a href="https://www.mlit.go.jp/report/press/tetsudo04_hh_000138.html">MLIT — 都市鉄道の混雑率調査結果 (FY2024)</a> <span class="lang">(Japanese)</span> <span class="why">Annual crowding rates for every major line in Tokyo, Osaka and Nagoya, with capacities and ridership.</span></li>
+<li data-type="link"><a href="https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network.html">LTA Singapore — Rail network</a> <span class="why">Singapore's existing and planned MRT and LRT lines.</span></li>
+<li data-type="link"><a href="https://crowplatform.com/product/design-manual-for-bicycle-traffic/">CROW — Design Manual for Bicycle Traffic</a> <span class="why">The Dutch standard (paid), whose five requirements are summarised in section 5.</span></li>
+<li data-type="link"><a href="https://dutchcycling.nl/expertises/cycling-infrastructure/">Dutch Cycling Embassy — Cycling infrastructure</a> <span class="why">Free English introduction to Dutch network and design principles.</span></li>
+<li data-type="tool"><a href="https://www.heatwalkingcycling.org/">WHO — HEAT for walking and cycling (online tool)</a> <span class="why">The tool used in section 6, with country-specific default values.</span></li>
+<li data-type="pdf"><a href="https://www.who.int/europe/publications/i/item/9789289052788">WHO Europe — HEAT methods and user guide (2017)</a> <span class="why">Relative risks, caps, age ranges and how to handle substitution, crashes and air pollution.</span></li>
+<li data-type="book"><span>Mekuria, Furth &amp; Nixon (2012) — <em>Low-Stress Bicycling and Network Connectivity</em>, Mineta Transportation Institute Report 11-19</span> <span class="why">The level-of-traffic-stress method for measuring cycle-network connectivity.</span></li>
+<li data-type="book"><span>Vuchic — <em>Urban Transit: Operations, Planning and Economics</em> (Wiley, 2005)</span> <span class="why">Standard engineering text on transit capacity, operations and network planning.</span></li>
+<li data-type="course"><a href="https://ocw.mit.edu/courses/1-201j-transportation-systems-analysis-demand-and-economics-fall-2008/">MIT OCW 1.201J — Transportation Systems Analysis: Demand and Economics</a> <span class="why">Free lectures including public-transport demand and pricing.</span></li>
+</ul>
+
+<nav class="pager">
+  <a href="m05-accessibility-land-use.html">← Module 5 · Accessibility, land use and induced demand</a>
+  <a href="m07-traffic-flow.html">Module 7 · Traffic flow, congestion and shockwaves →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

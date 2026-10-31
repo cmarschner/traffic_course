@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Germany · Role model country — Welfare-Centred Transport Planning</title>
+<meta name="description" content="Germany as a reading of the welfare objective: formal federal cost–benefit appraisal, FGSV design standards, avoid–shift–improve in cities, and the 2024 reform of road traffic law.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html">Syllabus</a>
+    <a href="../countries/index.html" aria-current="page">Countries</a>
+    <a href="../sources/index.html">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Role model country</p>
+<h1>Germany</h1>
+<p class="meta">Reading time ≈ 40 minutes · Related modules: 3, 8, 9, 11, 12, 14 · Key terms: <span class="term">A</span> <span class="term">C</span> <span class="term">E</span> <span class="term">constraints</span></p>
+
+<p class="lede">Germany combines two traditions that pull in different directions. At federal level it runs one of the most formalised cost–benefit appraisals in the world, built mainly around travel-time savings. In its cities, the planning goal is "more mobility with less traffic": avoid trips, shift them to walking, cycling and public transport, and improve what remains. Since 2024, road traffic law also lets municipalities act for climate, health and urban development. Germany is a good place to study how a precise, rule-bound engineering culture handles a change of objective.</p>
+
+<div class="box key">
+<div class="box-title">What to take from this page</div>
+<ul>
+<li>How the federal transport infrastructure plan (BVWP 2030) puts numbers on Terms A, C and E, and which effects it leaves out, such as secondary induced traffic.</li>
+<li>Why its four-module structure contains an explicit <em>minimum accessibility</em> test, an early form of the equity floor \(A_g \ge A_{\min}\).</li>
+<li>How the 2024 reform of road traffic law (StVG and StVO) changed the legal objective of traffic orders from "safety and ease of traffic" to a wider list.</li>
+<li>Where the German system is strong (standards, data, integrated public transport) and where it is criticised (carbon values, maintenance, rail reliability, speed limits).</li>
+</ul>
+</div>
+
+<h2>1. Snapshot</h2>
+<div class="table-wrap"><table>
+<tr><th>Indicator</th><th>Value</th><th>Source, year</th></tr>
+<tr><td>Population</td><td>83.3 million</td><td>Destatis, 30 June 2026</td></tr>
+<tr><td>Urban form</td><td>Polycentric. Four cities above one million (Berlin, Hamburg, Munich, Cologne), dense historic cores, many mid-sized cities, and car-oriented rural districts. Planning is federal: states (<em>Länder</em>) and municipalities hold most urban powers.</td><td>qualitative</td></tr>
+<tr><td>National modal split (trips)</td><td>walk 26 %, cycle 11 %, car driver 40 %, car passenger 13 %, public transport 11 %</td><td><a href="https://www.mobilitaet-in-deutschland.de/pdf/MiD2023_ZusammenfassungKurzbericht.pdf">Mobilität in Deutschland (MiD) 2023</a>, short report. Percentages are rounded, so they do not add up to exactly 100.</td></tr>
+<tr><td>Representative city: Munich, residents' trips</td><td>walk 29 %, cycle 18 %, public transport 25 %, car (driver + passenger) 29 %. In 2017 the car share was 34 %.</td><td><a href="https://www.mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/presse/pressemeldung/studie-zur-mobilitaet-in-muenchen-und-im-mvv-gebiet-mehr-wege-mit-oeffentlichem-nahverkehr-und-zu-fuss-mehr-autos-aber-weniger-pkw-verkehr/">MVV/MVG regional sample of MiD 2023</a></td></tr>
+<tr><td>Road deaths</td><td>2,770 in 2024. 2,814 in 2025 (preliminary), or 34 per million inhabitants, i.e. <strong>≈ 3.4 per 100,000</strong></td><td><a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/02/PD26_062_46241.html">Destatis press release, Feb 2026</a></td></tr>
+<tr><td>Key institutions</td><td>Federal Ministry of Transport (BMV; called BMDV 2021–2025), Federal Highway Research Institute (BASt), Road and Transportation Research Association (FGSV), German Environment Agency (UBA), Autobahn GmbH des Bundes, DB InfraGO, state ministries, municipal transport departments, regional transport associations (<em>Verkehrsverbünde</em>)</td><td>—</td></tr>
+</table></div>
+<p>Two measurement details matter when you compare these figures with other countries. MiD counts trips by <em>main mode</em>: a trip that combines walking and the tram is counted as public transport. Its regional samples cover residents only, so commuters from outside Munich are not in the Munich row. By passenger-kilometres rather than trips, the car's share is much higher, because car trips are long and walking trips are short.</p>
+
+<h2>2. Germany's reading of \(W\)</h2>
+<p>Module 1 summarised Germany as "formal national cost–benefit analysis for federal infrastructure; cities pursue <em>Vermeiden – Verlagern – Verbessern</em>". In the notation of the course, that means two different objective functions at two levels of government.</p>
+
+<h3>Federal level: a priced \(W\) with fixed land use <span class="term">A</span> <span class="term">C</span> <span class="term">E</span></h3>
+<p>Federal roads, railways and waterways are prioritised in the <a href="https://www.bmv.de/SharedDocs/DE/Artikel/G/BVWP/bundesverkehrswegeplan-2030-inhalte-herunterladen.html">Federal Transport Infrastructure Plan 2030</a> (<em>Bundesverkehrswegeplan</em>, BVWP), adopted by the federal cabinet on 3 August 2016. It covers about 1,000 projects worth €269.6 billion: €132.8 billion for federal trunk roads, €112.3 billion for rail and €24.5 billion for waterways. Its <a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">method handbook</a> scores projects in four modules:</p>
+<ul>
+<li><strong>Module A, cost–benefit analysis (NKA).</strong> This produces the benefit–cost ratio (<em>Nutzen-Kosten-Verhältnis</em>, NKV). Its benefit components include changes in vehicle operating costs (NB), exhaust emissions including CO₂ (NA), road safety (NS), passenger travel time (NRZ), freight transport time (NTZ), noise (NG), urban severance (NT), the implicit benefit of induced trips (NI) and life-cycle greenhouse emissions of the infrastructure (NL). The discount rate is 1.7 % a year. CO₂ is valued at €145 per tonne.</li>
+<li><strong>Module B, environmental and nature-conservation assessment.</strong> Effects that are not monetised, such as land take and the fragmentation of undisturbed landscapes.</li>
+<li><strong>Module C, spatial-planning assessment.</strong> Deficits in connection quality between higher-order centres, and each region's accessibility to the nearest motorway junction, airport or long-distance station. The handbook says explicitly that this module covers <em>distributive</em> questions such as minimum accessibility of regions. The NKA covers only the <em>allocative</em> sum of time savings.</li>
+<li><strong>Module D, urban-development assessment.</strong> Relief of town centres from through traffic, for example by bypasses.</li>
+</ul>
+<p>Mapped onto \(W\): Module A estimates Term A as time and cost savings with \(\omega_g=1\). It prices part of Term C (crashes, CO₂, air pollution, noise, severance) and counts Term E. Module B is a non-monetised stand-in for Term D and the land constraint. Module C is a soft version of the equity floor \(A_g\ge A_{\min}\). Term B (health from active travel) does not appear, because the plan covers only federal long-distance infrastructure.</p>
+<p>The demand model treats land use as fixed. It includes <em>primary</em> induced traffic: more trips and new destinations when generalised costs fall, modelled for roads with a gravity model. It explicitly excludes <em>secondary</em> induced traffic, meaning new residents and jobs that settle along an improved corridor (see the translated passage in section 7). In the language of Module 1, the BVWP is \(W\) evaluated at the "months–years" timescale and blind to the "decades" timescale. That is where most of the long-run demand response to motorway building takes place.</p>
+
+<h3>Municipal level: avoid, shift, improve <span class="term">A</span> <span class="term">B</span> <span class="term">C</span></h3>
+<p>German urban transport plans (<em>Verkehrsentwicklungspläne</em>, VEP, and newer sustainable urban mobility plans) mostly follow the avoid–shift–improve hierarchy. The German Environment Agency (UBA) <a href="https://www.umweltbundesamt.de/themen/verkehr/nachhaltige-mobilitaet">sums it up</a> as "more mobility with less traffic". Its point is that avoiding traffic does not mean stopping people from travelling. It means shortening distances through settlement structure and filling vehicles better (translation in section 7). In terms of \(W\), the slogan says: increase the logsum in Term A by bringing opportunities \(O_j\) closer, not by raising speeds, and so reduce vehicle-kilometres, which drive Term C.</p>
+<p>Many cities state their goal as a modal-split target, which is an <em>instrument</em> and not an objective in the sense of Module 1. Munich's Mobility Strategy 2035 (city council, 2021) aimed for <a href="https://stadt.muenchen.de/dam/jcr:41705a17-cede-408e-8f27-e6899f52306c/2_Mobilitaetsreferat_Mobilitaetsstrategie_2035.pdf">"at least 80 % of traffic by exhaust-free travel by 2025"</a>, alongside Vision Zero. A share target is a reasonable proxy when mode shift is cheap and raises welfare. It can be met perversely, for example by making driving worse without making anything else better, and only \(W\) catches that.</p>
+
+<h3>Constraints <span class="term">constraints</span></h3>
+<ul>
+<li><strong>Carbon.</strong> The Federal Climate Change Act (<a href="https://www.gesetze-im-internet.de/ksg/">KSG</a>) set annual emission budgets per sector, including transport. The amendment of 15 July 2024 made compliance multi-year and cross-sector: missing the transport budget no longer automatically forces the transport ministry to adopt an emergency programme. In terms of \(W\), the carbon constraint now applies to the whole economy instead of to transport alone, which weakens its effect on transport decisions.</li>
+<li><strong>Safety.</strong> Germany has Vision Zero as a stated policy aim, and Munich's strategy cites it. The Bundesrat asked in 2024 that Vision Zero be written into the road traffic regulations. According to the <a href="https://www.umweltbundesamt.de/themen/verkehrswende-endlich-mehr-spielraeume-fuer-staedte">UBA</a>, this had not happened. Safety is therefore priced (NS in the BVWP) and set through design rules, rather than imposed as a hard constraint as in Sweden.</li>
+<li><strong>Road traffic law as a constraint on instruments.</strong> Until 2024, §45(9) of the road traffic regulations (StVO) allowed restrictions on moving traffic only where a local danger "considerably exceeds" the general risk. This effectively ruled out many bus lanes, speed limits and cycle lanes. The <strong>2024 reform</strong> (section 3) removed part of this constraint. It is better described as a change in the <em>feasible set</em> \(\Theta\) of plans than as a change in \(W\).</li>
+</ul>
+
+<h3>A worked example: what the carbon value does <span class="term">C</span></h3>
+<p>Take a motorway widening that, after induced traffic, adds \(\Delta E_{\mathrm{CO_2}} = 10{,}000\) t of CO₂ per year. The BVWP 2030 values a tonne at €145. The UBA's current <a href="https://www.umweltbundesamt.de/daten/umwelt-wirtschaft/gesellschaftliche-kosten-von-umweltbelastungen">recommendation</a> for emissions in 2026 is €350 (2025 prices) at a 1 % pure time preference rate, and €1,000 with equal weighting of generations. The annual climate cost in Term C is therefore</p>
+$$p_{\mathrm{CO_2}}\,\Delta E = \begin{cases} 1.45\ \text{M€/yr} & p=145\\ 3.50\ \text{M€/yr} & p=350\\ 10.0\ \text{M€/yr} & p=1000\end{cases}$$
+<p>Over an illustrative 40-year horizon at the BVWP discount rate of 1.7 %, the annuity factor is \((1-1.017^{-40})/0.017\approx 28.9\). Moving from €145 to €350 therefore adds about €59 million to the present value of costs, holding emissions constant. Martinsturner et al. (2024, TU Berlin, see resources) re-ran BVWP project appraisals with higher CO₂ prices and found that some benefit–cost ratios change materially. This is the "report the vector" rule from Module 1 in action: a project whose ranking depends on a contested price should be flagged.</p>
+
+<h2>3. Institutions and standards</h2>
+<h3>Who plans</h3>
+<div class="table-wrap"><table>
+<tr><th>Level</th><th>Body</th><th>Role</th></tr>
+<tr><td>Federal</td><td>Federal Ministry of Transport (BMV)</td><td>BVWP and the infrastructure expansion acts. Federal trunk roads through Autobahn GmbH. Rail infrastructure through DB InfraGO. Road traffic law (StVG and StVO, together with the Bundesrat).</td></tr>
+<tr><td>Federal research</td><td><a href="https://www.bast.de/">BASt</a> (Federal Highway Research Institute)</td><td>Commissioned research behind design and capacity rules. Its report series is free online through the <a href="https://bast.opus.hbz-nrw.de/">BASt repository</a>.</td></tr>
+<tr><td>Federal environment</td><td>UBA (German Environment Agency)</td><td>Environmental cost values (methodological convention), positions on speed limits, parking and road traffic law.</td></tr>
+<tr><td>Standards</td><td><a href="https://www.fgsv.de/">FGSV</a> (Road and Transportation Research Association)</td><td>A registered association whose committees of practitioners and academics write the technical rules. These become binding when the federal government or the states adopt them.</td></tr>
+<tr><td>State and municipal</td><td>State ministries, city transport departments (e.g., Munich's Mobilitätsreferat)</td><td>Urban transport plans, street design, traffic orders, local public transport through transport associations</td></tr>
+<tr><td>Data</td><td>MiD (federal), <a href="https://tu-dresden.de/bu/verkehr/ivs/srv">SrV "Mobilität in Städten"</a> (TU Dresden, since 1972)</td><td>Household travel surveys with long, comparable time series</td></tr>
+</table></div>
+
+<h3>The FGSV rulebook</h3>
+<p>The FGSV rules are the German counterpart of the AASHTO Green Book and the Highway Capacity Manual, with one difference: they are consensus documents produced by volunteer committees. Most are sold, not free. The key ones for this course:</p>
+<ul>
+<li><strong><a href="https://www.fgsv-verlag.de/hbs">HBS</a></strong> (<em>Handbuch für die Bemessung von Straßenverkehrsanlagen</em>, 2015 edition). The capacity manual, with parts A (motorways), L (rural roads) and S (urban roads). It defines quality levels (<em>Qualitätsstufen des Verkehrsablaufs</em>, QSV) A–F, analogous to US level of service. The FGSV runs a free <a href="https://www.fgsv.de/regelwerk/dialog-zu-ausgewaehlten-regelwerken/hbs-2015">question-and-answer page</a> on it. See <a href="../modules/m08-capacity-los.html">Module 8</a>.</li>
+<li><strong><a href="https://www.fgsv-verlag.de/rast">RASt 06</a></strong> (<em>Richtlinien für die Anlage von Stadtstraßen</em>, 2006, corrected reprint). Urban street design. RASt designs from the edges inward ("<em>städtebauliche Bemessung</em>"): space for pedestrians, cycling and frontage uses is set first, and the carriageway gets what remains. In terms of \(W\), that is an implicit positive \(r\) on street space. See <a href="../modules/m12-street-design.html">Module 12</a>.</li>
+<li><strong><a href="https://www.fgsv-verlag.de/rilsa">RiLSA</a></strong> (traffic signal guidelines, 2010 edition with 2015 amendments). See <a href="../modules/m09-junctions.html">Module 9</a>.</li>
+<li><strong><a href="https://www.fgsv-verlag.de/era">ERA</a></strong> (cycle facility recommendations). The edition on sale is still the 2010 one. A revision has been under discussion for years, and cycling advocates criticise the slow pace.</li>
+<li><strong>EAR 23</strong> (parking facility recommendations, FGSV 283), and the rural and motorway design guidelines RAL and RAA.</li>
+</ul>
+
+<h3>The 2024 reform of road traffic law</h3>
+<p>The Road Traffic Act (StVG) empowers the ministry to issue the Road Traffic Regulations (StVO). Before 2024 the empowerment was framed around averting dangers to the "safety or ease of traffic" (<em>Sicherheit oder Leichtigkeit des Verkehrs</em>). In practice, "ease" meant the flow of motor traffic. A first attempt at reform failed in the Bundesrat in 2023. After mediation, the Bundestag and Bundesrat adopted the StVG amendment on 14 June 2024. The amended StVO, approved by the Bundesrat on 5 July 2024, <a href="https://www.bundesregierung.de/breg-de/service/gesetzesvorhaben/stvo-novelle-2023-2229430">entered into force on 11 October 2024</a>.</p>
+<p>The new <a href="https://www.gesetze-im-internet.de/stvg/__6.html">§6(4a) StVG</a> (full translation in section 7) and the new <a href="https://www.gesetze-im-internet.de/stvo_2013/__45.html">§45(1) sentence 2 no. 7 StVO</a> allow traffic orders "to improve the protection of the environment, including climate protection, to protect health or to support urban development". This applies in particular to bus lanes, bus priority at signals and "appropriate space" for walking and cycling, provided the ease of traffic is taken into account and safety is not impaired. The reform also makes it easier to impose 30 km/h near pedestrian crossings, playgrounds and busy school routes, and to close gaps of up to 500 m between 30 km/h sections (previously 300 m).</p>
+<p>Read as a change to the objective: before 2024, local traffic orders were in effect constrained to maximise vehicle flow subject to safety. After 2024 they may also serve Terms B, C and D. But "ease of traffic" must still be "taken into account" and safety must not be impaired. The legal objective is therefore a weighted list, not a single function. How courts weigh the items will determine how much really changed.</p>
+
+<h2>4. Signature ideas and documented weaknesses</h2>
+<h3>Ideas the world can learn from</h3>
+<ul>
+<li><strong>A published, multi-module federal appraisal.</strong> Few countries publish a single handbook that values time, safety, CO₂, noise and severance for road, rail and waterway projects on a common basis and adds a separate test for regional accessibility. Module C is a practical model for the equity floor. See <a href="../modules/m14-appraisal.html">Module 14</a>.</li>
+<li><strong>Integrated public transport through <em>Verkehrsverbünde</em>.</strong> Hamburg created the first transport association in 1965. Operators share one timetable and one fare system across a region. In terms of \(W\), integration removes transfer penalties and fare discontinuities from \(V_{nj}\). The Deutschlandticket (section 5) extended the idea to the whole country.</li>
+<li><strong>Street design from the edges inward (RASt).</strong> Starting from the space needs of pedestrians and frontage uses, rather than from design traffic volumes, is a design-code version of putting a price on land.</li>
+<li><strong>Long, consistent travel-survey series.</strong> SrV (since 1972) and MiD let cities measure their objectives over decades. Munich's car share among residents' trips fell from 34 % to 29 % between 2017 and 2023, even though car ownership in the region rose (MVV). The goal can be monitored.</li>
+<li><strong>Open engineering pedagogy.</strong> German universities contributed key traffic-flow and simulation tools: the Intelligent Driver Model (Treiber, Hennecke and Helbing, 2000; developed further in Dresden), MATSim (TU Berlin with ETH Zürich) and the commercial PTV Visum/Vissim suite from Karlsruhe. See <a href="../modules/m07-traffic-flow.html">Module 7</a> and <a href="../modules/m10-simulation-validation.html">Module 10</a>.</li>
+</ul>
+
+<h3>Weaknesses and criticisms</h3>
+<ul>
+<li><strong>Old carbon value and fixed land use in the BVWP.</strong> CO₂ at €145/t, from a method developed around 2012–2016, is well below the UBA's current €350/t. Secondary induced traffic is excluded by assumption. Both biases favour road capacity. Critics also note that the plan contains more "urgent need" projects than the budget can fund, which leaves prioritisation to the political process.</li>
+<li><strong>No general motorway speed limit.</strong> Germany is the only EU member without a general speed limit on its motorways. Only an advisory speed of 130 km/h applies. The UBA has repeatedly estimated CO₂ savings from a limit. Politically, this is the clearest case where Term A, read as the speed preferences of motorway drivers, wins against Term C.</li>
+<li><strong>Maintenance backlog.</strong> The BVWP itself put maintenance and replacement at €141.6 billion for 2016–2030, about half the plan. High-profile failures followed: the A45 Rahmede viaduct was closed in December 2021 and demolished in 2023, and part of Dresden's Carolabrücke collapsed in September 2024. These show that Term E includes the life-cycle cost of assets already built, not only new capital.</li>
+<li><strong>Rail reliability.</strong> In 2024 only about 62.5 % of DB long-distance trains arrived less than six minutes late, and reports put 2025 at about 60 %. Years of under-investment in rail capacity show up as low reliability in Term A for rail users. Unreliability does not appear in a mode-share figure until people give up on the train.</li>
+<li><strong>Legal bias towards motor traffic flow</strong> until 2024 (see above), and a cycle-facility standard (ERA 2010) that has not been revised in more than fifteen years.</li>
+<li><strong>Paywalled standards.</strong> The FGSV rules are sold, which makes them harder to scrutinise in public and to teach outside Germany. This page links only to their catalogue pages.</li>
+</ul>
+
+<h2>5. Case studies</h2>
+<h3>Munich: strategy, measurement and the gap between them</h3>
+<p>Munich created a dedicated Mobility Department (<em>Mobilitätsreferat</em>) in 2021 and adopted the Mobility Strategy 2035, with Vision Zero and an 80 % "exhaust-free" target for 2025. The MiD 2023 regional sample shows real movement: among residents, walking accounts for 29 % of trips, public transport 25 % and cycling 18 %. The car share fell five points to 29 %. In 2023, 40 % of Munich residents used a Deutschlandticket, against 16 % nationally. The 2025 target, however, was framed in a way that is hard to measure: it covers "traffic", and it counts exhaust-free cars. <em>Lesson for \(W\):</em> state targets in a measurable unit (trips, person-km, CO₂) and connect them to the welfare terms they serve. See <a href="../modules/m06-transit-active-modes.html">Module 6</a>.</p>
+
+<h3>Freiburg-Vauban: parking-free by design</h3>
+<p>Vauban was built on a 41-hectare former French army barracks site, vacated in 1991. Today about 5,500 people live there. Most streets are "parking-free" (<em>stellplatzfrei</em>): residents who own a car buy a space in a collective garage at the edge of the district, and households that sign up as car-free pay instead towards land held in reserve for a future garage. The city's <a href="https://freiburg.de/pb/site/Freiburg/get/params_E975311539/647912/Infotafeln_Vauban_de.pdf">information panels</a> report 172 cars per 1,000 residents, based on 2013 statistics. In terms of \(W\), Vauban <em>unbundles</em> the price of parking from the price of housing. This makes \(r\,L\) visible to each household, so households that do not own a car stop subsidising those that do. See <a href="../modules/m05-accessibility-land-use.html">Module 5</a> and <a href="../modules/m13-pricing.html">Module 13</a>. One caveat: Vauban's residents are self-selected and relatively affluent, so its low car ownership is not a transferable elasticity.</p>
+
+<h3>The Deutschlandticket: a national flat fare</h3>
+<p>Since 1 May 2023, one monthly subscription valid on all local and regional public transport in Germany has replaced hundreds of regional tariffs. Its price was €49, rose to €58 in 2025 and to €63 from January 2026 (<a href="https://www.deutschlandticket.de/">deutschlandticket.de</a>, <a href="https://regional.bahn.de/tickets/Deutschlandticket">DB Regio</a>). In terms of \(W\), the ticket cuts the money cost \(c\) of public transport to zero at the margin for subscribers. It also removes the complexity cost of tariff boundaries, part of \(x\) in \(V_{nj}\). The fare revenue lost raises Term E, multiplied by \(1+\mu\). The welfare question is whether the gains in A and the reductions in C, from diverted car trips, exceed \((1+\mu)\Delta R\) plus the cost of extra capacity on crowded lines. The answer depends heavily on how many car trips are actually diverted rather than new trips generated. The federal government and the Länder dispute the funding every year, which itself creates uncertainty for users.</p>
+
+<h3>Berlin: a mobility law and its politics</h3>
+<p>A citizens' initiative, <em>Volksentscheid Fahrrad</em>, collected over 100,000 signatures in 2016. In response, Berlin's parliament passed the <a href="https://gesetze.berlin.de/bsbe/document/jlr-MobGBErahmen">Berlin Mobility Act</a> (<em>Mobilitätsgesetz</em>) in June 2018, the first such law in Germany. It gives walking, cycling and public transport priority over private cars in planning. Implementation has been slower than the law's targets. A trial closure of Friedrichstraße to cars (2020–2023) ended in legal and political dispute, and in 2023 a new Senate put a number of cycle-lane projects on hold for review. <em>Lesson:</em> a statutory change to the objective does not deliver results by itself. Street space is reallocated project by project, and each project runs into the instruments, the courts and the electoral cycle.</p>
+
+<h2>6. Where to study</h2>
+<h3>Degree programmes and chairs</h3>
+<div class="table-wrap"><table>
+<tr><th>University</th><th>Unit</th><th>Notes</th></tr>
+<tr><td>TU Dresden</td><td><a href="https://tu-dresden.de/bu/verkehr">Faculty of Transport and Traffic Sciences "Friedrich List"</a>, incl. the <a href="https://tu-dresden.de/bu/verkehr/ivs">Institute of Transport Planning and Road Traffic</a></td><td>Describes itself as Germany's only faculty of transport sciences. Diplom in transport engineering (<em>Verkehrsingenieurwesen</em>) and transport economics. Home of the SrV survey. Teaching mainly in German.</td></tr>
+<tr><td>TU Munich</td><td><a href="https://www.mos.ed.tum.de/sv/startseite/">Chair of Urban Structure and Transport Planning</a>, <a href="https://www.mos.ed.tum.de/vt/startseite/">Chair of Traffic Engineering</a></td><td><a href="https://www.tum.de/studium/studienangebot/detail/transportation-systems-master-of-science-msc">M.Sc. Transportation Systems</a>, taught in English.</td></tr>
+<tr><td>Karlsruhe Institute of Technology</td><td><a href="https://www.ifv.kit.edu/">Institute for Transport Studies (IfV)</a></td><td>Demand modelling, the German Mobility Panel, simulation</td></tr>
+<tr><td>University of Stuttgart</td><td><a href="https://www.isv.uni-stuttgart.de/">Institute for Road and Transport Science (ISV)</a></td><td><a href="https://www.uni-stuttgart.de/studium/master/verkehrsingenieurwesen-m.sc./">M.Sc. Verkehrsingenieurwesen</a> (German). Transport planning and traffic control, model calibration.</td></tr>
+<tr><td>TU Berlin</td><td><a href="https://www.tu.berlin/vsp">Transport Systems Planning and Transport Telematics (VSP)</a></td><td>MATSim agent-based simulation. Research on BVWP methods.</td></tr>
+<tr><td>RWTH Aachen</td><td><a href="https://www.isb.rwth-aachen.de/">Institute of Highway Engineering (ISB)</a></td><td>Road design and traffic engineering</td></tr>
+</table></div>
+
+<h3>Free German-language teaching material</h3>
+<ul>
+<li><strong>Martin Treiber (TU Dresden), <a href="https://mtreiber.de/Vkoek_Ba/index.html">Verkehrsökonometrie</a></strong> <span class="lang">(German)</span>: a complete bachelor lecture with handouts on the four-step model, for example <a href="https://mtreiber.de/Vkoek_Ba_Skript/Lecture04_vpl_defs_handout.pdf">definitions in transport planning</a> and <a href="https://mtreiber.de/Vkoek_Ba_Skript/Lecture06_Verteilung_handout.pdf">trip distribution</a>, plus a <a href="https://www.youtube.com/playlist?list=PLhsJ0l0GYIUr-hIOOCZZYVw0w-FZGvr19">YouTube playlist of the lectures</a>. The same author's master course <a href="https://mtreiber.de/Vkmod/index.html">Traffic Flow Dynamics and Simulation</a> is in English. His browser simulator <a href="https://traffic-simulation.de/">traffic-simulation.de</a> runs the Intelligent Driver Model and MOBIL interactively.</li>
+<li><strong>BVWP 2030 method handbook</strong> <span class="lang">(German)</span>: more than 400 pages that work as a textbook of applied transport cost–benefit analysis, with worked example projects.</li>
+<li><strong>MiD and SrV reports</strong> <span class="lang">(German)</span>: the <a href="https://www.mobilitaet-in-deutschland.de/">MiD site</a> and the <a href="https://tu-dresden.de/bu/verkehr/ivs/srv">SrV pages</a> publish free reports and city tables. They are good material for exercises on trip rates and modal split in <a href="../modules/m04-demand-mode-choice.html">Module 4</a>.</li>
+<li><strong>BASt research reports</strong> <span class="lang">(German, some English summaries)</span>: free in the <a href="https://bast.opus.hbz-nrw.de/">BASt repository</a>. They include the research behind the HBS and design-traffic-volume rules.</li>
+<li><strong>Difu and Agora Verkehrswende</strong> <span class="lang">(German)</span>: <a href="https://difu.de/">Difu</a>, the German Institute of Urban Affairs, and <a href="https://www.agora-verkehrswende.de/">Agora Verkehrswende</a>, a think tank, publish free studies on parking, municipal finance and road traffic law. Read them as advocacy-adjacent sources.</li>
+</ul>
+<p class="small">We could not confirm public, non-campus access to recorded transport-planning lectures from TUM, KIT or TU Dresden's faculty video page (some require a university login), so they are not linked.</p>
+
+<h2>7. Translated key passages</h2>
+<div class="box translation">
+<div class="box-title">Road Traffic Act (StVG) §6(4a), as amended in 2024. Statutory text, translated in full</div>
+<p class="original">Rechtsverordnungen nach Absatz 1 Satz 1 Nummer 2, 8, 15 Buchstabe b oder c, Nummer 16 oder 18 können auch erlassen werden zur Verbesserung des Schutzes der Umwelt, darunter des Klimaschutzes, zum Schutz der Gesundheit oder zur Unterstützung der städtebaulichen Entwicklung, soweit sie nicht bereits nach Absatz 4 erlassen werden können. […] Die nach Satz 1 erlassenen Rechtsverordnungen und auf ihnen beruhenden Anordnungen müssen neben der Verbesserung des Schutzes der Umwelt, des Schutzes der Gesundheit oder der Unterstützung der städtebaulichen Entwicklung die Leichtigkeit des Verkehrs berücksichtigen und dürfen die Sicherheit des Verkehrs nicht beeinträchtigen.</p>
+<p>(4a) Regulations under paragraph 1 sentence 1 nos. 2, 8, 15(b) or (c), 16 or 18 may also be issued to improve the protection of the environment, including climate protection, to protect health or to support urban development, insofar as they cannot already be issued under paragraph 4. These regulations shall in particular provide that municipalities may apply to the authorities designated under state law for the execution of the regulations for orders ensuring the safety and ease of traffic, improving the protection of the environment, protecting health or supporting urban development. Regulations issued under sentence 1, and orders based on them, must, in addition to improving the protection of the environment, protecting health or supporting urban development, take the ease of traffic into account and must not impair the safety of traffic.</p>
+<p class="small">Source: <a href="https://www.gesetze-im-internet.de/stvg/__6.html">gesetze-im-internet.de</a>. The middle sentence is omitted from the original above for length; the translation covers all three sentences. Translated by the course authors (machine-assisted). Only the German text is legally binding.</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">German Environment Agency (UBA): "more mobility with less traffic"</div>
+<p class="original">Gerade die Vermeidung von Verkehr wird oft missverstanden: Vorrangiges Ziel ist es dabei nicht, Verkehr zu unterbinden, sondern die Verkehrswege durch veränderte Siedlungs- und Produktionsstrukturen zu verkürzen oder die Auslastung der Fahrzeuge zu erhöhen […] Es geht also um mehr Mobilität mit weniger Verkehr!</p>
+<p>Avoiding traffic in particular is often misunderstood. The primary aim is not to prevent traffic, but to shorten the distances travelled through changed settlement and production structures, or to increase vehicle occupancy […]. So it is about more mobility with less traffic!</p>
+<p class="small">Source: UBA, <a href="https://www.umweltbundesamt.de/themen/verkehr/nachhaltige-mobilitaet">Nachhaltige Mobilität</a> (topic page). Translated by the course authors (machine-assisted). In course notation, "mobility" is the logsum of Term A, and "traffic" is vehicle-kilometres, the driver of Term C.</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">BVWP 2030 method handbook: what induced traffic is left out</div>
+<p class="original">Im BVWP 2030 wird daher davon ausgegangen, dass die nachfragebestimmenden sozioökonomischen und soziodemografischen Strukturdaten zwischen Planfall und Bezugsfall unverändert sind und sekundär induzierter Verkehr nicht Gegenstand der NKA ist.</p>
+<p>The BVWP 2030 therefore assumes that the socio-economic and socio-demographic structural data that determine demand are unchanged between the project case and the reference case, and that secondary induced traffic is not part of the cost–benefit analysis.</p>
+<p class="small">Source: <a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">Methodenhandbuch zum Bundesverkehrswegeplan 2030</a>, section III.2.3.1. "Secondary induced traffic" means traffic from new residents and jobs that settle near the improved infrastructure. Translated by the course authors (machine-assisted).</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Discussion questions</div>
+<ol>
+<li>BVWP Module C tests minimum accessibility separately from the cost–benefit ratio. Is this better or worse than putting distributional weights \(\omega_g\) inside Term A? Consider transparency, manipulability and how each handles a remote region with few residents.</li>
+<li>The 2024 StVG wording requires that the "ease of traffic" be "taken into account". Write it as a constrained optimisation: which is the objective, and which are the constraints? Would a court reading it as "do not reduce motor-vehicle capacity" make the reform ineffective?</li>
+<li>Using the worked example in section 2, find the CO₂ price at which a road project with a benefit–cost ratio of 1.5 at €145/t falls below 1. What else would you need to know?</li>
+<li>Munich's 2025 target counted exhaust-free cars as part of the 80 %. Which terms of \(W\) does an electric car improve, and which does it leave unchanged (congestion, crashes, land, severance)?</li>
+<li>Vauban's residents chose car-light living. How would you design a study that separates the effect of the parking rules from self-selection?</li>
+</ol>
+</div>
+
+<h2>8. Links into the course and resources</h2>
+<div class="table-wrap"><table>
+<tr><th>Module</th><th>German material to use there</th></tr>
+<tr><td><a href="../modules/m03-externalities.html">3 Externalities</a></td><td>UBA cost rates (CO₂ €350/t), BVWP unit values</td></tr>
+<tr><td><a href="../modules/m04-demand-mode-choice.html">4 Demand and mode choice</a></td><td>MiD/SrV data, Treiber's four-step lectures, BVWP treatment of induced traffic</td></tr>
+<tr><td><a href="../modules/m05-accessibility-land-use.html">5 Accessibility and land use</a></td><td>BVWP Module C, Vauban, "more mobility with less traffic"</td></tr>
+<tr><td><a href="../modules/m06-transit-active-modes.html">6 Public transport and active modes</a></td><td><em>Verkehrsverbünde</em>, Deutschlandticket, ERA</td></tr>
+<tr><td><a href="../modules/m08-capacity-los.html">8 Capacity and LOS</a></td><td>HBS 2015 and QSV, the 30th-hour design volume</td></tr>
+<tr><td><a href="../modules/m09-junctions.html">9 Junctions</a></td><td>RiLSA, HBS junction procedures</td></tr>
+<tr><td><a href="../modules/m11-safety.html">11 Safety</a></td><td>Destatis casualty data, Vision Zero debate, motorway speed limit</td></tr>
+<tr><td><a href="../modules/m12-street-design.html">12 Street design</a></td><td>RASt 06, 2024 StVO reform (30 km/h, bus lanes)</td></tr>
+<tr><td><a href="../modules/m14-appraisal.html">14 Appraisal</a></td><td>BVWP 2030 method handbook, discount rate 1.7 %, four-module structure</td></tr>
+</table></div>
+
+<ul class="resources">
+<li data-type="pdf"><a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">BMV — Methodenhandbuch zum Bundesverkehrswegeplan 2030</a> <span class="lang">(German)</span> <span class="why">The full appraisal method: benefit components, unit values, induced traffic, Modules A–D.</span></li>
+<li data-type="link"><a href="https://www.bmv.de/SharedDocs/DE/Artikel/G/BVWP/bundesverkehrswegeplan-2030-inhalte-herunterladen.html">BMV — BVWP 2030 downloads</a> <span class="lang">(German)</span> <span class="why">The plan, its environmental report and the project dossiers.</span></li>
+<li data-type="pdf"><a href="https://svn.vsp.tu-berlin.de/repos/public-svn/publications/vspwp/2024/24-18/MartinsturnerEtAl2024_BvwpNkaCo2InvestmentCosts_revised.pdf">Martinsturner et al. (2024) — BVWP cost–benefit analysis under higher CO₂ prices and investment costs (TU Berlin working paper)</a> <span class="why">Re-evaluates BVWP projects with higher carbon values, a direct test of sensitivity to \(p_{\mathrm{CO_2}}\).</span></li>
+<li data-type="link"><a href="https://www.umweltbundesamt.de/daten/umwelt-wirtschaft/gesellschaftliche-kosten-von-umweltbelastungen">UBA — Gesellschaftliche Kosten von Umweltbelastungen</a> <span class="lang">(German)</span> <span class="why">Current recommended climate and environmental cost rates.</span></li>
+<li data-type="link"><a href="https://www.umweltbundesamt.de/themen/verkehrswende-endlich-mehr-spielraeume-fuer-staedte">UBA — Verkehrswende: Endlich mehr Spielräume für Städte und Gemeinden</a> <span class="lang">(German)</span> <span class="why">What the 2024 StVO reform changed, from the environment agency's perspective.</span></li>
+<li data-type="link"><a href="https://www.gesetze-im-internet.de/stvg/__6.html">StVG §6</a> and <a href="https://www.gesetze-im-internet.de/stvo_2013/__45.html">StVO §45</a> <span class="lang">(German)</span> <span class="why">The legal text of the objective of traffic orders.</span></li>
+<li data-type="data"><a href="https://www.mobilitaet-in-deutschland.de/">Mobilität in Deutschland (MiD)</a> <span class="lang">(German)</span> <span class="why">National household travel survey (2002, 2008, 2017, 2023).</span></li>
+<li data-type="data"><a href="https://tu-dresden.de/bu/verkehr/ivs/srv">TU Dresden — Mobilität in Städten (SrV)</a> <span class="lang">(German)</span> <span class="why">Comparable city travel surveys since 1972.</span></li>
+<li data-type="data"><a href="https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Verkehrsunfaelle/_inhalt.html">Destatis — Verkehrsunfälle</a> <span class="lang">(German)</span> <span class="why">Official road casualty statistics.</span></li>
+<li data-type="course"><a href="https://mtreiber.de/Vkoek_Ba/index.html">Martin Treiber — Verkehrsökonometrie (TU Dresden)</a> <span class="lang">(German)</span> <span class="why">Free slides and handouts on the four-step model and its statistics.</span></li>
+<li data-type="video"><a href="https://www.youtube.com/playlist?list=PLhsJ0l0GYIUr-hIOOCZZYVw0w-FZGvr19">Vorlesung Verkehrsökonometrie (YouTube playlist)</a> <span class="lang">(German)</span> <span class="why">Recorded lectures to accompany the slides above.</span></li>
+<li data-type="tool"><a href="https://traffic-simulation.de/">traffic-simulation.de</a> <span class="why">Interactive microsimulation in the browser (IDM, MOBIL), useful for Module 7.</span></li>
+<li data-type="link"><a href="https://www.fgsv.de/regelwerk/dialog-zu-ausgewaehlten-regelwerken/hbs-2015">FGSV — HBS 2015 dialogue page</a> <span class="lang">(German)</span> <span class="why">Free questions and answers on the paid German capacity manual.</span></li>
+<li data-type="pdf"><a href="https://stadt.muenchen.de/dam/jcr:41705a17-cede-408e-8f27-e6899f52306c/2_Mobilitaetsreferat_Mobilitaetsstrategie_2035.pdf">City of Munich — Mobilitätsstrategie 2035 (overview)</a> <span class="lang">(German)</span> <span class="why">Targets of a large German city, for comparison with the measured modal split.</span></li>
+<li data-type="pdf"><a href="https://freiburg.de/pb/site/Freiburg/get/params_E975311539/647912/Infotafeln_Vauban_de.pdf">City of Freiburg — Vauban information panels</a> <span class="lang">(German)</span> <span class="why">Primary facts on the parking-free district.</span></li>
+<li data-type="link"><a href="https://gesetze.berlin.de/bsbe/document/jlr-MobGBErahmen">Berliner Mobilitätsgesetz (official text)</a> <span class="lang">(German)</span> <span class="why">Germany's first state mobility law (2018).</span></li>
+<li data-type="book"><span>Treiber &amp; Kesting — <em>Verkehrsdynamik und -simulation</em> (Springer, 2010); English edition <em>Traffic Flow Dynamics</em></span> <span class="why">Standard textbook on traffic-flow models from the Dresden school.</span></li>
+<li data-type="book"><span>FGSV — <em>Handbuch für die Bemessung von Straßenverkehrsanlagen (HBS)</em>, 2015 edition; <em>RASt 06</em>; <em>RiLSA</em>; <em>ERA 2010</em> (FGSV Verlag, paid)</span> <span class="why">The binding German design and capacity rules.</span></li>
+<li data-type="translation"><a href="../sources/index.html">Sources &amp; translations</a> <span class="why">Further translated digests of German documents.</span></li>
+</ul>
+
+<nav class="pager">
+  <a href="us.html">← United States</a>
+  <a href="japan.html">Japan →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

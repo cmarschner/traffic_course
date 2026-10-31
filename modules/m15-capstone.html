@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 15 · Capstone: appraise a corridor with W — Welfare-Centred Transport Planning</title>
+<meta name="description" content="Capstone project: appraise real alternatives for a corridor with the full welfare objective, sensitivity tests and a decision memo.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html" aria-current="page">Syllabus</a>
+    <a href="../countries/index.html">Countries</a>
+    <a href="../sources/index.html">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Capstone · Module 15</p>
+<h1>Capstone: appraise a corridor with \(W\)</h1>
+<p class="meta">≈ 8 hours (more if you build your own model) · Prerequisites: Modules 1–14 · Key terms: all</p>
+
+<p class="lede">You will take one real street or corridor, define four genuinely different plans, estimate every term of the welfare objective for each, and write a two-page decision memo that a city council could act on. The memo must be honest about which conclusions are robust and which depend on contested values.</p>
+
+<div class="box key">
+<div class="box-title">Learning outcomes</div>
+<ul>
+<li>Translate a vague planning goal into an explicit objective and a set of constraints.</li>
+<li>Combine a traffic model (short run) with demand, safety, environmental and land-use reasoning (long run).</li>
+<li>Report a full effects vector, identify Pareto-dominated plans and test the ranking against national parameter sets.</li>
+<li>Communicate uncertainty without hiding behind it.</li>
+</ul>
+</div>
+
+<h2>1. Choose a corridor</h2>
+<p>Pick an urban arterial or main street of 1–5 km that you know well and that carries a mix of modes. Good choices have a live political debate, such as a proposed widening, bike lane, tram or bus lane, or pedestrianisation, because public documents then exist to compare against. Collect:</p>
+<ul>
+<li>Traffic counts (municipal open data, national count stations such as BASt in Germany or FHWA TMAS in the US, or your own counts).</li>
+<li>Public transport routes, frequencies and ridership where published.</li>
+<li>Crash data. National open crash maps exist in several countries, e.g. Germany's <a href="https://unfallatlas.statistikportal.de/">Unfallatlas</a> and the UK's STATS19 data.</li>
+<li>Land use along and around the corridor: population and jobs within 400 m and 800 m.</li>
+<li>Street cross-sections: widths allocated to each use. Measure them from aerial imagery.</li>
+</ul>
+
+<h2>2. Define four plans</h2>
+<p>Plans must be <em>different in kind</em>, not variations in lane width. A useful template, as in the <a href="../explorer.html">explorer</a>:</p>
+<ol>
+<li><strong>Capacity:</strong> more or better lanes for motor traffic, or signal optimisation.</li>
+<li><strong>Reallocation:</strong> fewer general lanes, with space given to cycling, walking, greenery and calmer junctions.</li>
+<li><strong>Public transport:</strong> bus lanes, BRT or tram.</li>
+<li><strong>Management:</strong> pricing, parking policy, access restrictions, with no construction.</li>
+</ol>
+<p>State each plan's cross-section, junction designs and operating rules precisely enough that someone else could model it.</p>
+
+<h2>3. Estimate the terms</h2>
+<div class="table-wrap"><table>
+<tr><th>Term</th><th>What to estimate</th><th>Minimum method</th><th>Better method</th><th>Module</th></tr>
+<tr><td>A, short run</td><td>travel-time change for existing trips, by mode, in person-hours</td><td>BPR link function and signal delay formulas, fixed OD</td><td>calibrated microsimulation (SUMO) of the peak hours</td><td><a href="m07-traffic-flow.html">7</a>–<a href="m10-simulation-validation.html">10</a></td></tr>
+<tr><td>A, long run</td><td>induced or evaporated traffic, mode shift, rule-of-half benefits</td><td>elasticities from the literature (Module 5), incremental logit pivot</td><td>regional demand model with logsum output</td><td><a href="m02-valuing-access.html">2</a>, <a href="m04-demand-mode-choice.html">4</a>, <a href="m05-accessibility-land-use.html">5</a></td></tr>
+<tr><td>B</td><td>change in walking and cycling km</td><td>mode-shift estimate × trip length</td><td>WHO HEAT</td><td><a href="m06-transit-active-modes.html">6</a></td></tr>
+<tr><td>C</td><td>CO₂, NOₓ/PM, noise exposure, crashes (KSI), severance</td><td>vehicle-km × unit values from the EU Handbook; crash modification factors</td><td>emission model (HBEFA/COPERT), noise mapping, Safe System assessment</td><td><a href="m03-externalities.html">3</a>, <a href="m11-safety.html">11</a></td></tr>
+<tr><td>D</td><td>change in land allocated to motor traffic and parking</td><td>cross-section areas × local land value or rent</td><td>hedonic or land-residual valuation</td><td><a href="m05-accessibility-land-use.html">5</a>, <a href="m12-street-design.html">12</a></td></tr>
+<tr><td>E</td><td>capital, maintenance, operations, revenue</td><td>unit costs from comparable projects, with optimism-bias uplift</td><td>reference-class forecasting</td><td><a href="m14-appraisal.html">14</a></td></tr>
+<tr><td>constraints</td><td>KSI change, CO₂ change, land change, accessibility of the worst-off group</td><td>sign of change</td><td>distributional accessibility analysis</td><td><a href="m11-safety.html">11</a>, <a href="m14-appraisal.html">14</a></td></tr>
+</table></div>
+
+<h2>4. Value and compare</h2>
+<ol>
+<li><strong>Effects table first.</strong> Present physical effects for every plan before any money values appear.</li>
+<li><strong>Pareto screen.</strong> Remove dominated plans and say which ones and why.</li>
+<li><strong>Three national parameter sets.</strong> Value the remaining plans with the official values of at least three role-model countries (Module 14 compares them). Does the ranking change?</li>
+<li><strong>Constraints.</strong> Apply Vision Zero, a carbon constraint and an equity floor in turn. Which plans survive?</li>
+<li><strong>Switching values.</strong> For the top two plans, find the value of time, carbon price, land value or KSI value at which their order flips. Robust conclusions have switching values far from any defensible parameter.</li>
+</ol>
+
+<h2>5. Write the decision memo</h2>
+<p>Two pages, for a non-technical council:</p>
+<ul>
+<li>The question and the plans, in one paragraph.</li>
+<li>One table: effects by plan, then \(W\) under the three parameter sets.</li>
+<li>The recommendation and the <em>conditions under which it would change</em>.</li>
+<li>What the analysis could not see: for example long-run land-use change, construction-period disruption, or effects on businesses beyond what the land-value term captures.</li>
+</ul>
+<p>Attach a technical appendix with data sources, the model, its verification and calibration (Module 10), and every assumption.</p>
+
+<div class="box exercise">
+<div class="box-title">Assessment rubric</div>
+<div class="table-wrap"><table>
+<tr><th>Criterion</th><th>Weight</th><th>Excellent work…</th></tr>
+<tr><td>Plans</td><td>15%</td><td>are distinct, realistic and precisely specified</td></tr>
+<tr><td>Estimation</td><td>30%</td><td>uses defensible methods for every term, short and long run, with sources</td></tr>
+<tr><td>Comparison</td><td>25%</td><td>includes Pareto screen, three national value sets, constraints and switching values</td></tr>
+<tr><td>Honesty</td><td>15%</td><td>states limitations plainly and separates evidence from judgement</td></tr>
+<tr><td>Memo</td><td>15%</td><td>could be read and acted on by a council member in ten minutes</td></tr>
+</table></div>
+</div>
+
+<h2>Readings and resources</h2>
+<ul class="resources">
+<li data-type="tool"><a href="https://eclipse.dev/sumo/">Eclipse SUMO — Simulation of Urban MObility</a> <span class="why">Open-source microsimulation, developed at DLR, for the short-run part of Term A.</span></li>
+<li data-type="tool"><a href="https://www.heatwalkingcycling.org/">WHO HEAT — Health Economic Assessment Tool</a> <span class="why">Term B.</span></li>
+<li data-type="pdf"><a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">European Commission — Handbook on the External Costs of Transport</a> <span class="why">Term C unit values.</span></li>
+<li data-type="link"><a href="https://www.gov.uk/guidance/transport-analysis-guidance-tag">UK Department for Transport — Transport Analysis Guidance (TAG)</a> <span class="why">The most complete open appraisal manual in English, with worked procedures for every term.</span></li>
+<li data-type="link"><a href="https://www.transportation.gov/grants/dot-navigator/benefit-cost-analysis-guidance-discretionary-grant-programs">USDOT — Benefit-Cost Analysis Guidance for Discretionary Grant Programs</a> <span class="why">US parameter values and procedure.</span></li>
+</ul>
+
+<nav class="pager">
+  <a href="m14-appraisal.html">← Module 14 · Appraisal and decision-making</a>
+  <a href="../syllabus.html">Back to syllabus →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

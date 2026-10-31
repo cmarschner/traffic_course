@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japan's road cost–benefit manual (MLIT, 2025) — English digest — Welfare-Centred Transport Planning</title>
+<meta name="description" content="English digest and partial translation of the MLIT 費用便益分析マニュアル (Cost-Benefit Analysis Manual, August 2025) for road projects: three benefits, formulas, unit values, discount rate and sensitivity analysis.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html">Syllabus</a>
+    <a href="../countries/index.html">Countries</a>
+    <a href="index.html" aria-current="page">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Sources &amp; translations · Japanese · Government manual</p>
+<h1>Japan's road cost–benefit manual: three benefits and nothing else</h1>
+<p class="meta">Ministry of Land, Infrastructure, Transport and Tourism (MLIT) · August 2025 edition · Terms: <span class="term">A</span> <span class="term">C</span> <span class="term">E</span> · Modules <a href="../modules/m14-appraisal.html">14</a>, <a href="../modules/m02-valuing-access.html">2</a>, <a href="../modules/m04-demand-mode-choice.html">4</a></p>
+
+<p class="lede">Road and urban street projects evaluated under MLIT's project-evaluation system are appraised with a 19-page manual. It counts exactly three benefits: travel-time savings, vehicle operating-cost savings and crash reduction. It lists many other effects of roads — comfort, roadside environment, disaster resilience, new development — and then deliberately leaves them out because they cannot yet be measured and monetised with "sufficient accuracy". The manual is an unusually clean example of the classic engineering objective dressed as cost–benefit analysis, and therefore an excellent object for comparison with \(W\).</p>
+
+<h2>Bibliographic record</h2>
+<div class="table-wrap"><table>
+<tr><th>Original title</th><td lang="ja">費用便益分析マニュアル（令和７年８月）</td></tr>
+<tr><th>English title</th><td>Cost-Benefit Analysis Manual (August 2025)</td></tr>
+<tr><th>Publisher</th><td>MLIT Road Bureau and City Bureau (<span lang="ja">国土交通省 道路局 都市局</span>). The August 2025 edition corrects unit values and formulas in the February 2025 edition; earlier editions include a 2003 draft and the February 2018 edition (<span lang="ja">平成30年2月</span>), which many project evaluations still cite.</td></tr>
+<tr><th>Scope</th><td>Cost–benefit analysis for road projects at three stages: new-project adoption, re-evaluation and ex-post evaluation. A separate manual covers grade separation of railways (<span lang="ja">連続立体交差事業編</span>).</td></tr>
+<tr><th>Original</th><td><a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ben-eki_2.pdf">Manual (PDF, Japanese)</a> · listed on the <a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ir-hyouka.html">MLIT road project evaluation page</a> together with the errata.</td></tr>
+<tr><th>Licence / status</th><td>Japanese government publication. We have not confirmed the reuse terms of the MLIT website, so we treat the manual as guidance: a structured digest, the method formulas in our own notation, and short quoted passages. Unit values are reproduced as facts, in a selection.</td></tr>
+<tr><th>Translation</th><td>Machine-assisted translation, reviewed by the course authors.</td></tr>
+</table></div>
+
+<h2>Why it matters for W</h2>
+<p>Map the manual onto \(W\) term by term:</p>
+<div class="table-wrap"><table>
+<tr><th>Term of \(W\)</th><th>In the MLIT manual</th></tr>
+<tr><td>A: access and choice</td><td>Only the change in vehicle travel time and vehicle operating cost on the road network, for fixed total trip generation and with a three-step model (no mode choice unless the base matrix is not a car matrix). No logsum, no new destinations, no value of new options.</td></tr>
+<tr><td>B: health</td><td>Not counted.</td></tr>
+<tr><td>C: externalities</td><td>Only crashes, through link-based loss formulas. No CO₂, air pollution, noise or severance.</td></tr>
+<tr><td>D: land</td><td>Land purchase is part of project cost (as a cash cost), with residual value optionally deducted. No ongoing opportunity cost of road space.</td></tr>
+<tr><td>E: net public cost</td><td>Construction, maintenance and renewal cost; no tolls or revenue term in the B/C; no marginal cost of public funds.</td></tr>
+<tr><td>Constraints</td><td>None in the appraisal itself.</td></tr>
+</table></div>
+<p>Three of the five simplifications that <a href="../modules/m01-objective.html">Module 1</a> lists for the classic objective (fixed demand in large part, vehicles rather than people, \(p_k=0\) for most externalities) are visible in the text. The manual is candid about it. It says that the other effects exist, that only the three benefits can currently be measured with sufficient accuracy, and that other effects may be added "for reference" if their uncertainty is stated. It is a good test case for <a href="../modules/m14-appraisal.html">Module 14</a>: what happens to a project ranking when the omitted terms are added?</p>
+<p>Japan's urban accessibility is not mainly delivered by road investment, and Japanese rail projects use a different manual. The narrowness of the road manual should not be read as a narrowness of Japanese transport policy as a whole; see the <a href="ja-location-normalisation-plan.html">Location Normalisation Plan digest</a> and the <a href="../countries/japan.html">Japan country page</a>.</p>
+
+<h2>Digest</h2>
+<h3>1. Purpose and basic approach (chapter 1)</h3>
+<p>CBA is meant to assess, from a socio-economic standpoint, whether a road project is justified, and to encourage more effective project delivery. The manual summarises the "standard method based on current knowledge", but stresses that responsible bureaus should consider adding their own items and methods to improve accountability. The analysis compares a with-project case and a without-project case over a fixed period from a base year, and compares the increments in benefits and costs.</p>
+<p>All values are converted to real prices of the base year with the GDP deflator published by the Cabinet Office, and discounted. The fixed parameters are:</p>
+<ul>
+<li>social discount rate <strong>4 %</strong>; from fiscal year 2023, results with <strong>1 % and 2 %</strong> may be shown for comparison;</li>
+<li>base year: the year of evaluation;</li>
+<li>appraisal period: <strong>50 years</strong> from opening, reflecting the service life of road structures; for networks evaluated as a whole, the period depends on the construction period and service life.</li>
+</ul>
+
+<h3>2. Traffic forecasting (chapter 2.1)</h3>
+<p>Traffic is forecast in principle with the three-step method — trip generation/attraction, distribution, assignment — on an origin–destination matrix derived from the national Road Traffic Census. A modal split step is added only if the base matrix is not a vehicle matrix. Future total generation and attraction is used as a <em>control total</em>; development traffic from well-advanced development plans may be added. Vehicles are classified into four types (passenger car, bus, light goods vehicle, heavy goods vehicle), or three if cars and buses are combined. Assignment uses average annual daily traffic with Q–V relationships or link performance functions, or diversion-rate formulas for toll roads. The network must include all links whose assigned volume differs between with and without cases, except where differences are within error. For small projects a simplified method may be used.</p>
+<p>The with- and without-project forecasts must use the same network extent, the same OD matrix and the same distribution. That rule removes most induced demand from the benefit calculation by construction: only route choice responds to the project.</p>
+
+<h3>3. Travel-time savings (chapter 2.2)</h3>
+<p>Benefit is the difference between total travel-time cost without and with the project:</p>
+$$BT = BT_O - BT_W,\qquad BT_i=\sum_j\sum_l Q_{ijl}\,T_{ijl}\,\alpha_j\times 365,$$
+<p>where \(Q_{ijl}\) is daily traffic of vehicle type \(j\) on link \(l\) in case \(i\) (W with, O without), \(T_{ijl}\) its travel time in minutes and \(\alpha_j\) the value of time per vehicle-minute. The example values in the August 2025 edition, in 2024 prices, are:</p>
+<div class="table-wrap"><table>
+<tr><th>Vehicle type</th><th>Value of time (yen per vehicle-minute)</th></tr>
+<tr><td>Passenger car</td><td>43.74</td></tr>
+<tr><td>Bus</td><td>386.79</td></tr>
+<tr><td>Passenger vehicles (car and bus combined)</td><td>48.89</td></tr>
+<tr><td>Light goods vehicle</td><td>52.07</td></tr>
+<tr><td>Heavy goods vehicle</td><td>101.93</td></tr>
+</table></div>
+<p>The values are built from the time values of persons, vehicles and goods; for freight, the value of goods times an hourly interest rate, which the manual itself says may not reflect actual freight logistics. Regions may use their own values if they publish them and their basis. Weekend traffic, closures due to disasters and winter conditions may be modelled separately.</p>
+
+<h3>4. Operating-cost savings (chapter 2.3)</h3>
+<p>Operating-cost benefit covers costs not included in travel time: fuel, oil, tyres, maintenance and repair, depreciation. It is computed per vehicle-kilometre with speed-dependent unit costs \(\beta_j(v)\):</p>
+$$BR=BR_O-BR_W,\qquad BR_i=\sum_j\sum_l Q_{ijl}\,L_l\,\beta_j\times 365.$$
+<p>The manual tabulates \(\beta_j\) in 5 km/h steps for four road environments (urban ordinary roads, flat rural, mountainous, expressways). For a passenger car on an urban ordinary road, for example, the unit cost falls from 53.71 yen/km at 5 km/h to 25.36 at 30 km/h and about 24.2 at 50 km/h (2024 prices). Values between steps are interpolated linearly; above 60 km/h (ordinary roads) or 90 km/h (expressways) the top value applies.</p>
+
+<h3>5. Crash reduction (chapter 2.4)</h3>
+<p>Crash benefit is the reduction in the social loss from crashes: human losses for drivers, passengers and pedestrians, material damage to vehicles and structures, and the cost of crash-induced congestion. Losses are computed per link from crash-rate formulas of the form</p>
+$$AA_{il}=a\,X_{1il}+b\,X_{2il},\qquad X_{1il}=Q_{il}L_l,\quad X_{2il}=Q_{il}Z_l,$$
+<p>in thousand yen per year, where \(X_1\) is thousand vehicle-km per day, \(X_2\) is thousand vehicle-junction passages per day and \(Z_l\) the number of major junctions (cross-road width at least 5.5 m) on the link. The coefficients depend on road type (densely inhabited district, other urban, non-urban, expressway), the number of lanes and whether a median is present over at least 65 % of the link. For example, a two-lane road in a densely inhabited district has \(a=1850,\ b=280\); an expressway has \(a=360\) and no junction term.</p>
+
+<h3>6. Costs (chapter 3)</h3>
+<p>Costs are project cost (construction, land, compensation, overheads), maintenance (inspection and repair of bridges and tunnels, patrols, cleaning, snow removal) and renewal of structures that reach the end of their service life within the appraisal period. Consumption tax is excluded. Strictly, costs should be computed as the with-minus-without difference across the whole network; where that is impractical, only the project's own costs may be counted. The residual value of land and similar items after the appraisal period may be deducted.</p>
+
+<h3>7. Results, re-evaluation, sensitivity, publication (chapter 4)</h3>
+<p>The main indicator is the benefit–cost ratio, with benefits being the sum of the three benefits and costs being project plus maintenance cost, all in present value. Net present value and economic internal rate of return may also be reported. At re-evaluation, both the whole project and the "remaining project" are evaluated; the latter ignores sunk costs and benefits already realised. Sensitivity analysis is mandatory; the three basic factors are traffic volume, project cost and project duration. Where data are insufficient, ±10 % around the base case may be used, with the caution that this shows sensitivity, not the actual degree of uncertainty. Results, data and methods are in principle published.</p>
+
+<div class="box exercise">
+<div class="box-title">Exercise · Add the missing terms</div>
+<p>A Japanese bypass has, in present value over 50 years at 4 %, travel-time benefits of 120, operating-cost benefits of 15 and crash benefits of 10 (billion yen), and costs of 110. (a) Compute the B/C ratio under the manual. (b) Suppose a variable-demand model shows that 30 % of the time savings are eroded by induced traffic within ten years, and the induced traffic adds CO₂ worth 8 (billion yen, PV) and noise worth 3. Recompute the ratio. (c) Recompute both at 2 %. Which conclusions are robust?</p>
+</div>
+
+<h2>Key passages, side by side</h2>
+
+<div class="box translation">
+<div class="box-title">Chapter 1(2) · the many effects of roads</div>
+<p class="original" lang="ja">道路の整備に伴う効果としては、渋滞の緩和や交通事故の減少の他、走行快適性の向上、沿道環境の改善、災害時の代替路確保、交流機会の拡大、新規立地に伴う生産増加や雇用・所得の増大等、多岐多様に渡る効果が存在する。</p>
+<p>The effects of road improvement are many and varied: besides relief of congestion and fewer crashes, they include better driving comfort, improvement of the roadside environment, provision of alternative routes in disasters, more opportunities for exchange, and increased production, employment and income from new location of activities.</p>
+<p class="meta">Translated by the course authors (machine-assisted).</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">Chapter 1(2) · why only three benefits are counted</div>
+<p class="original" lang="ja">本マニュアルにおいては、それらの効果のうち、現時点における知見により、十分な精度で計測が可能でかつ金銭表現が可能である、「走行時間短縮」、「走行経費減少」、「交通事故減少」の項目について […] 便益を算出する。</p>
+<p>In this manual, among those effects, benefits are calculated for the items "travel-time savings", "operating-cost savings" and "crash reduction", which on current knowledge can be measured with sufficient accuracy and expressed in money […]</p>
+<p class="meta">Translated by the course authors (machine-assisted). The omitted words say that benefits are measured as social surplus, "the established method for evaluating road investment".</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">Chapter 1(2) · other effects may be shown for reference</div>
+<p class="original" lang="ja">評価手法の確立、評価値の精度向上に向けた検討が必要な効果であっても、その旨を明示した上で、必要に応じて貨幣換算化し、参考比較のため、これらの便益を計上した値を設定しても良い。</p>
+<p>Even for effects whose evaluation methods still need to be established, or whose values need to become more accurate, a value including these benefits may be set for reference and comparison, converted to money as necessary, provided that this is stated explicitly.</p>
+<p class="meta">Translated by the course authors (machine-assisted).</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">Chapter 2(1) · the forecasting method</div>
+<p class="original" lang="ja">交通流の推計手法としては、道路交通センサスベースの OD 表を用いて、図－２に示す三段階推定法により行うことを原則とする。</p>
+<p>As a rule, traffic flows are forecast with the three-step method shown in Figure 2, using an OD matrix based on the Road Traffic Census.</p>
+<p class="meta">Translated by the course authors (machine-assisted).</p>
+</div>
+
+<div class="box translation">
+<div class="box-title">Chapter 4(3) · sensitivity is not uncertainty</div>
+<p class="original" lang="ja">この場合、費用便益分析結果の変動幅は、あくまでも影響要因の変動が費用便益分析結果に与える感度を見るためのものであり、不確実性の度合いを反映したものではないことに留意する必要がある。</p>
+<p>In this case it should be noted that the range of the CBA results serves only to show the sensitivity of the results to changes in the influencing factors, and does not reflect the degree of uncertainty.</p>
+<p class="meta">Translated by the course authors (machine-assisted). "This case" is the default ±10 % variation used where data are insufficient.</p>
+</div>
+
+<h2>Where the course uses it</h2>
+<ul>
+<li><a href="../modules/m14-appraisal.html">Module 14 · Appraisal and decision-making</a> — a minimal national CBA as a contrast case.</li>
+<li><a href="../modules/m02-valuing-access.html">Module 2 · Valuing time, access and choice</a> — vehicle-based values of time; with–without comparison.</li>
+<li><a href="../modules/m04-demand-mode-choice.html">Module 4 · Travel demand and mode choice</a> — three-step forecasting with a control total, and what it omits.</li>
+<li><a href="../modules/m03-externalities.html">Module 3 · Externalities and their prices</a> — crash-loss functions; externalities that are not counted.</li>
+<li><a href="../modules/m01-objective.html">Module 1 · What should transport optimise?</a> — the "three benefits" as a special case of \(W\).</li>
+<li><a href="../countries/japan.html">Country page: Japan</a>.</li>
+</ul>
+
+<nav class="pager">
+  <a href="nl-mkba-leidraad-2013.html">← Dutch MKBA guidance</a>
+  <a href="ja-location-normalisation-plan.html">Next · Japan's Location Normalisation Plan →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 4 · Travel demand and mode choice — Welfare-Centred Transport Planning</title>
+<meta name="description" content="Travel surveys, zoning, the four-step model, gravity distribution, multinomial and nested logit, elasticities, activity- and agent-based models, and equilibrium assignment, and how their logsums feed Term A of the welfare objective.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html" aria-current="page">Syllabus</a>
+    <a href="../countries/index.html">Countries</a>
+    <a href="../sources/index.html">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Part II · People and places · Module 4</p>
+<h1>Travel demand and mode choice</h1>
+<p class="meta">≈ 6 hours · Prerequisites: <a href="m01-objective.html">Module 1</a>, <a href="m02-valuing-access.html">Module 2</a>; basic probability and calculus · Key terms: <span class="term">A</span>, plus the inputs to <span class="term">B</span> and <span class="term">C</span></p>
+
+<p class="lede">Term A of the welfare objective is a sum of logsums, and a logsum is only as good as the demand model that produces it. This module explains where those models come from: the travel surveys that feed them, the classic four-step sequence, the logit family of choice models, activity- and agent-based simulation, and network equilibrium. The aim is not to make you a modeller in six hours. It is to make you a critical reader of model outputs, able to say which parts of \(W\) a given model can and cannot estimate.</p>
+
+<div class="box key">
+<div class="box-title">Learning outcomes</div>
+<ul>
+<li>Describe how national household travel surveys (MiD, ODiN, NHTS, Japanese person-trip surveys, French EMC²) are designed and what they can and cannot tell a modeller.</li>
+<li>Set up the four-step model and a doubly constrained gravity model, and explain the feedback loop that makes it consistent.</li>
+<li>Derive multinomial logit choice probabilities, compute the logsum and the change in consumer surplus for a policy, and check it against the rule of half.</li>
+<li>Explain the IIA property, why nested logit relaxes it, and compute direct and cross elasticities from a logit model.</li>
+<li>Contrast trip-based, tour-based, activity-based and agent-based (MATSim) models.</li>
+<li>State Wardrop's two principles, run Frank–Wolfe by hand on a small network, and explain the Braess paradox.</li>
+<li>Explain exactly how a demand model's logsum becomes Term A, and which biases appear when demand is held fixed.</li>
+</ul>
+</div>
+
+<h2>1. What a demand model is for <span class="term">A</span></h2>
+<p>Every demand model answers one question: <em>if the plan \(\theta\) changes travel times, costs and the location of opportunities, how do people change what they do?</em> The answer has several dimensions, which correspond to the alternatives \(j\) in Term A:</p>
+<ul>
+<li><strong>whether</strong> to make a trip at all (trip generation, or activity participation);</li>
+<li><strong>where</strong> to go (destination choice, which brings in the size term \(\ln O_j\));</li>
+<li><strong>how</strong> (mode choice);</li>
+<li><strong>when</strong> (departure-time choice);</li>
+<li><strong>which way</strong> (route choice, or assignment).</li>
+</ul>
+<p>In the longer run, people also choose car ownership, season tickets, residence and workplace. Modules <a href="m05-accessibility-land-use.html">5</a> and <a href="m13-pricing.html">13</a> deal with those.</p>
+<p>The classic engineering objective of <a href="m01-objective.html">Module 1</a>, \(\min \sum_a q_a t_a(q_a)\), keeps only the last dimension. It treats the origin–destination matrix as fixed. A good demand model keeps all of them, and its logsum then automatically contains induced trips, mode shift and destination change. This is the single most important link between this module and the objective function.</p>
+
+<h2>2. Data: household travel surveys</h2>
+<p>Nearly every demand model in the world is estimated on a <strong>household travel survey</strong>: a random sample of households who record every trip (or every activity) of every member on an assigned day. A trip record holds origin, destination, purpose, start and end time, mode(s) and party size. The household record holds income, car and bicycle ownership, and ticket ownership. The survey supplies three things: trip rates for generation, observed choices for estimating logit models, and control totals for validation.</p>
+
+<div class="table-wrap"><table>
+<tr><th>Country</th><th>Survey</th><th>Run by</th><th>Notes</th></tr>
+<tr><td>Germany</td><td><em>Mobilität in Deutschland</em> (MiD) 2002, 2008, 2017, 2023</td><td>Federal transport ministry (BMV), fieldwork by infas</td><td>MiD 2023 surveyed over 218,000 households and about 421,000 people (fieldwork 2023–24). Cities add the TU Dresden <em>Mobilität in Städten – SrV</em> survey.</td></tr>
+<tr><td>Netherlands</td><td><em>Onderweg in Nederland</em> (ODiN), continuous</td><td>Statistics Netherlands (CBS) for Rijkswaterstaat</td><td>Series dates from 1978 under earlier names (OVG, MON, OViN). One-day online diary, persons aged 6 and over, sampled from the population register.</td></tr>
+<tr><td>United States</td><td>National Household Travel Survey (NHTS)</td><td>FHWA</td><td>National totals and trip rates. Metropolitan planning organisations run their own regional surveys for model estimation.</td></tr>
+<tr><td>Japan</td><td>Urban-area person-trip surveys (都市圏パーソントリップ調査); national survey (全国都市交通特性調査)</td><td>Metropolitan planning councils; MLIT</td><td>Tokyo surveys since 1968, roughly every 10 years. The 5th (2008) received returns from about 730,000 people. A trial for the 7th survey ran in autumn 2026.</td></tr>
+<tr><td>France</td><td><em>Enquête ménages déplacements</em> (EMD), now <em>Enquête mobilité certifiée Cerema</em> (EMC²)</td><td>Local authorities, method certified by Cerema</td><td>Standard method since the 1970s, so cities are comparable. Results are published as open data.</td></tr>
+<tr><td>Singapore</td><td>Household Interview Travel Survey (HITS), now Household Travel Survey (HTS)</td><td>Land Transport Authority</td><td>Historically about every four years; LTA now describes an annual HTS. Used to track Land Transport Master Plan targets.</td></tr>
+</table></div>
+
+<p>Survey design choices shape the model, and through it \(W\):</p>
+<ul>
+<li><strong>Short walks get lost.</strong> Respondents under-report short walking trips and walking stages within public-transport trips, so walking is systematically undercounted. MiD 2023 reports that walking's share of trips rose from 22% to 26% since 2017, partly a real change and partly better capture. An under-recorded mode has an under-estimated logsum contribution.</li>
+<li><strong>One day hides variety.</strong> A one-day diary cannot see that someone cycles twice a week and drives three times. Multi-day and smartphone-based panels (the Dutch Mobility Panel, LTA's mobile survey) help.</li>
+<li><strong>Trips versus activities.</strong> Trip-based questionnaires make tour and activity models harder to estimate. Modern surveys record activities and tours explicitly.</li>
+</ul>
+
+<div class="box translation">
+<div class="box-title">German · BMV on MiD 2023</div>
+<p class="original">„Der Verkehr liegt im Befragungszeitraum 2023/2024 niedriger als zum Zeitpunkt der Vorgängerstudie im Jahr 2017. Aktuell werden von der Bevölkerung in Deutschland täglich bundesweit 249 Mio. Wege (-3 Prozent) und 2.983 Mio. Kilometer Wegstrecke (-7 Prozent) zurückgelegt."</p>
+<p>"Travel in the 2023/2024 survey period is lower than at the time of the previous study in 2017. The population of Germany currently makes 249 million trips a day nationwide (−3 per cent) and travels 2,983 million kilometres (−7 per cent)."</p>
+<p>The ministry attributes the decline mainly to less car travel. It reports that residents of the largest cities make 31% of trips on foot, 33% by car, 21% by public transport and 15% by bicycle. <em>Source: BMV, Mobilität in Deutschland page. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<div class="box translation">
+<div class="box-title">Japanese · What a person-trip survey measures</div>
+<p class="original">パーソントリップ調査とは、人の移動に関する内容について、ある人の平日の1日の動きを把握する調査です。</p>
+<p>"A person-trip survey is a survey that captures the movements of a person over one weekday."</p>
+<p class="original">全国ＰＴ調査は、「全国横断的」かつ「時系列的」に都市交通の特性（外出率、トリップ原単位、交通手段分担率等）を把握する調査です。</p>
+<p>"The national PT survey captures the characteristics of urban transport (share of people going out, trip rates, modal split, etc.) both across the whole country and over time."</p>
+<p>MLIT adds that the national survey is run about every five years with a small sample, so it gives comparable rates but cannot provide the origin–destination totals that the metropolitan surveys, which sample a few per cent of the population, supply. <em>Sources: Tokyo Metropolitan Region Transportation Planning Council; MLIT. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<h2>3. Zones, networks and the four-step model</h2>
+<h3>Zoning</h3>
+<p>The study area is divided into traffic analysis zones. Each has a centroid connected to the network by connectors. Zone size trades precision against data: Sweden's national Sampers model uses about 11,000 zones, while a city model may use 500 to 3,000. Zones that are too large produce a hidden bias. Trips inside a zone (intrazonal trips) never touch the modelled network, and these are disproportionately walking and cycling trips. A coarse zoning therefore systematically under-represents active modes, and with them Terms A and B.</p>
+
+<h3>The four steps</h3>
+<ol>
+<li><strong>Trip generation.</strong> Productions \(P_i\) and attractions \(D_j\) by purpose, usually from regression or cross-classification on household size, cars, employment and floor space.</li>
+<li><strong>Trip distribution.</strong> Fill the origin–destination matrix \(T_{ij}\), classically with a gravity model.</li>
+<li><strong>Mode choice.</strong> Split \(T_{ij}\) into \(T_{ijm}\) with a logit model.</li>
+<li><strong>Assignment.</strong> Load the car matrix onto the road network and the transit matrix onto the transit network, finding equilibrium travel times.</li>
+</ol>
+<p>The steps are linked by a <strong>feedback loop</strong>: congested times from step 4 must go back to steps 2 and 3, and the model iterates until times and flows are consistent. Many practical models skip or truncate this loop, which is one of the main reasons forecasts understate induced traffic.</p>
+
+<h3>The gravity model</h3>
+<p>The doubly constrained gravity model is</p>
+$$T_{ij} = A_i\,P_i\,B_j\,D_j\,f(c_{ij}),\qquad f(c_{ij}) = e^{-\beta c_{ij}},$$
+<p>where the balancing factors \(A_i = \big[\sum_j B_j D_j f(c_{ij})\big]^{-1}\) and \(B_j = \big[\sum_i A_i P_i f(c_{ij})\big]^{-1}\) are found by iterating (Furness or iterative proportional fitting) so that rows sum to \(P_i\) and columns to \(D_j\). \(c_{ij}\) is a generalised cost, ideally the mode-choice logsum between \(i\) and \(j\), so that a better bus service makes \(j\) more attractive as a destination.</p>
+<p>Wilson (1967) showed that this is the most probable trip matrix given the constraints and a fixed total travel cost, an entropy-maximisation result. It is also exactly the destination-choice multinomial logit with utility \(-\beta c_{ij} + \ln D_j\). The \(\ln D_j\) term is the \(\ln O_j\) size term in \(V_{nj}\). The gravity model is therefore not a separate tradition but a special case of the random-utility framework behind Term A.</p>
+
+<div class="box translation">
+<div class="box-title">Swedish · Sampers 4, Trafikverket's national model</div>
+<p class="original">I Sampers beräknas restider mellan modellens cirka 11 000 prognosområden genom nätutläggning med så kallad användarjämvikt för vägtrafik och optimal strategi för kollektivtrafik.</p>
+<p>"In Sampers, travel times between the model's approximately 11,000 forecast zones are computed by network assignment using so-called user equilibrium for road traffic and optimal strategy for public transport."</p>
+<p>The same report states that Sampers 4 forecasts travel by car, air, train, bus, metro, tram, walking and cycling, with base year 2019 and forecast year 2045, and that the 2045 forecast is the reference case for Trafikverket's cost–benefit analyses. <em>Source: Trafikverket, Prognos för persontrafiken 2045 (2024). Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<h2>4. Discrete choice: multinomial logit <span class="term">A</span></h2>
+<h3>Random utility</h3>
+<p>Person \(n\) chooses the alternative with the highest utility \(U_{nj} = V_{nj} + \varepsilon_{nj}\). The analyst observes \(V_{nj}\) and treats \(\varepsilon_{nj}\) as random. If the \(\varepsilon\) are independent and identically Gumbel distributed with scale \(\mu\) (normalised to 1), the choice probability is the <strong>multinomial logit</strong> (MNL):</p>
+$$P_{nj} = \frac{e^{V_{nj}}}{\sum_{k\in C_n} e^{V_{nk}}}.$$
+<p>The expected value of the maximum utility is the <strong>logsum</strong>:</p>
+$$\mathbb{E}\big[\max_j U_{nj}\big] = \ln \sum_{j\in C_n} e^{V_{nj}} + \text{const}.$$
+<p>Divide by the marginal utility of money \(\lambda_n = -\beta_c\) and you have consumer surplus in money, up to a constant that cancels when you compare two plans. This is exactly the inner part of Term A. McFadden developed this link in the 1970s and received the Nobel prize in economics for it in 2000.</p>
+
+<h3>A worked example</h3>
+<p>A commuter travels 6 km to work. Utilities are linear in in-vehicle time (minutes) and cost (euros), with alternative-specific constants (ASCs):</p>
+$$V_j = \text{ASC}_j - 0.05\,t_j - 0.25\,c_j.$$
+<p>The implied value of time is \(0.05/0.25 = 0.2\) €/min, or 12 €/h.</p>
+<div class="table-wrap"><table>
+<tr><th>Mode</th><th>ASC</th><th>\(t\) (min)</th><th>\(c\) (€)</th><th>\(V\)</th><th>\(e^V\)</th><th>\(P\)</th></tr>
+<tr><td>Car</td><td>0</td><td>20</td><td>4.00</td><td>−2.00</td><td>0.135</td><td>41.9%</td></tr>
+<tr><td>Bus</td><td>−0.5</td><td>30</td><td>2.00</td><td>−2.50</td><td>0.082</td><td>25.4%</td></tr>
+<tr><td>Bicycle</td><td>−1.0</td><td>25</td><td>0</td><td>−2.25</td><td>0.105</td><td>32.6%</td></tr>
+</table></div>
+<p>The logsum is \(\ln(0.135+0.082+0.105) = \ln 0.3228 = -1.131\).</p>
+<p><strong>Policy:</strong> a bus lane cuts the bus time from 30 to 22 minutes, so \(V_{\text{bus}} = -2.10\). The new shares are car 37.3%, bus 33.7% and bicycle 29.0%, and the new logsum is \(-1.013\). The change in consumer surplus per trip is</p>
+$$\Delta CS = \frac{1}{\lambda}\,\Delta\text{logsum} = \frac{-1.013-(-1.131)}{0.25} = 0.47\ \text{€}.$$
+<p><strong>Check with the rule of half</strong> (<a href="m02-valuing-access.html">Module 2</a>): the saving for a bus user is 8 min × 0.2 €/min = 1.60 €. The average bus share before and after is \((25.4\%+33.7\%)/2 = 29.6\%\), and \(0.296 \times 1.60 = 0.47\) €. The two methods agree, as they should for a change in one attribute. The logsum is more general: it remains correct when the change also alters destinations, adds a new mode or removes one.</p>
+<p>Note what the classic objective would have counted. A fixed-demand model that counts person-time records a saving of 8 minutes for the 25.4% who already took the bus, and nothing for the 8.3% of travellers who switched. A model that counts vehicles on the road network sees almost nothing for bus users. It records a small time gain for cars if the bus lane was added without taking a car lane, and a loss if it was.</p>
+
+<h3>Elasticities</h3>
+<p>For MNL with a linear attribute \(x\), the direct and cross point elasticities of choice probability are</p>
+$$E^{P_j}_{x_j} = \beta_x\,x_j\,(1-P_j),\qquad E^{P_i}_{x_j} = -\beta_x\,x_j\,P_j\quad (i\ne j).$$
+<p>In the example the bus share's elasticity with respect to bus time is \(-0.05 \times 30 \times (1-0.254) = -1.12\). The cross elasticity of both car and bicycle shares with respect to bus time is \(+0.38\). The cross elasticity is the <em>same</em> for car and bicycle. This is a direct consequence of the IIA property.</p>
+<p>Elasticities are the common language for comparing models with empirical evidence. Some reference values from reviews (check the cited source before using them in appraisal):</p>
+<ul>
+<li>Goodwin (1996), reviewing UK evidence for SACTRA: the elasticity of traffic volume with respect to travel time is about −0.5 in the short run and up to −1.0 in the long run.</li>
+<li>Duranton and Turner (2011): vehicle-kilometres on US metropolitan interstates have an elasticity close to 1 with respect to lane-kilometres. See <a href="m05-accessibility-land-use.html">Module 5</a>.</li>
+<li>Public-transport fare elasticities are typically well below 1 in absolute value in the short run and roughly double in the long run. Long-run responses always exceed short-run ones, because people re-sort homes, jobs and car ownership.</li>
+</ul>
+
+<h3>IIA and nested logit</h3>
+<p>MNL has the property of <em>independence of irrelevant alternatives</em> (IIA): the ratio \(P_i/P_j = e^{V_i - V_j}\) does not depend on any other alternative. The textbook failure is the "red bus / blue bus" problem. If a blue bus identical to an existing red bus is added, MNL takes share proportionally from car as well as from the red bus, though in reality the new bus would mainly split the bus riders.</p>
+<p><strong>Nested logit</strong> groups similar alternatives in nests \(k\) with a scale (dissimilarity) parameter \(0<\mu_k\le 1\):</p>
+$$P_{j} = \underbrace{\frac{e^{V_j/\mu_k}}{\sum_{l\in k} e^{V_l/\mu_k}}}_{P(j\mid k)}\;\cdot\;\underbrace{\frac{e^{\mu_k I_k}}{\sum_{m} e^{\mu_m I_m}}}_{P(k)},\qquad I_k = \ln \sum_{l\in k} e^{V_l/\mu_k}.$$
+<p>The welfare measure is the top-level logsum \(\ln\sum_m e^{\mu_m I_m}\). With \(\mu_k = 1\) the model collapses to MNL. Values of \(\mu_k\) outside \((0,1]\) are inconsistent with utility maximisation, and a model that estimates them should not be used for appraisal. Typical nesting structures put public-transport sub-modes (bus, tram, rail) in one nest, or place mode below destination choice. Mixed logit (Train's book, chapter 6) relaxes IIA and allows random taste variation, at the cost of simulation.</p>
+
+<div class="box note">
+<div class="box-title">Where mode choice meets the logsum: option value</div>
+<p>Adding an alternative with utility \(V_{\text{new}}\) raises the logsum by \(\ln\big(1 + e^{V_{\text{new}}}/\sum_{k} e^{V_k}\big) > 0\), however unattractive the alternative. This is the formal reason a new cycle route or bus line has value even to people who rarely use it, and why the course rejects mode-share targets as objectives (<a href="m06-transit-active-modes.html">Module 6</a>). It is also the reason to treat new-alternative logsums with care: the gain depends on the ASC, which is the least well identified parameter in most models.</p>
+</div>
+
+<h2>5. Beyond trips: tours, activities and agents</h2>
+<p>Trip-based four-step models have well-known weaknesses. They treat trips from the same person as independent, so a commuter can "choose" car for the outward trip and bicycle for the return. They have no time of day, so peak spreading and departure-time responses to pricing are invisible. And they have no persons, so outcomes cannot be broken down by income, age or car access for the equity weights \(\omega_g\).</p>
+<div class="table-wrap"><table>
+<tr><th>Model class</th><th>Unit of choice</th><th>Examples</th><th>What it adds for \(W\)</th></tr>
+<tr><td>Trip-based four-step</td><td>trip, aggregated by zone pair</td><td>Most city models; French four-step models (<em>modèles à 4 étapes</em>)</td><td>Fast, transparent; logsums by segment</td></tr>
+<tr><td>Tour-based</td><td>home-based tour with a main mode and destination</td><td>Dutch LMS/NRM, Swedish Sampers, many UK models</td><td>Consistent mode across a tour; better long-run elasticities</td></tr>
+<tr><td>Activity-based</td><td>daily activity pattern, then tours, then trips</td><td>DaySim, CT-RAMP, ActivitySim (open source, US agencies)</td><td>Person-level logsums for \(\omega_g\); time of day; household interactions</td></tr>
+<tr><td>Agent-based simulation</td><td>full-day plan per synthetic person, executed in a traffic simulation</td><td>MATSim (TU Berlin, ETH Zurich)</td><td>Dynamic congestion, plan-level utility, detailed equity analysis</td></tr>
+</table></div>
+<p><strong>Activity-based models</strong> start from a synthetic population, a list of individual persons and households matching census marginals, and simulate each person's day with a cascade of logit models. Because each level's logsum enters the level above, the top-level logsum is a person's expected utility for the whole day. That is a natural, person-level Term A.</p>
+<p><strong>MATSim</strong>, developed by Kai Nagel's group at TU Berlin and Kay Axhausen's at ETH Zurich, takes a different route. Each agent has a set of daily plans. Each plan is executed in a queue-based traffic simulation, scored with a utility function (positive for time spent at activities, negative for travel time and cost), and agents iteratively replan by changing route, departure time and mode. The process is a co-evolutionary search that converges to a stochastic user equilibrium. The open-access MATSim book (Horni, Nagel and Axhausen, 2016) has a chapter relating the MATSim score to cost–benefit analysis. In short, the change in an agent's executed-plan score, converted to money, is a consumer-surplus measure. It is close to the logsum but not identical, because it counts the utility of the plan chosen rather than the expected maximum over all plans.</p>
+
+<div class="box translation">
+<div class="box-title">Dutch · The Dutch national models LMS and NRM</div>
+<p class="original">Voor het maken van prognoses over mobiliteitsontwikkelingen op de langere termijn (15 à 30 jaar vooruit) beheert en ontwikkelt Rijkswaterstaat twee strategische modellen: het Landelijk Model Systeem (LMS) en het Nederlands Regionaal Model (NRM).</p>
+<p>"To forecast mobility developments over the longer term (15 to 30 years ahead), Rijkswaterstaat manages and develops two strategic models: the National Model System (LMS) and the Netherlands Regional Model (NRM)."</p>
+<p>The page adds that both models cover car, public transport, cycling and walking. The LMS covers the whole country, while four regional NRMs give detail down to motorway sections between junctions. They are built on ODiN data and run on the national WLO scenarios. The LMS dates from the 1980s, was originally built by Hague Consulting Group as a tour-based discrete-choice system, and has been audited independently. <em>Source: Rijkswaterstaat. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<h2>6. Assignment and network equilibrium</h2>
+<h3>Link performance</h3>
+<p>Assignment needs a function linking flow to travel time. The most common is the US Bureau of Public Roads (BPR) function:</p>
+$$t_a(v_a) = t_a^0\Big[1 + \alpha\Big(\frac{v_a}{c_a}\Big)^{\beta}\Big],\qquad \alpha = 0.15,\ \beta = 4 \text{ (defaults)}.$$
+<p>It is smooth and convenient, but it allows \(v_a > c_a\), a physically impossible flow. Real queues form at junctions and bottlenecks (<a href="m07-traffic-flow.html">Module 7</a>, <a href="m09-junctions.html">Module 9</a>). German practice often uses functions fitted to the HBS capacity manual, and many models use junction-based delay.</p>
+
+<h3>Wardrop's two principles</h3>
+<ul>
+<li><strong>User equilibrium (UE).</strong> No traveller can reduce their own travel time by changing route. All used routes between an OD pair have equal cost, and unused routes have higher cost. This describes what selfish drivers do.</li>
+<li><strong>System optimum (SO).</strong> Total travel time \(\sum_a v_a t_a(v_a)\) is minimised. On a used route, each traveller faces the <em>marginal</em> cost \(t_a + v_a t_a'(v_a)\), which includes the delay they impose on others.</li>
+</ul>
+<p>The gap \(v_a t_a'(v_a)\) is the external congestion cost. It is what belongs in Term C (<a href="m03-externalities.html">Module 3</a>), and a toll equal to it turns UE into SO (<a href="m13-pricing.html">Module 13</a>). Beckmann, McGuire and Winsten (1956) showed that UE solves the convex programme</p>
+$$\min_{v}\;\sum_a \int_0^{v_a} t_a(x)\,dx \quad \text{s.t. flow conservation},$$
+<p>which is what makes the following algorithm work.</p>
+
+<h3>Frank–Wolfe in four lines</h3>
+<ol>
+<li>Start with all-or-nothing assignment on free-flow times: flows \(v^{(0)}\).</li>
+<li>Update link times \(t_a(v_a^{(k)})\). Do an all-or-nothing assignment on these times to get auxiliary flows \(y^{(k)}\).</li>
+<li>Find the step \(\alpha\in[0,1]\) minimising the Beckmann objective along \(v^{(k)} + \alpha(y^{(k)} - v^{(k)})\). Set \(v^{(k+1)}\) accordingly.</li>
+<li>Stop when the <em>relative gap</em> \(\big[\sum_a t_a v_a - \sum_a t_a y_a\big] / \sum_a t_a v_a\) is small (practice: below \(10^{-4}\) for scheme appraisal).</li>
+</ol>
+<p>Frank–Wolfe converges slowly near the solution. Modern software uses path-based or bush-based algorithms that reach much tighter gaps. Tight convergence matters: two scenarios that differ by less than the convergence noise cannot be ranked.</p>
+
+<h3>The Braess paradox</h3>
+<p>Braess (1968) showed that adding a road can make <em>everyone</em> slower at user equilibrium. In the standard example, 4,000 drivers go from S to E by two routes. Each route has one link with time \(v/100\) minutes and one fixed 45-minute link. At equilibrium each route carries 2,000 and takes 20 + 45 = 65 minutes. Now add a zero-time link joining the two variable links. Every driver now prefers the path variable–link–variable, which takes 40 + 0 + 40 = 80 minutes, and no one can do better by deviating. Total time rises from 260,000 to 320,000 vehicle-minutes. Seoul's removal of the Cheonggyecheon elevated road (<a href="../countries/more.html#korea">more countries</a>) is often cited as a real-world case in the other direction, where removing capacity did not cause the predicted gridlock.</p>
+<p>The welfare lesson is general: at UE, individual and social optima differ, so capacity can be worth less than its engineering time savings suggest, even negative. Braess's 1968 paper was written in German. An English translation by Nagurney and Wakolbinger, with Braess, appeared in <em>Transportation Science</em> in 2005.</p>
+
+<h3>Dynamic traffic assignment</h3>
+<p>Static assignment has no queues that build and spill back, and no departure-time choice. Dynamic traffic assignment (DTA) propagates flows through time with a traffic-flow model (cell transmission, link transmission or simulation-based) and finds a dynamic user equilibrium in route and, ideally, departure time. MATSim is one form of simulation-based DTA. DTA is needed for evaluating congestion pricing by time of day, signal coordination and incident management. It is harder to calibrate and converge than static assignment, and Module <a href="m10-simulation-validation.html">10</a> covers how to verify it.</p>
+
+<div class="box translation">
+<div class="box-title">French · Cerema on modelling and EMC² surveys</div>
+<p class="original">Son activité autour de la modélisation multimodale des déplacements et la simulation des trafics vise à prévoir la demande de transport et à dimensionner les infrastructures de transports, tout en facilitant l'évaluation des politiques d'aménagements et des services de mobilités.</p>
+<p>"Its work on multimodal travel modelling and traffic simulation aims to forecast transport demand and to size transport infrastructure, while making it easier to evaluate land-use policies and mobility services."</p>
+<p>Cerema's pages also describe the <em>Enquêtes Mobilité Certifiées Cerema</em> (EMC²) as the standard method for household mobility surveys in French urban areas, and include a methods page on the four-step model (<em>modélisation en 4 étapes</em>). <em>Source: Cerema, Connaissance, modélisation et évaluation de la mobilité. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<h2>7. National practice compared</h2>
+<div class="table-wrap"><table>
+<tr><th>Country</th><th>Practice</th><th>Strength / weakness for \(W\)</th></tr>
+<tr><td><a href="../countries/germany.html">Germany</a></td><td>Cities produce a <em>Verkehrsentwicklungsplan</em> (VEP) or, increasingly, a mobility plan, supported by a multimodal macroscopic model, most often built in PTV Visum. Munich's 2006 VEP is being replaced by its <em>Mobilitätsstrategie 2035</em>. The EVA model (Lohse, TU Dresden) combines generation, distribution and mode choice. Federal projects use the national forecast prepared for the BVWP.</td><td>Strong network detail and data (MiD, SrV). Practice often stops at volumes and v/c ratios rather than logsums.</td></tr>
+<tr><td><a href="../countries/netherlands.html">Netherlands</a></td><td>LMS/NRM tour-based models are the mandatory basis for national projects. Their logsums and time savings feed the MKBA (social cost–benefit analysis).</td><td>Long time series and independent audits. Criticised in the past for weak cycling representation and limited land-use feedback.</td></tr>
+<tr><td><a href="../countries/japan.html">Japan</a></td><td>Metropolitan person-trip surveys every ~10 years drive urban transport master plans. Rail demand models are well developed because rail dominates commuting.</td><td>Very large samples. Road appraisal counts only time, operating cost and crashes (<a href="m14-appraisal.html">Module 14</a>).</td></tr>
+<tr><td><a href="../countries/singapore.html">Singapore</a></td><td>HITS/HTS data and LTA models track LTMP targets, including the share of peak trips by walk–cycle–ride.</td><td>Integrated with land-use planning; models are not public.</td></tr>
+<tr><td><a href="../countries/sweden.html">Sweden</a></td><td>Sampers (national, tour-based) and Samkalk (appraisal) produce consistent forecasts for all national plans.</td><td>Consistent national appraisal; regional models validated against counts.</td></tr>
+<tr><td><a href="../countries/france.html">France</a></td><td>Urban four-step models built on EMD/EMC² data; Cerema supports local authorities and audits models, e.g. for Lyon and Toulouse.</td><td>Comparable surveys across cities. Quality varies between local models.</td></tr>
+<tr><td><a href="../countries/us.html">United States</a></td><td>MPO models are required for regional plans. Larger MPOs have moved to activity-based models (DaySim, CT-RAMP, ActivitySim).</td><td>Open-source ABM tools are a US strength. Many models were historically used to justify highway expansion with weak feedback.</td></tr>
+</table></div>
+
+<h2>8. From model to Term A — and what goes wrong</h2>
+<p>Putting the pieces together, Term A for plan \(\theta\) is</p>
+$$A(\theta) = \sum_g \omega_g \sum_{n\in g}\frac{1}{\lambda_n}\,\ln\sum_{j\in C_n} e^{V_{nj}(\theta)},$$
+<p>where \(V_{nj}(\theta)\) comes from the converged model. In a nested model, the logsum over destination, mode and time of day is computed from the <em>equilibrium</em> skims, the congested travel times. Five checks decide whether the result can be trusted:</p>
+<ol>
+<li><strong>Consistency.</strong> Were the skims used in mode and destination choice the same as the assigned times? If not, the logsum ignores congestion feedback, and road schemes are overvalued.</li>
+<li><strong>Variable demand.</strong> Was total demand allowed to respond? If the OD matrix is fixed, there is no induced demand, and the logsum is just time savings. UK appraisal guidance (TAG) expects variable-demand modelling for road schemes unless it can be shown to be unnecessary, for this reason.</li>
+<li><strong>Same \(\lambda\) across scenarios.</strong> Logsum differences can be converted to money only if \(\lambda_n\) does not change with \(\theta\). Income effects are usually assumed away.</li>
+<li><strong>Same choice set.</strong> If a scenario adds an alternative, the gain depends on its ASC. Report it separately.</li>
+<li><strong>Convergence noise.</strong> Report the relative gap and run each scenario to the same tolerance.</li>
+</ol>
+<div class="box caution">
+<div class="box-title">The fixed-demand bias in numbers</div>
+<p>Suppose a widening cuts peak time on a corridor by 6 minutes for 10,000 existing car trips at 12 €/h, which gives €12,000 per peak period under fixed demand. With variable demand, extra trips arrive and the time saving falls to, say, 3 minutes for 11,000 trips. The rule of half then gives \(3/60 \times 12 \times (10{,}000+11{,}000)/2 = €6{,}300\), plus external costs of the extra 1,000 trips that belong in Term C. The fixed-demand estimate is almost twice as large, and it ignores the extra emissions entirely. The numbers here are illustrative; the direction of the bias is not.</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 4.1 · Logsum by hand</div>
+<p>Use the commuter example in section 4.</p>
+<ol>
+<li>The city adds a €2 parking charge, so car cost rises to €6. Recompute shares and the change in consumer surplus. Who loses and by how much? Where does the €2 go in \(W\)? (Hint: Term E.)</li>
+<li>Instead, a protected cycle route cuts bike time to 20 minutes and its ASC rises from −1.0 to −0.6 because perceived safety improves. Compute \(\Delta CS\). How much of it comes from the ASC change? How would you defend that part in an appraisal?</li>
+<li>Compute the direct elasticity of bike share with respect to bike time before and after the cycle route. Explain why it changes.</li>
+</ol>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 4.2 · Equilibrium, optimum and the price of anarchy</div>
+<p>Pigou's network: 1 unit of demand, two routes. Route 1 has constant time 1. Route 2 has time \(x\), where \(x\) is its flow.</p>
+<ol>
+<li>Find the user equilibrium and total travel time.</li>
+<li>Find the system optimum and total travel time. (Answer: half on each route, total 0.75.)</li>
+<li>What toll on route 2 achieves the system optimum? Is anyone better off after paying it, before the revenue is recycled? Relate your answer to Terms A, C and E.</li>
+<li>Run two Frank–Wolfe iterations by hand starting from all flow on route 2.</li>
+</ol>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 4.3 · Reading a model report</div>
+<p>Find the model report for a recent road or rail scheme in your country (Dutch MKBA reports, German BVWP project dossiers and UK TAG reports are public). Record: the survey used, zone count, model type (trip/tour/activity), whether demand was variable, the convergence gap, and whether consumer surplus was computed by logsum or by rule of half. Which of the five checks in section 8 does it pass?</p>
+</div>
+
+<h2>Readings and resources</h2>
+<ul class="resources">
+<li data-type="course"><a href="https://ocw.mit.edu/courses/1-201j-transportation-systems-analysis-demand-and-economics-fall-2008/pages/lecture-notes/">MIT OCW 1.201J — Transportation Systems Analysis: Demand and Economics (lecture notes)</a> <span class="why">Free lecture slides on demand, discrete choice, network equilibrium and forecasting. The best single free companion to this module.</span></li>
+<li data-type="book"><a href="https://eml.berkeley.edu/books/choice2.html">Kenneth Train — <em>Discrete Choice Methods with Simulation</em>, 2nd ed. (Cambridge University Press, 2009), free online edition</a> <span class="why">Chapters 2–4 (logit, GEV/nested logit) and 6 (mixed logit) at graduate level. Chapter 3 derives the logsum as consumer surplus.</span></li>
+<li data-type="course"><a href="https://ocw.tudelft.nl/courses/transportation-and-spatial-modelling/">TU Delft OCW — Transportation and Spatial Modelling</a> <span class="why">Free course with lectures and exercises on demand modelling, including a demand-modelling exercise module.</span></li>
+<li data-type="course"><a href="https://nptel.ac.in/courses/105101087">NPTEL (IIT Bombay) — Transportation Engineering I</a> <span class="why">Video and text lectures that walk through the four steps sequentially with numerical examples.</span></li>
+<li data-type="pdf"><a href="https://www.civil.iitb.ac.in/~vmtom/nptel/index.php">IIT Bombay — Transportation Systems Engineering lecture notes</a> <span class="why">Written chapters on trip generation, gravity models, logit and assignment with worked examples.</span></li>
+<li data-type="pdf"><a href="https://web.mit.edu/sheffi/www/documents/sheffi_urban_trans_networks.pdf">Yosef Sheffi — <em>Urban Transportation Networks</em> (1985), full text from the author's MIT page</a> <span class="why">The classic text on equilibrium assignment, Frank–Wolfe and stochastic user equilibrium. Free with the author's permission.</span></li>
+<li data-type="book"><a href="https://library.oapen.org/bitstream/20.500.12657/32162/1/613715.pdf">Horni, Nagel &amp; Axhausen (eds.) — <em>The Multi-Agent Transport Simulation MATSim</em> (Ubiquity Press, 2016), open access</a> <span class="why">The MATSim reference, including the chapter on scores and cost–benefit analysis.</span></li>
+<li data-type="tool"><a href="https://matsim.org/">MATSim</a> · <a href="https://github.com/matsim-scenarios/matsim-berlin">MATSim open Berlin scenario</a> · <a href="https://www.tu.berlin/vsp">TU Berlin, Transport Systems Planning and Transport Telematics (VSP)</a> <span class="why">Open-source agent-based simulation and a fully open city scenario to experiment with.</span></li>
+<li data-type="tool"><a href="https://activitysim.github.io/">ActivitySim</a> · <a href="https://github.com/RSGInc/DaySim">DaySim</a> <span class="why">Open-source activity-based model systems used by US metropolitan planning agencies.</span></li>
+<li data-type="tool"><a href="https://biogeme.epfl.ch/">Biogeme (EPFL)</a> <span class="why">Free software for estimating logit, nested and mixed logit models, with examples.</span></li>
+<li data-type="course"><a href="https://transp-or.epfl.ch/dca/">EPFL / MIT short course on Discrete Choice Analysis (Bierlaire, Ben-Akiva)</a> · <a href="https://professional.mit.edu/course-catalog/discrete-choice-analysis-predicting-individual-behavior-and-market-demand">MIT Professional Education version</a> <span class="why">The standard professional course (paid).</span></li>
+<li data-type="course"><a href="https://www.edx.org/learn/discrete-mathematics/ecole-polytechnique-federale-de-lausanne-introduction-to-discrete-choice-models">EPFL on edX — Introduction to Discrete Choice Models</a> <span class="why">Free-to-audit online course recommended as preparation for the EPFL/MIT short course; covers logit, nested logit and estimation with Biogeme.</span></li>
+<li data-type="book"><span>Ortúzar &amp; Willumsen — <em>Modelling Transport</em> (Wiley, latest edition)</span> <span class="why">The standard textbook on the four-step model, discrete choice, assignment and model validation.</span></li>
+<li data-type="book"><span>Ben-Akiva &amp; Lerman — <em>Discrete Choice Analysis: Theory and Application to Travel Demand</em> (MIT Press, 1985)</span> <span class="why">The classic derivation of logit, nested logit and the logsum in a travel context.</span></li>
+<li data-type="translation"><span>Braess, Nagurney &amp; Wakolbinger (2005) — "On a paradox of traffic planning", <em>Transportation Science</em> 39(4), doi:10.1287/trsc.1050.0127</span> <span class="why">English translation of Braess's 1968 German paper <em>Über ein Paradoxon aus der Verkehrsplanung</em>.</span></li>
+<li data-type="data"><a href="https://www.bmv.de/SharedDocs/DE/Artikel/G/mobilitaet-in-deutschland.html">BMV — Mobilität in Deutschland (MiD) 2023</a> · <a href="https://www.mobilitaet-in-deutschland.de/">mobilitaet-in-deutschland.de</a> <span class="lang">(German)</span> <span class="why">Results, methods report and tables of Germany's national travel survey.</span></li>
+<li data-type="data"><a href="https://www.cbs.nl/nl-nl/longread/rapportages/2024/onderweg-in-nederland--odin---2023-onderzoeksbeschrijving/1-inleiding">CBS — Onderweg in Nederland (ODiN) 2023, survey description</a> <span class="lang">(Dutch)</span> <span class="why">Sampling, fieldwork and weighting of the Dutch national travel survey.</span></li>
+<li data-type="data"><a href="https://nhts.ornl.gov/">FHWA — National Household Travel Survey</a> <span class="why">US national travel survey with data downloads and tables.</span></li>
+<li data-type="data"><a href="https://www.tokyo-pt.jp/">Tokyo Metropolitan Region Transportation Planning Council — person-trip survey</a> · <a href="https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000033.html">MLIT — national urban transport characteristics survey</a> <span class="lang">(Japanese)</span> <span class="why">The world's largest regular household travel survey and the national comparison survey.</span></li>
+<li data-type="link"><a href="https://www.cerema.fr/fr/activites/mobilites/connaissance-modelisation-evaluation-mobilite">Cerema — Connaissance, modélisation et évaluation de la mobilité</a> · <a href="https://www.data.gouv.fr/datasets/enquete-mobilite-certifiee-cerema-emc2-grand-angouleme-2023-exploitation-standard">example EMC² open dataset (Grand Angoulême 2023)</a> <span class="lang">(French)</span> <span class="why">French survey standard and modelling methods; open microdata for practice.</span></li>
+<li data-type="link"><a href="https://www.lta.gov.sg/content/ltagov/en/who_we_are/our_work/lta_surveys.html">LTA Singapore — Household Travel Survey</a> <span class="why">Description of Singapore's household survey programme.</span></li>
+<li data-type="link"><a href="https://www.rijkswaterstaat.nl/zakelijk/open-data/modellen-en-applicaties/verkeers-en-vervoermodellen/jaarlijkse-prognoses/prognoses-maken/lms-en-nrm">Rijkswaterstaat — Verkeers- en vervoermodellen LMS en NRM</a> <span class="lang">(Dutch)</span> <span class="why">Official description of the Dutch national and regional models.</span></li>
+<li data-type="pdf"><a href="https://bransch.trafikverket.se/contentassets/7e1063efbcfd4b34a4591b0d4e00f855/2024/prognos-for-persontrafiken-2045--trafikverkets-basprognoser-2024.pdf">Trafikverket — Prognos för persontrafiken 2045 (2024)</a> <span class="lang">(Swedish)</span> <span class="why">How Sampers 4 is set up and used for Sweden's national base forecast.</span></li>
+<li data-type="link"><a href="https://stadt.muenchen.de/infos/verkehrsdaten.html">Landeshauptstadt München — Verkehrsdaten: Erhebungen und Prognosen</a> <span class="lang">(German)</span> <span class="why">An example of a German city's survey, count and forecasting programme.</span></li>
+<li data-type="link"><a href="https://www.fhwa.dot.gov/planning/tmip/">FHWA — Travel Model Improvement Program (TMIP)</a> <span class="why">US federal resources and webinars on model practice, including activity-based models.</span></li>
+</ul>
+
+<nav class="pager">
+  <a href="m03-externalities.html">← Module 3 · Externalities and their prices</a>
+  <a href="m05-accessibility-land-use.html">Module 5 · Accessibility, land use and induced demand →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>

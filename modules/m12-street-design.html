@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 12 · Street design and passive control — Welfare-Centred Transport Planning</title>
+<meta name="description" content="Self-explaining roads, deflection geometry, traffic calming, woonerf and shared streets, filtered permeability, 30 km/h cities, and the allocation of street space as a land-use decision.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="../assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../syllabus.html" aria-current="page">Syllabus</a>
+    <a href="../countries/index.html">Countries</a>
+    <a href="../sources/index.html">Sources &amp; translations</a>
+    <a href="../explorer.html">Objective explorer</a>
+    <a href="../about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">Part IV · Policy levers · Module 12</p>
+<h1>Street design and passive control</h1>
+<p class="meta">≈ 4 hours · Prerequisites: Modules <a href="m01-objective.html">1</a> and <a href="m11-safety.html">11</a> · Key terms: D (land), C (crash, noise, severance), A (walking and cycling options), B (health)</p>
+
+<p class="lede">A speed limit sign asks drivers to behave. A narrow carriageway, a tight bend or a raised crossing makes them behave. This module is about the second kind of control: geometry that produces the desired speeds and routes without enforcement. It is the main instrument of Dutch, French and Japanese residential streets, and since 2020 of a wave of "30 km/h cities" across Europe. It is also a decision about who gets the street, which is why the module ends with space allocation as Term D of the welfare objective.</p>
+
+<div class="box key">
+<div class="box-title">Learning outcomes</div>
+<ul>
+<li>Explain the self-explaining road idea and the gap between design speed and posted speed.</li>
+<li>Compute the speed implied by a horizontal deflection (\(a=v^2/r\)) or a vertical deflection, and design a chicane for a target speed.</li>
+<li>Choose among traffic-calming measures and filtered-permeability schemes, and state their side effects.</li>
+<li>Describe the legal and design frameworks of the woonerf/<em>erf</em>, <em>zone de rencontre</em>, <em>verkehrsberuhigter Bereich</em>, ZTL, Spain's 30 km/h default, Japan's residential-street limit, RASt 06 and the NACTO guide.</li>
+<li>Value street space as land (Term D) and compare people-throughput per metre of street width.</li>
+<li>Identify the losers of calming (bus passengers, emergency services, some disabled people, boundary-road residents) and design for them.</li>
+</ul>
+</div>
+
+<h2>1. Self-explaining roads</h2>
+<p>Drivers choose speed mostly from what they see: road width, the distance to buildings and trees, sight lines, surface, markings and the presence of other people. Signs have a much weaker effect. Theeuwes and Godthelp (1995) called a road <strong>self-explaining</strong> when its appearance tells users what kind of road it is and how to behave on it, so that the speed people choose by instinct matches the speed the road is meant for. This idea underlies Sustainable Safety's predictability principle (<a href="m11-safety.html">Module 11</a>).</p>
+<p>The opposite case is common in North America and in many post-war European suburbs. Geometric design standards derived from highway practice give urban arterials a <em>design speed</em>, the speed for which curves and sight distances are dimensioned, equal to or above the posted speed for safety reasons. Wide lanes, generous curve radii and clear zones make high speed feel safe, so drivers drive faster than the limit. The street is "forgiving" to the motorist and unforgiving to everyone else. The response, from the Dutch woonerf to the US NACTO guide, is to design for a <em>target speed</em>: the speed you want, not the speed drivers might attempt.</p>
+<p>In the classic objective \(\min\sum q\,t\), any measure that slows cars is a cost. In \(W\), the same measure can raise welfare through Term C (fewer crashes, less noise, less severance), Term A (new walking and cycling options, higher-quality \(x\) attributes such as perceived safety), Term B (more active travel) and Term D (space released). Design is the instrument. The objective decides whether it is a good one.</p>
+
+<h2>2. The physics of deflection <span class="term">C</span></h2>
+<h3>Horizontal deflection: \(a=v^2/r\)</h3>
+<p>A vehicle following a path of radius \(r\) at speed \(v\) has lateral acceleration</p>
+$$a=\frac{v^2}{r}\qquad\Longleftrightarrow\qquad v=\sqrt{a\,r}.$$
+<p>Drivers accept lateral accelerations of roughly 2–4 m/s² in ordinary urban driving. Treat this range as indicative: it depends on vehicle, driver and surface. Highway design uses \(v^2=g\,r\,(e+f)\) with superelevation \(e\) and side friction \(f\). The design of calming elements reverses the problem: choose the geometry so that the comfortable speed equals the target speed.</p>
+<p>For a chicane, a vehicle must shift laterally by an effective path offset \(w\) within a length \(L\). If its path is two equal reverse arcs, the geometry gives</p>
+$$r=\frac{L^{2}+w^{2}}{4w}.$$
+
+<div class="box note">
+<div class="box-title">Worked example · Designing a chicane for 30 km/h</div>
+<p>Effective path offset \(w=2.5\) m (the lateral shift left after the driver uses all available width).</p>
+<ul>
+<li>With \(L=20\) m: \(r=(400+6.25)/10=40.6\) m. At \(a=3\) m/s², \(v=\sqrt{3\cdot40.6}=11.0\) m/s \(\approx 40\) km/h. Too fast for a 30 zone.</li>
+<li>Target 30 km/h (8.33 m/s) at \(a=3\) m/s²: \(r=8.33^2/3=23.1\) m. Then \(L^2=4wr-w^2=231-6.25\), so \(L\approx15.0\) m.</li>
+<li><strong>Bus passengers.</strong> Standing passengers tolerate much less lateral acceleration than seated car drivers; values around 1–1.5 m/s² are often used as comfort limits (indicative). At \(a=1.5\) m/s² on the same 23.1 m radius, the bus must slow to \(\sqrt{1.5\cdot23.1}=5.9\) m/s \(\approx 21\) km/h. A bus is also wider, so its effective offset \(w\) is <em>larger</em> and its radius smaller. The chicane that calms cars to 30 km/h slows the bus more and shakes its 50 passengers.</li>
+</ul>
+<p>Design response: put chicanes on streets without bus routes, or use bus-friendly measures (see the catalogue below) on bus routes.</p>
+</div>
+
+<h3>Vertical deflection: humps, cushions and tables</h3>
+<p>Approximate a hump of height \(h\) and length \(L\) by a cosine profile \(z(x)=\tfrac{h}{2}\big(1-\cos\tfrac{2\pi x}{L}\big)\). A wheel crossing at speed \(v\) has peak vertical acceleration</p>
+$$a_z^{\max}=\frac{h}{2}\left(\frac{2\pi v}{L}\right)^{2}.$$
+<p>For \(h=75\) mm and \(L=3.7\) m: at 15 km/h, \(a_z\approx1.9\) m/s². At 20 km/h, 3.3 m/s². At 30 km/h, 7.5 m/s², about 0.8 g. Real vehicles filter this through suspension, but the scaling with \(v^2\) is what makes humps self-enforcing: discomfort rises steeply just above the target speed. The same scaling is why humps are hard on ambulance patients, bus passengers and people with back conditions. <strong>Speed cushions</strong> are humps narrow enough (typically 1.5–1.9 m wide) for wide-track vehicles such as buses and fire engines to straddle, while car wheels must go over them.</p>
+
+<h2>3. A catalogue of passive control <span class="term">C</span> <span class="term">A</span></h2>
+<div class="table-wrap"><table>
+<tr><th>Family</th><th>Measures</th><th>Main effect</th><th>Side effects and trade-offs</th></tr>
+<tr><td><strong>Horizontal</strong></td><td>chicanes, staggered parking, kerb build-outs, pinch points (chokers), mini-roundabouts, tighter corner radii</td><td>lower speeds via \(v^2/r\); shorter crossing distances</td><td>bus and lorry swept paths; drainage; cyclists squeezed at pinch points unless bypasses are provided</td></tr>
+<tr><td><strong>Vertical</strong></td><td>humps, speed cushions, plateaus/tables, raised crossings, raised junctions, continuous footways across side streets</td><td>low speeds at precise points; raised crossings give pedestrians level priority</td><td>noise and vibration near humps; emergency-response delay; discomfort for bus passengers and patients</td></tr>
+<tr><td><strong>Perceptual</strong></td><td>narrow lanes, removal of centre lines, street trees, changes in surface, gateways at zone entrances</td><td>lower chosen speeds via a self-explaining environment</td><td>effects are smaller and less reliable than physical measures</td></tr>
+<tr><td><strong>Network</strong></td><td>modal filters (bollards, planters, bus gates), diagonal diverters, one-way loops, sector plans</td><td>remove through traffic while keeping access; the basis of LTNs and circulation plans</td><td>longer car trips for residents; traffic displaced to boundary roads in the short run; emergency access must be designed in</td></tr>
+<tr><td><strong>Regulatory</strong></td><td>30 km/h zones and default limits, 20 km/h shared zones, pedestrian zones, access restrictions (ZTL)</td><td>legal basis for low speeds; enforcement possible</td><td>without design, compliance is often poor</td></tr>
+</table></div>
+<p>The general lesson from evaluations in the UK, Netherlands and Germany is that area-wide schemes, which combine a lower limit with physical measures at regular spacing (every 50–150 m is common practice), work better than isolated measures. Japan's Zone 30 Plus is an explicit move from the regulatory row to a combination of rows.</p>
+
+<h2>4. Netherlands: from woonerf to erf <span class="term">C</span> <span class="term">D</span></h2>
+<p>The <strong>woonerf</strong> ("living yard") originated in Delft in the late 1960s and early 1970s, where residents and planners redesigned streets as shared yards with no kerbs, planting, play space and parking in marked bays. It received legal status in Dutch traffic law in 1976. Its design requirements included that the environment must compel drivers to drive at walking pace. The current national traffic rules (RVV 1990) still define the <em>erf</em>:</p>
+<div class="box translation">
+<div class="box-title">Reglement verkeersregels en verkeerstekens 1990, articles 44–46 <span class="lang">(Dutch)</span></div>
+<p class="original" lang="nl">"Voetgangers mogen wegen gelegen binnen een erf over de volle breedte gebruiken." (art. 44) — "Bestuurders mogen binnen een erf niet sneller rijden dan 15 km per uur." (art. 45) — "Het is bestuurders van een motorvoertuig verboden binnen een erf te parkeren anders dan op parkeerplaatsen die als zodanig zijn aangeduid." (art. 46(1), abridged)</p>
+<p>"Pedestrians may use the full width of roads within an <em>erf</em>." "Drivers may not drive faster than 15 km/h within an <em>erf</em>." "Drivers of motor vehicles are prohibited from parking within an <em>erf</em> other than in parking places marked as such." The speed rule was formerly expressed as walking pace (<em>stapvoets</em>).</p>
+<p class="small">Translated by the course authors (machine-assisted). Official legal text, wetten.overheid.nl.</p>
+</div>
+<p>The woonerf proved expensive to build and maintain, and it was hard to apply to whole neighbourhoods. From the 1980s Dutch practice shifted to cheaper <strong>30 km/h zones</strong> with entry gateways, plateaus and raised junctions, which under Sustainable Safety became the default for access roads (<em>erftoegangswegen</em>) in built-up areas. The Dutch knowledge platform <strong>CROW</strong> publishes the design manuals that municipalities use: the ASVV recommendations for traffic provisions in built-up areas and the <em>Design Manual for Bicycle Traffic</em> (paid publications). The Dutch weakness, noted in <a href="m11-safety.html">Module 11</a>, is that many 50 km/h distributor roads still combine high car volumes with cycling, and that the design catalogue has paid less attention to single-bicycle crashes.</p>
+
+<h2>5. Filtered permeability and low-traffic neighbourhoods <span class="term">A</span> <span class="term">C</span></h2>
+<p><strong>Filtered permeability</strong> means a street network that is permeable for walking and cycling but not for through motor traffic. Modal filters such as bollards, planters or camera-enforced bus gates cut the grid into cells. Every address stays accessible by car, but only from one side. Short trips on foot and by bike become shorter than by car, and rat-running disappears.</p>
+
+<h3>United Kingdom: LTNs</h3>
+<p>London boroughs introduced dozens of <strong>low-traffic neighbourhoods</strong> (LTNs) in 2020, many as emergency measures during the pandemic, building on earlier schemes such as Waltham Forest's "mini-Holland". They became politically contested, especially over traffic and pollution displaced onto boundary roads. The best evidence so far is a controlled before-and-after study of injuries over 2012–2024 covering more than 100 London LTNs (Furlong, Fevyer, Armstrong, Edwards, Aldred and Goodman, <em>Injury Prevention</em>, 2025). It found a 35 % reduction in all injuries and a 37 % reduction in killed or seriously injured casualties inside the LTNs. On boundary roads it found no clear change in total injuries (−2 %, 95 % CI −5 % to +2 %). Effects on boundary-road traffic volumes vary between schemes and remain the main open question.</p>
+
+<h3>Belgium: the Ghent circulation plan (2017)</h3>
+<p>On 3 April 2017 Ghent divided its inner city into a car-free core and six sectors. Cars can reach every sector, but cannot drive directly from one sector to another. They must go back out to the R40 ring road. Buses, taxis and cyclists can cross the sector boundaries. Evaluations by Transport &amp; Mobility Leuven reported a clear shift to sustainable modes in the first year. Campaign group Transport &amp; Environment cited figures of about 12 % less rush-hour traffic and 25 % more cyclists. The plan's lesson is that a city-wide network cut can be done quickly and cheaply with signs, cameras and planters, and then refined.</p>
+
+<h3>Spain: Barcelona's superilles and Pontevedra</h3>
+<p>Barcelona's <strong>superilles</strong> (superblocks), developed from ideas by the urban ecologist Salvador Rueda, group nine blocks of the Cerdà grid and remove through traffic from the inner streets. Pilots opened in Poblenou (2016) and Sant Antoni (2018). From 2020 the city moved to a "Superilla Barcelona" programme in the Eixample, converting whole streets such as Consell de Cent into green axes (<em>eixos verds</em>) with plazas at intersections. Evaluations of air quality and traffic redistribution are limited and mostly produced by the city itself, so independent evidence is still thin. Pontevedra in Galicia pedestrianised its historic centre within weeks of a new mayor, Miguel Anxo Fernández Lores, taking office in 1999, and later calmed the rest of the city. Access remains for residents, deliveries and emergency vehicles. The city reports long runs without traffic deaths, although sources give different starting years.</p>
+
+<h2>6. National frameworks for 30 km/h and shared streets <span class="term">C</span> <span class="term">constraints</span></h2>
+<h3>Spain: 30 km/h by default (2021)</h3>
+<p>Royal Decree 970/2020 amended the General Traffic Regulation. From 11 May 2021 the default urban limit in Spain is 20 km/h on single-platform streets (no kerb between carriageway and footway), 30 km/h on streets with one lane per direction and 50 km/h on streets with two or more lanes per direction. Municipalities may lower these limits, or exceptionally raise single-lane streets to 50 km/h with signs. Spain became one of the first countries to make 30 km/h the national urban default. The preamble gives the reasoning:</p>
+<div class="box translation">
+<div class="box-title">Real Decreto 970/2020, preamble <span class="lang">(Spanish)</span></div>
+<p class="original" lang="es">"Los diferentes estudios coinciden en que el riesgo de fallecer como consecuencia de un atropello se reduce como mínimo cinco veces si la velocidad del vehículo que impacta es de 30 km/h respecto a uno que circule a 50 km/h."</p>
+<p>"Studies agree that the risk of dying when struck by a vehicle is reduced at least five-fold if the impacting vehicle is travelling at 30 km/h rather than 50 km/h." The preamble also notes that 509 people died in Spanish cities in 2017, 80 % of them vulnerable road users (pedestrians, cyclists, motorcyclists and moped riders), and that the motor vehicle "is no longer the protagonist" of urban streets.</p>
+<p class="small">Translated by the course authors (machine-assisted). Official legal text, BOE-A-2020-13969.</p>
+</div>
+
+<h3>France: Ville 30, zones de rencontre and the Cerema guides</h3>
+<p>France added the <strong>zone de rencontre</strong> (encounter zone) to its Highway Code in 2008, alongside the <em>zone 30</em> and the <em>aire piétonne</em>. Article R110-2 of the Code de la route defines it:</p>
+<div class="box translation">
+<div class="box-title">Code de la route, article R110-2 (zone de rencontre) <span class="lang">(French)</span></div>
+<p class="original" lang="fr">"… les piétons sont autorisés à circuler sur la chaussée sans y stationner et bénéficient de la priorité sur les véhicules. La vitesse des véhicules y est limitée à 20 km/h."</p>
+<p>"… pedestrians are permitted to walk on the carriageway without stopping there and have priority over vehicles. The speed of vehicles is limited to 20 km/h." The article also makes all carriageways in the zone two-way for cyclists unless the authority decides otherwise.</p>
+<p class="small">Translated by the course authors (machine-assisted). Official legal text (Légifrance).</p>
+</div>
+<p>The national agency <strong>Cerema</strong> publishes free design guidance, notably <em>Aménager des rues apaisées</em> (2020), which presents the "zones de circulation apaisée" (zones 30, encounter zones, pedestrian areas) and the process for creating them. Cerema notes that "des collectivités pionnières ont instauré des zones de circulation apaisée", that is, pioneering local authorities introduced calmed traffic zones before national guidance caught up. Many French cities, including Grenoble, Lille, Lyon and Paris (from August 2021), have moved to <strong>Ville 30</strong>: 30 km/h as the general limit, with 50 km/h kept only on designated arterials. France's strength is the combination of these legal categories with the roundabout as the standard junction. A weakness is that many Ville 30 schemes rely on signs rather than physical change.</p>
+
+<h3>Italy: ZTL and Bologna Città 30 (2024)</h3>
+<p>Italian historic centres have long used <strong>zone a traffico limitato</strong> (ZTL, limited traffic zones) under article 7 of the Highway Code. Access is restricted to permit holders and enforced by cameras at the gates. A ZTL is an access rule rather than a design, but it allows streets to be redesigned for pedestrians once through traffic is gone. On 16 January 2024 Bologna became the first large Italian city to adopt 30 km/h on most streets. The city emphasises that the programme is a redesign, not just a limit:</p>
+<div class="box translation">
+<div class="box-title">Comune di Bologna — Bologna Città 30 <span class="lang">(Italian)</span></div>
+<p class="original" lang="it">"Molti pensano che coincida solo con l'introduzione di un limite a 30 chilometri orari. In realtà Bologna Città 30 è molto di più. È una città che si trasforma per diventare più silenziosa e più spaziosa …"</p>
+<p>"Many people think it simply means introducing a 30 km/h limit. In reality Bologna Città 30 is much more. It is a city transforming itself to become quieter and more spacious …" The page goes on to list safe streets, green spaces, pedestrian squares, cycle tracks, calm crossings for older and disabled people and protected space outside schools.</p>
+<p class="small">Translated by the course authors (machine-assisted). Source: bolognacitta30.it.</p>
+</div>
+<p>The city's first-year report, covering 16 January 2024 to 15 January 2025 against the average of the two previous years, gave 13.1 % fewer crashes and 48.7 % fewer deaths, and no pedestrian deaths in 2024 for the first time since 1991. One year of data on a small number of deaths is statistically fragile, and the scheme met political opposition, including from the national transport ministry. Treat it as a promising early result.</p>
+
+<h3>Germany: RASt 06 and design "from the edge"</h3>
+<p>German urban street design follows the FGSV guideline <strong>RASt 06</strong> (<em>Richtlinien für die Anlage von Stadtstraßen</em>, 2006), which replaced the separate guidelines for access streets (EAE) and main roads (EAHV). RASt is a paid FGSV publication. Its central methodological idea is <em>städtebauliche Bemessung</em>, "urban-design dimensioning". The traditional method fixed the carriageway width from traffic demand and left the side spaces (footways, cycle tracks, parking, trees) as the remainder. RASt reverses the order: first determine what the side spaces need for their uses (walking, staying, cycling, deliveries, greenery), then give the carriageway what is left, and resolve conflicts by explicit weighing. German practitioners summarise this as designing the street <em>von außen nach innen</em> or <em>vom Rand her</em>: "from the outside in", "from the edge". RASt also gives proportions for a balanced cross-section, commonly quoted as roughly 30 : 40 : 30 (side space : carriageway : side space).</p>
+<p>How far the principle reaches in practice depends on the road authority. Federal and state roads through towns serve long-distance traffic, and state governments have issued their own conditions. Bavaria's 2009 decree introducing RASt 06 is a clear example:</p>
+<div class="box translation">
+<div class="box-title">Bavaria, Oberste Baubehörde (2009): introduction of RASt 06 <span class="lang">(German)</span></div>
+<p class="original" lang="de">"… in der Regel eine Befahrbarkeit mit der innerorts zulässigen Höchstgeschwindigkeit von 50 km/h sicherzustellen ist … von der Anlage von Senkrechtparkständen, Fahrbahneinengungen und Fahrbahnanhebungen abzusehen ist …"</p>
+<p>On through-town sections of federal and state roads, "as a rule, it must be possible to drive at the urban speed limit of 50 km/h … perpendicular parking, carriageway narrowings and raised carriageways are to be avoided …" For municipal streets, the decree states that RASt 06 is an aid to planning and does not relieve municipalities of their duty to weigh the interests in each case.</p>
+<p class="small">Translated by the course authors (machine-assisted). Source: Bavarian State Ministry of the Interior, letter of 11 February 2009.</p>
+</div>
+<p>Germany's own legal categories include the <em>Tempo-30-Zone</em> and the <em>verkehrsberuhigter Bereich</em> (sign 325.1, often called a <em>Spielstraße</em>), in which vehicles must travel at walking speed and pedestrians may use the whole street. The German constraint is legal more than technical: § 45(9) StVO makes speed limits on main roads depend on proof of a special local danger (<a href="m11-safety.html">Module 11</a>).</p>
+
+<h3>Japan: narrow streets, no sidewalks, and a new 30 km/h default</h3>
+<p>Much of urban Japan is served by very narrow streets, often 4–5 m between property lines, with no footway and no on-street parking. A car owner must prove an off-street parking place to register a vehicle (the garage certificate, <em>shako shōmei</em>), and overnight on-street parking is prohibited. The result is close to a woonerf by default: pedestrians, cyclists and slow cars share the full width, and the absence of parked cars keeps sight lines open. These streets are called 生活道路 (<em>seikatsu dōro</em>, "everyday-life roads"). They are not perfect. Through traffic using them as short cuts and the large number of older pedestrians produce many injuries, which is why Japan has moved from signs to systematic area treatment.</p>
+<p>Zone 30 (National Police Agency, 2011) set area-wide 30 km/h limits. Zone 30 Plus (ゾーン30プラス, 2021) combines them with physical devices installed by road administrators. MLIT reported 263 districts with Zone 30 Plus plans by March 2025. From 1 September 2026, the statutory speed limit on residential streets without a centre line was cut from 60 to 30 km/h nationwide:</p>
+<div class="box translation">
+<div class="box-title">Residential-street speed limit (2026) and Zone 30 Plus (2021) <span class="lang">(Japanese)</span></div>
+<p class="original" lang="ja">「改正道路交通法施行令の施行により、令和8年9月1日から生活道路における自動車の法定速度が60キロメートル毎時から30キロメートル毎時に引き下げられます。」</p>
+<p>"With the entry into force of the amended Road Traffic Act Enforcement Order, the statutory speed limit for motor vehicles on residential streets will be lowered from 60 km/h to 30 km/h from 1 September 2026 (Reiwa 8)." Roads with a centre line or marked lanes, or with physically separated directions, keep the 60 km/h statutory limit unless signed otherwise. <em>(Meguro City, Tokyo)</em></p>
+<p class="original" lang="ja">「最高速度30km/h の区域規制と物理的デバイスとの適切な組合せにより交通安全の向上を図ろうとする区域を「ゾーン３０プラス」として設定し……」</p>
+<p>"Areas where road safety is to be improved by an appropriate combination of a 30 km/h area speed limit and physical devices shall be designated as 'Zone 30 Plus' …" <em>(MLIT and National Police Agency, 26 August 2021)</em></p>
+<p class="small">Translated by the course authors (machine-assisted).</p>
+</div>
+
+<h3>United States: NACTO and Complete Streets</h3>
+<p>The <strong>NACTO Urban Street Design Guide</strong> (National Association of City Transportation Officials, 2013) was written by city transport departments as an urban alternative to state-highway practice. It treats streets as public spaces, recommends designing for a target speed rather than a higher design speed, and documents narrow lanes, protected bike lanes, curb extensions, parklets and "interim" designs using paint and posts. US cities have been innovative with low-cost, quick-build projects and in public engagement methods. The constraint is that many urban arterials are state highways designed to state standards, and that federal funding has long rewarded vehicle level of service (<a href="m08-capacity-los.html">Module 8</a>). Complete Streets policies, adopted by many states and cities, require all users to be considered, with mixed results in practice.</p>
+
+<h3>Denmark: Copenhagen's kerb-separated cycle tracks</h3>
+<p>Copenhagen's standard cycle track sits between carriageway and footway, separated by kerbs at different heights: the cycle track is raised above the carriageway and slightly below the footway. It uses little width, is cheap to sweep and clear of snow, and is predictable for everyone. It is a good example of separation according to the homogeneity principle that does not need much space. Its weaknesses are at junctions, where turning conflicts remain, and where cycle volumes exceed the track's capacity.</p>
+
+<h2>7. Street space as land: Term D <span class="term">D</span> <span class="term">A</span></h2>
+<p>A street is the city's largest piece of public land. In \(W\), Term D charges each use of land at its opportunity cost \(r\). Most appraisals set \(r=0\) for existing roads, which makes giving space to moving and parked cars look free.</p>
+<div class="box note">
+<div class="box-title">Worked example · What is a metre of street worth?</div>
+<p>Inner-city land value \(€3{,}000\)/m², annualised at 4 %: \(r=€120\) per m² per year.</p>
+<ul>
+<li>One kerbside parking space (2.5 m × 5 m = 12.5 m²) uses land worth about <strong>€1,500 per year</strong>, roughly €4 per day. Residents' permits in many European cities cost a small fraction of this. See <a href="m13-pricing.html">Module 13</a> on parking prices.</li>
+<li>Narrowing a 1 km street's carriageway by 3 m frees 3,000 m², worth about <strong>€360,000 per year</strong> in Term D if put to a use valued at that rate (wider footways, trees, cycle tracks, café space).</li>
+</ul>
+<p>The rate \(r\) is contested. Space reallocated to footways does not literally become a building plot. A defensible approach is to value the new use directly (pedestrian comfort, health, retail turnover) and to use land value as a ceiling.</p>
+</div>
+
+<h3>People per metre of width</h3>
+<p>Engineering capacity is usually stated in vehicles per lane. Term A counts people. The following rough figures per 3–3.5 m of width on a signalised urban street are computed by the course authors from stated assumptions. They are orders of magnitude, not design values.</p>
+<div class="table-wrap"><table>
+<tr><th>Use of one lane-width</th><th>Assumptions</th><th>People per hour (one direction)</th></tr>
+<tr><td>General traffic lane</td><td>saturation 1,800 veh/h × green share 0.45 ≈ 800 veh/h; 1.3 persons per car</td><td>≈ 1,000</td></tr>
+<tr><td>Bus lane</td><td>40–60 buses/h × 60–70 passengers</td><td>≈ 2,400–4,200</td></tr>
+<tr><td>One-way cycle track</td><td>two streams of cyclists at 15 km/h, 4 m spacing ≈ 7,500/h unsignalised; × 0.45 at signals</td><td>≈ 3,000+</td></tr>
+<tr><td>Footway</td><td>comfortable walking at ≈ 12 persons per minute per metre</td><td>≈ 2,000 (comfortable) and far more at capacity</td></tr>
+<tr><td>Kerbside parking</td><td>parked cars turn over a few times per day</td><td>a few dozen per day (access, not throughput)</td></tr>
+</table></div>
+<p>The table explains why cities with scarce space (Singapore, Tokyo, Copenhagen, Paris) allocate less of it to private cars. It does <em>not</em> mean that every street should become a bus lane. Demand for each use, network effects and the needs of deliveries and disabled drivers matter. In \(W\), a reallocation is good if the gain in Term A for people using the new allocation, plus Terms B, C and D, exceeds the loss in Term A for drivers, after demand has responded.</p>
+
+<h2>8. Who loses, and how to design for them <span class="term">A</span> <span class="term">constraints</span></h2>
+<ul>
+<li><strong>Bus passengers.</strong> Humps and chicanes raise bus journey times and discomfort, which lowers bus attributes in \(V_{nj}\) for many people at once. Keep bus routes on distributor roads with priority, and use cushions, bus gates (filters that let buses through) and raised tables with gentle ramps where calming is needed.</li>
+<li><strong>Emergency services.</strong> Each hump costs a few seconds, and filters can force detours. Fire services in the UK and elsewhere have objected to some LTNs. Use cushions, camera-enforced or removable filters, and map emergency routes before cutting the network. The relevant measure is change in response time to the whole area, not to one address.</li>
+<li><strong>Disabled people.</strong> Level shared surfaces remove the kerb that blind and partially sighted people use to orient themselves. In the UK, campaigns by disability organisations led the Department for Transport in 2018 to ask councils to pause new level-surface shared-space schemes. Tactile delineation, controlled crossings and protected footways keep shared streets accessible. Filtered streets can lengthen car trips for people who cannot walk or cycle far, which argues for blue-badge exemptions or access through filters. This is the equity floor \(A_g\ge A_{\min}\) at work.</li>
+<li><strong>Boundary-road residents.</strong> Through traffic removed from a cell goes somewhere, at least in the short run. Some of it disappears as people change routes, times, modes or destinations ("traffic evaporation", the mirror image of induced demand in <a href="m05-accessibility-land-use.html">Module 5</a>). Monitoring and complementary measures on boundary roads (bus priority, better crossings) are part of a fair scheme.</li>
+<li><strong>Deliveries and trades.</strong> Loading bays and time windows must be designed in. Otherwise vehicles park on footways and cycle tracks.</li>
+</ul>
+
+<div class="box exercise">
+<div class="box-title">Exercise 12.1 · Design a 30 km/h residential street</div>
+<p>A 12 m wide residential street (façade to façade) carries 3,000 vehicles per day, much of it through traffic, and is a school route. One bus route uses it.</p>
+<ol>
+<li>Draw two cross-sections: one following the "carriageway first" method and one following RASt's "from the edge" method. Use <a href="https://streetmix.net/">Streetmix</a> or a sketch.</li>
+<li>Design a chicane for 30 km/h cars and compute the speed at which a bus can pass it at 1.5 m/s². Propose an alternative that respects the bus.</li>
+<li>Where would a modal filter remove the through traffic? Which boundary road receives it, and what would you do there?</li>
+<li>List the changes in each term of \(W\) and identify the groups \(g\) that gain and lose.</li>
+</ol>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 12.2 · Pricing the kerb</div>
+<p>For your own city, find the price of land in a central district and the annual price of a residents' parking permit. Compute the implied subsidy per permit using \(r\) as in Section 7. Compare it with the annual cost of a monthly public transport pass. Which term of \(W\) is distorted, and in favour of whom?</p>
+</div>
+
+<h2>Readings and resources</h2>
+<ul class="resources">
+<li data-type="pdf"><a href="https://nacto.org/publication/urban-street-design-guide/">NACTO — Urban Street Design Guide</a> <span class="why">US city practice for streets as public space, target speeds, curb extensions, protected bike lanes and interim designs. Much of the content is freely available online.</span></li>
+<li data-type="translation"><a href="https://www.cerema.fr/fr/actualites/amenager-rues-apaisees-guide-du-cerema-collectivites">Cerema (2020) — Aménager des rues apaisées</a> <span class="lang">(French)</span> <span class="why">French national guidance on zones 30, encounter zones and pedestrian areas, with many examples.</span></li>
+<li data-type="link"><a href="https://www.cerema.fr/fr/mots-cles/zone-rencontre">Cerema — Zone de rencontre (topic page)</a> <span class="lang">(French)</span> <span class="why">Entry point to Cerema's fact sheets and articles on encounter zones.</span></li>
+<li data-type="translation"><a href="https://www.boe.es/buscar/act.php?id=BOE-A-2020-13969">Real Decreto 970/2020 (BOE-A-2020-13969)</a> <span class="lang">(Spanish)</span> <span class="why">Spain's national 20/30/50 km/h urban limits and their safety reasoning.</span></li>
+<li data-type="link"><a href="https://www.dgt.es/comunicacion/notas-de-prensa/grande-marlaska-destaca-que-la-limitacion-de-la-velocidad-urbana">DGT (2021) — the urban speed limit takes effect</a> <span class="lang">(Spanish)</span> <span class="why">Government statement of the objectives of the 30 km/h default.</span></li>
+<li data-type="translation"><a href="https://www.bolognacitta30.it/">Comune di Bologna — Bologna Città 30</a> <span class="lang">(Italian)</span> <span class="why">Maps, design interventions, FAQs and annual result reports of Italy's first large 30 km/h city.</span></li>
+<li data-type="translation"><a href="https://wetten.overheid.nl/BWBR0004825/">RVV 1990 — Reglement verkeersregels en verkeerstekens</a> <span class="lang">(Dutch)</span> <span class="why">Official Dutch traffic rules. See §17 (Erven) for the legal woonerf.</span></li>
+<li data-type="pdf"><a href="https://mobilitaet.bayern.de/assets/stmi/vum/strasse/planung/49_einfuehrung_rast_20110209.pdf">Bavarian State Ministry of the Interior (2009) — introduction of RASt 06</a> <span class="lang">(German)</span> <span class="why">How a state road authority limits calming on through roads: a concrete view of the place-versus-movement trade-off.</span></li>
+<li data-type="pdf"><a href="https://www.isv.uni-stuttgart.de/sus/lehre/bachelorarbeiten/downloads/BA_Inneroertlicher-Strassenraumentwurf-in-Deutschland-und-den-USA.pdf">University of Stuttgart (ISV) — Bachelor thesis: Innerörtlicher Straßenraumentwurf in Deutschland und den USA</a> <span class="lang">(German)</span> <span class="why">Student thesis comparing RASt 06 with US urban street design practice. Useful as a structured comparison; check against the primary guidelines.</span></li>
+<li data-type="book"><span>FGSV — <em>Richtlinien für die Anlage von Stadtstraßen (RASt 06)</em>, FGSV-Verlag, Köln</span> <span class="lang">(German)</span> <span class="why">The German urban street design guideline (paid).</span></li>
+<li data-type="translation"><a href="https://www.city.meguro.tokyo.jp/dobokukanri/bousaianzen/koutsuuanzen/houteisokudo.html">目黒区 — 生活道路の法定速度は30キロメートル毎時に引き下げられます</a> <span class="lang">(Japanese)</span> <span class="why">A municipal explanation of Japan's 2026 residential-street speed limit.</span></li>
+<li data-type="link"><a href="https://www.mlit.go.jp/road/road/traffic/sesaku/koho-zone30-seminar2024.html">国土交通省 — 生活道路の交通安全対策ポータル</a> <span class="lang">(Japanese)</span> <span class="why">MLIT's portal for residential-street safety, Zone 30 Plus guidance and seminar material.</span></li>
+<li data-type="link"><a href="https://stad.gent/en/mobility-ghent/circulation-plan">City of Ghent — The Circulation Plan</a> <span class="why">The city's description of the 2017 sector plan.</span></li>
+<li data-type="link"><a href="https://www.tmleuven.be/en/project/circulatieplangent">Transport &amp; Mobility Leuven — Assessment of Gent's traffic circulation plan</a> <span class="why">Independent evaluation of the Ghent plan.</span></li>
+<li data-type="link"><a href="https://ajuntament.barcelona.cat/superilles/">Ajuntament de Barcelona — Superilles</a> <span class="lang">(Catalan/Spanish)</span> <span class="why">Official site of the superblock programme.</span></li>
+<li data-type="link"><a href="https://researchonline.lshtm.ac.uk/4676732">Furlong et al. (2025) — Low Traffic Neighbourhoods in London reduce road traffic injuries (Injury Prevention)</a> <span class="why">The largest controlled evaluation of LTN safety effects, including boundary roads.</span></li>
+<li data-type="link"><a href="https://www.santepubliquefrance.fr/index.php/docs/article/pontevedra-spain-pedestrians-rule-roads-relegating-cars-sidelines-interview">Santé publique France — Pontevedra, Spain: pedestrians rule the roads (interview)</a> <span class="why">Pontevedra's approach in the words of its planners.</span></li>
+<li data-type="tool"><a href="https://streetmix.net/">Streetmix</a> <span class="why">Free browser tool to sketch and compare street cross-sections.</span></li>
+<li data-type="book"><span>Theeuwes, J. &amp; Godthelp, H. (1995) — "Self-explaining roads", <em>Safety Science</em> 19(2–3)</span> <span class="why">The original statement of the self-explaining road concept.</span></li>
+<li data-type="book"><span>CROW — <em>Design Manual for Bicycle Traffic</em> and <em>ASVV</em> (Ede, NL)</span> <span class="why">Dutch reference manuals for cycling infrastructure and urban traffic provisions (paid).</span></li>
+</ul>
+
+<nav class="pager">
+  <a href="m11-safety.html">← Module 11 · Safety: Vision Zero, Sustainable Safety, Safe System</a>
+  <a href="m13-pricing.html">Module 13 · Pricing and demand management →</a>
+</nav>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+</div></footer>
+</body>
+</html>
