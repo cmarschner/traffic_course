@@ -207,3 +207,27 @@ img, iframe, video { max-width: 100%; height: auto; }
 /* opening illustration */
 .hero-figure { margin: 0 auto 1.5rem; max-width: 34rem; }
 .hero-figure img { display: block; width: 100%; height: auto; border-radius: 18px; }
+
+/* ---------- opening essay ---------- */
+main.essay { max-width: 44rem; }
+.essay-head { text-align: center; margin: .5rem 0 1.2rem; }
+.essay-head h1 { font-size: 2.6rem; margin-bottom: .2rem; }
+.subtitle { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--ink-2); margin: 0; }
+main.essay > p, main.essay li { font-size: 1.05rem; }
+figure.photo { margin: 1.4rem 0; }
+figure.photo img { display: block; width: 100%; height: auto; border-radius: 8px; }
+figure.photo figcaption { font-family: var(--sans); font-size: .8rem; color: var(--ink-2); margin-top: .4rem; line-height: 1.45; }
+.credit { display: block; color: var(--ink-3); font-size: .74rem; }
+.credit a { color: inherit; }
+.pair, .triple { display: grid; gap: .8rem; margin: 1.4rem 0; }
+.pair { grid-template-columns: 1fr 1fr; }
+.triple { grid-template-columns: 1fr 1fr 1fr; }
+.pair figure.photo, .triple figure.photo { margin: 0; }
+.pair img, .triple img { aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 1100px) { .pair, .triple { margin-left: -6rem; margin-right: -6rem; } }
+@media (max-width: 640px) {
+  .pair, .triple { grid-template-columns: 1fr; }
+  .essay-head h1 { font-size: 1.9rem; }
+  .subtitle { font-size: 1.1rem; }
+}
+.tenet p { font-size: 1.05rem; }

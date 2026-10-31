@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 1 · What should a transport system optimize? — Welfare-Centered Transport Planning</title>
 <meta name="description" content="The welfare objective function at the center of the course: access and mode choice, health, externalities, land, costs and hard constraints.">
-<link rel="stylesheet" href="../assets/style.css?v=5">
+<link rel="stylesheet" href="../assets/style.css?v=6">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=5"></script>
+<script defer src="../assets/site.js?v=6"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,7 +29,7 @@
 <main>
 <p class="kicker">Part I · The objective · Module 1</p>
 <h1>What should a transport system optimize?</h1>
-<p class="meta">≈ 3 hours · Prerequisites: none · Key terms: all</p>
+<p class="meta">≈ 3 hours · Prerequisites: the <a href="../index.html">introduction</a> · Key terms: all</p>
 
 <p class="lede">Traffic engineering inherited a simple target: move vehicles quickly. This module replaces it with a <em>welfare objective</em>, a single function that values people's access to opportunities, including their choice of mode, and subtracts the harm that travel does to others. The rest of the course fills in the terms of this function, one at a time.</p>
 
@@ -44,9 +44,9 @@
 </ul>
 </div>
 
-<h2>1. The Katy Freeway problem</h2>
-<p>Houston's Katy Freeway (Interstate 10 west of downtown) was widened in 2008 to as many as 26 lanes, counting frontage roads, at a cost of about US$2.8 billion. A few years later, peak travel times on parts of the corridor were longer than before the widening. Critics treat it as the textbook case of <em>induced demand</em>. Defenders point out that the corridor now carries far more people, and that the population of west Houston grew rapidly.</p>
-<p>Both sides can be right, because they are answering different questions. "Did peak travel time fall?" is one objective. "Are the people of Houston better off, all costs counted?" is another. The second question needs an explicit statement of what <em>better off</em> means. That statement is the objective function.</p>
+<h2>1. From two roads to one question</h2>
+<p>The <a href="../index.html">introduction</a> followed two roads built in the same decade with the same aim: fast car access to a growing city. Houston rebuilt the <a href="../index.html#katy">Katy Freeway</a> to as many as 26 lanes. Utrecht dug its <a href="../index.html#utrecht">Catharijnesingel</a> motorway back out and refilled it with water. Each decision makes sense under some objective. The Katy project was scored on vehicle-hours, volume-to-capacity ratios and level of service. Utrecht's reversal valued space, safety, quiet and the life of the city center.</p>
+<p>Debates about such projects often go in circles because the two sides answer different questions. "Did peak travel time fall?" is one objective. "Are people better off, all costs counted, here and elsewhere, now and later?" is another. The second question needs an explicit statement of what <em>better off</em> means. That statement is the objective function, and this module builds it.</p>
 <blockquote>Vehicle speed is an intermediate variable, not the ultimate purpose of transportation. A city in which residents drive 30 km to work at 80 km/h is not necessarily more accessible than one in which they cycle 5 km at 20 km/h.</blockquote>
 
 <h2>2. The welfare objective</h2>
@@ -164,6 +164,16 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 <tr><td><a href="../countries/france.html">France</a></td><td>Statutory socio-economic appraisal with a high, rising carbon value. Behavior shaped <em>passively</em> through geometry (roundabouts, Ville 30) rather than technology.</td><td>Quinet carbon value, CEREMA guides, GIRABASE, <em>versement mobilité</em> payroll levy for transit</td></tr>
 </table></div>
 <p>Other countries contribute specific ideas. Spain contributes Pontevedra's car-free center and Barcelona's superblocks. Italy contributes limited-traffic zones and Bologna's Città 30. The UK contributes empirical capacity models and appraisal guidance (TAG). Colombia contributes Bogotá's bus rapid transit. South Korea contributes the removal of Seoul's Cheonggyecheon freeway. See <a href="../countries/more.html">more countries</a>.</p>
+<h3>Objectives beyond the five terms</h3>
+<p>The <a href="../index.html#objectives">introduction</a> also met objectives that national manuals rarely name. Some fit inside \(W\), and some deliberately do not:</p>
+<div class="table-wrap"><table>
+<tr><th>Objective</th><th>Example</th><th>Where it goes in \(W\)</th></tr>
+<tr><td>Territorial equality, national integration</td><td>Germany's "equivalent living conditions"; France's 1995 promise of a motorway or TGV station within 45 minutes; China's "1-2-3" travel-time circles</td><td>Equity weights \(\omega_g\) for remote regions and the equity floor \(A_g\ge A_{\min}\)</td></tr>
+<tr><td>Economic growth, logistics competitiveness</td><td>India's PM Gati Shakti; China's freight-time circles; the Netherlands as a logistics gateway</td><td>Freight users in Term A, plus wider economic benefits such as agglomeration (<a href="m02-valuing-access.html">Module 2</a>)</td></tr>
+<tr><td>Resilience</td><td>Japan's 2013 Basic Act for National Resilience; hurricane evacuation in Houston</td><td>Expected \(W\) over disruption scenarios: reliability and redundancy have value</td></tr>
+<tr><td>Affordability</td><td>India's National Urban Transport Policy (2006)</td><td>Money cost \(c\) in \(V\), weighted by \(\omega_g\) for low-income groups</td></tr>
+<tr><td>Defense, industrial policy</td><td>The 1956 "Interstate and Defense Highways"; electric-vehicle industrial policy in China</td><td>Outside \(W\). These are legitimate public goals, but they are not the welfare of travelers and neighbors. Report them separately so that they do not hide inside transport benefits.</td></tr>
+</table></div>
 
 <h2>6. Objectives, instruments and timescales</h2>
 <h3>Instruments are not objectives</h3>

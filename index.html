@@ -3,13 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Welfare-Centered Transport Planning — an open course</title>
-<meta name="description" content="An open, graduate-level course in traffic and transport planning built around a human-welfare objective function, drawing on practice in the US, Germany, Japan, Singapore, the Netherlands, Sweden and France.">
-<link rel="stylesheet" href="assets/style.css?v=5">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="assets/site.js?v=5"></script>
+<title>Welfare-Centered Transport Planning — The quest for designing mobility of the ideal city</title>
+<meta name="description" content="An open course on transport planning. We all need to get from A to B; countries have found very different answers. This course asks what transport systems should really optimize for, and learns from the US, Germany, Japan, Singapore, the Netherlands, Sweden, France and beyond.">
+<link rel="stylesheet" href="assets/style.css?v=6">
+<script defer src="assets/site.js?v=6"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -24,72 +21,157 @@
   </nav>
 </div></header>
 
-<main class="wide">
-<section class="hero">
+<main class="essay">
+<header class="essay-head">
+<p class="kicker">An open course</p>
+<h1>Welfare-Centered Transport Planning</h1>
+<p class="subtitle">The quest for designing mobility of the ideal city</p>
+</header>
+
 <figure class="hero-figure">
 <img src="assets/img/hero-welfare.svg" width="820" height="820" alt="People at the center. Five objectives flow toward them: access and choice, health, externalities, land, and public cost. Around them, on the curve of the Earth's horizon, run the limits: no deaths on the road, the carbon budget, land within limits, and minimum access for all.">
 </figure>
 
-<p class="kicker">An open course · 15 modules · ≈ 70 hours</p>
-<h1>What should a transport system optimize?</h1>
-<p class="lede" style="max-width:44rem">Traffic engineering grew up minimizing vehicle delay. Cities that took that goal literally built 26-lane freeways and still have traffic jams. This course teaches traffic and transport planning from one question: <strong>which plan makes people better off, once every cost is counted?</strong> It answers that question with an explicit welfare objective and the best teaching material from seven role-model countries.</p>
-<p><a class="card" style="display:inline-block" href="syllabus.html"><strong>Start with the syllabus →</strong></a>
-&nbsp; <a href="modules/m01-objective.html">or jump to Module 1: the objective function</a></p>
-</section>
+<p class="lede">Every morning, billions of people need to get from A to B: to work, to school, to a doctor, to a friend. The physics of that problem is the same everywhere. A body, a distance, a few minutes to spare. Yet the cities that people have built to solve it could hardly look more different.</p>
 
-<h2>The objective at the center</h2>
-<p style="max-width:46rem">Every module estimates one term of a single welfare function. A plan \(\theta\) (infrastructure, services, rules, prices, land use) is judged by:</p>
-<div class="equation-hero">
-$$
-\begin{aligned}
-W(\theta)=\;&
-\underbrace{\sum_{g}\omega_g\sum_{n\in g}\tfrac{1}{\lambda_n}\ln\sum_{j} e^{V_{nj}(\theta)}}_{\text{A: access \& mode choice}}
-+\underbrace{H(\theta)}_{\text{B: health}}
--\underbrace{\sum_{k} p_k E_k(\theta)}_{\text{C: externalities}}\\[4pt]
-&-\underbrace{r\,L(\theta)}_{\text{D: land}}
--\underbrace{(1+\mu)\big[K(\theta)-R(\theta)\big]}_{\text{E: net public cost}}
-\end{aligned}
-$$
-$$\text{s.t. } F(\theta)\le\bar F \;(\text{Vision Zero}),\quad E_{\mathrm{CO_2}}\le B,\quad L\le\bar L,\quad A_g\ge A_{\min}$$
+<p>In Houston, the answer is a car on a freeway that is, in places, more than twenty lanes wide. In Utrecht, it is a bicycle on a street where a motorway used to be. In Tokyo, it is a train that arrives every few minutes at a station surrounded by shops and homes. In Singapore, the right to own a car is rationed by a government auction. Each answer works, after a fashion. Each is the product of choices, and each leaves something on the table.</p>
+
+<p>This course is about those choices: what transport systems around the world are actually built to achieve, what they <em>should</em> be built to achieve, and which ideas and tools from each country are worth borrowing. We start with two stretches of road.</p>
+
+<h2 id="katy">1. Houston: the Katy Freeway</h2>
+
+<figure class="photo">
+<img src="assets/img/houston-southwest-freeway-1972-documerica.jpg" width="1280" height="864" loading="lazy" alt="Cars jammed on a Houston freeway under a tangle of interchange ramps, 1972.">
+<figcaption>Houston, May 1972: congestion on the Southwest Freeway (US 59), photographed for the EPA's DOCUMERICA project. Within a decade of opening, Houston's new freeways were already full. <span class="credit">Photo: Blair Pittman / U.S. EPA DOCUMERICA, National Archives (NARA 553019), public domain.</span></figcaption>
+</figure>
+
+<p>Interstate 10 west of downtown Houston, known as the <strong>Katy Freeway</strong>, was built in the 1960s. It had three lanes in each direction plus two-lane frontage roads and was designed for about <strong>80,000 vehicles a day</strong>. It was part of the federal Interstate program created by the Federal-Aid Highway Act of 1956. That act officially named the network the <em>National System of Interstate and Defense Highways</em>, paid 90% of construction from Washington, and financed the federal share through a dedicated Highway Trust Fund fed by fuel taxes.</p>
+
+<p>West Houston grew around the freeway. By 2001 the busiest section carried about <strong>238,000 vehicles a day</strong>, roughly three times its design volume, with congestion lasting up to eleven hours a day. Texas planners concluded in a 1995 study that the road was obsolete. The study set four goals: improve corridor mobility and safety cost-effectively, limit harm to the environment and communities, build a balanced transportation system, and serve the region's land-use and development patterns. Alternatives were compared on vehicle-hours and vehicle-miles of travel, volume-to-capacity ratios, shift to high-occupancy modes, and level of service (LOS), using a regional model with a design year of 2020.</p>
+
+<p>The answer was to rebuild. Between 2003 and 2008, at a cost of about <strong>US$2.8 billion</strong>, the Katy Freeway was widened to as many as <strong>26 lanes</strong> counting frontage roads, including tolled managed lanes in the median. Much of the extra width came from the right-of-way of the abandoned Missouri–Kansas–Texas railroad, the "Katy" line that gave the freeway its name. The regional transit agency had been negotiating to buy that corridor for transit. The highway department acquired it instead.</p>
+
+<div class="pair">
+<figure class="photo">
+<img src="assets/img/katy-freeway-highsmith-before-widening.jpg" width="1280" height="990" loading="lazy" alt="Aerial view of a freeway running straight east toward the downtown Houston skyline through low-rise office parks.">
+<figcaption>Before: the Katy Freeway looking east toward downtown, photographed before the widening (exact date not recorded). <span class="credit">Carol M. Highsmith Archive, Library of Congress, public domain.</span></figcaption>
+</figure>
+<figure class="photo">
+<img src="assets/img/katy-freeway-2009-widened.jpg" width="1280" height="960" loading="lazy" alt="A very wide freeway with many lanes and elevated managed lanes stretching to the horizon.">
+<figcaption>After: the rebuilt Katy Freeway with its central managed lanes, July 2009. <span class="credit">Photo: Socrate76, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, via Wikimedia Commons.</span></figcaption>
+</figure>
 </div>
+
+<p>At first it worked. The state reported that the morning trip from the Grand Parkway (SH 99) to the West Loop fell from 36 to 21 minutes. Within a few years, travel times were climbing again. Analyses of Houston TranStar data found that between 2011 and 2014 the morning commute on the corridor grew by about 30% and the evening commute by about 55%. A researcher at the Texas A&amp;M Transportation Institute explained it in five words: "build it and they will come." He attributed the rise to the region's job and population growth. Others call it <em>induced demand</em>: when travel gets cheaper in time, people travel more and farther, until the road fills up again.</p>
+
+<div class="box note">
+<div class="box-title">Fair to Houston</div>
+<p>Both readings can be true at once, and neither proves the widening was a failure. The corridor now moves far more people than before, and growth that went to west Houston would have gone somewhere. The critics' data start three years after completion, so they show congestion <em>returning</em>, not congestion worse than before the project. Judging the project needs a counterfactual and a defined objective. That is exactly the point of this course.</p>
+</div>
+
+<h3>Why visitors shake their heads</h3>
+<p>To many planners from Europe or East Asia, the Katy Freeway looks like the answer to the wrong question. The project's own criteria explain why it was built: vehicle-hours, volume-to-capacity ratios and level of service for a forecast of traffic in 2020. What those criteria leave out is what a visitor notices:</p>
+<ul>
+<li><strong>A rail corridor was paved.</strong> The one piece of land that could have carried high-capacity transit into the city became more lanes for cars.</li>
+<li><strong>Demand was treated as something to accommodate, not something the road creates.</strong> More capacity invites more and longer trips, and the time savings fade.</li>
+<li><strong>Land, emissions, noise and crashes were not part of the score.</strong> A corridor of up to 26 lanes consumes land that would be priceless in Tokyo or Amsterdam, and more driving means more emissions.</li>
+<li><strong>People without a car gain little.</strong> Teenagers, many older people, people who cannot afford a car or cannot drive are left with few alternatives.</li>
+</ul>
+<p>Visitors can also miss what the design delivers. Houston offers fast car access to an enormous, dispersed job market, relatively affordable housing on cheap land, and a great deal of individual freedom over where to live and when to travel. These are real gains for the people who benefit. The question is not whether the Katy Freeway produced value. It is <em>what it was optimizing for</em>, and what that leaves on the table.</p>
+
+<h2 id="utrecht">2. Utrecht: the canal that came back</h2>
+
+<p>In the same years that Texas was building its freeways, the Dutch city of Utrecht had a similar plan. A 1958 ring-road plan proposed turning the city's historic outer canal, the <strong>Catharijnesingel</strong>, into a road. From 1969 into the early 1970s, sections of the canal were drained and filled to build the <em>Catharijnebaan</em>, a sunken multi-lane urban motorway, and the station-area shopping center Hoog Catharijne was built over it. The aim was the same as in Houston: give cars fast access to the center of a growing city.</p>
+
+<div class="triple">
+<figure class="photo">
+<img src="assets/img/utrecht-catharijnesingel-1967.jpg" width="1280" height="1027" loading="lazy" alt="Black-and-white view over Utrecht with the canal running along a row of buildings, 1967.">
+<figcaption>1967: the Catharijnesingel still holds water. <span class="credit">A. J. van der Wal / Rijksdienst voor het Cultureel Erfgoed, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</span></figcaption>
+</figure>
+<figure class="photo">
+<img src="assets/img/utrecht-catharijnebaan-2008.jpg" width="750" height="500" loading="lazy" alt="A sunken divided urban road with several lanes between retaining walls and trees.">
+<figcaption>2008: the Catharijnebaan motorway in the filled-in canal. <span class="credit">Photo: T Houdijk, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</span></figcaption>
+</figure>
+<figure class="photo">
+<img src="assets/img/utrecht-catharijnesingel-2025.jpg" width="1280" height="960" loading="lazy" alt="A restored canal with green banks running between modern office buildings.">
+<figcaption>2025: the restored canal near Hoog Catharijne. <span class="credit">Photo: Gargarapalvin, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</span></figcaption>
+</figure>
+</div>
+
+<p>Then Utrecht changed its mind. In a 2002 referendum, residents backed restoring the canal. The road was dug out in stages, and on <strong>12 September 2020</strong> the Catharijnesingel reopened as a complete ring of water around the old city, with green banks, footpaths, and boats again able to circle the center. The City of Utrecht now calls the filling of the canal "a mistake from the past". The project won the European Prize for Urban Public Space in 2022. Utrecht is not alone. Paris turned its 1967 riverside expressway on the Seine into a park in 2016. Seoul tore down an elevated freeway carrying 169,000 vehicles a day to uncover the Cheonggyecheon stream in 2005. Tokyo is moving the 1960s expressway that covers its historic Nihonbashi bridge underground.</p>
+
+<h3>Same problem, opposite answers</h3>
+<p>Houston and Utrecht started from the same idea in the same decade and ended up moving in opposite directions. Utrecht did not stop caring about access. The city remains one of the most accessible places in the Netherlands, but it now provides most of that access by bicycle, train and bus. What it gave up is fast car travel through the center. What it gained is space, safety, quiet, cleaner air and a city that people want to spend time in. Houston made the opposite trade.</p>
+
+<h2 id="drivers">3. Why the answers differ</h2>
+<p>Neither city was irrational. Each was optimizing, explicitly or implicitly, for a different mix of goals under different conditions. Several drivers explain most of the difference.</p>
+
+<div class="table-wrap"><table>
+<tr><th>Driver</th><th>How it pushes toward Houston</th><th>How it pushes toward Utrecht</th></tr>
+<tr><td><strong>Land</strong></td><td>Abundant, cheap land at the urban edge; growth can spread outward.</td><td>A dense, small country; every square meter of street has competing uses.</td></tr>
+<tr><td><strong>Input prices</strong></td><td>Cheap fuel: taxes were about 17% of the US retail gasoline price in late 2025.</td><td>Expensive fuel: taxes were about 58% of the Dutch price (61% in Germany, 57% in France, 43% in Japan).</td></tr>
+<tr><td><strong>Money and institutions</strong></td><td>Fuel-tax revenue earmarked for highways, 90% federal funding for Interstates. The cheapest project for a state was often more freeway.</td><td>General budgets and strong city governments that can trade road space for other uses.</td></tr>
+<tr><td><strong>The inherited city</strong></td><td>Most of Houston was built after the car.</td><td>Utrecht's center was built centuries before it, on a human scale.</td></tr>
+<tr><td><strong>Shocks and movements</strong></td><td>Cold War defense logic shaped the Interstate network.</td><td>Dutch road deaths peaked at 3,264 in 1972. The protest movement <em>Stop de Kindermoord</em> ("stop the child murder", 1973) and the oil-crisis car-free Sundays of 1973–74 changed public priorities.</td></tr>
+<tr><td><strong>Values</strong></td><td>Individual freedom, private property, local control, suspicion of central planning.</td><td>Consensus, collective use of scarce space, a long tradition of planning.</td></tr>
+</table></div>
+
+<p>Put simply, transport policy is rooted in <strong>a local value system</strong> and shaped by <strong>constraints</strong> such as available land, the price of energy, the existing city, and the way infrastructure is funded. Change the values or the constraints and the "optimal" plan changes too.</p>
+
+<h2 id="objectives">4. A world of objectives</h2>
+<p>Look at more countries and the list of objectives grows. Some are explicit in law, others visible only in what institutions fund and measure. The seven role-model countries of this course each emphasize different ones, and two large countries outside that group remind us of objectives that Western curricula rarely name.</p>
+
+<div class="table-wrap"><table>
+<tr><th>Country</th><th>Objectives that stand out</th><th>Evidence</th></tr>
+<tr><td><a href="countries/us.html">United States</a></td><td>Vehicle mobility and reliable car access across large regions; historically national defense; increasingly safety and climate in some states and cities</td><td>Level-of-service standards; the 1956 "Interstate and Defense Highways"; California's 2013 switch from LOS to vehicle-miles traveled</td></tr>
+<tr><td><a href="countries/germany.html">Germany</a></td><td>Equivalent living conditions across regions; "more mobility with less traffic" in cities; cost-effectiveness</td><td>Basic Law Art. 72(2) and the spatial planning act; federal cost–benefit analysis; the 2024 road traffic law reform adding climate, health and urban development</td></tr>
+<tr><td><a href="countries/japan.html">Japan</a></td><td>Accessibility through dense, rail-oriented urban structure; resilience to disasters; compact cities for an aging, shrinking population</td><td>Private railways that build towns around stations; the 2013 Basic Act for National Resilience; Location Normalization Plans</td></tr>
+<tr><td><a href="countries/singapore.html">Singapore</a></td><td>Maximum access within a hard limit on land; managing demand directly</td><td>Road pricing since 1975; a quota on the number of vehicles; "20-minute towns and a 45-minute city" by 2040</td></tr>
+<tr><td><a href="countries/netherlands.html">Netherlands</a></td><td>Safety by design; cycling as a mainstream mode; livable streets</td><td>Sustainable Safety; CROW design manuals; formal social cost–benefit analysis</td></tr>
+<tr><td><a href="countries/sweden.html">Sweden</a></td><td>Safety as an ethical limit; accessibility and health–environment as co-equal goals</td><td>Vision Zero (1997); the two co-equal national transport-policy goals</td></tr>
+<tr><td><a href="countries/france.html">France</a></td><td>Territorial equality ("no place too far"); climate; calm streets achieved by design rather than technology</td><td>The 1995 planning law's promise that no point of mainland France be more than 50 km or 45 minutes from a motorway or TGV station; a high official carbon value; roundabouts and <em>Ville 30</em></td></tr>
+<tr><td><a href="countries/more.html#china">China</a></td><td>Economic development, national integration, global logistics competitiveness, industrial leadership</td><td>The 2019 <em>Outline for Building a Strong Transport Country</em>, with "1-2-3" travel- and freight-time circles; about 50,000 km of high-speed rail by 2025; purchase-tax breaks for electric vehicles</td></tr>
+<tr><td><a href="countries/more.html#india">India</a></td><td>Affordability and equity for a majority who walk, cycle or use buses; growth through logistics</td><td>The 2006 National Urban Transport Policy's "equitable allocation of road space with people, rather than vehicles, as its main focus"; 23% of workers walk to work (2011 census); PM Gati Shakti (2021)</td></tr>
+</table></div>
+
+<p>China and India show that the list is not just about time, safety and the environment. Nation-building, economic growth, industrial strategy, logistics costs and affordability for the poor are transport objectives too, and they can dominate. So can resilience against earthquakes and floods, or regional fairness. A course that only teaches one national manual inherits that manual's objectives without noticing.</p>
+
+<p>The lesson of this tour is simple. <strong>Every transport policy is a weighted combination of objectives</strong>, whether or not anyone wrote the weights down. The weights come from local values. The trade-offs are imposed by local constraints.</p>
+
+<h2 id="tenet">5. What transport should optimize for</h2>
+<p>If every policy is a combination of objectives, which combination is right? This course takes a clear position, and the rest of the course makes it precise.</p>
+
+<div class="box key tenet">
+<p><strong>First, transport exists to improve the welfare of the people who use it.</strong> Nobody wants a trip for its own sake. What people want is what the trip gives them: a job, an education, care, friendship, a choice of places to live and things to do. Speed, lanes and mode shares are means. Access to a good life is the end.</p>
+<p><strong>Second, it must do so while maximizing overall welfare</strong>, minimizing the harm that travel does to everyone else. That harm is spread in <em>space</em>: neighbors breathing exhaust, children who cannot cross the street, communities split by a highway, the global climate. It is also spread in <em>time</em>: emissions that accumulate, land that is paved for generations, a city shape that locks in car dependence long after the people who chose it are gone.</p>
+</div>
+
+<p>The opening illustration shows that idea. People are at the center. Five groups of effects flow toward them: their <strong>access and choice</strong>, their <strong>health</strong>, the <strong>externalities</strong> that travel imposes on others, the <strong>land</strong> that transport consumes, and the <strong>public cost</strong> of building and running it. Around everything run limits that many societies refuse to trade away: no deaths on the road, the carbon budget, land within limits, and a minimum level of access for everyone. In <a href="modules/m01-objective.html">Module 1</a> these become a single welfare function. That gives you a way to compare the Katy Freeway and the Catharijnesingel on the same scale, and to see exactly where national practices weight things differently.</p>
+
+<h2 id="why">6. Why this course</h2>
+<p>Transport planners are usually trained within one national tradition. An American engineer learns the Highway Capacity Manual and level of service. A German engineer learns the HBS and the FGSV guidelines. A French engineer learns CEREMA's methods and French socio-economic appraisal. Each tradition is excellent on its own terms, and each passes on its own objectives as if they were simply "how traffic engineering is done".</p>
+<p>This course pulls together a deliberately wider set of viewpoints, with two goals:</p>
+<ol>
+<li><strong>A global framework for better planning goals.</strong> One explicit objective, centered on human welfare, in which the priorities of the US, Germany, Japan, Singapore, the Netherlands, Sweden, France and others appear as different weights and constraints. They become something you can compare, question and choose between, rather than inherit.</li>
+<li><strong>Access to better planning tools.</strong> Many of the best tools were developed inside one national framework and are little known outside it. Examples include Japan's verification tests for traffic simulators, France's empirical roundabout capacity model, Sweden's Vision Zero design logic, Dutch social cost–benefit analysis, and Singapore's road pricing. Where the originals exist only in Swedish, German, Japanese, French, Dutch, Spanish or Italian, we <a href="sources/index.html">summarize and translate</a> them.</li>
+</ol>
+
+<h2 id="start">Where to go next</h2>
 <div class="grid">
-  <div class="card"><h3><span class="term">A</span> Access &amp; choice</h3><p>The value people get from reaching jobs, schools and friends by whatever mode suits them. The logsum of a choice model, so mode choice and induced demand are built in.</p></div>
-  <div class="card"><h3><span class="term">B</span> Health</h3><p>Physical-activity benefits of walking and cycling that travelers do not price themselves (WHO HEAT).</p></div>
-  <div class="card"><h3><span class="term">C</span> Externalities</h3><p>Crashes, CO₂, air pollution, noise, severance and the delay each driver imposes on others, each with a price.</p></div>
-  <div class="card"><h3><span class="term">D</span> Land</h3><p>The opportunity cost of street and parking space: near zero on the edge of Houston, enormous in Singapore.</p></div>
-  <div class="card"><h3><span class="term">E</span> Public cost</h3><p>Construction, operation and maintenance, net of revenues, with a premium for raising public funds.</p></div>
-  <div class="card"><h3><span class="term">constraints</span> Limits</h3><p>Things some societies refuse to trade: deaths on the road (Sweden), carbon budgets, land, minimum access for all.</p></div>
-</div>
-<p style="max-width:46rem">The conventional engineering objective, minimizing \(\sum_a q_a t_a\) with fixed demand, is a special case of \(W\) that drops induced demand, mode choice, externalities and land. Much of the course is about what that special case gets wrong and how to do better. <a href="explorer.html">Try the objective explorer</a> to see how the same four corridor designs rank under American, German, Japanese, Singaporean, Dutch, Swedish and French readings of \(W\).</p>
-
-<h2>Seven role models, seven readings of the objective</h2>
-<div class="grid">
-  <a class="card" href="countries/us.html"><h3>United States</h3><p>The capacity tradition (HCM, level of service) and its reform: benefit–cost guidance, California's switch from LOS to VMT, congestion pricing in New York.</p></a>
-  <a class="card" href="countries/germany.html"><h3>Germany</h3><p>Rigorous standards (HBS, RASt, RiLSA), national cost–benefit analysis, and cities pursuing "avoid – shift – improve".</p></a>
-  <a class="card" href="countries/japan.html"><h3>Japan</h3><p>Accessibility through urban structure: private railways that build the city around the station. Plus rigorous verification of traffic simulators.</p></a>
-  <a class="card" href="countries/singapore.html"><h3>Singapore</h3><p>Maximum access under a hard land constraint: road pricing since 1975 and a quota on the number of cars.</p></a>
-  <a class="card" href="countries/netherlands.html"><h3>Netherlands</h3><p>Sustainable Safety, cycling as a primary mode, and design that makes the safe behaviour the obvious one.</p></a>
-  <a class="card" href="countries/sweden.html"><h3>Sweden</h3><p>Vision Zero: safety as a constraint, not a price. 2+1 roads and the Stockholm congestion tax.</p></a>
-  <a class="card" href="countries/france.html"><h3>France</h3><p>Statutory socio-economic appraisal with a high carbon value. Roundabouts and Ville 30: geometry instead of technology.</p></a>
-  <a class="card" href="countries/more.html"><h3>…and more</h3><p>Spain (Pontevedra, superblocks), Italy (ZTL, Bologna Città 30), UK, Denmark, Austria, Switzerland, Colombia, South Korea, Australia, India, China.</p></a>
+  <a class="card" href="modules/m01-objective.html"><h3>Module 1: What should a transport system optimize?</h3><p>The welfare objective, term by term, and why the classic traffic-engineering objective is a special case of it.</p><p class="meta">Start here →</p></a>
+  <a class="card" href="syllabus.html"><h3>Syllabus</h3><p>15 modules in four parts: the objective, people and places, traffic engineering, policy levers, plus a capstone.</p></a>
+  <a class="card" href="countries/index.html"><h3>Countries</h3><p>Seven role models and eleven more countries: institutions, ideas, failures and teaching material.</p></a>
+  <a class="card" href="explorer.html"><h3>Objective explorer</h3><p>Rank four plans for one corridor under American, German, Japanese, Singaporean, Dutch, Swedish and French readings of the objective.</p></a>
 </div>
 
-<h2>How the course works</h2>
-<div class="grid">
-  <div class="card"><h3>Course notes, not just links</h3><p>Each module is a self-contained set of notes with formulas, worked examples, country comparisons and exercises.</p></div>
-  <div class="card"><h3>The best open material</h3><p>Every module points to free lectures, OpenCourseWare, official guidance and videos (TU Delft, MIT, Treiber, FHWA, CEREMA, JSTE and more), checked at the time of writing.</p></div>
-  <div class="card"><h3>Translated originals</h3><p>Much of the best material is not in English. Key original documents (Swedish, German, Japanese, French, Dutch, Spanish, Italian) are summarized and excerpted in English in <a href="sources/index.html">Sources &amp; translations</a>.</p></div>
-  <div class="card"><h3>Who it is for</h3><p>Engineers, planners, economists, modelers and civic technologists with undergraduate maths: some calculus, statistics and a willingness to read an equation.</p></div>
-</div>
-
-<div class="box note" style="max-width:46rem">
-<div class="box-title">A note on judgment</div>
-<p>Country characterizations in this course are interpretations, supported by official documents, of what each country's institutions reward. They are not rankings. Every role model also has well-documented failures, and the country pages discuss them. The aim is not to pick a winner but to make the objective explicit, so that you can argue about the right thing.</p>
+<div class="box note">
+<div class="box-title">Sources for this page</div>
+<p class="small">Katy Freeway: <a href="https://www.fhwa.dot.gov/ipd/project_profiles/tx_katy_freeway.aspx">FHWA project profile</a>; Texas A&amp;M Transportation Institute, <a href="https://static.tti.tamu.edu/tti.tamu.edu/documents/0-6688-1.pdf">report 0-6688-1</a> (2013); <a href="https://www.houstonpress.com/?p=281978">Houston Press</a> (2008); <a href="https://www.click2houston.com/news/2014/02/04/houston-commute-times-quickly-increasing">KPRC</a> (2014); <a href="https://cityobservatory.org/reducing-congestion-katy-didnt/">City Observatory</a> (2015, an advocacy source); <a href="https://www.abandonedrails.com/houston-to-katy">MKT corridor</a>. 1956 Act: <a href="https://www.fhwa.dot.gov/highwayhistory/data/page03.cfm">FHWA highway history</a>. Utrecht: <a href="https://www.utrecht.nl/nieuws/nieuwsbericht-gemeente-utrecht/de-singel-is-rond-1">City of Utrecht</a> (Dutch); <a href="https://www.okra.nl/?p=2200">OKRA</a>. Seoul: <a href="https://landscapeperformance.org/case-study-briefs/cheonggyecheon-stream-restoration">Landscape Performance Series</a>. Fuel taxes: <a href="https://www.mof.go.jp/tax_policy/summary/consumption/133.pdf">Japan Ministry of Finance chart of IEA data, Q4 2025</a> (Japanese). Germany: <a href="https://www.gesetze-im-internet.de/gg/art_72.html">Basic Law Art. 72</a>. France: <a href="https://www.senat.fr/seances/s201302/s20130211/s20130211007.html">Sénat debate on the 1995 law</a>. Japan: <a href="https://www.japaneselawtranslation.go.jp/en/laws/view/2354/je">Basic Act for National Resilience</a>. China: <a href="https://www.gov.cn/zhengce/2019-09/19/content_5431432.htm">交通强国建设纲要 (2019)</a>; <a href="https://english.henan.gov.cn/2026/01-04/3281485.html">high-speed rail length, end-2025</a>. India: <a href="https://indiaenvironmentportal.org.in/reports-and-documents/national-urban-transport-policy-2006">National Urban Transport Policy 2006</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6187020/">Goel (2018), census commuting data</a>.</p>
 </div>
 </main>
 
 <footer class="site-footer"><div class="inner">
-Welfare-Centered Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="about.html">About, sources and translation policy</a>.
+Welfare-Centered Transport Planning — an open course. Text licensed CC BY 4.0; photographs are credited individually and remain under their own licenses. <a href="about.html">About, sources and translation policy</a>.
 </div></footer>
 </body>
 </html>
