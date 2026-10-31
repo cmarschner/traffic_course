@@ -193,3 +193,10 @@ a.card:hover { border-color: var(--accent); transform: translateY(-1px); color: 
   ul.resources li { padding-left: 0; padding-top: 1.6rem; }
   ul.resources li::before { top: .4rem; }
 }
+
+/* grid children must be allowed to shrink so wide tables scroll inside .table-wrap instead of widening the page */
+.layout-notes > *, .explorer > *, .grid > * { min-width: 0; }
+main { overflow-wrap: break-word; }
+main a { overflow-wrap: anywhere; }
+pre { overflow-x: auto; max-width: 100%; }
+img, iframe, video { max-width: 100%; height: auto; }
