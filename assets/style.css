@@ -260,3 +260,10 @@ figure.photo.inset { float: right; width: 42%; margin: .2rem 0 .6rem 1rem; }
 .demo-controls input { accent-color: var(--accent); width: 100%; }
 .demo-controls output { text-align: right; font-variant-numeric: tabular-nums; }
 main h4 { color: var(--accent); }
+.demo-sub { font-family: var(--sans); font-size: .88rem; margin: 1rem 0 .3rem; }
+.demo-btn { font: inherit; font-size: .8rem; margin-left: .4rem; padding: .25rem .7rem; border-radius: 6px;
+  border: 1px solid var(--accent); background: var(--card); color: var(--accent); cursor: pointer; }
+.demo-btn:hover { background: var(--accent-soft); }
+.demo-people td.chosen { background: var(--accent-soft); font-weight: 700; box-shadow: inset 0 0 0 2px var(--accent); }
+.demo-people .parts { color: var(--ink-3); font-weight: 400; font-size: .78rem; }
+@media (max-width: 640px) { .demo-people .parts { display: block; } }

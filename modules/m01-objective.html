@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 1 · What should a transport system optimize? — Welfare-Centered Transport Planning</title>
 <meta name="description" content="The welfare objective function at the center of the course: access and mode choice, health, externalities, land, costs and hard constraints.">
-<link rel="stylesheet" href="../assets/style.css?v=10">
+<link rel="stylesheet" href="../assets/style.css?v=11">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=10"></script>
+<script defer src="../assets/site.js?v=11"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -256,41 +256,61 @@ $$\ln \sum_{i=1}^{O_j} e^{v_j} \;=\; \ln\!\big(O_j\, e^{v_j}\big) \;=\; v_j + \l
 
 <div class="box demo" id="logsum-demo">
 <div class="box-title">Try it · simulate people choosing</div>
-<p class="small">Set the measured utilities \(V\) of three options. The demo simulates 50,000 people. For each person it draws a Gumbel-distributed hidden part for every option, and the person picks the option with the highest total utility. The tables compare the simulation with the formulas from Steps 2 and 4.</p>
+<p class="small">Set the measured utilities \(V\) of three options. The demo then simulates people. For each person, it draws a random hidden part \(\varepsilon\) for every option from a Gumbel distribution. It adds the two parts to get the total utility \(U = V + \varepsilon\). The person chooses the option with the highest \(U\).</p>
 <div class="demo-controls">
 <label>Option 1 <input type="range" min="-3" max="3" step="0.1" value="-1" data-v="0"> <output>−1.0</output></label>
 <label>Option 2 <input type="range" min="-3" max="3" step="0.1" value="-2" data-v="1"> <output>−2.0</output></label>
 <label>Option 3 <input type="range" min="-6" max="3" step="0.1" value="-6" data-v="2"> <output>−6.0</output></label>
 </div>
+<p class="demo-sub"><strong>Eight simulated people.</strong> Each cell shows \(V + \varepsilon = U\). The highlighted cell is the highest \(U\) in the row: the option this person chooses. <button type="button" class="demo-btn" data-act="redraw">Draw new people</button></p>
+<div class="table-wrap"><table class="demo-people">
+<thead><tr><th>Person</th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th><th>Chooses</th></tr></thead>
+<tbody></tbody></table></div>
+<p class="small" data-o="note"></p>
+<p class="demo-sub"><strong>50,000 simulated people.</strong> Each makes the same kind of choice. Counting their choices gives shares, which we compare with the formulas from Steps 2 and 4.</p>
 <div class="table-wrap"><table>
 <thead><tr><th></th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th></tr></thead>
 <tbody>
-<tr><td>Logit probability \(e^{V_j}/\sum e^{V_k}\)</td><td class="num" data-o="p0"></td><td class="num" data-o="p1"></td><td class="num" data-o="p2"></td></tr>
+<tr><td>Logit probability \(e^{V_j}/\sum_k e^{V_k}\)</td><td class="num" data-o="p0"></td><td class="num" data-o="p1"></td><td class="num" data-o="p2"></td></tr>
 <tr><td>Simulated share choosing it</td><td class="num" data-o="s0"></td><td class="num" data-o="s1"></td><td class="num" data-o="s2"></td></tr>
 </tbody></table></div>
 <div class="table-wrap"><table>
-<tr><td>Best observed utility, \(\max_j V_j\)</td><td class="num" data-o="max"></td></tr>
+<tr><td>Best measured utility, \(\max_j V_j\)</td><td class="num" data-o="max"></td></tr>
 <tr><td>Logsum, \(\ln\sum_j e^{V_j}\)</td><td class="num" data-o="ls"></td></tr>
-<tr><td>Simulated average utility of the chosen option, minus \(\gamma\)</td><td class="num" data-o="mc"></td></tr>
+<tr><td>Simulated average of each person's highest \(U\), minus \(\gamma\)</td><td class="num" data-o="mc"></td></tr>
 </table></div>
 <p class="small">Things to try: make the three options equal (the logsum is \(\ln 3 \approx 1.10\) above them). Make option 3 very poor (it adds almost nothing). Raise option 2 by 0.5 and compare the change in the logsum with the rule of a half.</p>
 </div>
 <script>
 (function () {
-  var box = document.getElementById("logsum-demo"), N = 50000, G = 0.5772156649;
+  var box = document.getElementById("logsum-demo"), N = 50000, G = 0.5772156649, SHOW = 8;
   var sliders = box.querySelectorAll("input[type=range]");
+  var body = box.querySelector(".demo-people tbody");
   function out(k, v) { box.querySelector('[data-o="' + k + '"]').textContent = v; }
-  function fmt(x) { return (x < 0 ? "−" : "") + Math.abs(x).toFixed(3); }
-  function run() {
-    var V = [].map.call(sliders, function (s) { s.nextElementSibling.textContent = fmt(+s.value).replace(/0+$/, "").replace(/\.$/, ".0"); return +s.value; });
-    var ex = V.map(Math.exp), sum = ex[0] + ex[1] + ex[2];
-    var counts = [0, 0, 0], total = 0;
+  function fmt(x, d) { return (x < 0 ? "−" : "") + Math.abs(x).toFixed(d === undefined ? 3 : d); }
+  function sgn(x) { return (x < 0 ? " − " : " + ") + Math.abs(x).toFixed(2); }
+  function gumbel() { return -Math.log(-Math.log(Math.random())); }
+  function values() { return [].map.call(sliders, function (s) { s.nextElementSibling.textContent = fmt(+s.value, 1); return +s.value; }); }
+  function people(V) {
+    var bestV = V.indexOf(Math.max.apply(null, V)), surprises = 0, html = "";
+    for (var i = 0; i < SHOW; i++) {
+      var e = V.map(gumbel), U = V.map(function (v, j) { return v + e[j]; });
+      var c = U.indexOf(Math.max.apply(null, U));
+      if (c !== bestV) surprises++;
+      html += "<tr><td>" + (i + 1) + "</td>" + V.map(function (v, j) {
+        return '<td class="num' + (j === c ? ' chosen' : '') + '"><span class="parts">' + fmt(v, 1) + sgn(e[j]) + " =</span> " + fmt(U[j], 2) + "</td>";
+      }).join("") + "<td><strong>Option " + (c + 1) + "</strong></td></tr>";
+    }
+    body.innerHTML = html;
+    out("note", surprises === 0
+      ? "All eight chose the option with the highest measured utility V this time. Draw again: sometimes a hidden part tips the choice."
+      : surprises + " of the eight chose an option other than the one with the highest V. Their hidden parts tipped the balance. That is why the analyst can only state probabilities.");
+  }
+  function crowd(V) {
+    var ex = V.map(Math.exp), sum = ex[0] + ex[1] + ex[2], counts = [0, 0, 0], total = 0;
     for (var i = 0; i < N; i++) {
       var best = -Infinity, bj = 0;
-      for (var j = 0; j < 3; j++) {
-        var u = V[j] - Math.log(-Math.log(Math.random()));
-        if (u > best) { best = u; bj = j; }
-      }
+      for (var j = 0; j < 3; j++) { var u = V[j] + gumbel(); if (u > best) { best = u; bj = j; } }
       counts[bj]++; total += best;
     }
     for (var j = 0; j < 3; j++) { out("p" + j, (100 * ex[j] / sum).toFixed(1) + "%"); out("s" + j, (100 * counts[j] / N).toFixed(1) + "%"); }
@@ -298,7 +318,9 @@ $$\ln \sum_{i=1}^{O_j} e^{v_j} \;=\; \ln\!\big(O_j\, e^{v_j}\big) \;=\; v_j + \l
     out("ls", fmt(Math.log(sum)));
     out("mc", fmt(total / N - G));
   }
+  function run() { var V = values(); people(V); crowd(V); }
   sliders.forEach(function (s) { s.addEventListener("input", run); });
+  box.querySelector('[data-act="redraw"]').addEventListener("click", function () { people(values()); });
   run();
 })();
 </script>
