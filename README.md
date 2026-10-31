@@ -1,4 +1,4 @@
-# Welfare-Centred Transport Planning — an open course
+# Welfare-Centered Transport Planning — an open course
 
 A static website (plain HTML/CSS, no build step) teaching traffic and transport planning around one explicit
 welfare objective function, with the US, Germany, Japan, Singapore, the Netherlands, Sweden and France as main

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 820" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+<title id="t">Welfare-centered transport planning</title>
+<desc id="d">People at the center. Five objectives flow toward them: access and choice, health, externalities, land, and public cost. Around them, on the curve of the Earth's horizon, run the limits: no deaths on the road, the carbon budget, land, and minimum access for all.</desc>
+<defs>
+<radialGradient id="space" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#1b2b4a"/><stop offset="1" stop-color="#070d1a"/></radialGradient>
+<radialGradient id="sky" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fffaf0"/><stop offset=".55" stop-color="#eef6f6"/><stop offset="1" stop-color="#cfe6ea"/></radialGradient>
+<radialGradient id="earth" gradientUnits="userSpaceOnUse" cx="410" cy="410" r="392">
+  <stop offset=".80" stop-color="#9fd3e6"/><stop offset=".83" stop-color="#3f8fc0"/><stop offset=".93" stop-color="#1e5e95"/><stop offset="1" stop-color="#123f6e"/></radialGradient>
+<radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="410" cy="410" r="412">
+  <stop offset=".93" stop-color="#7fd4ff" stop-opacity="0"/><stop offset=".955" stop-color="#8fdcff" stop-opacity=".75"/><stop offset="1" stop-color="#8fdcff" stop-opacity="0"/></radialGradient>
+<radialGradient id="hub" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#fffdf7"/><stop offset="1" stop-color="#fbe9c6"/></radialGradient>
+<clipPath id="ring"><path fill-rule="evenodd" d="M410,18a392,392 0 1 0 0.01,0ZM410,92a318,318 0 1 1 -0.01,0Z"/></clipPath>
+<path id="arcTop" d="M48,410 A362,362 0 0 1 772,410"/><path id="arcBot" d="M48,410 A362,362 0 0 0 772,410"/>
+</defs>
+<rect width="820" height="820" rx="28" fill="url(#space)"/>
+<circle cx="64" cy="81" r="1.3" fill="#fff" opacity="0.38"/>
+<circle cx="48" cy="186" r="0.8" fill="#fff" opacity="0.51"/>
+<circle cx="124" cy="103" r="1" fill="#fff" opacity="0.66"/>
+<circle cx="635" cy="74" r="1" fill="#fff" opacity="0.64"/>
+<circle cx="240" cy="796" r="0.6" fill="#fff" opacity="0.63"/>
+<circle cx="781" cy="70" r="1" fill="#fff" opacity="0.54"/>
+<circle cx="649" cy="63" r="0.6" fill="#fff" opacity="0.87"/>
+<circle cx="528" cy="806" r="1.3" fill="#fff" opacity="0.51"/>
+<circle cx="143" cy="102" r="0.6" fill="#fff" opacity="0.47"/>
+<circle cx="801" cy="557" r="1.3" fill="#fff" opacity="0.88"/>
+<circle cx="219" cy="11" r="1.3" fill="#fff" opacity="0.64"/>
+<circle cx="109" cy="699" r="0.6" fill="#fff" opacity="0.60"/>
+<circle cx="708" cy="773" r="1.3" fill="#fff" opacity="0.57"/>
+<circle cx="804" cy="643" r="1.3" fill="#fff" opacity="0.49"/>
+<circle cx="802" cy="776" r="1" fill="#fff" opacity="0.39"/>
+<circle cx="800" cy="499" r="0.6" fill="#fff" opacity="0.61"/>
+<circle cx="739" cy="637" r="0.8" fill="#fff" opacity="0.61"/>
+<circle cx="110" cy="130" r="1.3" fill="#fff" opacity="0.79"/>
+<circle cx="796" cy="536" r="1" fill="#fff" opacity="0.44"/>
+<circle cx="120" cy="801" r="0.8" fill="#fff" opacity="0.80"/>
+<circle cx="155" cy="11" r="0.8" fill="#fff" opacity="0.44"/>
+<circle cx="410" cy="410" r="412" fill="url(#glow)"/>
+<circle cx="410" cy="410" r="392" fill="url(#earth)"/>
+<g clip-path="url(#ring)" fill="#5f9e6e" opacity=".55">
+<ellipse cx="105" cy="234" rx="46" ry="20" transform="rotate(-60 105 234)"/>
+<ellipse cx="187" cy="125" rx="30" ry="14" transform="rotate(-38 187 125)"/>
+<ellipse cx="588" cy="103" rx="52" ry="18" transform="rotate(30 588 103)"/>
+<ellipse cx="753" cy="285" rx="24" ry="12" transform="rotate(70 753 285)"/>
+<ellipse cx="729" cy="559" rx="40" ry="16" transform="rotate(115 729 559)"/>
+<ellipse cx="533" cy="748" rx="58" ry="18" transform="rotate(160 533 748)"/>
+<ellipse cx="246" cy="719" rx="36" ry="15" transform="rotate(208 246 719)"/>
+<ellipse cx="70" cy="534" rx="44" ry="16" transform="rotate(250 70 534)"/>
+<ellipse cx="87" cy="260" rx="30" ry="13" transform="rotate(295 87 260)"/>
+</g>
+<circle cx="410" cy="410" r="321" fill="none" stroke="#e8fbff" stroke-width="3" opacity=".9"/>
+<circle cx="410" cy="410" r="318" fill="url(#sky)"/>
+<text font-size="19" font-weight="700" letter-spacing="2.2" fill="#ffffff"><textPath href="#arcTop" startOffset="25%" text-anchor="middle">NO DEATHS ON THE ROAD</textPath></text>
+<text font-size="19" font-weight="700" letter-spacing="2.2" fill="#ffffff"><textPath href="#arcTop" startOffset="75%" text-anchor="middle">CARBON BUDGET</textPath></text>
+<text font-size="19" font-weight="700" letter-spacing="2.2" fill="#ffffff" dy="14"><textPath href="#arcBot" startOffset="25%" text-anchor="middle">MINIMUM ACCESS FOR ALL</textPath></text>
+<text font-size="19" font-weight="700" letter-spacing="2.2" fill="#ffffff" dy="14"><textPath href="#arcBot" startOffset="75%" text-anchor="middle">LAND WITHIN LIMITS</textPath></text>
+<rect x="760.0" y="405.0" width="10" height="10" fill="#fff" opacity=".85" transform="rotate(45 765.0 410.0)"/>
+<rect x="405.0" y="760.0" width="10" height="10" fill="#fff" opacity=".85" transform="rotate(45 410.0 765.0)"/>
+<rect x="50.0" y="405.0" width="10" height="10" fill="#fff" opacity=".85" transform="rotate(45 55.0 410.0)"/>
+<rect x="405.0" y="50.0" width="10" height="10" fill="#fff" opacity=".85" transform="rotate(45 410.0 55.0)"/>
+<path d="M432.0,254.0 L415.0,320.0 L405.0,320.0 L388.0,254.0Z" fill="#1f8a92" opacity=".38"/>
+<path d="M419.0,308.0 L410.0,322.0 L401.0,308.0Z" fill="#1f8a92"/>
+<path d="M565.2,382.7 L497.1,386.9 L494.1,377.4 L551.6,340.9Z" fill="#3f9a4f" opacity=".38"/>
+<path d="M509.8,387.0 L493.7,382.8 L504.2,369.9Z" fill="#3f9a4f"/>
+<path d="M483.9,549.1 L458.9,485.8 L466.9,479.9 L519.5,523.3Z" fill="#c45a2c" opacity=".38"/>
+<path d="M462.7,497.8 L461.7,481.2 L477.2,487.2Z" fill="#c45a2c"/>
+<path d="M300.5,523.3 L353.1,479.9 L361.1,485.8 L336.1,549.1Z" fill="#c79a1e" opacity=".38"/>
+<path d="M342.8,487.2 L358.3,481.2 L357.3,497.8Z" fill="#c79a1e"/>
+<path d="M268.4,340.9 L325.9,377.4 L322.9,386.9 L254.8,382.7Z" fill="#6a5fb0" opacity=".38"/>
+<path d="M315.8,369.9 L326.3,382.8 L310.2,387.0Z" fill="#6a5fb0"/>
+<circle cx="410.0" cy="214.0" r="47" fill="#1f8a92" stroke="#fff" stroke-width="4"/>
+<g transform="translate(410.0 214.0)" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M0,-24V26M-9,26H9"/><path d="M0,-18H17L23,-12.5L17,-7H0Z"/><path d="M0,-3H-17L-23,2.5L-17,8H0Z"/></g>
+<circle cx="443.0" cy="181.0" r="12" fill="#fff" stroke="#1f8a92" stroke-width="2.5"/><text x="443.0" y="186.0" font-size="14" font-weight="800" fill="#1f8a92" text-anchor="middle">A</text>
+<text x="410.0" y="152.0" font-size="21" font-weight="700" fill="#1f8a92" text-anchor="middle" stroke="#f6fbfb" stroke-width="5" paint-order="stroke">Access &amp; choice</text>
+<circle cx="596.4" cy="349.4" r="47" fill="#3f9a4f" stroke="#fff" stroke-width="4"/>
+<g transform="translate(596.4 349.4)" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M0,19C-27,1 -23,-21 -9,-21C-3.5,-21 0,-16 0,-12C0,-16 3.5,-21 9,-21C23,-21 27,1 0,19Z"/><path d="M-15,-3H-7L-3.5,-10L1.5,4L5,-3H15" stroke-width="3"/></g>
+<circle cx="629.4" cy="316.4" r="12" fill="#fff" stroke="#3f9a4f" stroke-width="2.5"/><text x="629.4" y="321.4" font-size="14" font-weight="800" fill="#3f9a4f" text-anchor="middle">B</text>
+<text x="612.4" y="427.4" font-size="21" font-weight="700" fill="#3f9a4f" text-anchor="middle" stroke="#f6fbfb" stroke-width="5" paint-order="stroke">Health</text>
+<circle cx="525.2" cy="568.6" r="47" fill="#c45a2c" stroke="#fff" stroke-width="4"/>
+<g transform="translate(525.2 568.6)" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M-15,7A9.5,9.5 0 0 1 -14,-12A13,13 0 0 1 10,-14A10.5,10.5 0 0 1 16,7Z"/><circle cx="-9" cy="16" r="2.2" fill="#fff" stroke="none"/><circle cx="1" cy="20" r="2.2" fill="#fff" stroke="none"/><circle cx="11" cy="15" r="2.2" fill="#fff" stroke="none"/></g>
+<circle cx="558.2" cy="535.6" r="12" fill="#fff" stroke="#c45a2c" stroke-width="2.5"/><text x="558.2" y="540.6" font-size="14" font-weight="800" fill="#c45a2c" text-anchor="middle">C</text>
+<text x="525.2" y="644.6" font-size="21" font-weight="700" fill="#c45a2c" text-anchor="middle" stroke="#f6fbfb" stroke-width="5" paint-order="stroke">Externalities</text>
+<circle cx="294.8" cy="568.6" r="47" fill="#c79a1e" stroke="#fff" stroke-width="4"/>
+<g transform="translate(294.8 568.6)" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M-25,18H25"/><rect x="-19" y="-4" width="12" height="22"/><rect x="-4" y="-18" width="12" height="36"/><circle cx="17" cy="2" r="7"/><path d="M17,9V18"/></g>
+<circle cx="327.8" cy="535.6" r="12" fill="#fff" stroke="#c79a1e" stroke-width="2.5"/><text x="327.8" y="540.6" font-size="14" font-weight="800" fill="#c79a1e" text-anchor="middle">D</text>
+<text x="294.8" y="644.6" font-size="21" font-weight="700" fill="#c79a1e" text-anchor="middle" stroke="#f6fbfb" stroke-width="5" paint-order="stroke">Land</text>
+<circle cx="223.6" cy="349.4" r="47" fill="#6a5fb0" stroke="#fff" stroke-width="4"/>
+<g transform="translate(223.6 349.4)" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="0" cy="-12" rx="16" ry="6"/><path d="M-16,-12V12A16,6 0 0 0 16,12V-12"/><path d="M-16,-3A16,6 0 0 0 16,-3M-16,5A16,6 0 0 0 16,5"/></g>
+<circle cx="256.6" cy="316.4" r="12" fill="#fff" stroke="#6a5fb0" stroke-width="2.5"/><text x="256.6" y="321.4" font-size="14" font-weight="800" fill="#6a5fb0" text-anchor="middle">E</text>
+<text x="207.6" y="427.4" font-size="21" font-weight="700" fill="#6a5fb0" text-anchor="middle" stroke="#f6fbfb" stroke-width="5" paint-order="stroke">Public cost</text>
+<circle cx="410" cy="410" r="84" fill="url(#hub)" stroke="#e2b85c" stroke-width="4"/>
+<g fill="#24323f">
+<circle cx="381" cy="381.0" r="8.5"/>
+<rect x="370.0" y="392.0" width="22.0" height="34.0" rx="9.0"/>
+<circle cx="410" cy="394.5" r="6.1"/>
+<rect x="402.1" y="402.4" width="15.8" height="24.5" rx="6.5"/>
+<circle cx="439" cy="381.0" r="8.5"/>
+<rect x="428.0" y="392.0" width="22.0" height="34.0" rx="9.0"/>
+</g>
+<path d="M392,402 Q400,408 403,405 M417,405 Q420,408 428,402" fill="none" stroke="#24323f" stroke-width="4.5" stroke-linecap="round"/>
+<text x="410" y="452" font-size="12.5" font-weight="800" letter-spacing="2.5" fill="#8a6514" text-anchor="middle">PEOPLE</text>
+</svg>

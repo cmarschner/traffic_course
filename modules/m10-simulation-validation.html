@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Module 10 · Simulation, calibration and verification — Welfare-Centred Transport Planning</title>
+<title>Module 10 · Simulation, calibration and verification — Welfare-Centered Transport Planning</title>
 <meta name="description" content="Verification, calibration and validation of traffic simulation models: the Japanese JSTE verification tests, FHWA, UK TAG, Singapore LTA, Spanish and French guidance, GEH and its limits, overfitting, SUMO and MATSim, and what a simulation can and cannot say about welfare.">
-<link rel="stylesheet" href="../assets/style.css?v=4">
+<link rel="stylesheet" href="../assets/style.css?v=5">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=4"></script>
+<script defer src="../assets/site.js?v=5"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
-  <a class="brand" href="../index.html">Welfare-Centred <span>Transport Planning</span></a>
+  <a class="brand" href="../index.html">Welfare-Centered <span>Transport Planning</span></a>
   <nav class="site-nav">
     <a href="../index.html">Home</a>
     <a href="../syllabus.html" aria-current="page">Syllabus</a>
@@ -69,10 +69,10 @@
 <tr><td>2</td><td>ボトルネック容量と飽和交通流率 (Q-K関係の感度分析)</td><td>Bottleneck capacity and saturation flow rate (with sensitivity of the flow–density relation to parameters, for car-following models)</td><td>Specified capacity; cumulative curves and point queue</td></tr>
 <tr><td>3</td><td>渋滞の延伸と解消　停止波と発進波の伝播</td><td>Growth and dissolution of congestion: propagation of stopping and starting waves</td><td>Shockwave theory (<a href="m07-traffic-flow.html">Module 7</a>)</td></tr>
 <tr><td>4</td><td>合分流部の容量</td><td>Capacity of merge and diverge sections (and merge ratios)</td><td>Merge capacity and the conditions under which the main line, the ramp or both queue</td></tr>
-<tr><td>5</td><td>信号交差点での右折容量</td><td>Right-turn capacity at signalised intersections (Japan drives on the left, so right turns cross opposing traffic)</td><td>Gap acceptance against opposing flow (<a href="m09-junctions.html">Module 9</a>)</td></tr>
-<tr><td>6</td><td>経路選択挙動</td><td>Route choice behaviour</td><td>Equilibrium or logit route splits on simple networks</td></tr>
+<tr><td>5</td><td>信号交差点での右折容量</td><td>Right-turn capacity at signalized intersections (Japan drives on the left, so right turns cross opposing traffic)</td><td>Gap acceptance against opposing flow (<a href="m09-junctions.html">Module 9</a>)</td></tr>
+<tr><td>6</td><td>経路選択挙動</td><td>Route choice behavior</td><td>Equilibrium or logit route splits on simple networks</td></tr>
 </table></div>
-<p>The archived clearinghouse lists results for about twenty models, including AIMSUN, VISSIM, Paramics and many Japanese models (AVENUE, SOUND, NETSTREAM, SIPA and others), each marked as published, in preparation, or not applicable. Two ideas from the manual deserve to travel. First, it explicitly states that verification is <em>not</em> about whether the model agrees with real traffic, and not about ranking models: it checks that each model does what it claims, so that users understand its behaviour. Second, it shows why the difference between point queues and physical queues matters: in a physical queue, vehicles that do not need to pass the bottleneck are delayed by the spillback, in a point queue they are not. A model can fit link counts with either representation and still allocate delay to entirely different people.</p>
+<p>The archived clearinghouse lists results for about twenty models, including AIMSUN, VISSIM, Paramics and many Japanese models (AVENUE, SOUND, NETSTREAM, SIPA and others), each marked as published, in preparation, or not applicable. Two ideas from the manual deserve to travel. First, it explicitly states that verification is <em>not</em> about whether the model agrees with real traffic, and not about ranking models: it checks that each model does what it claims, so that users understand its behavior. Second, it shows why the difference between point queues and physical queues matters: in a physical queue, vehicles that do not need to pass the bottleneck are delayed by the spillback, in a point queue they are not. A model can fit link counts with either representation and still allocate delay to entirely different people.</p>
 
 <h2>3. Calibration in practice: what the guidance says</h2>
 <h3>United States: FHWA Traffic Analysis Toolbox Volume III (2019 update)</h3>
@@ -83,28 +83,28 @@
 <li>the mean absolute error to the representative day is no larger than the typical difference between the representative day and other days in the cluster (the "bounded dynamic absolute error");</li>
 <li>the simulation is not systematically biased by more than a third of that bound.</li>
 </ol>
-<p>The logic is welfare-relevant: a model need not be closer to one day than real days are to each other. FHWA also notes that variation between random seeds is small compared with day-to-day variation, and that large seed-to-seed differences usually indicate coding errors or gridlock rather than genuine behaviour.</p>
+<p>The logic is welfare-relevant: a model need not be closer to one day than real days are to each other. FHWA also notes that variation between random seeds is small compared with day-to-day variation, and that large seed-to-seed differences usually indicate coding errors or gridlock rather than genuine behavior.</p>
 
 <h3>United Kingdom: TAG unit M3.1</h3>
-<p>The Department for Transport's TAG unit M3.1 (Highway Assignment Modelling; updated May 2026) sets widely copied acceptability guidelines for strategic highway models. Flows are compared with counts using the GEH statistic</p>
+<p>The Department for Transport's TAG unit M3.1 (Highway Assignment Modeling; updated May 2026) sets widely copied acceptability guidelines for strategic highway models. Flows are compared with counts using the GEH statistic</p>
 $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
-<p>with \(M\) the modelled and \(C\) the observed <em>hourly</em> flow. The statistic is named after its inventor, Geoffrey E. Havers. TAG's criteria:</p>
+<p>with \(M\) the modeled and \(C\) the observed <em>hourly</em> flow. The statistic is named after its inventor, Geoffrey E. Havers. TAG's criteria:</p>
 <div class="table-wrap"><table>
 <tr><th>Criterion</th><th>Guideline</th></tr>
 <tr><td>Flows &lt; 700 veh/h within ±100 veh/h; 700–2,700 within ±15%; &gt; 2,700 within ±400 veh/h</td><td>&gt; 85% of cases</td></tr>
 <tr><td>GEH &lt; 5</td><td>&gt; 85% of cases</td></tr>
-<tr><td>Modelled journey times within 15% of observed (or 1 minute, if higher)</td><td>&gt; 85% of routes</td></tr>
+<tr><td>Modeled journey times within 15% of observed (or 1 minute, if higher)</td><td>&gt; 85% of routes</td></tr>
 </table></div>
 <p>TAG asks for these comparisons on counts that were <em>not</em> used in matrix estimation where possible, and limits how far matrix estimation may change the prior matrix: for example, a regression of zonal cell values after against before should have a slope between 0.98 and 1.02 and \(R^2\) above 0.95, and mean trip lengths should change by less than 5% (TAG M3.1, Table 5). Those rules are as important as the thresholds.</p>
 
 <h3>Singapore: LTA transport impact assessments</h3>
-<p>The Land Transport Authority's 2020 addendum to its Transport Impact Assessment guidelines requires developers' consultants to submit link and turn GEH tables with \(R^2\) plots, queue-length comparisons, and travel-time calibration on agreed corridors, measured by floating car or extracted from Google Maps with timestamps. Acceptable travel-time error is ±1 minute for 3–5 minute trips, ±2 for 6–10, ±3 for 11–15, ±4 for 16–20 and ±20% above 20 minutes. Validation is separate: observed versus modelled average speeds on key corridors and the number of signal cycles needed to clear each junction. Changes to default driver-behaviour parameters require prior LTA approval and must be listed with justifications. This last rule is an anti-overfitting device.</p>
+<p>The Land Transport Authority's 2020 addendum to its Transport Impact Assessment guidelines requires developers' consultants to submit link and turn GEH tables with \(R^2\) plots, queue-length comparisons, and travel-time calibration on agreed corridors, measured by floating car or extracted from Google Maps with timestamps. Acceptable travel-time error is ±1 minute for 3–5 minute trips, ±2 for 6–10, ±3 for 11–15, ±4 for 16–20 and ±20% above 20 minutes. Validation is separate: observed versus modeled average speeds on key corridors and the number of signal cycles needed to clear each junction. Changes to default driver-behavior parameters require prior LTA approval and must be listed with justifications. This last rule is an anti-overfitting device.</p>
 
 <h3>Spain: %RMSE and a hold-out sample</h3>
 <div class="box translation">
 <div class="box-title">Spanish · Nota de Servicio 5/2014, §6.3</div>
 <p class="original">El valor de %RMSE debe ser inferior al 30%. En redes complejas con muchos tramos, para asegurar la validez de la calibración deberá de cumplirse también esta condición en una muestra de las observaciones, cuyos valores no hayan sido utilizados en la calibración del modelo. El tamaño de esta muestra de contraste será al menos del 10% de los aforos.</p>
-<p>"The %RMSE must be below 30%. In complex networks with many links, to ensure the validity of the calibration, this condition must also be met in a sample of observations whose values were not used in calibrating the model. The size of this test sample shall be at least 10% of the counts." The note also asks for a regression of modelled on observed volumes with slope near 1, intercept near 0 and \(r^2\) desirably above 0.7, and for sensitivity tests on value of time and toll sensitivity. <em>Source: Dirección General de Carreteras, Nota de Servicio 5/2014. Translated by the course authors (machine-assisted).</em></p>
+<p>"The %RMSE must be below 30%. In complex networks with many links, to ensure the validity of the calibration, this condition must also be met in a sample of observations whose values were not used in calibrating the model. The size of this test sample shall be at least 10% of the counts." The note also asks for a regression of modeled on observed volumes with slope near 1, intercept near 0 and \(r^2\) desirably above 0.7, and for sensitivity tests on value of time and toll sensitivity. <em>Source: Dirección General de Carreteras, Nota de Servicio 5/2014. Translated by the course authors (machine-assisted).</em></p>
 </div>
 <p>Here \(\%\text{RMSE}=100\,\sqrt{\sum_i(E_i-O_i)^2/(N-1)}\,\big/\,(\sum_i O_i/N)\). Spain's explicit hold-out sample is a small rule with large consequences: it is the simplest guard against fitting noise.</p>
 
@@ -116,7 +116,7 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 </div>
 
 <h3>Germany: research on calibration and the Stuttgart school</h3>
-<p>German practice relies on the FGSV's guidance on transport models and on strong university groups. At the University of Stuttgart, Markus Friedrich's chair (<em>Verkehrsplanung und Verkehrsleittechnik</em>) proposed the <strong>scalable GEH</strong> (SQV), a bounded 0–1 quality measure for comparing observed and modelled values that adds a scaling factor so the same threshold can be used for hourly and daily volumes (Friedrich, Pestel, Schiller and Simon, 2019). The chair's current projects include <em>SEED</em> (2025–2028), a single-source approach to jointly estimating origin–destination relationships and calibrating demand models, and specification and quality assurance for the update of the Munich city and regional demand model (2025–2027). The SQV is a model-fit statistic; it has nothing to do with the HBS quality levels (QSV) in <a href="m08-capacity-los.html">Module 8</a>.</p>
+<p>German practice relies on the FGSV's guidance on transport models and on strong university groups. At the University of Stuttgart, Markus Friedrich's chair (<em>Verkehrsplanung und Verkehrsleittechnik</em>) proposed the <strong>scalable GEH</strong> (SQV), a bounded 0–1 quality measure for comparing observed and modeled values that adds a scaling factor so the same threshold can be used for hourly and daily volumes (Friedrich, Pestel, Schiller and Simon, 2019). The chair's current projects include <em>SEED</em> (2025–2028), a single-source approach to jointly estimating origin–destination relationships and calibrating demand models, and specification and quality assurance for the update of the Munich city and regional demand model (2025–2027). The SQV is a model-fit statistic; it has nothing to do with the HBS quality levels (QSV) in <a href="m08-capacity-los.html">Module 8</a>.</p>
 
 <h2>4. GEH and its limits</h2>
 <p>GEH is popular because one threshold works across flow levels: it behaves like a relative error at high flows and an absolute error at low flows. Three examples: \(M=1100, C=1000\) gives GEH 3.1; \(M=5300, C=5000\) gives 4.2; \(M=150, C=100\) gives 4.5. All "pass", though the last is a 50% error. Limits to keep in mind:</p>
@@ -152,13 +152,13 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <h2>7. What a simulation can and cannot say about \(W\)</h2>
 <div class="table-wrap"><table>
 <tr><th>Term</th><th>A calibrated traffic simulation can estimate…</th><th>…but needs other models or data for</th></tr>
-<tr><td><span class="term">A</span></td><td>Short-run changes in travel time, delay and reliability for <em>today's</em> demand on the modelled network</td><td>Induced demand, mode shift, destination and departure-time change (demand models, <a href="m04-demand-mode-choice.html">Module 4</a>); land-use response (<a href="m05-accessibility-land-use.html">Module 5</a>); option value of new modes</td></tr>
-<tr><td><span class="term">B</span></td><td>Pedestrian and cyclist delay, if they are modelled</td><td>Changes in walking and cycling volumes and their health effects (<a href="m06-transit-active-modes.html">Module 6</a>)</td></tr>
+<tr><td><span class="term">A</span></td><td>Short-run changes in travel time, delay and reliability for <em>today's</em> demand on the modeled network</td><td>Induced demand, mode shift, destination and departure-time change (demand models, <a href="m04-demand-mode-choice.html">Module 4</a>); land-use response (<a href="m05-accessibility-land-use.html">Module 5</a>); option value of new modes</td></tr>
+<tr><td><span class="term">B</span></td><td>Pedestrian and cyclist delay, if they are modeled</td><td>Changes in walking and cycling volumes and their health effects (<a href="m06-transit-active-modes.html">Module 6</a>)</td></tr>
 <tr><td><span class="term">C</span></td><td>Speed profiles and stops for emission and noise models; external congestion cost; surrogate safety indicators (time-to-collision, conflicts)</td><td>Crash numbers and severity (crash prediction models, <a href="m11-safety.html">Module 11</a>): simulated drivers do not crash; severance</td></tr>
 <tr><td><span class="term">D</span></td><td>Nothing directly</td><td>Land take from the design drawings; land value</td></tr>
 <tr><td><span class="term">E</span></td><td>Operating cost of signals, transit run times</td><td>Construction cost, revenue</td></tr>
 </table></div>
-<p>The most common misuse is to run a microsimulation of a road widening or a road diet with a fixed OD matrix and report the change in vehicle-hours as the benefit. That is the classic objective \(\min\sum q\,t\) of <a href="m01-objective.html">Module 1</a> with all five simplifications. It is legitimate for operational questions over weeks; it is not a welfare estimate for a change that will alter travel behaviour for decades. A simulation report should say so explicitly.</p>
+<p>The most common misuse is to run a microsimulation of a road widening or a road diet with a fixed OD matrix and report the change in vehicle-hours as the benefit. That is the classic objective \(\min\sum q\,t\) of <a href="m01-objective.html">Module 1</a> with all five simplifications. It is legitimate for operational questions over weeks; it is not a welfare estimate for a change that will alter travel behavior for decades. A simulation report should say so explicitly.</p>
 
 <h2>8. A proposal: a verification suite of synthetic networks</h2>
 <p>Building on the JSTE tests and the national capacity methods of Modules 7–9, a simulator used for planning should pass a suite of small synthetic networks <em>before</em> it is calibrated to any city. Each case has a known or independently estimated answer and a stated tolerance. A possible core set:</p>
@@ -177,7 +177,7 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <tr><td>11</td><td>Two-lane roundabout, asymmetric turning</td><td>Lane use consistent with destination-based lane choice (Spanish DGT guidance)</td></tr>
 <tr><td>12</td><td>Short link between two signals</td><td>Spillback blocks the upstream junction (physical queue), as Singapore's LTA warns</td></tr>
 <tr><td>13</td><td>Two parallel routes</td><td>Equilibrium or logit split as specified; stable convergence (JSTE test 6)</td></tr>
-<tr><td>14</td><td>Grid with increasing demand</td><td>A network MFD with a maximum and a declining branch; gridlock behaviour</td></tr>
+<tr><td>14</td><td>Grid with increasing demand</td><td>A network MFD with a maximum and a declining branch; gridlock behavior</td></tr>
 <tr><td>15</td><td>Mixed cars and bicycles on a shared lane</td><td>Overtaking and queueing consistent with observed speeds and headways; no cyclists "teleported"</td></tr>
 <tr><td>16</td><td>Repeated seeds, every case</td><td>Seed-to-seed variance small relative to day-to-day variance (FHWA)</td></tr>
 </table></div>
@@ -196,7 +196,7 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 
 <div class="box exercise">
 <div class="box-title">Exercise 10.2 · Verify a simulator</div>
-<p>Implement cases 2, 7 and 10 of the verification suite in SUMO (or another simulator). For case 10, plot simulated entry capacity against conflicting flow alongside the SETRA, Swiss and Siegloch curves from Module 9. Change one behavioural parameter (for example the minimum gap or impatience) and show how much the curve moves. Which parameter would you calibrate against local roundabout data, and what data would you need?</p>
+<p>Implement cases 2, 7 and 10 of the verification suite in SUMO (or another simulator). For case 10, plot simulated entry capacity against conflicting flow alongside the SETRA, Swiss and Siegloch curves from Module 9. Change one behavioral parameter (for example the minimum gap or impatience) and show how much the curve moves. Which parameter would you calibrate against local roundabout data, and what data would you need?</p>
 </div>
 
 <h2>Readings and resources</h2>
@@ -209,8 +209,8 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <li data-type="translation"><a href="http://web.archive.org/web/20250116025841/http://www.jste.or.jp/sim/verification/index.html">JSTE — Model basic verification results, clearinghouse (archived January 2025)</a> <span class="lang">(Japanese)</span> <span class="why">The six tests and the published status for about twenty models.</span></li>
 <li data-type="pdf"><a href="http://web.archive.org/web/20250521050422/http://www.jste.or.jp/sim/manuals/VfyManE.pdf">JSTE — Standard Verification Process for Traffic Flow Simulation Model, English manual (archived, PDF)</a> <span class="why">Philosophy of verification versus validation and detailed test configurations for Q-K and car-following models.</span></li>
 <li data-type="link"><a href="https://trid.trb.org/View/733061">Horiguchi, Kuwahara &amp; Yoshii (2000) — A manual of verification process for road network simulation models: an examination in Japan (TRID record)</a> <span class="why">The conference paper introducing the Japanese process internationally.</span></li>
-<li data-type="translation"><a href="https://doc.cerema.fr/Default/doc/SYRACUSE/17424">Cerema (2019) — Recommandations pour la réalisation d'études de trafic et d'évaluations socio-économiques de projets d'infrastructure de transport routier</a> <span class="lang">(French)</span> <span class="why">Catalogue record; the <a href="https://doc.cerema.fr/digitalCollection/DigitalCollectionAttachmentDownloadHandler.ashx?documentId=21683&amp;parentDocumentId=17424&amp;skipCopyright=true&amp;skipWatermark=true">PDF</a> contains the passages on calibration, validation and elasticities quoted above.</span></li>
-<li data-type="translation"><a href="https://cdn.transportes.gob.es/portal-web-transportes/carreteras/normativa_tecnica/05_estudios_proyectos/ns52014.pdf">Spain — Nota de Servicio 5/2014: traffic studies (PDF)</a> <span class="lang">(Spanish)</span> <span class="why">Chapter 6: modelling scenarios, calibration (regression, %RMSE), hold-out sample and sensitivity analysis.</span></li>
+<li data-type="translation"><a href="https://doc.cerema.fr/Default/doc/SYRACUSE/17424">Cerema (2019) — Recommandations pour la réalisation d'études de trafic et d'évaluations socio-économiques de projets d'infrastructure de transport routier</a> <span class="lang">(French)</span> <span class="why">Catalog record; the <a href="https://doc.cerema.fr/digitalCollection/DigitalCollectionAttachmentDownloadHandler.ashx?documentId=21683&amp;parentDocumentId=17424&amp;skipCopyright=true&amp;skipWatermark=true">PDF</a> contains the passages on calibration, validation and elasticities quoted above.</span></li>
+<li data-type="translation"><a href="https://cdn.transportes.gob.es/portal-web-transportes/carreteras/normativa_tecnica/05_estudios_proyectos/ns52014.pdf">Spain — Nota de Servicio 5/2014: traffic studies (PDF)</a> <span class="lang">(Spanish)</span> <span class="why">Chapter 6: modeling scenarios, calibration (regression, %RMSE), hold-out sample and sensitivity analysis.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1177/0361198119838849">Friedrich, Pestel, Schiller &amp; Simon (2019) — Scalable GEH: a quality measure for comparing observed and modeled single values in a travel demand model validation</a> <span class="why">The SQV measure from the Stuttgart group.</span></li>
 <li data-type="link"><a href="https://fis.uni-stuttgart.de/converis/portal/detail/Person/10168839?lang=de_DE">University of Stuttgart — Markus Friedrich, research portal</a> <span class="lang">(German)</span> <span class="why">Current projects, including SEED (joint OD estimation and demand-model calibration) and quality assurance of the Munich model update.</span></li>
 <li data-type="tool"><a href="https://eclipse.dev/sumo/">Eclipse SUMO — Simulation of Urban MObility</a> <span class="why">Open-source microscopic simulator from DLR. <a href="https://sumo.dlr.de/docs/index.html">Documentation</a> and <a href="https://sumo.dlr.de/docs/Tutorials/index.html">tutorials</a>; see also <a href="https://sumo.dlr.de/docs/Car-Following-Models.html">car-following models</a> and <a href="https://sumo.dlr.de/docs/Simulation/Why_Vehicles_are_teleporting.html">why vehicles teleport</a> (a classic verification trap).</span></li>
@@ -229,7 +229,7 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 </div>
 
 <footer class="site-footer"><div class="inner">
-Welfare-Centred Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
+Welfare-Centered Transport Planning — an open course. Text licensed CC BY 4.0; linked and quoted materials remain the property of their owners. <a href="../about.html">About, sources and translation policy</a>.
 </div></footer>
 </body>
 </html>
