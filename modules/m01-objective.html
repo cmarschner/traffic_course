@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 1 · What should a transport system optimize? — Welfare-Centered Transport Planning</title>
 <meta name="description" content="The welfare objective function at the center of the course: access and mode choice, health, externalities, land, costs and hard constraints.">
-<link rel="stylesheet" href="../assets/style.css?v=6">
+<link rel="stylesheet" href="../assets/style.css?v=8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=6"></script>
+<script defer src="../assets/site.js?v=8"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -31,27 +31,180 @@
 <h1>What should a transport system optimize?</h1>
 <p class="meta">≈ 3 hours · Prerequisites: the <a href="../index.html">introduction</a> · Key terms: all</p>
 
-<p class="lede">Traffic engineering inherited a simple target: move vehicles quickly. This module replaces it with a <em>welfare objective</em>, a single function that values people's access to opportunities, including their choice of mode, and subtracts the harm that travel does to others. The rest of the course fills in the terms of this function, one at a time.</p>
+<p class="lede">The introduction ended with a principle: transport should improve the welfare of the people who use it, while minimizing the harm it does to everyone else. This module turns that principle into something you can calculate. We first ask why we would want a number at all. Then we build it piece by piece, looking at the shape of each piece and the history behind it. The full welfare function appears only at the end, once every part of it is familiar.</p>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>State the welfare objective \(W(\theta)\) and explain each term and constraint.</li>
-<li>Show that "minimize vehicle-hours" is a special case of \(W\) that drops induced demand, mode choice and externalities.</li>
-<li>Map the eight common planning objectives (mobility, accessibility, safety, environment, land, urban quality, equity, economics) onto terms of \(W\).</li>
-<li>Characterize the planning traditions of the US, Germany, Japan, Singapore, the Netherlands, Sweden and France as different weightings of, or constraints on, \(W\).</li>
-<li>Tell objectives apart from <em>instruments</em> (geometry, rules and prices, active control) and from <em>timescales</em>.</li>
+<li>Explain three uses of a numerical objective: measuring and comparing, scoring simulations, and searching for better plans automatically. Explain why public simulation matters for democratic decisions.</li>
+<li>Write welfare as the sum of five terms (access and choice, health, externalities, land, public cost) subject to four limits, and say what each term measures.</li>
+<li>Give the numerical form of each term, explain the shape of its curve, and name at least one alternative formulation and its history.</li>
+<li>Explain the difference between pricing an outcome and constraining it, and what a shadow price is.</li>
+<li>Assemble the full welfare function \(W\), and show that "minimize vehicle-hours" is a special case of it.</li>
+<li>Read the planning traditions of the seven role-model countries as different weights on, or constraints in, \(W\).</li>
 </ul>
 </div>
 
 <h2>1. From two roads to one question</h2>
 <p>The <a href="../index.html">introduction</a> followed two roads built in the same decade with the same aim: fast car access to a growing city. Houston rebuilt the <a href="../index.html#katy">Katy Freeway</a> to as many as 26 lanes. Utrecht dug its <a href="../index.html#utrecht">Catharijnesingel</a> motorway back out and refilled it with water. Each decision makes sense under some objective. The Katy project was scored on vehicle-hours, volume-to-capacity ratios and level of service. Utrecht's reversal valued space, safety, quiet and the life of the city center.</p>
-<p>Debates about such projects often go in circles because the two sides answer different questions. "Did peak travel time fall?" is one objective. "Are people better off, all costs counted, here and elsewhere, now and later?" is another. The second question needs an explicit statement of what <em>better off</em> means. That statement is the objective function, and this module builds it.</p>
+<p>Debates about such projects often go in circles because the two sides answer different questions. "Did peak travel time fall?" is one objective. "Are people better off, all costs counted, here and elsewhere, now and later?" is another. The second question needs an explicit statement of what <em>better off</em> means. That statement is the objective function.</p>
 <blockquote>Vehicle speed is an intermediate variable, not the ultimate purpose of transportation. A city in which residents drive 30 km to work at 80 km/h is not necessarily more accessible than one in which they cycle 5 km at 20 km/h.</blockquote>
 
-<h2>2. The welfare objective</h2>
-<p>Let \(\theta\) be a <em>plan</em>: a bundle of infrastructure, service levels, rules, prices and land-use policy. The course evaluates every plan with the following function (all terms per year, in money units, discounted over the appraisal period where relevant):</p>
+<h2 id="why-a-number">2. Why put a number on it?</h2>
+<p>Planning has long run on judgment, standards and negotiation, and much of it still should. A numerical objective does not replace any of these. It adds four things that are hard to get otherwise.</p>
 
+<h3>Use 1: Measure and compare</h3>
+<p>A number lets you say how a transport system is doing, track it over time and compare it with other cities. More importantly, once the objective is written down, <em>objectives themselves</em> become comparable. You can score the same plan under an American, a Swedish and a Singaporean reading of welfare and see where they disagree and why. Without a written objective, the disagreement stays hidden inside professional habits. The <a href="../explorer.html">objective explorer</a> does exactly this for four plans on one corridor.</p>
+
+<h3>Use 2: Score simulations</h3>
+<p>A traffic or land-use simulation produces flows, travel times, queues, emissions and trips. It does not say whether the simulated city is <em>better</em>. An objective function turns simulation output into a judgment: it is the <strong>fitness function</strong> that scores each simulated version of the transport system. Call a version, meaning a specific set of roads, services, rules, prices and land uses, a <em>plan</em> \(\theta\). The pipeline is then:</p>
+<div class="box note">
+<p style="text-align:center;font-family:var(--sans);margin:0">plan \(\theta\) &nbsp;→&nbsp; simulation of how people and vehicles respond &nbsp;→&nbsp; outcomes (times, trips, crashes, emissions, land) &nbsp;→&nbsp; objective \(W(\theta)\)</p>
+</div>
+<p>With today's computing power, a city can be simulated at the level of every resident. Agent-based models such as MATSim routinely represent millions of synthetic people, each with a daily schedule. Scenario building can then become second nature: something planners do as routinely as software engineers run tests, rather than a one-off consultancy exercise for a major project.</p>
+
+<h3>Use 3: Search for better plans</h3>
+<p>Once a plan can be scored, a computer can search for better ones. This is an old idea in traffic engineering. TRANSYT, developed at the UK's Road Research Laboratory in the late 1960s, optimized signal timings by hill-climbing on a "performance index", a weighted sum of vehicle delay and stops. That was an objective function. It counted vehicles rather than people and ignored everything outside the carriageway, so it optimized the wrong thing very efficiently. The method was sound; the objective was narrow.</p>
+<p>Two families of optimization methods are relevant:</p>
+<ul>
+<li><strong>Non-gradient (black-box) methods</strong>, such as genetic algorithms, simulated annealing and Bayesian optimization, need only the ability to evaluate \(W(\theta)\). They suit noisy, complex simulators and discrete choices like "build this link or not".</li>
+<li><strong>Gradient-based methods</strong> follow the slope of \(W\). They need a model that is differentiable, or a smooth surrogate model trained on simulation runs. They scale to many continuous variables such as prices, signal timings and frequencies.</li>
+</ul>
+<p>Transport optimization has a special structure, often called <em>bilevel</em>. The planner chooses \(\theta\), and travelers then respond by choosing their own routes, modes and destinations. A plan that looks good with travelers held fixed can look poor once they adapt. Braess's paradox (1968) is the classic warning: adding a road to a congested network can make every traveler slower. The network design problem, formalized in the 1970s (for example by LeBlanc, 1975), is this bilevel search. The automatically generated variants are not decisions. They map out the options, and especially the trade-offs between them, for people to choose from.</p>
+
+<h3>Use 4: Open the decision to the public</h3>
+<p>Transport decisions are usually argued from conclusions: "this road will relieve congestion", "this bike lane will kill business". When the simulation and the objective are public, the argument can move to the assumptions. Which demand response is plausible? What is a quiet street worth? Open-source simulators (SUMO, MATSim, and citizen-oriented tools such as A/B Street), open map data (OpenStreetMap) and open timetables (GTFS) mean that a neighborhood group, a journalist or a student can test a proposal, not just a consultant. A transparent objective is a precondition. If the weights are hidden in software defaults, they cannot be debated.</p>
+
+<div class="box caution">
+<div class="box-title">A number can mislead</div>
+<ul>
+<li><strong>Goodhart's law:</strong> when a measure becomes a target, it ceases to be a good measure. Level of service became a target, and the result was capacity-building that its authors never intended.</li>
+<li><strong>The McNamara fallacy:</strong> what is easy to measure crowds out what matters. Time savings are easy to measure, and a child's freedom to walk to school is not.</li>
+<li><strong>Optimizers exploit model errors.</strong> An optimizer will find the places where the simulation is wrong and push the plan there. Verification and validation (<a href="m10-simulation-validation.html">Module 10</a>) come before optimization.</li>
+</ul>
+<p>The objective supports judgment. It does not replace it.</p>
+</div>
+<p>We will come back to simulation-based search and public simulation later in the course, once the basics are in place: in <a href="m10-simulation-validation.html">Module 10</a> (building simulations that can be trusted), <a href="m14-appraisal.html">Module 14</a> (using the objective in decisions) and the <a href="m15-capstone.html">capstone</a>.</p>
+
+<h2 id="one-line">3. Welfare in one line</h2>
+<p>The objective of this course is the sum of five terms. Measure each in money per year, so that they can be added:</p>
+<div class="equation-hero">
+$$W \;=\; \underbrace{A}_{\text{access \& choice}} \;+\; \underbrace{B}_{\text{health}} \;-\; \underbrace{C}_{\text{externalities}} \;-\; \underbrace{D}_{\text{land}} \;-\; \underbrace{E}_{\text{public cost}}$$
+</div>
+<p>In words: <strong>welfare is the value people get from being able to reach what they need, plus the health benefits of their travel, minus the harm that travel imposes on others, minus the land it consumes, minus what it costs the public to build and run.</strong></p>
+<p>The sum is maximized within four <strong>limits</strong> that many societies refuse to trade away:</p>
+<ul>
+<li>deaths and serious injuries on the road stay below a limit, ultimately zero;</li>
+<li>emissions stay within the carbon budget;</li>
+<li>land used for transport stays within what the city can spare;</li>
+<li>every group of people keeps a minimum level of access.</li>
+</ul>
+<h3>Why money, and where are the weights?</h3>
+<p>Money is only a common unit. It lets minutes, deaths, tonnes of CO₂ and square meters be added. If the terms were left in their own units, the sum would need explicit weights:</p>
+$$W = w_A A + w_B B - w_C C - w_D D - w_E E .$$
+<p>Converting every term into money sets these weights to 1, but the judgment does not disappear. It moves into the <em>prices</em> used for conversion: the value of an hour, of a statistical life, of a tonne of carbon, of a square meter. Those prices differ between countries, and much of the international comparison in this course is a comparison of prices. Where a society will not put a price on something, it uses a limit instead (<a href="#limits">section 9</a>). Where it wants to favor some people, such as low-income households or children, it weights their welfare more (\(\omega_g\) in <a href="#term-a">section 4</a>).</p>
+<p>The next six sections give each part a numerical form.</p>
+
+<h2 id="term-a">4. Term A: access and choice <span class="term">A</span></h2>
+<p><strong>What it measures:</strong> the value to people of being able to reach jobs, schools, shops, care and each other, given the options they have.</p>
+<h3>From travel time to accessibility</h3>
+<p>The simplest measure is travel time. Early traffic engineering minimized total vehicle travel time \(\sum q\,t\) on the network, and highway appraisal valued <em>time savings</em>. Economists generalized this to <strong>generalized cost</strong>, \(g = c + \text{VOT}\cdot t\): money cost plus time valued at a value of time (<a href="m02-valuing-access.html">Module 2</a>). Both measure the cost of trips people already make. Neither captures what the trips are <em>for</em>.</p>
+<p>In 1959 Walter Hansen proposed measuring <strong>accessibility</strong> instead, the opportunities a place puts within reach:</p>
+$$A_i = \sum_j O_j \, f(c_{ij}),$$
+<p>where \(O_j\) counts opportunities (jobs, for example) at destination \(j\) and \(f\) is a decreasing function of the cost \(c_{ij}\) of getting there. Two common shapes are a step ("jobs within 30 minutes", the <em>cumulative-opportunities</em> measure) and a smooth decay such as \(e^{-\beta c_{ij}}\) (the <em>gravity</em> measure). In 1970 Torsten Hägerstrand added the time-geography view. Access is limited by fixed points in a person's day, such as work hours and when the daycare closes. A destination is only accessible if it fits into the gaps.</p>
+<h3>The utility-based measure: the logsum</h3>
+<p>Random utility theory, developed in transport by Daniel McFadden in the 1970s (Nobel Prize 2000), gave accessibility an economic meaning. Each person \(n\) chooses among alternatives \(j\), each a bundle of destination, mode, time of day and route. Each alternative has a utility</p>
+$$V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \beta_x^{\top}x_{nj} + \ln O_j ,$$
+<p>made of time \(t\), money \(c\), other qualities \(x\) (reliability, crowding, comfort, transfers, perceived safety) and the attraction of the destination \(O_j\). If people choose the alternative with the highest utility and the unobserved parts are random (logit), the expected value of the best choice is the <strong>logsum</strong>. Divided by the marginal utility of money \(\lambda_n\), it is that person's consumer surplus in money:</p>
+$$A_n = \frac{1}{\lambda_n}\ln \sum_{j} e^{V_{nj}} .$$
+<p>Williams (1977) and Ben-Akiva and Lerman (1985) established the logsum as the welfare measure of a choice model. The <a href="m02-valuing-access.html">rule of a half</a>, the traditional appraisal shortcut, is its linear approximation.</p>
+<figure class="photo chart"><img src="../assets/img/m01-shape-logsum.svg" width="360" height="230" alt="Chart: the logsum of two options is a smooth curve lying above the maximum of the two, by ln 2 where they are equal."><figcaption>The logsum is a <em>smooth maximum</em>. It is close to the value of the best option when one option clearly dominates, and higher than it when options are close, because having a choice is itself valuable.</figcaption></figure>
+<h3>Why this shape</h3>
+<ul>
+<li><strong>It rewards faster and cheaper travel</strong>, the engineer's objective, through \(t\) and \(c\).</li>
+<li><strong>It rewards more destinations within reach</strong>, by any mode, through \(O_j\). This is the accessibility objective of Japanese rail-oriented development.</li>
+<li><strong>It rewards new options, even little-used ones.</strong> Adding an alternative never lowers the logsum. A safe cycle route has value for people who mostly drive, because it is there when they need it. This is how <strong>mode choice</strong> enters the objective: you value the option, not a mode-share target.</li>
+<li><strong>Its slope is the share of people using an option.</strong> \(\partial A_n/\partial V_{nj} = P_{nj}/\lambda_n\). Improving an option is worth more the more people choose it, which is what the rule of a half captures.</li>
+<li><strong>It includes induced demand.</strong> Computed from a model in which people can change routes, modes and destinations, the logsum already contains their response, unlike time savings on a fixed trip table.</li>
+</ul>
+<h3>Whose access? Equity weights</h3>
+<p>Summing over people gives Term A: \(A = \sum_g \omega_g \sum_{n\in g} A_n\). Here \(g\) are groups such as income classes, ages or neighborhoods, and \(\omega_g\) are their weights. Standard cost–benefit analysis sets all \(\omega_g = 1\), so a euro of benefit counts the same for everyone. Because rich people value time more in money, unweighted sums tilt toward projects that serve them. Equity weighting (the UK Green Book allows it; see <a href="m14-appraisal.html">Module 14</a>) and the access floor in <a href="#limits">section 9</a> are two answers. Modules <a href="m02-valuing-access.html">2</a>, <a href="m04-demand-mode-choice.html">4</a> and <a href="m05-accessibility-land-use.html">5</a> develop this term.</p>
+
+<h2 id="term-b">5. Term B: health <span class="term">B</span></h2>
+<p><strong>What it measures:</strong> the health benefit of physical activity from walking and cycling, which travelers largely ignore when choosing how to travel.</p>
+<p>Epidemiology finds that regular walking and cycling lower all-cause mortality, and the dose–response relationship is fairly consistent across studies. The World Health Organization's HEAT tool turns it into a calculation. If a reference amount of cycling \(x_{\text{ref}}\) per week reduces mortality by a relative risk \(RR_{\text{ref}}\), a population of \(N\) people cycling \(x\) minutes per week avoids</p>
+$$\Delta\text{deaths} = N\, m_0 \left(1 - RR_{\text{ref}}^{\;x/x_{\text{ref}}}\right)$$
+<p>deaths per year, where \(m_0\) is the baseline mortality rate. Multiplying by the value of a statistical life gives Term B:</p>
+$$B = \text{VSL}\cdot\sum_g N_g\, m_{0,g}\left(1 - RR_{\text{ref}}^{\;\min(x_g,\,x_{\max})/x_{\text{ref}}}\right).$$
+<figure class="photo chart"><img src="../assets/img/m01-shape-health.svg" width="360" height="230" alt="Chart: mortality reduction rises with minutes of cycling per week, with diminishing returns, and is capped."><figcaption>Diminishing returns, then a cap. The first hours of activity bring the largest gain. The cap keeps the model from extrapolating beyond the evidence.</figcaption></figure>
+<h3>Why this shape, and the debate behind it</h3>
+<p>The concave curve reflects the epidemiology: going from inactive to moderately active matters most. The cap is a deliberate act of caution. A long-running question was whether cycling's health benefits outweigh its risks from crashes and from breathing polluted air. De Hartog and colleagues (2010) estimated for the Netherlands that the life-years gained from activity were many times larger than those lost to crashes and air pollution. Later assessments in other cities generally agree, but the margin depends on how safe the streets are. That is one reason Term B and the safety limit belong in the same objective. HEAT and its methods are covered in <a href="m06-transit-active-modes.html">Module 6</a>.</p>
+
+<h2 id="term-c">6. Term C: externalities <span class="term">C</span></h2>
+<p><strong>What it measures:</strong> the harm that travelers impose on other people, which they do not pay for and therefore do not weigh when they decide to travel.</p>
+<p>The idea goes back to Arthur Pigou's <em>The Economics of Welfare</em> (1920), which used a congested road as one of its examples. When a cost falls on others, individual choices produce too much of the activity, and a charge equal to the external cost can correct it. Frank Knight replied in 1924 that if the road were privately owned, the owner would charge for it anyway. That exchange shaped a century of debate about road pricing. The numerical form is a sum over kinds of harm \(k\), each a physical quantity \(E_k\) times a unit price \(p_k\):</p>
+$$C = \sum_k p_k\,E_k .$$
+<div class="table-wrap"><table>
+<tr><th>\(k\)</th><th>Harm</th><th>Physical quantity \(E_k\)</th><th>Unit price \(p_k\)</th></tr>
+<tr><td>crash</td><td>External crash costs: harm to others, medical and emergency costs</td><td>expected killed and seriously injured</td><td>value of a statistical life, injury values</td></tr>
+<tr><td>CO₂</td><td>Climate change</td><td>tonnes CO₂-equivalent</td><td>carbon value</td></tr>
+<tr><td>air</td><td>NOₓ and PM₂.₅ damage to health</td><td>emissions weighted by exposed population</td><td>damage cost per tonne, by location</td></tr>
+<tr><td>noise</td><td>Annoyance, sleep disturbance, cardiovascular disease</td><td>people exposed above thresholds, in dB bands</td><td>€ per person per dB band</td></tr>
+<tr><td>congestion</td><td>Delay each driver imposes on <em>other</em> road users</td><td>marginal minus average travel time</td><td>value of time</td></tr>
+<tr><td>severance</td><td>Barrier effect on pedestrians, children's independent mobility</td><td>detours and waiting at crossings</td><td>value of time, stated preference</td></tr>
+</table></div>
+<h3>Why these shapes</h3>
+<p>The sum is linear in the quantities \(E_k\), but the quantities are anything but linear in traffic.</p>
+<p><strong>Congestion is strongly convex.</strong> With the classic Bureau of Public Roads (1964) link function \(t(q) = t_0\,[1 + \alpha (q/Q)^\beta]\), usually with \(\alpha = 0.15\) and \(\beta = 4\), each extra vehicle delays all the others by \(q\,t'(q) = t_0\,\alpha\beta\,(q/Q)^\beta\). Alan Walters (1961) and William Vickrey (1969) made this marginal-versus-average distinction the basis of congestion pricing. Near capacity, the delay a driver imposes on others is larger than the delay they suffer. Only this <em>external</em> part belongs in C. The delay people experience themselves is already counted in Term A.</p>
+<figure class="photo chart"><img src="../assets/img/m01-shape-congestion.svg" width="360" height="230" alt="Chart: average travel time rises gently with volume, while the external cost per vehicle rises steeply near capacity."><figcaption>At capacity the external cost (0.6 × t₀ here) is already much larger than the increase in each driver's own travel time (0.15 × t₀). Above capacity it dominates.</figcaption></figure>
+<p><strong>Crash harm rises with roughly the fourth power of speed.</strong> Göran Nilsson's power model (2004) relates deaths to mean speed as \((v_1/v_0)^4\) and injuries more gently. A 10% higher mean speed means roughly 46% more deaths. The physics of impact energy, \(\tfrac12 m v^2\), and of the difference in mass between a truck and a pedestrian, sits behind it (<a href="m11-safety.html">Module 11</a>).</p>
+<figure class="photo chart"><img src="../assets/img/m01-shape-speed.svg" width="360" height="230" alt="Chart: relative number of deaths rises with the fourth power of mean speed."><figcaption>Fatalities rise roughly with the fourth power of mean speed, so small speed changes have large safety effects.</figcaption></figure>
+<p><strong>Noise is logarithmic.</strong> Sound levels add on a decibel scale, so doubling traffic adds only about 3 dB. Halving traffic on a busy street is barely audible, while lowering speeds or changing the road surface can matter more.</p>
+<p><strong>Emissions per kilometer are U-shaped in speed</strong>, high in stop-and-go traffic and again at high speed, but total emissions scale with vehicle-kilometers. That is why induced traffic matters so much for Term C.</p>
+<h3>Alternatives and debates</h3>
+<ul>
+<li><strong>Damage cost or avoidance cost?</strong> A carbon price can be the estimated damage of a tonne (the social cost of carbon) or the cost of meeting a target (an avoidance or "shadow" price). France's official carbon value follows the second logic.</li>
+<li><strong>Marginal or average?</strong> Pricing uses marginal costs. Accounting for a whole sector often uses averages. They can differ by a factor of several.</li>
+<li><strong>Price or limit?</strong> Some harms are better treated as limits (<a href="#limits">section 9</a>).</li>
+</ul>
+<p>The <a href="m03-externalities.html">EU Handbook on the External Costs of Transport</a> and national appraisal guides supply the values (<a href="m03-externalities.html">Module 3</a>). Prices that internalize externalities, such as congestion charges and fuel taxes, are the subject of <a href="m13-pricing.html">Module 13</a>.</p>
+
+<h2 id="term-d">7. Term D: land <span class="term">D</span></h2>
+<p><strong>What it measures:</strong> the value of what the land under roads, parking and junctions could otherwise be used for: homes, parks, shops, trees.</p>
+$$D = r\,L ,$$
+<p>where \(L\) is the area used for transport (square meters) and \(r\) is its annual opportunity cost, the rent the land would earn in its best other use. The linear form is deliberately simple. The economics sits in \(r\), which follows David Ricardo's old insight that land rent reflects location: \(r\) is close to zero at the edge of Houston and enormous in central Tokyo.</p>
+<h3>Why it is usually missing</h3>
+<p>Most appraisals treat land already in public road use as free: it is sunk, and nobody pays rent for it. Donald Shoup's <em>The High Cost of Free Parking</em> (2005) made the cost visible for parking. An urban parking space can occupy land worth as much as the car parked on it. Leaving out Term D is a hidden subsidy to the space-hungriest modes. A car lane moves fewer people per meter of width than a bus lane, a bike lane or a sidewalk (<a href="m06-transit-active-modes.html">Module 6</a>).</p>
+<h3>Alternatives</h3>
+<p>\(r\) can be estimated from market rents, from land-value models, or as the shadow price of a land limit (Singapore). Land-value capture, in which a railway funds itself from the rise in land values around its stations (Japan, Hong Kong), is Term D seen from the other side (<a href="m05-accessibility-land-use.html">Module 5</a>).</p>
+
+<h2 id="term-e">8. Term E: public cost <span class="term">E</span></h2>
+<p><strong>What it measures:</strong> what it costs the public to build, maintain and operate the system, net of the fares, tolls and charges it collects.</p>
+<p>This is the oldest term. The French engineer Jules Dupuit asked in 1844 how to measure the usefulness of public works such as bridges and canals, and in doing so invented consumer surplus. The US Flood Control Act of 1936 required that federal projects be undertaken only if "the benefits to whomsoever they may accrue are in excess of the estimated costs", the founding text of public cost–benefit analysis. The numerical form is</p>
+$$E = (1+\mu)\,\big[K - R\big],$$
+<p>with \(K\) the annualized capital plus operating and maintenance cost, \(R\) the revenue, and \(\mu\) the <em>marginal cost of public funds</em>. That is the extra welfare lost because each euro of public money is raised through taxes that distort work and spending. France applies such a factor, and many other manuals set \(\mu = 0\) (<a href="m14-appraisal.html">Module 14</a>).</p>
+<h3>Turning an investment into a yearly cost</h3>
+<p>A capital cost \(K_0\) spread over \(n\) years at interest rate \(i\) becomes an annual cost \(K_0 \cdot \tfrac{i(1+i)^n}{(1+i)^n - 1}\), the capital recovery factor. More generally, every term is a stream over time, and future values are discounted. One euro of net benefit in year \(t\) counts as \((1+i)^{-t}\) today.</p>
+<figure class="photo chart"><img src="../assets/img/m01-shape-discount.svg" width="360" height="230" alt="Chart: the weight of future benefits declines with time, faster at higher discount rates."><figcaption>At 7% a year, a benefit 30 years away counts for about an eighth of its value. At 1.7% (Germany's federal transport plan) it counts for about 60%. The discount rate decides how much the future matters.</figcaption></figure>
+<h3>Why revenue is not a benefit</h3>
+<p>Tolls and fares are paid by users, which lowers their surplus in Term A, and they arrive as revenue in Term E. As a transfer they cancel out. Pricing raises welfare only through the behavior it changes, and through \(\mu\) when the revenue replaces distorting taxes.</p>
+
+<h2 id="limits">9. The limits</h2>
+<p>Some outcomes are not traded at any price. In the objective they appear as <strong>constraints</strong>, conditions a plan must meet before its sum is even considered:</p>
+<div class="table-wrap"><table>
+<tr><th>Limit</th><th>In words</th><th>Formally</th><th>Example</th></tr>
+<tr><td>Safety</td><td>Deaths and serious injuries stay below a limit, in the long run zero</td><td>\(F(\theta)\le\bar F\)</td><td>Sweden's Vision Zero (1997): it is ethically unacceptable for anyone to be killed or seriously injured in road traffic (<a href="m11-safety.html">Module 11</a>)</td></tr>
+<tr><td>Carbon</td><td>Emissions stay within a budget</td><td>\(E_{\mathrm{CO_2}}(\theta)\le \bar E_{\mathrm{CO_2}}\)</td><td>Climate laws such as Germany's Klimaschutzgesetz. Until 2024 it set annual limits for the transport sector, then a cross-sector total.</td></tr>
+<tr><td>Land</td><td>Transport uses no more land than the city can spare</td><td>\(L(\theta)\le\bar L\)</td><td>Singapore caps the number of vehicles (COE quota) because road space cannot grow</td></tr>
+<tr><td>Access for all</td><td>Every group keeps a minimum level of access</td><td>\(A_g(\theta)\ge A_{\min}\ \forall g\)</td><td>Singapore's "20-minute towns"; Karel Martens' <em>Transport Justice</em> (2017) argues for such a sufficiency threshold</td></tr>
+</table></div>
+<h3>Price or limit? The shadow price</h3>
+<p>Mathematically, a constrained problem can be written with Lagrange multipliers \(\nu\):</p>
+$$\max_\theta\; W(\theta) - \nu_F\,\big(F(\theta)-\bar F\big) - \nu_{\mathrm{CO_2}}\big(E_{\mathrm{CO_2}}(\theta)-B\big) - \dots,\qquad \nu \ge 0 .$$
+<p>When a limit binds, its multiplier \(\nu\) is an implied price, the <strong>shadow price</strong>: how much \(W\) we would gain if the limit were relaxed by one unit. Vision Zero therefore does not value life "infinitely". It fixes the target and lets the shadow price be whatever is needed to meet it. The difference from pricing crashes with a VSL is political and procedural. With a price, enough time savings can pay for a death, and the burden of proof is on those who object. With a limit, the design must first show that it is safe. A carbon budget works the same way, and France derives its rising official carbon value from it.</p>
+
+<h2 id="welfare-function">10. Putting it together: the welfare function</h2>
+<p>Substituting the numerical form of each term into the one-line objective of <a href="#one-line">section 3</a> gives the welfare function used throughout this course. For a plan \(\theta\), per year:</p>
 <div class="equation-hero">
 $$
 \begin{aligned}
@@ -66,92 +219,55 @@ $$
 $$
 \text{subject to}\quad
 \underbrace{F(\theta)\le \bar F}_{\text{safety}},\qquad
-\underbrace{E_{\mathrm{CO_2}}(\theta)\le B}_{\text{carbon budget}},\qquad
+\underbrace{E_{\mathrm{CO_2}}(\theta)\le \bar E_{\mathrm{CO_2}}}_{\text{carbon budget}},\qquad
 \underbrace{L(\theta)\le \bar L}_{\text{land}},\qquad
-\underbrace{A_g(\theta)\ge A_{\min}\ \ \forall g}_{\text{equity floor}}
+\underbrace{A_g(\theta)\ge A_{\min}\ \ \forall g}_{\text{access for all}}
 $$
 </div>
-
-<p>The planner chooses \(\theta\) to maximize \(W\). In practice we rarely optimize. We compare a handful of alternatives and ask which has the highest \(W\) among those that satisfy the constraints, and whether the ranking survives reasonable changes in the prices \(p_k\), \(r\) and weights \(\omega_g\). The <a href="../explorer.html">objective explorer</a> lets you do this interactively.</p>
-
-<h3>Term A: access and choice <span class="term">A</span></h3>
-<p>Each person \(n\) faces a set \(C_n\) of alternatives \(j\). An alternative is a bundle: destination, mode, departure time and route. Its systematic utility is</p>
-$$V_{nj} = \beta_{t}\,t_{nj} + \beta_{c}\,c_{nj} + \beta_{x}^{\top}x_{nj} + \ln O_{j},$$
-<p>with travel time \(t\), money cost \(c\), other attributes \(x\) (reliability, crowding, comfort, waiting, transfers, perceived safety) and a size term \(O_j\) for the opportunities at the destination: jobs, shops, schools. With random-utility (logit) choice, the expected maximum utility is the <strong>logsum</strong>. Divided by the marginal utility of money \(\lambda_n\), it is the person's consumer surplus.</p>
-<p>The logsum is the bridge between the engineering view and the planning view:</p>
-<ul>
-<li>It rises when travel gets faster or cheaper, which is the engineer's objective.</li>
-<li>It rises when <em>more opportunities come within reach</em>, by any mode. This is the accessibility objective of Japanese rail-oriented development and of the ITF Urban Access Framework. The familiar gravity accessibility \(A_i=\sum_j O_j f(t_{ij})\) is a close relative.</li>
-<li>It rises when a <em>new option</em> appears. A safe cycle route adds an alternative even for people who rarely use it. This is how <strong>mode choice</strong> enters the objective: you value the option, not a mode-share target.</li>
-<li>It responds to demand. If a road gets faster, more people choose it, longer trips become attractive and congestion returns. A logsum computed from an equilibrium model already contains <strong>induced demand</strong>.</li>
-</ul>
-<p>The weights \(\omega_g\) let the analyst give more weight to some groups, for example low-income households, children or people without a car. Standard cost-benefit analysis sets \(\omega_g=1\). Modules <a href="m02-valuing-access.html">2</a>, <a href="m04-demand-mode-choice.html">4</a> and <a href="m05-accessibility-land-use.html">5</a> develop this term.</p>
-
-<h3>Term B: health from active travel <span class="term">B</span></h3>
-<p>Walking and cycling produce health benefits that travelers largely do not count when they choose a mode: lower all-cause mortality and less chronic disease. The WHO's <a href="https://www.heatwalkingcycling.org/">HEAT tool</a> turns minutes of walking and cycling into avoided deaths and money. In Dutch and Danish appraisals this term often dominates the business case for cycling. See <a href="m06-transit-active-modes.html">Module 6</a>.</p>
-
-<h3>Term C: externalities <span class="term">C</span></h3>
-<p>\(E_k\) is the physical quantity of harm \(k\) that travelers impose on others, each multiplied by a unit price \(p_k\):</p>
+<p>Over an appraisal period of \(T\) years, the yearly values are discounted and added: \(\sum_{t=0}^{T} (1+i)^{-t}\,W_t(\theta)\). Every symbol has now appeared:</p>
 <div class="table-wrap"><table>
-<tr><th>\(k\)</th><th>Harm</th><th>Typical driver</th><th>Valued with</th></tr>
-<tr><td>crash</td><td>External crash costs: harm to others, medical and police costs</td><td>vehicle-km × risk, especially speed and mass differences</td><td>value of a statistical life (VSL), injury values</td></tr>
-<tr><td>CO₂</td><td>Climate change</td><td>fuel/energy use</td><td>carbon value (e.g., France's <em>valeur tutélaire</em>)</td></tr>
-<tr><td>air</td><td>NOₓ, PM₂.₅ health damage</td><td>vehicle-km × emission factor × exposed population</td><td>damage cost per tonne, by location</td></tr>
-<tr><td>noise</td><td>Annoyance, sleep disturbance, cardiovascular disease</td><td>traffic volume, speed, surface, distance to homes</td><td>€ per dB per exposed person</td></tr>
-<tr><td>congestion</td><td>Delay imposed on <em>other</em> road users</td><td>marginal minus average travel time</td><td>value of time</td></tr>
-<tr><td>severance</td><td>Barrier effect on pedestrians, children's independent mobility</td><td>traffic volume and speed on crossing roads</td><td>detour time, stated-preference values</td></tr>
+<tr><th>Symbol</th><th>Meaning</th><th>Section</th></tr>
+<tr><td>\(\theta\)</td><td>the plan: infrastructure, services, rules, prices, land use</td><td><a href="#why-a-number">2</a></td></tr>
+<tr><td>\(g,\ \omega_g\)</td><td>population groups and their equity weights</td><td><a href="#term-a">4</a></td></tr>
+<tr><td>\(n,\ j,\ C_n,\ V_{nj},\ \lambda_n\)</td><td>person, alternative, choice set, utility, marginal utility of money</td><td><a href="#term-a">4</a></td></tr>
+<tr><td>\(H\)</td><td>health benefit (HEAT-type calculation)</td><td><a href="#term-b">5</a></td></tr>
+<tr><td>\(E_k,\ p_k\)</td><td>physical harm of kind \(k\) and its unit price</td><td><a href="#term-c">6</a></td></tr>
+<tr><td>\(L,\ r\)</td><td>land used and its opportunity cost</td><td><a href="#term-d">7</a></td></tr>
+<tr><td>\(K,\ R,\ \mu\)</td><td>cost, revenue, marginal cost of public funds</td><td><a href="#term-e">8</a></td></tr>
+<tr><td>\(F,\ \bar F,\ \bar E_{\mathrm{CO_2}},\ \bar L,\ A_{\min}\)</td><td>the limits</td><td><a href="#limits">9</a></td></tr>
 </table></div>
-<p>Two subtleties. First, the congestion delay that travelers <em>suffer</em> is already inside Term A. Only the <em>external</em> part, the delay each driver adds for everyone else, belongs in C, and subtracting it again would double-count. Second, if \(\theta\) contains a price that internalizes an externality, such as a congestion charge or fuel tax, the traveler sees the cost in \(c_{nj}\), behavior changes, and \(E_k\) falls. That is the logic of <a href="m13-pricing.html">Module 13</a>. The <a href="m03-externalities.html">EU Handbook on the External Costs of Transport</a> and national appraisal guides provide the values (<a href="m03-externalities.html">Module 3</a>).</p>
+<p>The planner looks for the \(\theta\) with the highest \(W\) that satisfies the limits. In practice we rarely search the whole space. We compare a handful of alternatives, generated by hand or by an optimizer, and ask whether the ranking survives reasonable changes in the prices \(p_k\) and \(r\) and the weights \(\omega_g\). The <a href="../explorer.html">objective explorer</a> lets you try this.</p>
 
-<h3>Term D: land <span class="term">D</span></h3>
-<p>\(L(\theta)\) is the land occupied by carriageways, parking and junctions. \(r\) is its annualized opportunity cost: what the land would earn as housing, parks or business space. In most appraisals \(r\) is implicitly zero once the land is public road. In Singapore, where land is the binding constraint, it is the heart of the matter. Adding Term D explains why a 26-lane freeway can be rational in Katy and absurd in central Tokyo.</p>
-
-<h3>Term E: net public cost <span class="term">E</span></h3>
-<p>\(K\) is capital, maintenance and operating cost. \(R\) is revenue from fares, tolls and charges. \(\mu\) is the <em>marginal cost of public funds</em>, the extra welfare lost because a euro of public money is raised through distorting taxes. France, for example, applies an explicit factor to public funds, while many other national manuals set \(\mu=0\) (see <a href="m14-appraisal.html">Module 14</a>). Revenues are transfers. They reduce traveler surplus in A and come back here, so pricing raises welfare only through behavior change and the \(\mu\) premium.</p>
-
-<h3>The constraints <span class="term">constraints</span></h3>
-<p>Not everything is traded. Some societies treat certain outcomes as hard limits rather than prices:</p>
-<ul>
-<li><strong>Safety, \(F(\theta)\le\bar F\).</strong> Sweden's Vision Zero (Riksdag decision, 1997) states that it is ethically unacceptable for anyone to be killed or seriously injured in road traffic, with the long-run target \(\bar F\to 0\). This is a different logic from pricing crashes with a VSL. With a price, enough time savings can "pay for" a death. With a constraint, they cannot. See <a href="m11-safety.html">Module 11</a>.</li>
-<li><strong>Carbon budget, \(E_{\mathrm{CO_2}}\le B\).</strong> Climate laws such as Germany's Klimaschutzgesetz set emission budgets. Until 2024 they included annual limits for the transport sector, which were then replaced by a cross-sector total. A budget implies a shadow price, which is how France derives its rising carbon value.</li>
-<li><strong>Land, \(L\le\bar L\).</strong> Singapore caps the vehicle population through the Certificate of Entitlement (COE) quota system because road space cannot grow.</li>
-<li><strong>Equity floor, \(A_g\ge A_{\min}\).</strong> A minimum level of access for every group, for example Singapore's "20-minute towns and a 45-minute city" or the French <em>droit au transport</em>.</li>
-</ul>
-<div class="box note">
-<div class="box-title">Constraint or price?</div>
-<p>Mathematically, every binding constraint has a Lagrange multiplier, an implied price. Vision Zero is therefore not "infinitely" valuing life. It sets a target and lets the shadow price be whatever is needed to meet it. The difference is political and procedural. A constraint puts the burden of proof on the design: show it is safe. A price puts it on the victim: show the harm outweighs the benefit.</p>
-</div>
-
-<h2>3. The classic objective as a special case</h2>
+<h2 id="classic">11. The classic objective as a special case</h2>
 <p>The objective most traffic-engineering software minimizes is total vehicle travel time on the network:</p>
 $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 <p>This is \(W\) with five simplifications:</p>
 <ol>
-<li><strong>Fixed demand.</strong> The origin–destination matrix does not respond to \(\theta\), so no induced traffic, no mode shift, no new destinations. Term A collapses to time savings on existing trips.</li>
+<li><strong>Fixed demand.</strong> The origin–destination matrix does not respond to \(\theta\), so there is no induced traffic, no mode shift and no new destinations. Term A collapses to time savings on existing trips.</li>
 <li><strong>Vehicles, not people.</strong> A bus with 60 passengers counts the same as a car with 1.2 occupants.</li>
 <li><strong>Only motorized traffic on the modeled network.</strong> Pedestrian delay at a signal, or a cyclist's detour, is invisible.</li>
-<li><strong>\(p_k=0\)</strong> for all externalities, and \(r=0\) for land.</li>
-<li><strong>No constraints.</strong> Safety enters only through design standards.</li>
+<li><strong>\(p_k=0\)</strong> for all externalities, \(r=0\) for land, and Term B is absent.</li>
+<li><strong>No limits.</strong> Safety enters only through design standards.</li>
 </ol>
 <p>Each simplification was once a reasonable computational shortcut. Taken together, they systematically favor adding road capacity. The empirical "fundamental law of road congestion" (Duranton &amp; Turner, 2011) finds that vehicle-kilometers in US metro areas grow roughly one-for-one with lane-kilometers. Under fixed demand, the time savings the model promises never arrive.</p>
 <p>Level-of-service (LOS) standards inherit the same bias. In 2013 California passed <strong>SB 743</strong>, which replaced automobile LOS with <em>vehicle miles traveled</em> (VMT) as the measure of transport impact in environmental review (in force statewide from July 2020). In the terms of this course, California moved weight from the time part of A to Term C. See <a href="m08-capacity-los.html">Module 8</a>.</p>
 
-<h2>4. Eight planning objectives, five terms</h2>
+<h2 id="eight">12. Eight planning objectives, five terms</h2>
 <p>Planning documents usually list objectives rather than a function. The eight that recur internationally map onto \(W\) as follows:</p>
 <div class="table-wrap"><table>
 <tr><th>Objective dimension</th><th>Representative metrics</th><th>Where it lives in \(W\)</th></tr>
 <tr><td>1. Vehicle mobility</td><td>vehicle-hours of delay, speeds, reliability</td><td>part of A (time and reliability in \(V\)); external congestion in C</td></tr>
 <tr><td>2. Human accessibility</td><td>jobs reachable in 30 min, generalized cost</td><td>A (the logsum itself)</td></tr>
-<tr><td>3. Safety and health</td><td>KSI (killed or seriously injured), exposure to pollution</td><td>C (crash, air), B (activity), safety constraint</td></tr>
+<tr><td>3. Safety and health</td><td>KSI (killed or seriously injured), exposure to pollution</td><td>C (crash, air), B (activity), safety limit</td></tr>
 <tr><td>4. Environment</td><td>CO₂e, NOₓ, PM₂.₅, energy</td><td>C, carbon budget</td></tr>
-<tr><td>5. Land efficiency</td><td>road and parking land per capita, people per meter of street</td><td>D, land constraint</td></tr>
+<tr><td>5. Land efficiency</td><td>road and parking land per capita, people per meter of street</td><td>D, land limit</td></tr>
 <tr><td>6. Urban quality</td><td>noise, severance, walkability, public space</td><td>C (noise, severance), comfort attributes \(x\) in A, D</td></tr>
-<tr><td>7. Equity and inclusion</td><td>accessibility by income, age, disability, neighborhood</td><td>weights \(\omega_g\), equity floor</td></tr>
+<tr><td>7. Equity and inclusion</td><td>accessibility by income, age, disability, neighborhood</td><td>weights \(\omega_g\), access-for-all limit</td></tr>
 <tr><td>8. Economic efficiency and resilience</td><td>benefit–cost ratio, lifecycle cost, reliability under disruption</td><td>E, plus the whole of \(W\) as net benefit</td></tr>
 </table></div>
-<p>Three contrasts explain much of the divergence between Houston, Tokyo, Stockholm and Paris. The first is <strong>mobility versus accessibility</strong>: time savings versus opportunities reached. The second is <strong>individual speed versus system safety</strong>: Term A versus the safety constraint. The third is <strong>traffic capacity versus urban land value</strong>: \(r\).</p>
+<p>Three contrasts explain much of the divergence between Houston, Tokyo, Stockholm and Paris. The first is <strong>mobility versus accessibility</strong>: time savings versus opportunities reached. The second is <strong>individual speed versus system safety</strong>: Term A versus the safety limit. The third is <strong>traffic capacity versus urban land value</strong>: \(r\).</p>
 
-<h2 id="role-models">5. Seven role models as seven readings of \(W\)</h2>
+<h2 id="role-models">13. Seven role models as seven readings of \(W\)</h2>
 <p>The countries in this course do not literally optimize \(W\). Their institutions, appraisal manuals and design standards nonetheless reveal which terms they weight heavily, which they price and which they constrain. The table is a <em>qualitative interpretation</em> to frame study, not a measured ranking. Practice varies a lot within each country. Each country page develops it with primary sources.</p>
 <div class="table-wrap"><table>
 <tr><th>Country</th><th>Characteristic reading of \(W\)</th><th>Signature instruments</th></tr>
@@ -175,9 +291,9 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 <tr><td>Defense, industrial policy</td><td>The 1956 "Interstate and Defense Highways"; electric-vehicle industrial policy in China</td><td>Outside \(W\). These are legitimate public goals, but they are not the welfare of travelers and neighbors. Report them separately so that they do not hide inside transport benefits.</td></tr>
 </table></div>
 
-<h2>6. Objectives, instruments and timescales</h2>
+<h2 id="instruments">14. Objectives, instruments and timescales</h2>
 <h3>Instruments are not objectives</h3>
-<p>The source discussion for this course raised a "ninth dimension": <em>how</em> a society pursues its objectives. Keep it separate from \(W\). Three families of instruments can produce the same outcome:</p>
+<p>A further dimension is <em>how</em> a society pursues its objectives. Keep it separate from \(W\). Three families of instruments can produce the same outcome:</p>
 <div class="table-wrap"><table>
 <tr><th>Instrument family</th><th>Examples</th><th>Strengths and weaknesses</th></tr>
 <tr><td><strong>Passive, self-regulating design</strong></td><td>compact roundabouts, narrow lanes, raised crossings, filtered permeability, transit-oriented land use</td><td>Robust, cheap to operate, works without enforcement or power. Hard to change once built. Can impose discomfort (e.g., lateral acceleration \(a=v^2/r\) on bus passengers).</td></tr>
@@ -196,12 +312,13 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 </table></div>
 <p>A plan can look excellent at one timescale and poor at another. Road widening gives large short-run time savings that induced demand erodes over years. A new rail line carries few passengers at first and may reshape a city over twenty years. \(W\) must be evaluated with a model that covers the timescale on which the plan's effects play out.</p>
 
-<h2>7. Using \(W\) honestly</h2>
+<h2 id="honest">15. Using \(W\) honestly</h2>
 <ul>
-<li><strong>Report the vector, not just the sum.</strong> Show Terms A–E and every constraint separately before aggregating. A plan that wins only because of a contested price (VSL, carbon value, \(r\)) should be identified as such.</li>
+<li><strong>Report the vector, not just the sum.</strong> Show Terms A–E and every limit separately before aggregating. A plan that wins only because of a contested price (VSL, carbon value, \(r\)) should be identified as such.</li>
 <li><strong>Prefer Pareto comparisons first.</strong> Plan X dominates plan Y if it is at least as good on every term and better on one. Dominated plans can be discarded without any weights. Only the remaining trade-offs need political judgment.</li>
 <li><strong>Test sensitivity.</strong> Vary \(p_k\), \(r\), \(\omega_g\) and the demand elasticities. The explorer does this for the national presets.</li>
 <li><strong>Know what the model cannot see.</strong> A calibrated microsimulation of today's traffic can estimate short-run time effects. It cannot predict long-run mode shift, crashes, land development or street quality without additional models.</li>
+<li><strong>Publish it.</strong> An objective, a model and its assumptions that others can rerun are worth more than a polished number nobody can check (<a href="#why-a-number">section 2</a>).</li>
 </ul>
 
 <div class="box exercise">
@@ -210,7 +327,7 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 <ol>
 <li>Identify the objective the project <em>actually</em> used. Which terms of \(W\) appear? Which were set to zero?</li>
 <li>Was demand fixed or variable? Were people or vehicles counted?</li>
-<li>Name one constraint that, had it been imposed, would have changed the design.</li>
+<li>Name one limit that, had it been imposed, would have changed the design.</li>
 <li>Re-rank the project against one alternative using the <a href="../explorer.html">explorer</a> presets. Does the ranking depend on the country preset?</li>
 </ol>
 </div>
@@ -220,12 +337,29 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 <p>Two modes, car and bike, with \(V_{\text{car}}=-1.0\) and \(V_{\text{bike}}=-3.0\), and \(\lambda=0.1\) per euro. Compute consumer surplus with only the car, and with both. A safe cycle route then raises \(V_{\text{bike}}\) to \(-1.5\). Compute the gain in surplus and the new bike share. Why is the gain positive even for people who keep driving?</p>
 </div>
 
+<div class="box exercise">
+<div class="box-title">Exercise 1.3 · How convex is congestion?</div>
+<p>A link has free-flow time \(t_0=10\) min and capacity \(Q=2{,}000\) veh/h, with the BPR function (\(\alpha=0.15,\ \beta=4\)). At \(q=1{,}600\) and at \(q=2{,}200\) veh/h, compute (a) each driver's travel time, (b) the delay one extra vehicle imposes on all others, and (c) the corresponding Pigouvian charge at a value of time of €15/h. Why is (b) the relevant quantity for Term C and (a) for Term A?</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 1.4 · An objective for a simulation</div>
+<p>You have a city simulation that outputs, for each scenario, every person's trips (mode, time, cost), vehicle-kilometers by road type, and crashes from a safety model. Write down, step by step, how you would compute each of Terms A–E and check each limit from these outputs. Which terms can the simulation not provide, and where would you get them? If you let an optimizer search over speed limits and bus frequencies, what could go wrong?</p>
+</div>
+
+
 <h2>Readings and resources</h2>
 <ul class="resources">
 <li data-type="pdf"><a href="https://www.itf-oecd.org/what-urban-access-framework">ITF/OECD — What is the Urban Access Framework?</a> <span class="why">Separates proximity, transport performance and accessibility. The best short introduction to Term A as accessibility.</span></li>
 <li data-type="pdf"><a href="https://www.vtpi.org/wellmeas.pdf">Todd Litman — Well Measured: Developing Indicators for Sustainable and Livable Transport Planning (VTPI)</a> <span class="why">A long catalog of indicators and of the biases of traffic-based metrics.</span></li>
 <li data-type="link"><a href="https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2616">Duranton &amp; Turner (2011) — The Fundamental Law of Road Congestion, American Economic Review</a> <span class="why">Empirical basis for induced demand in US cities.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/j.tra.2006.10.002">de Jong, Daly, Pieters &amp; van der Hoorn (2007) — The logsum as an evaluation measure: review of the literature and new results</a> <span class="why">Why the logsum is the consumer-surplus measure for Term A.</span></li>
+<li data-type="link"><a href="https://doi.org/10.1080/01944365908978307">Hansen (1959) — How Accessibility Shapes Land Use, Journal of the American Institute of Planners</a> <span class="why">The origin of the accessibility measure in Term A.</span></li>
+<li data-type="book"><span>Ben-Akiva &amp; Lerman — <em>Discrete Choice Analysis: Theory and Application to Travel Demand</em> (MIT Press, 1985)</span> <span class="why">The logsum as accessibility and welfare measure.</span></li>
+<li data-type="book"><span>Pigou — <em>The Economics of Welfare</em> (1920)</span> <span class="why">The origin of the externality argument behind Term C, with a congested road as an example.</span></li>
+<li data-type="link"><a href="https://doi.org/10.2307/1911814">Walters (1961) — The Theory and Measurement of Private and Social Cost of Highway Congestion, Econometrica</a> <span class="why">Marginal versus average congestion cost.</span></li>
+<li data-type="book"><span>Shoup — <em>The High Cost of Free Parking</em> (APA Planners Press, 2005)</span> <span class="why">Why Term D is usually invisible, and what it costs.</span></li>
+<li data-type="book"><span>Martens — <em>Transport Justice: Designing Fair Transportation Systems</em> (Routledge, 2017)</span> <span class="why">The case for a minimum level of access for all.</span></li>
 <li data-type="pdf"><a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">European Commission (2020) — Handbook on the External Costs of Transport</a> <span class="why">Unit values for Term C across EU countries and modes.</span></li>
 <li data-type="link"><a href="https://lci.ca.gov/ceqa/sb-743/">California Governor's Office of Land Use and Climate Innovation — SB 743: from LOS to VMT</a> <span class="why">A case study of a jurisdiction changing its objective function in law.</span></li>
 <li data-type="book"><span>Small &amp; Verhoef — <em>The Economics of Urban Transportation</em> (Routledge, 2007)</span> <span class="why">Graduate-level treatment of demand, costs, pricing and investment. The economic backbone of this course.</span></li>

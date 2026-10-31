@@ -13,7 +13,9 @@
       var li = document.createElement("li");
       var a = document.createElement("a");
       a.href = "#" + h.id;
-      a.textContent = h.textContent;
+      var label = h.cloneNode(true);
+      label.querySelectorAll(".term").forEach(function (t) { t.remove(); });
+      a.textContent = label.textContent.trim();
       li.appendChild(a);
       toc.appendChild(li);
     });

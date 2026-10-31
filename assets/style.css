@@ -231,3 +231,5 @@ figure.photo figcaption { font-family: var(--sans); font-size: .8rem; color: var
   .subtitle { font-size: 1.1rem; }
 }
 .tenet p { font-size: 1.05rem; }
+figure.chart { max-width: 26rem; margin: 1.2rem auto; }
+figure.chart img { border: 1px solid var(--rule); }
