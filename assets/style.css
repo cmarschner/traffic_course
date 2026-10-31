@@ -265,5 +265,13 @@ main h4 { color: var(--accent); }
   border: 1px solid var(--accent); background: var(--card); color: var(--accent); cursor: pointer; }
 .demo-btn:hover { background: var(--accent-soft); }
 .demo-people td.chosen { background: var(--accent-soft); font-weight: 700; box-shadow: inset 0 0 0 2px var(--accent); }
+.demo-dist { display: block; width: 100%; height: auto; margin: .3rem 0 .6rem; font-family: var(--sans); font-size: 11px; }
+.demo-dist text { fill: var(--ink-3); }
+.demo-dist .grid { stroke: var(--rule); }
+.demo-dist .axis { stroke: var(--ink-3); }
+.demo-dist .bar { fill: var(--accent); opacity: .35; }
+.demo-dist .bar:hover { opacity: .6; }
+.demo-dist .curve { fill: none; stroke: var(--accent); stroke-width: 2; }
+.demo-dist .rug { stroke: var(--accent-2); stroke-width: 2; }
 .demo-people .parts { color: var(--ink-3); font-weight: 400; font-size: .78rem; }
 @media (max-width: 640px) { .demo-people .parts { display: block; } }

@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 1 · What should a transport system optimize? — Welfare-Centered Transport Planning</title>
 <meta name="description" content="The welfare objective function at the center of the course: access and mode choice, health, externalities, land, costs and hard constraints.">
-<link rel="stylesheet" href="../assets/style.css?v=12">
+<link rel="stylesheet" href="../assets/style.css?v=13">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=12"></script>
+<script defer src="../assets/site.js?v=13"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -187,6 +187,8 @@ $$A_i = \sum_j O_j \, f(c_{ij}).$$
 <thead><tr><th>Person</th><th class="num">Car</th><th class="num">Bus</th><th class="num">Bike</th><th>Chooses</th></tr></thead>
 <tbody></tbody></table></div>
 <p class="small" data-o="note"></p>
+<p class="demo-sub"><strong>How the hidden parts are spread.</strong> The bars count the hidden parts drawn for the 50,000 people below. The line is the shape they are drawn from, a <em>Gumbel distribution</em> (Step 2 explains it). The orange ticks are the hidden parts of the eight people in the table.</p>
+<svg class="demo-dist" viewBox="0 0 600 190" role="img" aria-label="Histogram of the simulated hidden parts with the Gumbel density curve"></svg>
 <p class="demo-sub"><strong>50,000 simulated people.</strong> Each makes the same kind of choice. Counting their choices answers both questions.</p>
 <div class="table-wrap"><table>
 <thead><tr><th></th><th class="num">Car</th><th class="num">Bus</th><th class="num">Bike</th></tr></thead>
@@ -217,6 +219,7 @@ $$V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \boldsymbol{\beta}_x^{\top}\mathb
 $$P_{nj} = \Pr\big(U_{nj} \ge U_{nk}\ \text{for every other option } k\big).$$
 <p>To compute this probability, we need an assumption about the hidden parts \(\varepsilon\): which values are likely and which are rare. Such an assumption is called a <em>probability distribution</em>.</p>
 <p>The standard choice is the <strong>Gumbel distribution</strong>. It is named after Emil Gumbel, a German statistician who studied extremes, such as the highest flood of each year. It describes how the largest of many random values is spread. Its shape is a bell, close to the normal distribution, with a slightly longer tail toward high values. In formula form, the chance that a Gumbel value is at most \(x\) is \(\exp(-e^{-x})\). The demo at the start of this section draws its hidden parts from this distribution.</p>
+<figure class="photo chart"><img src="../assets/img/m01-gumbel.svg" width="360" height="230" alt="Chart: the Gumbel density is a slightly skewed bell with a longer tail toward high values, drawn next to a normal bell with the same average and spread."><figcaption>The Gumbel distribution (solid) next to a normal distribution with the same average and spread (dashed). Both are shifted to average zero, as in the demo. The Gumbel bell leans left and has a longer tail toward high values: now and then, someone likes an option far more than its time and cost suggest.</figcaption></figure>
 <p>Why Gumbel and not the normal distribution? Mainly because of convenience. With Gumbel, the probabilities have a simple formula. With the normal distribution they do not, and must be computed numerically (that model is called <em>probit</em>).</p>
 <p>We need one more assumption: the hidden parts of different options are <em>independent</em>. Knowing that someone has an unusually strong liking for the bus tells us nothing about their hidden liking for the car. Note that this is an assumption about the hidden parts, not about the measured ones. Times and costs of different options can be related in any way.</p>
 <p>Under these two assumptions, McFadden showed that the probability of choosing option \(j\) is</p>
@@ -298,36 +301,77 @@ $$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!
   document.querySelectorAll(".logsum-demo").forEach(function (box) {
     var sliders = box.querySelectorAll("input[type=range]");
     var names = [].map.call(sliders, function (s) { return s.dataset.name; });
-    var body = box.querySelector(".demo-people tbody");
+    var body = box.querySelector(".demo-people tbody"), svg = box.querySelector(".demo-dist");
+    var LO = -2.5, BW = 0.25, bins = new Array(34).fill(0), rug = [];
     function out(k, v) { var el = box.querySelector('[data-o="' + k + '"]'); if (el) el.textContent = v; }
     function values() { return [].map.call(sliders, function (s) { s.nextElementSibling.textContent = fmt(+s.value, 1) + " = " + eur(+s.value); return +s.value; }); }
     function people(V) {
       if (!body) return;
       var bestV = V.indexOf(Math.max.apply(null, V)), surprises = 0, html = "";
+      rug = [];
       for (var i = 0; i < SHOW; i++) {
         var e = V.map(hidden), U = V.map(function (v, j) { return v + e[j]; });
         var c = U.indexOf(Math.max.apply(null, U));
+        rug = rug.concat(e);
         if (c !== bestV) surprises++;
         html += "<tr><td>" + (i + 1) + "</td>" + V.map(function (v, j) {
           return '<td class="num' + (j === c ? ' chosen' : '') + '"><span class="parts">' + fmt(v, 1) + sgn(e[j]) + " =</span> " + fmt(U[j], 2) + "</td>";
         }).join("") + "<td><strong>" + names[c] + "</strong></td></tr>";
       }
       body.innerHTML = html;
+      draw();
       out("note", surprises === 0
         ? "All eight chose the option with the highest measured part this time. Draw again: sometimes a hidden part tips the choice."
         : surprises + " of the eight chose an option other than the one with the highest measured part. Their hidden parts tipped the balance. That is why an analyst, who sees only the measured parts, can only state probabilities.");
     }
     function crowd(V) {
       var ex = V.map(Math.exp), sum = ex[0] + ex[1] + ex[2], counts = [0, 0, 0], total = 0;
+      bins = bins.map(function () { return 0; });
       for (var i = 0; i < N; i++) {
         var best = -Infinity, bj = 0;
-        for (var j = 0; j < 3; j++) { var u = V[j] + hidden(); if (u > best) { best = u; bj = j; } }
+        for (var j = 0; j < 3; j++) {
+          var h = hidden(), u = V[j] + h, k = Math.floor((h - LO) / BW);
+          if (k >= 0 && k < bins.length) bins[k]++;
+          if (u > best) { best = u; bj = j; }
+        }
         counts[bj]++; total += best;
       }
       for (var j = 0; j < 3; j++) { out("p" + j, (100 * ex[j] / sum).toFixed(1) + "%"); out("s" + j, (100 * counts[j] / N).toFixed(1) + "%"); }
       out("max", fmt(Math.max.apply(null, V)) + (body ? " = " + eur(Math.max.apply(null, V), 2) : ""));
       out("ls", fmt(Math.log(sum)));
       out("mc", fmt(total / N) + (body ? " = " + eur(total / N, 2) : ""));
+      draw();
+    }
+    // Histogram of the crowd's hidden parts, the Gumbel density, and a rug for the eight people.
+    function draw() {
+      if (!svg) return;
+      var x0 = 40, x1 = 590, y0 = 150, y1 = 12, YMAX = 0.42;
+      function X(v) { return x0 + (v - LO) / (BW * bins.length) * (x1 - x0); }
+      function Y(d) { return y0 - d / YMAX * (y0 - y1); }
+      var g = "", n = 3 * N, w = (x1 - x0) / bins.length;
+      [0.1, 0.2, 0.3, 0.4].forEach(function (d) {
+        g += '<line class="grid" x1="' + x0 + '" x2="' + x1 + '" y1="' + Y(d) + '" y2="' + Y(d) + '"/>';
+      });
+      bins.forEach(function (c, k) {
+        var d = c / (n * BW), a = LO + k * BW;
+        g += '<rect class="bar" x="' + (X(a) + 1) + '" y="' + Y(d) + '" width="' + (w - 2) + '" height="' + (y0 - Y(d)) + '" rx="2"><title>' +
+          fmt(a, 2) + " to " + fmt(a + BW, 2) + ": " + (100 * c / n).toFixed(1) + "% of hidden parts</title></rect>";
+      });
+      var path = "";
+      for (var v = LO; v <= LO + BW * bins.length + 1e-9; v += 0.05) {
+        var z = v + G, d = Math.exp(-(z + Math.exp(-z)));
+        path += (path ? " L" : "M") + X(v).toFixed(1) + "," + Y(d).toFixed(1);
+      }
+      g += '<path class="curve" d="' + path + '"/>';
+      rug.forEach(function (h) { if (h >= LO && h <= LO + BW * bins.length) g += '<line class="rug" x1="' + X(h) + '" x2="' + X(h) + '" y1="' + (y0 - 14) + '" y2="' + y0 + '"/>'; });
+      g += '<line class="axis" x1="' + x0 + '" x2="' + x1 + '" y1="' + y0 + '" y2="' + y0 + '"/>';
+      for (var t = -2; t <= 6; t++) {
+        g += '<text x="' + X(t) + '" y="' + (y0 + 15) + '" text-anchor="middle">' + fmt(t, 0) + "</text>";
+        g += '<text class="eur" x="' + X(t) + '" y="' + (y0 + 28) + '" text-anchor="middle">' + eur(t) + "</text>";
+      }
+      g += '<text x="' + (x0 - 6) + '" y="' + (y0 + 15) + '" text-anchor="end">points</text>';
+      g += '<text class="eur" x="' + (x0 - 6) + '" y="' + (y0 + 28) + '" text-anchor="end">euros</text>';
+      svg.innerHTML = g;
     }
     function run() { var V = values(); people(V); crowd(V); }
     sliders.forEach(function (s) { s.addEventListener("input", run); });
