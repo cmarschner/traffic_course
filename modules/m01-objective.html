@@ -186,11 +186,17 @@ $$P_{nj} \;=\; \frac{e^{V_{nj}}}{\sum_k e^{V_{nk}}}.$$
 <p>This model is called the <strong>multinomial logit</strong> model. "Multinomial" means that there can be more than two options. "Logit" is short for "logistic unit", a term coined by the statistician Joseph Berkson in 1944. With only two options, the formula becomes the logistic function, the S-shaped curve \(P_1 = 1/(1+e^{-(V_1-V_2)})\). It turns the difference in utility into a probability between 0 and 1.</p>
 
 <h4>Step 3: taking the logarithm</h4>
-<p>We now take the natural logarithm of both sides of the probability formula. Two rules of the logarithm help. First, the logarithm turns a division into a subtraction: \(\ln(a/b) = \ln a - \ln b\). Second, the logarithm undoes the exponential: \(\ln e^{V} = V\). The result is</p>
+<p>The probability formula is hard to read as it stands. The option's own utility sits inside an exponential, and it is divided by a sum over all options. We would like to pull these two parts apart, for two reasons.</p>
+<ul>
+<li><strong>To see what drives a choice.</strong> We want to see how an option's own utility affects its probability, separately from the other options.</li>
+<li><strong>To estimate the weights.</strong> A survey contains many choices. The probability of observing all of them together is the product of their individual probabilities. That is a product of many numbers between 0 and 1, which is unwieldy and quickly becomes too small for a computer to store accurately.</li>
+</ul>
+<p>The logarithm solves both problems. It turns a division into a subtraction: \(\ln(a/b) = \ln a - \ln b\). It turns a product into a sum: \(\ln(ab) = \ln a + \ln b\). And it undoes the exponential: \(\ln e^{V} = V\). Because the logarithm only ever increases, it also keeps the order of things: a larger probability always has a larger logarithm.</p>
+<p>So we take the natural logarithm of both sides of the probability formula. The result is</p>
 $$\ln P_{nj} \;=\; V_{nj} \;-\; \ln \sum_k e^{V_{nk}}.$$
 <p>The second term is the same for every option of person \(n\). It does not depend on which option \(j\) we look at. So, for one person, the option with the highest measured utility \(V\) is also the option with the highest probability.</p>
 <p>The first term, \(V_{nj}\), is linear in the weights \(\beta\). This is why the model is also called a <em>log-linear</em> model: the logarithm of the probability is linear in the unknown weights.</p>
-<p>The analyst can now estimate the weights. The method is called <strong>maximum likelihood</strong>. It picks the weights that make the choices actually observed in the survey as probable as possible. In practice, it maximizes the sum of \(\ln P\) over all observed choices. Here, unlike in the comparison above, the second term does not drop out, because it changes when the weights change. Statistical software does this calculation (<a href="m04-demand-mode-choice.html">Module 4</a>).</p>
+<p>The analyst can now estimate the weights. The method is called <strong>maximum likelihood</strong>. It picks the weights that make the choices actually observed in the survey as probable as possible. Thanks to the logarithm, this means maximizing a sum rather than a product: the sum of \(\ln P\) over all observed choices. Because the logarithm keeps the order, the weights that maximize the sum also maximize the product. Here, unlike in the comparison above, the second term does not drop out, because it changes when the weights change. Statistical software does this calculation (<a href="m04-demand-mode-choice.html">Module 4</a>).</p>
 <p>The second term has its own name. It is called the <strong>logsum</strong>, because it is the logarithm of a sum:</p>
 $$\text{logsum}_n \;=\; \ln \sum_k e^{V_{nk}}.$$
 <p>It turns out to be exactly the quantity we need for welfare, as the next step shows.</p>
