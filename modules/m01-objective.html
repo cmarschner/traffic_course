@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 1 · What should a transport system optimize? — Welfare-Centered Transport Planning</title>
 <meta name="description" content="The welfare objective function at the center of the course: access and mode choice, health, externalities, land, costs and hard constraints.">
-<link rel="stylesheet" href="../assets/style.css?v=13">
+<link rel="stylesheet" href="../assets/style.css?v=14">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=13"></script>
+<script defer src="../assets/site.js?v=14"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -484,9 +484,60 @@ $$C = \sum_k p_k\,E_k .$$
 <figure class="photo chart"><img src="../assets/img/m01-shape-speed.svg" width="360" height="230" alt="Chart: relative number of deaths rises with the fourth power of mean speed."><figcaption>Fatalities rise roughly with the fourth power of mean speed, so small speed changes have large safety effects.</figcaption></figure>
 <p><strong>Noise is logarithmic.</strong> Sound levels add on a decibel scale, so doubling traffic adds only about 3 dB. Halving traffic on a busy street is barely audible, while lowering speeds or changing the road surface can matter more.</p>
 <p><strong>Emissions per kilometer are U-shaped in speed</strong>, high in stop-and-go traffic and again at high speed, but total emissions scale with vehicle-kilometers. That is why induced traffic matters so much for Term C.</p>
+<h3>What is a tonne of CO₂ worth?</h3>
+<p>Of all the prices in Term C, the price of carbon dioxide is the most debated. A tonne of CO₂ is roughly what a petrol car emits over 7,000 km. Once emitted, it stays in the air for centuries and warms the planet a little. The warming causes harm: heat deaths, crop losses, floods, damage from rising seas.</p>
+<p>The <strong>social cost of carbon</strong> is an estimate of that harm. It adds up the damage one extra tonne causes in every future year, and expresses it in today's money.</p>
+<p>Most of that damage happens decades from now. So the estimate depends on how much weight we give to the future. Economists express this weight as a <em>rate of time preference</em>: the percentage by which a harm counts less for each year it lies in the future. At 1% per year, harm in 70 years counts about half as much as harm today. At 0%, every generation counts the same.</p>
+<p>Recent official and scientific estimates:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Source</th><th>What it measures</th><th class="num">Value per tonne of CO₂</th></tr></thead>
+<tbody>
+<tr><td>Germany: Federal Environment Agency (UBA), <a href="https://www.umweltbundesamt.de/daten/umweltzustand-trends/umwelt-wirtschaft/gesellschaftliche-kosten-von-umweltbelastungen">Methodenkonvention 4.0</a> (2026)</td><td>Damage, 1% time preference</td><td class="num">€350 (emitted in 2026)</td></tr>
+<tr><td>Same, with all generations weighted equally</td><td>Damage, 0% time preference</td><td class="num">€1,000</td></tr>
+<tr><td>Rennert et al., <a href="https://www.rff.org/publications/journal-articles/comprehensive-evidence-implies-a-higher-social-cost-of-co2/"><em>Nature</em></a> (2022)</td><td>Damage, 2% discount rate</td><td class="num">$185 (range $44–413)</td></tr>
+<tr><td>United States: EPA (2023), <a href="https://eelp.law.harvard.edu/tracker/the-social-cost-of-carbon/">withdrawn in January 2025</a></td><td>Damage, 2% discount rate</td><td class="num">$190 (emitted in 2020)</td></tr>
+<tr><td>France: <a href="https://www.tse-fr.eu/news/interview-alain-quinet-report">Quinet commission</a>, revised 2025</td><td>Cost of meeting France's climate targets</td><td class="num">€256 (2025), €300 (2030), €563 (2050), in 2023 euros</td></tr>
+<tr><td>EU Emissions Trading System, 2025 average</td><td>Market price for power plants and industry</td><td class="num">about €74</td></tr>
+<tr><td>Germany: national CO₂ price on fuels, 2025</td><td>Price set by law</td><td class="num">€55</td></tr>
+</tbody></table></div>
+<p>Two things stand out. First, careful damage estimates have risen over the past decade, to roughly €200–350 per tonne. Older official values were far lower, such as the interim US value of $51 used from 2021 to 2023. The main reasons are better evidence on heat deaths and crop losses, and lower discount rates. Second, the prices people actually pay are much lower than these estimates. The US federal government no longer uses any value.</p>
+<p>What does €350 per tonne mean for a driver? Burning one liter of petrol releases about 2.3 kg of CO₂. At €350 per tonne, that is about €0.80 of damage per liter. A car that uses 6 liters per 100 km causes about 5 cents of climate damage per kilometer. For all of Germany's transport, about 146 million tonnes in 2023, the damage comes to roughly €50 billion a year, or €600 per resident.</p>
+<p class="small">An aside on fuel taxes. Germany taxes petrol at 65 cents per liter, plus the CO₂ price. Per tonne of CO₂, that adds up to roughly €340, close to the UBA damage estimate. But the fuel tax was not designed as a climate charge. It also has to cover road costs and other harms. American drivers pay about 50 cents per gallon in federal and state fuel taxes, roughly $55 per tonne.</p>
+
+<h3>What does reaching a carbon target cost?</h3>
+<p>The second approach starts from a target instead of from the damage. Germany's 2021 climate law set a limit for transport of 85 million tonnes in 2030. In 2023 the sector emitted about 146 million tonnes. So about 61 million tonnes a year had to go.</p>
+<p>There are many ways to cut emissions, and they cost very different amounts per tonne. Electric cars that are driven a lot save their owners more on fuel than they cost extra, so they avoid CO₂ at a negative cost. A lower speed limit costs little money; it mainly costs time. Synthetic fuels, made from electricity and captured CO₂, are very expensive. A sensible plan uses the cheapest measures first and moves to more expensive ones until the target is met.</p>
+<p>The chart sorts such measures by cost. Each bar is one measure: its width is the tonnes it avoids, its height is the cost per tonne. The numbers are illustrative, not estimates.</p>
+<figure class="photo chart"><img src="../assets/img/m01-abatement.svg" width="360" height="250" alt="Chart: bars for five measures sorted by cost per tonne, from electric cars below zero to synthetic fuels at €600. A vertical line marks a 61 million tonne cut; the cost of the last tonne needed is about €260, below the damage line at €350."><figcaption>An abatement cost curve. Cheap measures come first. The cost of the last tonne needed to reach the target is the shadow price of the target. The total cost of reaching it is the dark area, which is much smaller than the shadow price times all tonnes.</figcaption></figure>
+<p>The cost of the <em>last</em> tonne needed is the <strong>shadow price</strong> of the target, introduced in <a href="#limits">section 9</a>. It is the carbon price that would make people choose exactly enough of the measures on their own. In 2019, researchers at the Mercator institute (MCC) estimated that a CO₂ price on fuels would have to rise to about <strong>€275 per tonne by 2030</strong> to meet Germany's targets for transport and heating. The price actually charged in 2025 was €55. The EU's new trading system for road fuels, from 2028, is designed to release extra allowances once its price exceeds €45 (in 2020 euros).</p>
+<p>Three lessons follow:</p>
+<ul>
+<li><strong>The shadow price is not the total cost.</strong> Earlier tonnes are cheaper than the last one, and some save money. The total cost is the area under the curve, up to the target.</li>
+<li><strong>A target can pass or fail a damage test.</strong> If the shadow price is below the damage per tonne, as in the chart, meeting the target is worth more than it costs. If it is above, the target is stricter than a damage-based price would justify. France uses the shadow-price logic for its official value; Germany's UBA uses the damage logic.</li>
+<li><strong>Prices are only one instrument.</strong> Many measures, such as bike lanes or better buses, are built, not bought by drivers. The shadow price then serves as a yardstick: a project that avoids CO₂ for less than the shadow price is a cheap way to reach the target.</li>
+</ul>
+
+<h3>How electric cars change Term C</h3>
+<p>An electric car has no exhaust pipe. That changes some of the harms in Term C a lot and others hardly at all.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Harm</th><th>Effect of switching from petrol to electric</th></tr></thead>
+<tbody>
+<tr><td>CO₂</td><td><strong>Much lower, depending on the grid.</strong> Building the battery causes extra emissions up front, but over its life a medium-size electric car in Europe causes 66–69% less greenhouse gas than a comparable petrol car (<a href="https://theicct.org/publication/a-global-comparison-of-the-life-cycle-greenhouse-gas-emissions-of-combustion-engine-and-electric-passenger-cars/">ICCT, 2021</a>). The cleaner the electricity, the larger the gap.</td></tr>
+<tr><td>Air pollution</td><td><strong>Exhaust gases disappear, dust does not.</strong> NOₓ and exhaust particles go to zero. Particles from tire, brake and road wear remain. The OECD estimates that light electric cars emit 11–13% less fine dust than petrol cars, and heavy ones 3–8% more, because weight increases tire wear (<a href="https://www.oecd.org/en/publications/non-exhaust-particulate-emissions-from-road-transport_4a4dc6ca-en.html">OECD, 2020</a>).</td></tr>
+<tr><td>Noise</td><td><strong>Quieter only at low speed.</strong> Above roughly 20–30 km/h, tire noise drowns out the engine, for both kinds of car. EU rules even require electric cars to make an artificial sound below 20 km/h, so that pedestrians hear them.</td></tr>
+<tr><td>Crashes</td><td><strong>Not lower.</strong> Heavier cars carry more energy into a crash, \(\tfrac12 m v^2\). Speed and street design matter far more than the drive train.</td></tr>
+<tr><td>Congestion, severance, land</td><td><strong>Unchanged.</strong> An electric car takes as much road and parking space as a petrol car.</td></tr>
+</tbody></table></div>
+<p>Electric cars also change the other terms of \(W\):</p>
+<ul>
+<li><strong>Term A rises, and with it traffic.</strong> Electricity is cheaper per kilometer than petrol, so driving gets cheaper. People respond by driving more, which raises congestion, crashes and wear. Economists call this a <em>rebound effect</em>.</li>
+<li><strong>Term E rises, because revenue \(R\) falls.</strong> Fuel taxes shrink as fewer people buy fuel. Governments will need other ways to charge for road use, such as charges per kilometer, by place and by time of day (<a href="m13-pricing.html">Module 13</a>).</li>
+<li><strong>The carbon limit gets easier to meet.</strong> Electric cars are one of the cheapest measures on the abatement curve, so the shadow price of the carbon target falls as they spread. But cars last 15 years or more, so the fleet changes slowly, and the 2030 targets still need other measures.</li>
+</ul>
+<p>The upshot: electrification shrinks the CO₂ and exhaust parts of Term C, but leaves congestion, crashes, space and dust. As fuel taxes fade, the charges that remain should target those harms directly, by kilometer, place, time and vehicle weight.</p>
 <h3>Alternatives and debates</h3>
 <ul>
-<li><strong>Damage cost or avoidance cost?</strong> A carbon price can be the estimated damage of a tonne (the social cost of carbon) or the cost of meeting a target (an avoidance or "shadow" price). France's official carbon value follows the second logic.</li>
+<li><strong>Damage cost or avoidance cost?</strong> As shown above for carbon, a price can be the estimated damage of a unit of harm or the cost of meeting a target. The same choice arises for noise and air pollution.</li>
 <li><strong>Marginal or average?</strong> Pricing uses marginal costs. Accounting for a whole sector often uses averages. They can differ by a factor of several.</li>
 <li><strong>Price or limit?</strong> Some harms are better treated as limits (<a href="#limits">section 9</a>).</li>
 </ul>
