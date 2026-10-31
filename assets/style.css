@@ -212,6 +212,7 @@ img, iframe, video { max-width: 100%; height: auto; }
 main.essay { max-width: 44rem; }
 .essay-head { text-align: center; margin: .5rem 0 1.2rem; }
 .essay-head h1 { font-size: 2.6rem; margin-bottom: .2rem; }
+.byline { font-family: var(--sans); font-size: .95rem; color: var(--ink-2); margin: .6rem 0 0; }
 .subtitle { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--ink-2); margin: 0; }
 main.essay > p, main.essay li { font-size: 1.05rem; }
 figure.photo { margin: 1.4rem 0; }
