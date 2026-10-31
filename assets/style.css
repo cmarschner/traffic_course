@@ -252,3 +252,11 @@ figure.photo.inset { float: right; width: 42%; margin: .2rem 0 .6rem 1rem; }
   .person img, .person .noimg { width: 64px; height: 80px; }
   figure.photo.inset { float: none; width: 100%; margin: .5rem 0; }
 }
+
+/* interactive demos */
+.box.demo { border-left: 4px solid var(--accent); }
+.demo-controls { display: grid; gap: .4rem; margin: .6rem 0; font-family: var(--sans); font-size: .88rem; }
+.demo-controls label { display: grid; grid-template-columns: 5.5rem 1fr 3.5rem; align-items: center; gap: .6rem; }
+.demo-controls input { accent-color: var(--accent); width: 100%; }
+.demo-controls output { text-align: right; font-variant-numeric: tabular-nums; }
+main h4 { color: var(--accent); }

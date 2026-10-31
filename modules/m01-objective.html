@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 1 · What should a transport system optimize? — Welfare-Centered Transport Planning</title>
 <meta name="description" content="The welfare objective function at the center of the course: access and mode choice, health, externalities, land, costs and hard constraints.">
-<link rel="stylesheet" href="../assets/style.css?v=9">
+<link rel="stylesheet" href="../assets/style.css?v=10">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=9"></script>
+<script defer src="../assets/site.js?v=10"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -149,11 +149,113 @@ $$A_i = \sum_j O_j \, f(c_{ij}),$$
 <p class="credit">Photo: Ville de Saint-Dié-des-Vosges / Ji-Elle, 1992, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p></div>
 </aside>
 <h3>The utility-based measure: the logsum</h3>
-<p>Random utility theory, developed in transport by Daniel McFadden in the 1970s (Nobel Prize 2000), gave accessibility an economic meaning. Each person \(n\) chooses among alternatives \(j\), each a bundle of destination, mode, time of day and route. Each alternative has a utility</p>
-$$V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \beta_x^{\top}x_{nj} + \ln O_j ,$$
-<p>made of time \(t\), money \(c\), other qualities \(x\) (reliability, crowding, comfort, transfers, perceived safety) and the attraction of the destination \(O_j\). If people choose the alternative with the highest utility and the unobserved parts are random (logit), the expected value of the best choice is the <strong>logsum</strong>. Divided by the marginal utility of money \(\lambda_n\), it is that person's consumer surplus in money:</p>
-$$A_n = \frac{1}{\lambda_n}\ln \sum_{j} e^{V_{nj}} .$$
-<p>Williams (1977) and Ben-Akiva and Lerman (1985) established the logsum as the welfare measure of a choice model. The <a href="m02-valuing-access.html">rule of a half</a>, the traditional appraisal shortcut, is its linear approximation.</p>
+<p>Random utility theory, developed for transport by Daniel McFadden in the 1970s (Nobel Prize 2000), gave accessibility an economic meaning. It is easiest to understand in five steps. If you have fitted a multinomial logistic regression, you already know most of it.</p>
+
+<h4>Step 1: what the analyst sees, and what they don't</h4>
+<p>Each person \(n\) chooses one alternative \(j\) from a set, for example car, bus or bike for a given trip. An alternative can also be a destination, a time of day or a route. Each alternative gives the person a utility \(U_{nj}\), a number that says how attractive it is to them. The analyst splits it into two parts:</p>
+$$U_{nj} \;=\; \underbrace{V_{nj}}_{\text{observed}} \;+\; \underbrace{\varepsilon_{nj}}_{\text{unobserved}},\qquad V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \beta_x^{\top}x_{nj} .$$
+<p>\(V\) is what the data can explain: travel time \(t\), money cost \(c\), and other measurable qualities \(x\) such as transfers, crowding and reliability. \(\varepsilon\) is everything else: today's weather, a heavy bag, a liking for buses, a meeting near the station. The analyst cannot see \(\varepsilon\), so it is treated as random. The person, however, sees all of \(U\) and simply picks the alternative with the highest \(U_{nj}\).</p>
+
+<h4>Step 2: choice probabilities, which is multinomial logit</h4>
+<p>Because \(\varepsilon\) is random, the analyst can only state probabilities: \(P_{nj} = \Pr(U_{nj} \ge U_{nk}\ \text{for all } k)\). The probabilities depend on the distribution assumed for \(\varepsilon\). Assume the \(\varepsilon_{nj}\) are independent and follow a <strong>Gumbel</strong> (extreme-value type I) distribution, \(\Pr(\varepsilon\le x)=\exp(-e^{-x})\). The probabilities then take the familiar form</p>
+$$P_{nj} \;=\; \frac{e^{V_{nj}}}{\sum_k e^{V_{nk}}}, \qquad\text{equivalently}\qquad \ln P_{nj} \;=\; V_{nj} - \ln\sum_k e^{V_{nk}} .$$
+<p>This is the multinomial logit model, the softmax. The second form is the log-linear model you know. The coefficients \(\beta\) are estimated by maximum likelihood from observed choices, for example from a travel survey (<a href="m04-demand-mode-choice.html">Module 4</a>). The last term, \(\ln\sum_k e^{V_{nk}}\), is the <strong>log normalizing constant</strong>, the log partition function. It is the <strong>logsum</strong>.</p>
+<p><em>Why Gumbel?</em> Partly convenience: it is the one common assumption that gives probabilities in closed form. A normal distribution gives the probit model, which needs numerical integration. It also has a rationale. The Gumbel is the limiting distribution of the <em>maximum</em> of many random influences, and its bell shape is close to the normal. Nothing in what follows depends on the details. What matters is that the assumption is stated and can be tested.</p>
+
+<h4>Step 3: the expected value of the best choice is the logsum</h4>
+<p>The person ends up with the utility of whatever they choose, which is the maximum, \(\max_j U_{nj}\). The analyst does not know \(\varepsilon\) and therefore cannot know this maximum, but can compute its expected value. With Gumbel errors that expectation has a closed form, and it is the logsum again:</p>
+$$\mathbb{E}\Big[\max_j\,(V_{nj}+\varepsilon_{nj})\Big] \;=\; \ln\sum_j e^{V_{nj}} \;+\; \gamma ,$$
+<p>where \(\gamma\approx0.577\) is Euler's constant. It disappears whenever we compare two situations, so we drop it. The proof is three lines and relies on one property: the maximum of independent Gumbel variables is again Gumbel.</p>
+<div class="box note">
+<div class="box-title">Proof</div>
+<p>\(U_j = V_j + \varepsilon_j\) is Gumbel with location \(V_j\): \(\Pr(U_j\le x) = \exp(-e^{-(x-V_j)})\). The maximum is at most \(x\) only if every \(U_j\) is, so</p>
+$$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!\Big(-e^{-x}\sum_j e^{V_j}\Big) = \exp\!\Big(-e^{-(x - \ln\sum_j e^{V_j})}\Big).$$
+<p>That is a Gumbel distribution with location \(\ln\sum_j e^{V_j}\). A Gumbel with location \(m\) has mean \(m+\gamma\). ∎</p>
+</div>
+<p>Two special cases give the intuition:</p>
+<ul>
+<li><strong>One option clearly dominates</strong> (\(V_1 \gg V_2\)): the logsum is about \(V_1\). Having a second, poor option adds almost nothing.</li>
+<li><strong>\(k\) equally good options</strong> (all \(V_j = v\)): the logsum is \(v + \ln k\). With more good options, the chance rises that one of them happens to suit you particularly well today, because its \(\varepsilon\) is high. That is the value of choice.</li>
+</ul>
+<p>A further property links the logsum to demand: its derivative with respect to an option's utility is that option's probability, \(\partial \ln\sum_k e^{V_k} / \partial V_j = P_j\). In the language of log-linear models, the gradient of the log partition function is the vector of expected frequencies.</p>
+
+<h4>Step 4: from utility to money</h4>
+<p>Utility has no natural unit, but the cost coefficient converts it. \(\beta_c\) says how many utility units one euro of cost takes away, so \(\lambda_n = -\beta_c\) is the <em>marginal utility of money</em>. Dividing by it turns the expected best utility into euros, the person's consumer surplus:</p>
+$$A_n = \frac{1}{\lambda_n}\ln \sum_{j} e^{V_{nj}} \qquad(\text{plus a constant that cancels in comparisons}).$$
+<p>Only differences are meaningful. When a plan changes the \(V\)s, the welfare change is \(\Delta A_n = \tfrac{1}{\lambda_n}\,\Delta\!\ln\sum_j e^{V_{nj}}\). Williams (1977) and Ben-Akiva and Lerman (1985) established this as the welfare measure of a choice model. The <a href="m02-valuing-access.html">rule of a half</a>, the traditional appraisal shortcut, is its linear approximation.</p>
+
+<div class="box exercise">
+<div class="box-title">Worked example · improving the bus</div>
+<p>One trip, two options: car with \(V_{\text{car}}=-1\) and bus with \(V_{\text{bus}}=-2\). Cost coefficient \(\beta_c=-0.1\) per euro, so \(\lambda=0.1\).</p>
+<ul>
+<li>Probabilities: \(P_{\text{car}} = e^{-1}/(e^{-1}+e^{-2}) = 0.731\), \(P_{\text{bus}} = 0.269\).</li>
+<li>Logsum: \(\ln(e^{-1}+e^{-2}) = \ln(0.368+0.135) = -0.687\). That is 0.313 above the best \(V\) (\(-1\)), the value of having a choice.</li>
+<li>A bus lane raises \(V_{\text{bus}}\) to \(-1.5\). New logsum \(\ln(0.368+0.223) = -0.526\), an increase of 0.161 utility units. New bus share: 0.378.</li>
+<li>In money: \(0.161 / 0.1 = \) <strong>€1.61 per traveler per trip</strong>, averaged over everyone, including those who keep driving.</li>
+<li>Check with the rule of a half: improvement \(\times\) average bus share \(= 0.5 \times (0.269+0.378)/2 = 0.162\). Nearly identical.</li>
+</ul>
+</div>
+
+<h4>Step 5: why \(\ln O_j\) for destinations</h4>
+<p>When the alternatives are <em>destinations</em> such as city districts or traffic zones, each one bundles many elementary opportunities: a district with 5,000 jobs offers 5,000 possible workplaces. Suppose zone \(j\) contains \(O_j\) opportunities, each with the same observed utility \(v_j\) (same travel time, same cost) and its own independent \(\varepsilon\). Choosing the zone means choosing the best of these \(O_j\) options, and by Step 3 the value of that is</p>
+$$\ln \sum_{i=1}^{O_j} e^{v_j} \;=\; \ln\!\big(O_j\, e^{v_j}\big) \;=\; v_j + \ln O_j .$$
+<p>So \(\ln O_j\) is not an arbitrary transformation. It is exactly what aggregating identical opportunities into one zone produces, and it is called the <em>size term</em>. Three consequences:</p>
+<ul>
+<li>The probability of choosing a zone is proportional to \(O_j\,e^{v_j}\): opportunities times a decaying function of travel cost. That is the <strong>gravity model</strong>, and the logsum over zones is the utility-based version of Hansen's accessibility \(\sum_j O_j f(c_{ij})\). With \(f = e^{v}\), the two coincide up to the logarithm.</li>
+<li>Doubling the jobs in a zone doubles its chance of being chosen, all else equal. Splitting a zone into two halves leaves predictions unchanged, as it should, since the zone boundaries are the analyst's invention.</li>
+<li>In practice the coefficient on \(\ln O_j\) is estimated rather than fixed at 1. A value below 1 means opportunities within a zone are partly alike: their \(\varepsilon\)s are correlated, which leads to the nested logit of <a href="m04-demand-mode-choice.html">Module 4</a>.</li>
+</ul>
+<p>Putting a full alternative together, destination \(j\) by mode \(m\): \(V_{n,jm} = \beta_t\,t_{n,jm} + \beta_c\,c_{n,jm} + \beta_x^{\top}x_{n,jm} + \ln O_j\).</p>
+
+<div class="box demo" id="logsum-demo">
+<div class="box-title">Try it · simulate people choosing</div>
+<p class="small">Set the observed utilities of three options. The demo draws Gumbel noise for 50,000 simulated people, lets each pick their best option, and compares the simulation with the formulas.</p>
+<div class="demo-controls">
+<label>Option 1 <input type="range" min="-3" max="3" step="0.1" value="-1" data-v="0"> <output>−1.0</output></label>
+<label>Option 2 <input type="range" min="-3" max="3" step="0.1" value="-2" data-v="1"> <output>−2.0</output></label>
+<label>Option 3 <input type="range" min="-6" max="3" step="0.1" value="-6" data-v="2"> <output>−6.0</output></label>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th></tr></thead>
+<tbody>
+<tr><td>Logit probability \(e^{V_j}/\sum e^{V_k}\)</td><td class="num" data-o="p0"></td><td class="num" data-o="p1"></td><td class="num" data-o="p2"></td></tr>
+<tr><td>Simulated share choosing it</td><td class="num" data-o="s0"></td><td class="num" data-o="s1"></td><td class="num" data-o="s2"></td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<tr><td>Best observed utility, \(\max_j V_j\)</td><td class="num" data-o="max"></td></tr>
+<tr><td>Logsum, \(\ln\sum_j e^{V_j}\)</td><td class="num" data-o="ls"></td></tr>
+<tr><td>Simulated average utility of the chosen option, minus \(\gamma\)</td><td class="num" data-o="mc"></td></tr>
+</table></div>
+<p class="small">Things to try: make the three options equal (the logsum is \(\ln 3 \approx 1.10\) above them). Make option 3 very poor (it adds almost nothing). Raise option 2 by 0.5 and compare the change in the logsum with the rule of a half.</p>
+</div>
+<script>
+(function () {
+  var box = document.getElementById("logsum-demo"), N = 50000, G = 0.5772156649;
+  var sliders = box.querySelectorAll("input[type=range]");
+  function out(k, v) { box.querySelector('[data-o="' + k + '"]').textContent = v; }
+  function fmt(x) { return (x < 0 ? "−" : "") + Math.abs(x).toFixed(3); }
+  function run() {
+    var V = [].map.call(sliders, function (s) { s.nextElementSibling.textContent = fmt(+s.value).replace(/0+$/, "").replace(/\.$/, ".0"); return +s.value; });
+    var ex = V.map(Math.exp), sum = ex[0] + ex[1] + ex[2];
+    var counts = [0, 0, 0], total = 0;
+    for (var i = 0; i < N; i++) {
+      var best = -Infinity, bj = 0;
+      for (var j = 0; j < 3; j++) {
+        var u = V[j] - Math.log(-Math.log(Math.random()));
+        if (u > best) { best = u; bj = j; }
+      }
+      counts[bj]++; total += best;
+    }
+    for (var j = 0; j < 3; j++) { out("p" + j, (100 * ex[j] / sum).toFixed(1) + "%"); out("s" + j, (100 * counts[j] / N).toFixed(1) + "%"); }
+    out("max", fmt(Math.max.apply(null, V)));
+    out("ls", fmt(Math.log(sum)));
+    out("mc", fmt(total / N - G));
+  }
+  sliders.forEach(function (s) { s.addEventListener("input", run); });
+  run();
+})();
+</script>
+
 <aside class="person">
 <img src="../assets/img/people/mcfadden.jpg" alt="Portrait of Daniel McFadden" loading="lazy">
 <div><p class="person-name">Daniel McFadden <span>born 1937</span></p>
