@@ -153,8 +153,8 @@ $$A_i = \sum_j O_j \, f(c_{ij}),$$
 
 <h4>Step 1: what the analyst sees, and what they don't</h4>
 <p>Each person \(n\) chooses one alternative \(j\) from a set, for example car, bus or bike for a given trip. An alternative can also be a destination, a time of day or a route. Each alternative gives the person a utility \(U_{nj}\), a number that says how attractive it is to them. The analyst splits it into two parts:</p>
-$$U_{nj} \;=\; \underbrace{V_{nj}}_{\text{observed}} \;+\; \underbrace{\varepsilon_{nj}}_{\text{unobserved}},\qquad V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \beta_x^{\top}x_{nj} .$$
-<p>\(V\) is what the data can explain: travel time \(t\), money cost \(c\), and other measurable qualities \(x\) such as transfers, crowding and reliability. \(\varepsilon\) is everything else: today's weather, a heavy bag, a liking for buses, a meeting near the station. The analyst cannot see \(\varepsilon\), so it is treated as random. The person, however, sees all of \(U\) and simply picks the alternative with the highest \(U_{nj}\).</p>
+$$U_{nj} \;=\; \underbrace{V_{nj}}_{\text{observed}} \;+\; \underbrace{\varepsilon_{nj}}_{\text{unobserved}},\qquad V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj} .$$
+<p>\(V\) is what the data can explain: travel time \(t\), money cost \(c\), and other measurable qualities \(\mathbf{x}\) such as transfers, crowding and reliability. \(\varepsilon\) is everything else: today's weather, a heavy bag, a liking for buses, a meeting near the station. The analyst cannot see \(\varepsilon\), so it is treated as random. The person, however, sees all of \(U\) and simply picks the alternative with the highest \(U_{nj}\).</p>
 
 <h4>Step 2: choice probabilities, which is multinomial logit</h4>
 <p>Because \(\varepsilon\) is random, the analyst can only state probabilities: \(P_{nj} = \Pr(U_{nj} \ge U_{nk}\ \text{for all } k)\). The probabilities depend on the distribution assumed for \(\varepsilon\). Assume the \(\varepsilon_{nj}\) are independent and follow a <strong>Gumbel</strong> (extreme-value type I) distribution, \(\Pr(\varepsilon\le x)=\exp(-e^{-x})\). The probabilities then take the familiar form</p>
@@ -205,7 +205,7 @@ $$\ln \sum_{i=1}^{O_j} e^{v_j} \;=\; \ln\!\big(O_j\, e^{v_j}\big) \;=\; v_j + \l
 <li>Doubling the jobs in a zone doubles its chance of being chosen, all else equal. Splitting a zone into two halves leaves predictions unchanged, as it should, since the zone boundaries are the analyst's invention.</li>
 <li>In practice the coefficient on \(\ln O_j\) is estimated rather than fixed at 1. A value below 1 means opportunities within a zone are partly alike: their \(\varepsilon\)s are correlated, which leads to the nested logit of <a href="m04-demand-mode-choice.html">Module 4</a>.</li>
 </ul>
-<p>Putting a full alternative together, destination \(j\) by mode \(m\): \(V_{n,jm} = \beta_t\,t_{n,jm} + \beta_c\,c_{n,jm} + \beta_x^{\top}x_{n,jm} + \ln O_j\).</p>
+<p>Putting a full alternative together, destination \(j\) by mode \(m\): \(V_{n,jm} = \beta_t\,t_{n,jm} + \beta_c\,c_{n,jm} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{n,jm} + \ln O_j\).</p>
 
 <div class="box demo" id="logsum-demo">
 <div class="box-title">Try it · simulate people choosing</div>
@@ -437,7 +437,7 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 <tr><td>3. Safety and health</td><td>KSI (killed or seriously injured), exposure to pollution</td><td>C (crash, air), B (activity), safety limit</td></tr>
 <tr><td>4. Environment</td><td>CO₂e, NOₓ, PM₂.₅, energy</td><td>C, carbon budget</td></tr>
 <tr><td>5. Land efficiency</td><td>road and parking land per capita, people per meter of street</td><td>D, land limit</td></tr>
-<tr><td>6. Urban quality</td><td>noise, severance, walkability, public space</td><td>C (noise, severance), comfort attributes \(x\) in A, D</td></tr>
+<tr><td>6. Urban quality</td><td>noise, severance, walkability, public space</td><td>C (noise, severance), comfort attributes \(\mathbf{x}\) in A, D</td></tr>
 <tr><td>7. Equity and inclusion</td><td>accessibility by income, age, disability, neighborhood</td><td>weights \(\omega_g\), access-for-all limit</td></tr>
 <tr><td>8. Economic efficiency and resilience</td><td>benefit–cost ratio, lifecycle cost, reliability under disruption</td><td>E, plus the whole of \(W\) as net benefit</td></tr>
 </table></div>

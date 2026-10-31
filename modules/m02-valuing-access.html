@@ -49,7 +49,7 @@
 <p>A traveler choosing between alternatives weighs money, time and discomfort. Transport analysis collapses these into one number, the <strong>generalized cost</strong> (GC) of alternative \(j\), expressed in money:</p>
 $$GC_j = c_j + \mathrm{VTTS}\cdot\Big(t^{\text{ivt}}_j + w_{\text{wait}}\,t^{\text{wait}}_j + w_{\text{walk}}\,t^{\text{walk}}_j + \text{transfer penalty}_j\Big) + \mathrm{VOR}\cdot\sigma_j + \dots$$
 <p>Here \(c_j\) is out-of-pocket cost (fare, fuel, toll, parking), \(t^{\text{ivt}}\) in-vehicle time, the weights \(w\) scale waiting and walking time relative to in-vehicle time, and \(\sigma_j\) is the standard deviation of travel time, valued at the value of reliability (VOR). Generalized cost is just the systematic utility of Module 1 divided by the marginal utility of money:</p>
-$$V_{nj} = \beta_t t_{nj} + \beta_c c_{nj} + \beta_x^{\top}x_{nj} + \ln O_j \quad\Longrightarrow\quad -\frac{V_{nj}}{\lambda_n} = c_{nj} + \frac{\beta_t}{\beta_c}\,t_{nj} + \dots, \qquad \lambda_n = -\beta_c.$$
+$$V_{nj} = \beta_t t_{nj} + \beta_c c_{nj} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj} + \ln O_j \quad\Longrightarrow\quad -\frac{V_{nj}}{\lambda_n} = c_{nj} + \frac{\beta_t}{\beta_c}\,t_{nj} + \dots, \qquad \lambda_n = -\beta_c.$$
 <p>So the <strong>VTTS is a ratio of coefficients</strong>: \(\mathrm{VTTS} = \beta_t/\beta_c\) (both negative). If a mode-choice model estimates \(\beta_t=-0.03\) per minute and \(\beta_c=-0.15\) per euro, then \(\mathrm{VTTS}=0.2\) €/min \(=12\) €/h. Everything else in this module is about which \(\beta\)s to use, whose they are, and what to do with them.</p>
 
 <div class="box note">
@@ -136,7 +136,7 @@ $$\Delta CS = \int_{P_1}^{P_0} T(P)\,dP \;\approx\; \tfrac12\,(T_0+T_1)(P_0-P_1)
 <p>"This benefit component, newly included in the BVWP 2030, takes into account, for example in passenger transport, the fact that road users' decisions between available mobility options are not made solely on the basis of comparisons of travel time and cost."</p>
 <p class="small">Source: Methodenhandbuch zum Bundesverkehrswegeplan 2030, section 4.2.2.6, Veränderung der Impliziten Nutzen (N<sub>I</sub>). The handbook adds that this allows induced and diverted traffic to be treated consistently. Translated by the course authors (machine-assisted).</p>
 </div>
-<p>In Module 1 terms, the implicit benefit captures the part of \(V_{nj}\) that is not time or cost, the \(\beta_x^{\top}x\) and the unobserved mode-specific constants. It is a step from "time savings" toward the full logsum.</p>
+<p>In Module 1 terms, the implicit benefit captures the part of \(V_{nj}\) that is not time or cost, the \(\boldsymbol{\beta}_x^{\top}\mathbf{x}\) and the unobserved mode-specific constants. It is a step from "time savings" toward the full logsum.</p>
 
 <h2>5. The logsum as the welfare measure <span class="term">A</span></h2>
 <p>For a multinomial logit model with scale normalized to one, the expected maximum utility of person \(n\) is</p>
