@@ -167,26 +167,26 @@ $$A_i = \sum_j O_j \, f(c_{ij}).$$
 
 <div class="box demo logsum-demo" id="logsum-demo">
 <div class="box-title">Try it · simulate people choosing</div>
-<p class="small">Set the measured parts of three options with the sliders. Higher is better. For each simulated person, the demo draws a random hidden part for every option. It adds the two parts to get the total utility. The person chooses the option with the highest total.</p>
+<p class="small">Take a 6 km commute with three options. The <strong>car</strong> takes 15 minutes and costs €6 for parking. The <strong>bus</strong> takes 25 minutes, plus a 10-minute walk, and costs €3. The <strong>bike</strong> is free but takes 30 minutes, up a steep hill. Each slider sets an option's measured part, which sums up its time, cost and effort. Higher is better. The starting values rank the car first, the bus second and the bike third. For each simulated person, the demo draws a random hidden part for every option. It adds the two parts to get the total utility. The person chooses the option with the highest total.</p>
 <div class="demo-controls">
-<label>Option 1 <input type="range" min="-3" max="3" step="0.1" value="-1"> <output>−1.0</output></label>
-<label>Option 2 <input type="range" min="-3" max="3" step="0.1" value="-2"> <output>−2.0</output></label>
-<label>Option 3 <input type="range" min="-6" max="3" step="0.1" value="-6"> <output>−6.0</output></label>
+<label>Car <input type="range" min="-3" max="3" step="0.1" value="-1" data-name="Car"> <output>−1.0</output></label>
+<label>Bus <input type="range" min="-3" max="3" step="0.1" value="-2" data-name="Bus"> <output>−2.0</output></label>
+<label>Bike <input type="range" min="-6" max="3" step="0.1" value="-3" data-name="Bike"> <output>−3.0</output></label>
 </div>
 <p class="demo-sub"><strong>Eight simulated people.</strong> Each cell shows measured part + hidden part = total. The highlighted cell is the highest total in the row: the option this person chooses. <button type="button" class="demo-btn" data-act="redraw">Draw new people</button></p>
 <div class="table-wrap"><table class="demo-people">
-<thead><tr><th>Person</th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th><th>Chooses</th></tr></thead>
+<thead><tr><th>Person</th><th class="num">Car</th><th class="num">Bus</th><th class="num">Bike</th><th>Chooses</th></tr></thead>
 <tbody></tbody></table></div>
 <p class="small" data-o="note"></p>
 <p class="demo-sub"><strong>50,000 simulated people.</strong> Each makes the same kind of choice. Counting their choices answers both questions.</p>
 <div class="table-wrap"><table>
-<thead><tr><th></th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th></tr></thead>
+<thead><tr><th></th><th class="num">Car</th><th class="num">Bus</th><th class="num">Bike</th></tr></thead>
 <tbody><tr><td>Share choosing it</td><td class="num" data-o="s0"></td><td class="num" data-o="s1"></td><td class="num" data-o="s2"></td></tr></tbody></table></div>
 <div class="table-wrap"><table>
 <tr><td>Best measured part</td><td class="num" data-o="max"></td></tr>
 <tr><td>Average total utility of the option each person chooses</td><td class="num" data-o="mc"></td></tr>
 </table></div>
-<p class="small">The hidden parts are drawn so that they average zero. Things to try: make the three options equal. Make option 3 very poor. Move option 2 close to option 1.</p>
+<p class="small">The hidden parts are drawn so that they average zero. Things to try: a bus lane makes the bus faster, so raise the bus by 0.5. A higher parking fee makes the car worse, so lower the car. Snow makes the bike very poor, so move it to the far left. Then make all three options equally good.</p>
 </div>
 
 <p>Two patterns show up. First, the shares are never all-or-nothing. Even a clearly worse option wins some people, because for them the hidden part tips the balance. Second, the average value of the chosen option is higher than the best measured part. Each person picks what is best for <em>them</em>, and sometimes that is not the option that looks best on paper. Adding a good option raises this average further.</p>
@@ -259,14 +259,14 @@ $$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!
 
 <div class="box demo logsum-demo">
 <div class="box-title">Check · formulas versus simulation</div>
-<p class="small">The same three options as in the first demo. Now the results of 50,000 simulated people stand next to the formulas from Steps 2 and 4. The hidden parts are Gumbel values shifted to average zero, so no \(\gamma\) appears.</p>
+<p class="small">The same car, bus and bike as in the first demo. Now the results of 50,000 simulated people stand next to the formulas from Steps 2 and 4. The hidden parts are Gumbel values shifted to average zero, so no \(\gamma\) appears.</p>
 <div class="demo-controls">
-<label>Option 1 <input type="range" min="-3" max="3" step="0.1" value="-1"> <output>−1.0</output></label>
-<label>Option 2 <input type="range" min="-3" max="3" step="0.1" value="-2"> <output>−2.0</output></label>
-<label>Option 3 <input type="range" min="-6" max="3" step="0.1" value="-6"> <output>−6.0</output></label>
+<label>Car <input type="range" min="-3" max="3" step="0.1" value="-1" data-name="Car"> <output>−1.0</output></label>
+<label>Bus <input type="range" min="-3" max="3" step="0.1" value="-2" data-name="Bus"> <output>−2.0</output></label>
+<label>Bike <input type="range" min="-6" max="3" step="0.1" value="-3" data-name="Bike"> <output>−3.0</output></label>
 </div>
 <div class="table-wrap"><table>
-<thead><tr><th></th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th></tr></thead>
+<thead><tr><th></th><th class="num">Car</th><th class="num">Bus</th><th class="num">Bike</th></tr></thead>
 <tbody>
 <tr><td>Logit probability \(e^{V_j}/\sum_k e^{V_k}\)</td><td class="num" data-o="p0"></td><td class="num" data-o="p1"></td><td class="num" data-o="p2"></td></tr>
 <tr><td>Simulated share choosing it</td><td class="num" data-o="s0"></td><td class="num" data-o="s1"></td><td class="num" data-o="s2"></td></tr>
@@ -276,7 +276,7 @@ $$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!
 <tr><td>Logsum, \(\ln\sum_j e^{V_j}\)</td><td class="num" data-o="ls"></td></tr>
 <tr><td>Simulated average of each person's highest \(U\)</td><td class="num" data-o="mc"></td></tr>
 </table></div>
-<p class="small">Things to try: make the three options equal (the logsum is \(\ln 3 \approx 1.10\) above them). Make option 3 very poor (it adds almost nothing). Raise option 2 by 0.5: the logsum rises by about 0.5 times option 2's probability.</p>
+<p class="small">Things to try: make the three options equal (the logsum is \(\ln 3 \approx 1.10\) above them). Make the bike very poor, as on a snowy day (it adds almost nothing). Give the bus a bus lane by raising it 0.5: the logsum rises by about 0.5 times the bus probability.</p>
 </div>
 <script>
 (function () {
@@ -287,6 +287,7 @@ $$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!
   function hidden() { return -Math.log(-Math.log(Math.random())) - G; }
   document.querySelectorAll(".logsum-demo").forEach(function (box) {
     var sliders = box.querySelectorAll("input[type=range]");
+    var names = [].map.call(sliders, function (s) { return s.dataset.name; });
     var body = box.querySelector(".demo-people tbody");
     function out(k, v) { var el = box.querySelector('[data-o="' + k + '"]'); if (el) el.textContent = v; }
     function values() { return [].map.call(sliders, function (s) { s.nextElementSibling.textContent = fmt(+s.value, 1); return +s.value; }); }
@@ -299,7 +300,7 @@ $$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!
         if (c !== bestV) surprises++;
         html += "<tr><td>" + (i + 1) + "</td>" + V.map(function (v, j) {
           return '<td class="num' + (j === c ? ' chosen' : '') + '"><span class="parts">' + fmt(v, 1) + sgn(e[j]) + " =</span> " + fmt(U[j], 2) + "</td>";
-        }).join("") + "<td><strong>Option " + (c + 1) + "</strong></td></tr>";
+        }).join("") + "<td><strong>" + names[c] + "</strong></td></tr>";
       }
       body.innerHTML = html;
       out("note", surprises === 0
