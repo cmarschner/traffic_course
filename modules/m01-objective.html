@@ -153,12 +153,48 @@ $$A_i = \sum_j O_j \, f(c_{ij}).$$
 <p class="credit">Photo: Ville de Saint-Dié-des-Vosges / Ji-Elle, 1992, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p></div>
 </aside>
 <h3>The utility-based measure: the logsum</h3>
-<p>Hansen's measure counts what is reachable. It does not say how much being able to reach it is worth to people. Random utility theory answers that question. It was developed for transport by Daniel McFadden in the 1970s, and it earned him the Nobel Prize in 2000. We build it up in six small steps.</p>
+<p>Hansen's measure counts what is reachable. It does not say how much being able to reach it is worth to people. Random utility theory answers that question. It was developed for transport by Daniel McFadden in the 1970s, and it earned him the Nobel Prize in 2000.</p>
 
-<h4>Step 1: an analyst watching people choose</h4>
-<p>Imagine an analyst who wants to understand how people choose to travel. The analyst has data from a travel survey. For each trip, the data show which option the person chose: car, bus or bike. The data also show the travel time and the cost of every option, including those not chosen.</p>
-<p>The analyst sees the choice only from the outside. Some of what led to it is hidden. To reason about this, we make one assumption: each person gives each option a score, and picks the option with the highest score. Economists call this score <strong>utility</strong>.</p>
-<p>Some parts of utility can be measured, such as travel time and money cost. Other parts are invisible to the analyst, such as a person's liking for buses, today's weather, or a heavy bag. Unless we know more about these hidden parts, the best we can do is treat them as random.</p>
+<h4>What we are trying to do</h4>
+<p>Picture a person about to make a trip. They can go by car, by bus or by bike. Some things about each option are easy to measure, such as the travel time and the cost. Other things matter too, but nobody else can see them: a liking for buses, today's weather, a heavy bag.</p>
+<p>Suppose the person gives each option a score and takes the option with the highest score. Economists call this score <strong>utility</strong>. Part of it comes from the things we can measure. We call this the <em>measured part</em>. The rest comes from the things we cannot see. We call this the <em>hidden part</em>.</p>
+<p>A planner who changes a road or a bus line changes only the measured parts. The planner wants to know two things:</p>
+<ol>
+<li><strong>Who chooses what?</strong> What share of people will pick each option?</li>
+<li><strong>What is the choice worth?</strong> On average, how good is the option each person ends up with?</li>
+</ol>
+<p>The hidden parts differ from person to person. We cannot know them, so we treat them as random numbers. The demo below does exactly that. It simulates people, each with their own random hidden parts, and lets each of them pick their best option.</p>
+
+<div class="box demo logsum-demo" id="logsum-demo">
+<div class="box-title">Try it · simulate people choosing</div>
+<p class="small">Set the measured parts of three options with the sliders. Higher is better. For each simulated person, the demo draws a random hidden part for every option. It adds the two parts to get the total utility. The person chooses the option with the highest total.</p>
+<div class="demo-controls">
+<label>Option 1 <input type="range" min="-3" max="3" step="0.1" value="-1"> <output>−1.0</output></label>
+<label>Option 2 <input type="range" min="-3" max="3" step="0.1" value="-2"> <output>−2.0</output></label>
+<label>Option 3 <input type="range" min="-6" max="3" step="0.1" value="-6"> <output>−6.0</output></label>
+</div>
+<p class="demo-sub"><strong>Eight simulated people.</strong> Each cell shows measured part + hidden part = total. The highlighted cell is the highest total in the row: the option this person chooses. <button type="button" class="demo-btn" data-act="redraw">Draw new people</button></p>
+<div class="table-wrap"><table class="demo-people">
+<thead><tr><th>Person</th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th><th>Chooses</th></tr></thead>
+<tbody></tbody></table></div>
+<p class="small" data-o="note"></p>
+<p class="demo-sub"><strong>50,000 simulated people.</strong> Each makes the same kind of choice. Counting their choices answers both questions.</p>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th></tr></thead>
+<tbody><tr><td>Share choosing it</td><td class="num" data-o="s0"></td><td class="num" data-o="s1"></td><td class="num" data-o="s2"></td></tr></tbody></table></div>
+<div class="table-wrap"><table>
+<tr><td>Best measured part</td><td class="num" data-o="max"></td></tr>
+<tr><td>Average total utility of the option each person chooses</td><td class="num" data-o="mc"></td></tr>
+</table></div>
+<p class="small">The hidden parts are drawn so that they average zero. Things to try: make the three options equal. Make option 3 very poor. Move option 2 close to option 1.</p>
+</div>
+
+<p>Two patterns show up. First, the shares are never all-or-nothing. Even a clearly worse option wins some people, because for them the hidden part tips the balance. Second, the average value of the chosen option is higher than the best measured part. Each person picks what is best for <em>them</em>, and sometimes that is not the option that looks best on paper. Adding a good option raises this average further.</p>
+<p>A simulation gives these answers only approximately, and only after drawing many people. The rest of this section finds exact formulas for both: one for the shares (Step 2) and one for the value (Step 4). We build them up in six small steps.</p>
+
+<h4>Step 1: the analyst's view</h4>
+<p>The planner relies on an analyst, who learns from data how people choose. The analyst has a travel survey. For each trip, it shows which option the person chose. It also shows the travel time and the cost of every option, including those not chosen.</p>
+<p>The analyst sees only the measured parts and the choices. The hidden parts stay hidden. So the analyst makes the same assumptions as the demo: each person picks the option with the highest utility, and the hidden parts are random.</p>
 <p>Formally, write \(U_{nj}\) for the utility that person \(n\) gives option \(j\). We split it into a measured part \(V_{nj}\) and a hidden part \(\varepsilon_{nj}\):</p>
 $$U_{nj} \;=\; V_{nj} \;+\; \varepsilon_{nj}.$$
 <p>The measured part is a weighted sum of the things we can measure:</p>
@@ -171,7 +207,7 @@ $$V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \boldsymbol{\beta}_x^{\top}\mathb
 <p>Because part of the utility is hidden, the analyst cannot predict a choice with certainty. The analyst can only say how likely each choice is. Option \(j\) is chosen when its utility is the highest, so its probability is</p>
 $$P_{nj} = \Pr\big(U_{nj} \ge U_{nk}\ \text{for every other option } k\big).$$
 <p>To compute this probability, we need an assumption about the hidden parts \(\varepsilon\): which values are likely and which are rare. Such an assumption is called a <em>probability distribution</em>.</p>
-<p>The standard choice is the <strong>Gumbel distribution</strong>. It is named after Emil Gumbel, a German statistician who studied extremes, such as the highest flood of each year. It describes how the largest of many random values is spread. Its shape is a bell, close to the normal distribution, with a slightly longer tail toward high values. In formula form, the chance that a Gumbel value is at most \(x\) is \(\exp(-e^{-x})\).</p>
+<p>The standard choice is the <strong>Gumbel distribution</strong>. It is named after Emil Gumbel, a German statistician who studied extremes, such as the highest flood of each year. It describes how the largest of many random values is spread. Its shape is a bell, close to the normal distribution, with a slightly longer tail toward high values. In formula form, the chance that a Gumbel value is at most \(x\) is \(\exp(-e^{-x})\). The demo at the start of this section draws its hidden parts from this distribution.</p>
 <p>Why Gumbel and not the normal distribution? Mainly because of convenience. With Gumbel, the probabilities have a simple formula. With the normal distribution they do not, and must be computed numerically (that model is called <em>probit</em>).</p>
 <p>We need one more assumption: the hidden parts of different options are <em>independent</em>. Knowing that someone has an unusually strong liking for the bus tells us nothing about their hidden liking for the car. Note that this is an assumption about the hidden parts, not about the measured ones. Times and costs of different options can be related in any way.</p>
 <p>Under these two assumptions, McFadden showed that the probability of choosing option \(j\) is</p>
@@ -205,7 +241,7 @@ $$\text{logsum}_n \;=\; \ln \sum_k e^{V_{nk}}.$$
 <p>The person ends up with the utility of the option they choose. Since they choose the best one, they get the highest utility, \(\max_j U_{nj}\). The analyst does not know this value, because it includes the hidden parts.</p>
 <p>The analyst can, however, compute its average over all possible hidden values. This average is called the <em>expected value</em>, written \(\mathbb{E}[\cdot]\). With Gumbel-distributed hidden parts, it equals the logsum plus a constant:</p>
 $$\mathbb{E}\Big[\max_j\,(V_{nj}+\varepsilon_{nj})\Big] \;=\; \ln\sum_j e^{V_{nj}} \;+\; \gamma .$$
-<p>The constant \(\gamma \approx 0.577\) is called Euler's constant. It is the same in every situation, so it cancels whenever we compare two situations. From now on we drop it.</p>
+<p>The constant \(\gamma \approx 0.577\) is called Euler's constant. It is the average of a single Gumbel value. If the hidden parts are shifted so that they average zero, as in the demo, the constant disappears. Either way it is the same in every situation, so it cancels whenever we compare two situations. From now on we drop it.</p>
 <p>Why is this true? The key is a property of the Gumbel distribution: the largest of several independent Gumbel values is again Gumbel-distributed. The box shows this in three lines.</p>
 <div class="box note">
 <div class="box-title">Proof</div>
@@ -220,6 +256,76 @@ $$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!
 <li><strong>Several equally good options.</strong> If \(k\) options all have the same \(V = v\), the logsum is \(v + \ln k\). The extra \(\ln k\) is the value of choice: with more good options, it becomes more likely that one of them happens to suit you particularly well today.</li>
 </ul>
 <p>One more property will be useful later. If an option's measured utility \(V_j\) rises by a small amount, the logsum rises by that amount times the option's probability \(P_j\). An improvement is worth more, the more people use the improved option.</p>
+
+<div class="box demo logsum-demo">
+<div class="box-title">Check · formulas versus simulation</div>
+<p class="small">The same three options as in the first demo. Now the results of 50,000 simulated people stand next to the formulas from Steps 2 and 4. The hidden parts are Gumbel values shifted to average zero, so no \(\gamma\) appears.</p>
+<div class="demo-controls">
+<label>Option 1 <input type="range" min="-3" max="3" step="0.1" value="-1"> <output>−1.0</output></label>
+<label>Option 2 <input type="range" min="-3" max="3" step="0.1" value="-2"> <output>−2.0</output></label>
+<label>Option 3 <input type="range" min="-6" max="3" step="0.1" value="-6"> <output>−6.0</output></label>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th></tr></thead>
+<tbody>
+<tr><td>Logit probability \(e^{V_j}/\sum_k e^{V_k}\)</td><td class="num" data-o="p0"></td><td class="num" data-o="p1"></td><td class="num" data-o="p2"></td></tr>
+<tr><td>Simulated share choosing it</td><td class="num" data-o="s0"></td><td class="num" data-o="s1"></td><td class="num" data-o="s2"></td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<tr><td>Best measured utility, \(\max_j V_j\)</td><td class="num" data-o="max"></td></tr>
+<tr><td>Logsum, \(\ln\sum_j e^{V_j}\)</td><td class="num" data-o="ls"></td></tr>
+<tr><td>Simulated average of each person's highest \(U\)</td><td class="num" data-o="mc"></td></tr>
+</table></div>
+<p class="small">Things to try: make the three options equal (the logsum is \(\ln 3 \approx 1.10\) above them). Make option 3 very poor (it adds almost nothing). Raise option 2 by 0.5: the logsum rises by about 0.5 times option 2's probability.</p>
+</div>
+<script>
+(function () {
+  var N = 50000, G = 0.5772156649, SHOW = 8;
+  function fmt(x, d) { return (x < 0 ? "−" : "") + Math.abs(x).toFixed(d === undefined ? 3 : d); }
+  function sgn(x) { return (x < 0 ? " − " : " + ") + Math.abs(x).toFixed(2); }
+  // A Gumbel draw shifted by Euler's constant, so the hidden parts average zero.
+  function hidden() { return -Math.log(-Math.log(Math.random())) - G; }
+  document.querySelectorAll(".logsum-demo").forEach(function (box) {
+    var sliders = box.querySelectorAll("input[type=range]");
+    var body = box.querySelector(".demo-people tbody");
+    function out(k, v) { var el = box.querySelector('[data-o="' + k + '"]'); if (el) el.textContent = v; }
+    function values() { return [].map.call(sliders, function (s) { s.nextElementSibling.textContent = fmt(+s.value, 1); return +s.value; }); }
+    function people(V) {
+      if (!body) return;
+      var bestV = V.indexOf(Math.max.apply(null, V)), surprises = 0, html = "";
+      for (var i = 0; i < SHOW; i++) {
+        var e = V.map(hidden), U = V.map(function (v, j) { return v + e[j]; });
+        var c = U.indexOf(Math.max.apply(null, U));
+        if (c !== bestV) surprises++;
+        html += "<tr><td>" + (i + 1) + "</td>" + V.map(function (v, j) {
+          return '<td class="num' + (j === c ? ' chosen' : '') + '"><span class="parts">' + fmt(v, 1) + sgn(e[j]) + " =</span> " + fmt(U[j], 2) + "</td>";
+        }).join("") + "<td><strong>Option " + (c + 1) + "</strong></td></tr>";
+      }
+      body.innerHTML = html;
+      out("note", surprises === 0
+        ? "All eight chose the option with the highest measured part this time. Draw again: sometimes a hidden part tips the choice."
+        : surprises + " of the eight chose an option other than the one with the highest measured part. Their hidden parts tipped the balance. That is why an analyst, who sees only the measured parts, can only state probabilities.");
+    }
+    function crowd(V) {
+      var ex = V.map(Math.exp), sum = ex[0] + ex[1] + ex[2], counts = [0, 0, 0], total = 0;
+      for (var i = 0; i < N; i++) {
+        var best = -Infinity, bj = 0;
+        for (var j = 0; j < 3; j++) { var u = V[j] + hidden(); if (u > best) { best = u; bj = j; } }
+        counts[bj]++; total += best;
+      }
+      for (var j = 0; j < 3; j++) { out("p" + j, (100 * ex[j] / sum).toFixed(1) + "%"); out("s" + j, (100 * counts[j] / N).toFixed(1) + "%"); }
+      out("max", fmt(Math.max.apply(null, V)));
+      out("ls", fmt(Math.log(sum)));
+      out("mc", fmt(total / N));
+    }
+    function run() { var V = values(); people(V); crowd(V); }
+    sliders.forEach(function (s) { s.addEventListener("input", run); });
+    var redraw = box.querySelector('[data-act="redraw"]');
+    if (redraw) redraw.addEventListener("click", function () { people(values()); });
+    run();
+  });
+})();
+</script>
 
 <h4>Step 5: from utility to money</h4>
 <p>Utility has no natural unit. To add it to costs and harms, we convert it into money. The cost weight \(\beta_c\) makes this possible: it says how much utility one euro of cost takes away.</p>
@@ -253,77 +359,6 @@ $$\ln \sum_{i=1}^{O_j} e^{v_j} \;=\; \ln\!\big(O_j\, e^{v_j}\big) \;=\; v_j + \l
 <li>In practice, the weight on \(\ln O_j\) is estimated from data rather than fixed at 1. A weight below 1 means the opportunities in a district are partly alike, so their hidden parts are not independent. A variant called <em>nested logit</em> handles this (<a href="m04-demand-mode-choice.html">Module 4</a>).</li>
 </ul>
 <p>A complete option is then a destination \(j\) reached by a way of traveling \(m\), with measured utility \(V_{n,jm} = \beta_t\,t_{n,jm} + \beta_c\,c_{n,jm} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{n,jm} + \ln O_j\).</p>
-
-<div class="box demo" id="logsum-demo">
-<div class="box-title">Try it · simulate people choosing</div>
-<p class="small">Set the measured utilities \(V\) of three options. The demo then simulates people. For each person, it draws a random hidden part \(\varepsilon\) for every option from a Gumbel distribution. It adds the two parts to get the total utility \(U = V + \varepsilon\). The person chooses the option with the highest \(U\).</p>
-<div class="demo-controls">
-<label>Option 1 <input type="range" min="-3" max="3" step="0.1" value="-1" data-v="0"> <output>−1.0</output></label>
-<label>Option 2 <input type="range" min="-3" max="3" step="0.1" value="-2" data-v="1"> <output>−2.0</output></label>
-<label>Option 3 <input type="range" min="-6" max="3" step="0.1" value="-6" data-v="2"> <output>−6.0</output></label>
-</div>
-<p class="demo-sub"><strong>Eight simulated people.</strong> Each cell shows \(V + \varepsilon = U\). The highlighted cell is the highest \(U\) in the row: the option this person chooses. <button type="button" class="demo-btn" data-act="redraw">Draw new people</button></p>
-<div class="table-wrap"><table class="demo-people">
-<thead><tr><th>Person</th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th><th>Chooses</th></tr></thead>
-<tbody></tbody></table></div>
-<p class="small" data-o="note"></p>
-<p class="demo-sub"><strong>50,000 simulated people.</strong> Each makes the same kind of choice. Counting their choices gives shares, which we compare with the formulas from Steps 2 and 4.</p>
-<div class="table-wrap"><table>
-<thead><tr><th></th><th class="num">Option 1</th><th class="num">Option 2</th><th class="num">Option 3</th></tr></thead>
-<tbody>
-<tr><td>Logit probability \(e^{V_j}/\sum_k e^{V_k}\)</td><td class="num" data-o="p0"></td><td class="num" data-o="p1"></td><td class="num" data-o="p2"></td></tr>
-<tr><td>Simulated share choosing it</td><td class="num" data-o="s0"></td><td class="num" data-o="s1"></td><td class="num" data-o="s2"></td></tr>
-</tbody></table></div>
-<div class="table-wrap"><table>
-<tr><td>Best measured utility, \(\max_j V_j\)</td><td class="num" data-o="max"></td></tr>
-<tr><td>Logsum, \(\ln\sum_j e^{V_j}\)</td><td class="num" data-o="ls"></td></tr>
-<tr><td>Simulated average of each person's highest \(U\), minus \(\gamma\)</td><td class="num" data-o="mc"></td></tr>
-</table></div>
-<p class="small">Things to try: make the three options equal (the logsum is \(\ln 3 \approx 1.10\) above them). Make option 3 very poor (it adds almost nothing). Raise option 2 by 0.5 and compare the change in the logsum with the rule of a half.</p>
-</div>
-<script>
-(function () {
-  var box = document.getElementById("logsum-demo"), N = 50000, G = 0.5772156649, SHOW = 8;
-  var sliders = box.querySelectorAll("input[type=range]");
-  var body = box.querySelector(".demo-people tbody");
-  function out(k, v) { box.querySelector('[data-o="' + k + '"]').textContent = v; }
-  function fmt(x, d) { return (x < 0 ? "−" : "") + Math.abs(x).toFixed(d === undefined ? 3 : d); }
-  function sgn(x) { return (x < 0 ? " − " : " + ") + Math.abs(x).toFixed(2); }
-  function gumbel() { return -Math.log(-Math.log(Math.random())); }
-  function values() { return [].map.call(sliders, function (s) { s.nextElementSibling.textContent = fmt(+s.value, 1); return +s.value; }); }
-  function people(V) {
-    var bestV = V.indexOf(Math.max.apply(null, V)), surprises = 0, html = "";
-    for (var i = 0; i < SHOW; i++) {
-      var e = V.map(gumbel), U = V.map(function (v, j) { return v + e[j]; });
-      var c = U.indexOf(Math.max.apply(null, U));
-      if (c !== bestV) surprises++;
-      html += "<tr><td>" + (i + 1) + "</td>" + V.map(function (v, j) {
-        return '<td class="num' + (j === c ? ' chosen' : '') + '"><span class="parts">' + fmt(v, 1) + sgn(e[j]) + " =</span> " + fmt(U[j], 2) + "</td>";
-      }).join("") + "<td><strong>Option " + (c + 1) + "</strong></td></tr>";
-    }
-    body.innerHTML = html;
-    out("note", surprises === 0
-      ? "All eight chose the option with the highest measured utility V this time. Draw again: sometimes a hidden part tips the choice."
-      : surprises + " of the eight chose an option other than the one with the highest V. Their hidden parts tipped the balance. That is why the analyst can only state probabilities.");
-  }
-  function crowd(V) {
-    var ex = V.map(Math.exp), sum = ex[0] + ex[1] + ex[2], counts = [0, 0, 0], total = 0;
-    for (var i = 0; i < N; i++) {
-      var best = -Infinity, bj = 0;
-      for (var j = 0; j < 3; j++) { var u = V[j] + gumbel(); if (u > best) { best = u; bj = j; } }
-      counts[bj]++; total += best;
-    }
-    for (var j = 0; j < 3; j++) { out("p" + j, (100 * ex[j] / sum).toFixed(1) + "%"); out("s" + j, (100 * counts[j] / N).toFixed(1) + "%"); }
-    out("max", fmt(Math.max.apply(null, V)));
-    out("ls", fmt(Math.log(sum)));
-    out("mc", fmt(total / N - G));
-  }
-  function run() { var V = values(); people(V); crowd(V); }
-  sliders.forEach(function (s) { s.addEventListener("input", run); });
-  box.querySelector('[data-act="redraw"]').addEventListener("click", function () { people(values()); });
-  run();
-})();
-</script>
 
 <aside class="person">
 <img src="../assets/img/people/mcfadden.jpg" alt="Portrait of Daniel McFadden" loading="lazy">
