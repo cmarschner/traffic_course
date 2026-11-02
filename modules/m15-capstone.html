@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 15 · Capstone: appraise a corridor with W — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Capstone project: appraise real alternatives for a corridor with the full welfare objective, sensitivity tests and a decision memo.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="Capstone project in three variants by role: a decision memo for a decision maker, a transparent appraisal for a planner, and a citizen proposal for a real street, each with a brief, steps and assessment criteria.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,90 +29,213 @@
 <main>
 <p class="kicker">Capstone · Module 15</p>
 <h1>Capstone: appraise a corridor with \(W\)</h1>
-<p class="meta">≈ 8 hours (more if you build your own model) · Prerequisites: Modules 1–14 · Key terms: all</p>
+<p class="meta">≈ 6–20 hours, depending on the variant · Prerequisites: Module 1 and Module 14 for every variant; further modules as listed per variant · Key terms: all</p>
 
-<p class="lede">You will take one real street or corridor, define four genuinely different plans, estimate every term of the welfare objective for each, and write a two-page decision memo that a city council could act on. The memo must be honest about which conclusions are robust and which depend on contested values.</p>
+<p class="lede">You will take one real street or corridor and decide what should happen to it. Who you are changes what that means. A councillor needs a short memo that leads to a vote. A planner needs an appraisal that others can check and rerun. A resident needs a proposal that a city must take seriously at a hearing. This capstone offers one variant for each. All three share a common core: an explicit objective, genuinely different options, effects shown separately, and honesty about which conclusions rest on contested numbers.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The task</dt><dd>Choose a real street or corridor. Compare genuinely different plans for it against an explicit objective, and produce a document someone could act on.</dd>
+<dt>Three variants</dt><dd>A two-page <strong>decision memo</strong> (decision maker). A <strong>transparent appraisal</strong> with the full effects vector, sensitivity tests and verification evidence (planner). A <strong>citizen proposal</strong>: an alternative for a street, tested with open data and tools, ready for a hearing (citizen).</dd>
+<dt>Numbers to question</dt><dd>The value of time, the carbon value, the discount rate, the land value, and whether traffic was allowed to grow or shrink in response to each plan. For each, say whether it could flip your conclusion.</dd>
+<dt>What counts</dt><dd>A clear objective; options of different kinds; each effect counted once; limits checked before any total; the conditions under which your recommendation would change.</dd>
+<dt>Ask yourself</dt><dd>Would a skeptical reader on the other side of the debate accept my effects table, even if they reject my recommendation?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>Translate a vague planning goal into an explicit objective and a set of constraints.</li>
-<li>Combine a traffic model (short run) with demand, safety, environmental and land-use reasoning (long run).</li>
-<li>Report a full effects vector, identify Pareto-dominated plans and test the ranking against national parameter sets.</li>
+<li>Translate a vague planning goal into an explicit objective: terms, prices, weights and limits.</li>
+<li>Define plans that differ in kind, and estimate their effects at the right timescales, short run and long run.</li>
+<li>Report effects separately, identify dominated plans, apply the limits, and test the ranking against contested parameters and national value sets.</li>
+<li>Write for a specific reader: a decision maker, a technical reviewer, or a public hearing.</li>
 <li>Communicate uncertainty without hiding behind it.</li>
 </ul>
 </div>
 
-<h2>1. Choose a corridor</h2>
-<p>Pick an urban arterial or main street of 1–5 km that you know well and that carries a mix of modes. Good choices have a live political debate, such as a proposed widening, bike lane, tram or bus lane, or pedestrianization, because public documents then exist to compare against. Collect:</p>
+<h2 id="choose">1. Choose your variant</h2>
+<p>Pick the variant that matches the role you hold or want to practice. The common core (section 2) is the same for all three. What differs is the depth, the evidence required and the reader.</p>
+<div class="table-wrap"><table>
+<tr><th>Variant</th><th>For whom</th><th>Product</th><th>Depth of analysis</th><th>Time</th><th>Modules to lean on</th></tr>
+<tr><td><a href="#memo">A · Decision memo</a></td><td>Decision makers and their staff</td><td>Two pages, plus a one-page annex of sources</td><td>Effects estimated with simple methods or taken from existing studies; contested numbers tested</td><td>≈ 6–8 hours</td><td>1, 13, 14</td></tr>
+<tr><td><a href="#appraisal">B · Transparent appraisal</a></td><td>Planners, modelers, consultants</td><td>Report with the full effects vector, sensitivity analysis, verification evidence and a reproducible package</td><td>Every term estimated; a calibrated and verified model for the short run; demand response for the long run</td><td>≈ 15–20 hours</td><td>1–14, especially 2–5, 10</td></tr>
+<tr><td><a href="#citizen">C · Citizen proposal</a></td><td>Residents, neighborhood groups, journalists, NGOs</td><td>A proposal pack: one-page summary, a drawing of the street, an effects table, questions for the authority</td><td>Open data and open tools; physical effects first; money values only where they help</td><td>≈ 8–12 hours</td><td>1, 5, 6, 11, 12, 14</td></tr>
+</table></div>
+<p>Groups can combine variants. For example, a planner can produce variant B and a colleague the memo of variant A from it. The memo must then be readable without the appraisal.</p>
+
+<h2 id="core">2. The common core</h2>
+<h3>Choose a corridor</h3>
+<p>Pick an urban arterial or main street of 1–5 km that you know well and that carries a mix of modes. Good choices have a live political debate, such as a proposed widening, bike lane, tram or bus lane, or pedestrian zone. Public documents then exist to compare against. Collect:</p>
 <ul>
-<li>Traffic counts (municipal open data, national count stations such as BASt in Germany or FHWA TMAS in the US, or your own counts).</li>
-<li>Public transport routes, frequencies and ridership where published.</li>
-<li>Crash data. National open crash maps exist in several countries, e.g. Germany's <a href="https://unfallatlas.statistikportal.de/">Unfallatlas</a> and the UK's STATS19 data.</li>
-<li>Land use along and around the corridor: population and jobs within 400 m and 800 m.</li>
-<li>Street cross-sections: widths allocated to each use. Measure them from aerial imagery.</li>
+<li>Traffic counts: municipal open data, national count stations such as BASt in Germany or FHWA TMAS in the US, or your own counts.</li>
+<li>The street network and land use from <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, free to reuse.</li>
+<li>Public transport routes and timetables in the <a href="https://gtfs.org/">GTFS</a> format, which most operators publish, plus ridership where available.</li>
+<li>Crash data. Several countries publish open crash maps or records, such as Germany's <a href="https://unfallatlas.statistikportal.de/">Unfallatlas</a> and the UK's STATS19 data.</li>
+<li>Population and jobs within 400 m and 800 m of the corridor.</li>
+<li>Street cross-sections: the width given to each use. Measure them from aerial imagery or on site.</li>
+<li>The city's own stated goals: its mobility plan (SUMP or VEP), climate targets, road-safety strategy (<a href="m14-appraisal.html#plans">Module 14</a>).</li>
 </ul>
 
-<h2>2. Define four plans</h2>
+<h3>State the objective</h3>
+<p>Write down the objective before you design any plan. Use the three levels of <a href="m14-appraisal.html#three-levels">Module 14</a>:</p>
+<ul>
+<li><strong>Society:</strong> which targets and limits apply here? For example, no deaths or serious injuries, a share of the city's carbon budget, a minimum level of access for people without a car.</li>
+<li><strong>Appraisal:</strong> which terms of \(W\) will you estimate, with which values, and whose values (which country's manual)?</li>
+<li><strong>Model:</strong> which models or rules of thumb will deliver the physical effects, and at which timescale?</li>
+</ul>
+
+<h3>Define plans that differ in kind</h3>
 <p>Plans must be <em>different in kind</em>, not variations in lane width. A useful template, as in the <a href="../explorer.html">explorer</a>:</p>
 <ol>
 <li><strong>Capacity:</strong> more or better lanes for motor traffic, or signal optimization.</li>
 <li><strong>Reallocation:</strong> fewer general lanes, with space given to cycling, walking, greenery and calmer junctions.</li>
-<li><strong>Public transport:</strong> bus lanes, BRT or tram.</li>
+<li><strong>Public transport:</strong> bus lanes, bus rapid transit or tram.</li>
 <li><strong>Management:</strong> pricing, parking policy, access restrictions, with no construction.</li>
 </ol>
-<p>State each plan's cross-section, junction designs and operating rules precisely enough that someone else could model it.</p>
+<p>Add the <strong>reference case</strong>: the most likely future without any of the plans, including policies already decided. State each plan's cross-section, junction designs and operating rules precisely enough that someone else could model it.</p>
 
-<h2>3. Estimate the terms</h2>
+<h3>Estimate the effects</h3>
 <div class="table-wrap"><table>
 <tr><th>Term</th><th>What to estimate</th><th>Minimum method</th><th>Better method</th><th>Module</th></tr>
-<tr><td>A, short run</td><td>travel-time change for existing trips, by mode, in person-hours</td><td>BPR link function and signal delay formulas, fixed OD</td><td>calibrated microsimulation (SUMO) of the peak hours</td><td><a href="m07-traffic-flow.html">7</a>–<a href="m10-simulation-validation.html">10</a></td></tr>
-<tr><td>A, long run</td><td>induced or evaporated traffic, mode shift, rule-of-half benefits</td><td>elasticities from the literature (Module 5), incremental logit pivot</td><td>regional demand model with logsum output</td><td><a href="m02-valuing-access.html">2</a>, <a href="m04-demand-mode-choice.html">4</a>, <a href="m05-accessibility-land-use.html">5</a></td></tr>
+<tr><td>A, short run</td><td>travel-time change for existing trips, by mode, in person-hours (including the delay drivers cause each other)</td><td>simple link and signal delay formulas, fixed trips</td><td>calibrated microsimulation (SUMO) of the peak hours</td><td><a href="m07-traffic-flow.html">7</a>–<a href="m10-simulation-validation.html">10</a></td></tr>
+<tr><td>A, long run</td><td>induced or evaporated traffic, mode shift, benefits to new and departing trips</td><td>elasticities from the literature, incremental logit pivot</td><td>regional demand model with logsum output</td><td><a href="m02-valuing-access.html">2</a>, <a href="m04-demand-mode-choice.html">4</a>, <a href="m05-accessibility-land-use.html">5</a></td></tr>
 <tr><td>B</td><td>change in walking and cycling km</td><td>mode-shift estimate × trip length</td><td>WHO HEAT</td><td><a href="m06-transit-active-modes.html">6</a></td></tr>
-<tr><td>C</td><td>CO₂, NOₓ/PM, noise exposure, crashes (KSI), severance</td><td>vehicle-km × unit values from the EU Handbook; crash modification factors</td><td>emission model (HBEFA/COPERT), noise mapping, Safe System assessment</td><td><a href="m03-externalities.html">3</a>, <a href="m11-safety.html">11</a></td></tr>
-<tr><td>D</td><td>change in land allocated to motor traffic and parking</td><td>cross-section areas × local land value or rent</td><td>hedonic or land-residual valuation</td><td><a href="m05-accessibility-land-use.html">5</a>, <a href="m12-street-design.html">12</a></td></tr>
-<tr><td>E</td><td>capital, maintenance, operations, revenue</td><td>unit costs from comparable projects, with optimism-bias uplift</td><td>reference-class forecasting</td><td><a href="m14-appraisal.html">14</a></td></tr>
-<tr><td>constraints</td><td>KSI change, CO₂ change, land change, accessibility of the worst-off group</td><td>sign of change</td><td>distributional accessibility analysis</td><td><a href="m11-safety.html">11</a>, <a href="m14-appraisal.html">14</a></td></tr>
+<tr><td>C</td><td>CO₂, NOₓ/PM, noise exposure, crashes (killed or seriously injured), severance not already in A. <em>Not</em> congestion</td><td>vehicle-km × unit values from the EU Handbook; crash modification factors</td><td>emission model (HBEFA/COPERT), noise mapping, Safe System assessment</td><td><a href="m03-externalities.html">3</a>, <a href="m11-safety.html">11</a></td></tr>
+<tr><td>D</td><td>change in land given to motor traffic and parking</td><td>cross-section areas × local land rent</td><td>hedonic or land-residual valuation</td><td><a href="m05-accessibility-land-use.html">5</a>, <a href="m12-street-design.html">12</a></td></tr>
+<tr><td>E</td><td>capital, maintenance and operating costs (excluding land), revenue</td><td>unit costs from comparable projects, with optimism-bias uplift</td><td>reference-class forecasting</td><td><a href="m14-appraisal.html#politics">14</a></td></tr>
+<tr><td>limits</td><td>change in killed and seriously injured, CO₂, land, access of the worst-off group</td><td>direction of change</td><td>distributional accessibility analysis</td><td><a href="m11-safety.html">11</a>, <a href="m14-appraisal.html#equity">14</a></td></tr>
 </table></div>
 
-<h2>4. Value and compare</h2>
+<div class="box caution">
+<div class="box-title">Count every effect once</div>
+<ul>
+<li><strong>Congestion</strong> is in Term A, through everyone's forecast travel times. Do not add it again as an external cost in C. The same holds for crowding on buses (<a href="m01-objective.html">Module 1</a>, "Where is congestion?").</li>
+<li><strong>Land</strong> is in Term D as a yearly rent. Keep land purchase out of the construction cost in E.</li>
+<li><strong>Tolls, parking fees and fares</strong> are transfers. They lower user benefits in A and arrive as revenue in E. They cancel, except through the cost of public funds \(\mu\). A charge earns its place in your plan through the behavior it changes, not through its revenue.</li>
+</ul>
+</div>
+
+<h3>Compare</h3>
 <ol>
 <li><strong>Effects table first.</strong> Present physical effects for every plan before any money values appear.</li>
-<li><strong>Pareto screen.</strong> Remove dominated plans and say which ones and why.</li>
-<li><strong>Three national parameter sets.</strong> Value the remaining plans with the official values of at least three role-model countries (Module 14 compares them). Does the ranking change?</li>
-<li><strong>Constraints.</strong> Apply Vision Zero, a carbon constraint and an equity floor in turn. Which plans survive?</li>
-<li><strong>Switching values.</strong> For the top two plans, find the value of time, carbon price, land value or KSI value at which their order flips. Robust conclusions have switching values far from any defensible parameter.</li>
+<li><strong>Limits.</strong> Apply the safety limit, a carbon limit and an access floor. Which plans survive?</li>
+<li><strong>Pareto screen.</strong> Remove dominated plans, and say which ones and why (<a href="m14-appraisal.html#pareto">Module 14</a>).</li>
+<li><strong>Contested numbers.</strong> Find the two or three parameters that come closest to flipping the ranking, and their switching values (<a href="m14-appraisal.html#switching">Module 14</a>).</li>
 </ol>
 
-<h2>5. Write the decision memo</h2>
-<p>Two pages, for a non-technical council:</p>
-<ul>
-<li>The question and the plans, in one paragraph.</li>
-<li>One table: effects by plan, then \(W\) under the three parameter sets.</li>
-<li>The recommendation and the <em>conditions under which it would change</em>.</li>
-<li>What the analysis could not see: for example long-run land-use change, construction-period disruption, or effects on businesses beyond what the land-value term captures.</li>
-</ul>
-<p>Attach a technical appendix with data sources, the model, its verification and calibration (Module 10), and every assumption.</p>
+<h2 id="memo">3. Variant A · The decision memo</h2>
+<p><strong>The brief.</strong> You advise a mayor, a council committee or a minister. They will decide on the corridor within a month. They have ten minutes to read your memo, and they will have to defend the decision to voters, auditors and perhaps a court. Write two pages that let them decide, and that tell them honestly what they are deciding on.</p>
+<p><strong>Steps.</strong></p>
+<ol>
+<li>Do the common core. Simple methods are enough, and you may use effects from existing studies, if you say where each number comes from and whether its model let demand respond.</li>
+<li>Value the surviving plans with the official values of at least two countries, or with your own country's values plus the low and high variants.</li>
+<li>Find the switching values for the top two plans.</li>
+<li>Write the memo in the structure below. Then cut it to two pages.</li>
+<li>Give it to someone without transport training. Ask them to tell you what you recommend and why. Revise until they can.</li>
+</ol>
+<div class="table-wrap"><table>
+<tr><th>Section of the memo</th><th>Content</th><th>Length</th></tr>
+<tr><td>1. The objective</td><td>What the corridor should achieve, in the city's own terms, and which limits apply</td><td>3–5 sentences</td></tr>
+<tr><td>2. The options</td><td>The reference case and the plans, one line each, different in kind</td><td>a short list</td></tr>
+<tr><td>3. Effects, shown separately</td><td>One table: access and travel time, health, safety, emissions, noise, land, public cost, distribution. Physical units first, money where available. Mark plans that break a limit</td><td>one table</td></tr>
+<tr><td>4. Contested numbers</td><td>The two or three assumptions that could change the answer, their range, and the switching values</td><td>a short paragraph or table</td></tr>
+<tr><td>5. Recommendation</td><td>The plan you recommend, the conditions under which you would change it, and what the analysis could not see</td><td>one paragraph</td></tr>
+</table></div>
 
 <div class="box exercise">
-<div class="box-title">Assessment rubric</div>
+<div class="box-title">Assessment · Variant A</div>
 <div class="table-wrap"><table>
 <tr><th>Criterion</th><th>Weight</th><th>Excellent work…</th></tr>
-<tr><td>Plans</td><td>15%</td><td>are distinct, realistic and precisely specified</td></tr>
-<tr><td>Estimation</td><td>30%</td><td>uses defensible methods for every term, short and long run, with sources</td></tr>
-<tr><td>Comparison</td><td>25%</td><td>includes Pareto screen, three national value sets, constraints and switching values</td></tr>
-<tr><td>Honesty</td><td>15%</td><td>states limitations plainly and separates evidence from judgment</td></tr>
-<tr><td>Memo</td><td>15%</td><td>could be read and acted on by a council member in ten minutes</td></tr>
+<tr><td>Objective</td><td>15 %</td><td>states the objective and limits in the city's own terms, before any option appears</td></tr>
+<tr><td>Options</td><td>15 %</td><td>are different in kind, include a no-build option, and are described in one line each</td></tr>
+<tr><td>Effects</td><td>25 %</td><td>are shown separately, in physical units first, with sources; each effect counted once; limits checked</td></tr>
+<tr><td>Contested numbers</td><td>20 %</td><td>names the assumptions that could flip the ranking and gives their switching values</td></tr>
+<tr><td>Recommendation</td><td>15 %</td><td>is clear, says when it would change, and names what the analysis could not see</td></tr>
+<tr><td>Readability</td><td>10 %</td><td>fits on two pages and can be read and acted on in ten minutes by a non-specialist</td></tr>
 </table></div>
 </div>
 
+<h2 id="appraisal">4. Variant B · The transparent appraisal</h2>
+<p><strong>The brief.</strong> You are the planner or consultant responsible for the appraisal. Your work will be reviewed by an independent body, read by the decision maker's staff and challenged by groups who oppose the outcome. Produce an appraisal that answers the decision maker's questions directly, shows every assumption, and can be rerun by someone else.</p>
+<p><strong>Steps.</strong></p>
+<ol>
+<li><strong>Objective and options.</strong> Do the common core in full. Document the long list and why options were dropped.</li>
+<li><strong>Short-run model.</strong> Build a model of the peak periods, for example in SUMO. Calibrate it to counts and travel times. Report the fit with the measures of <a href="m10-simulation-validation.html">Module 10</a>, and keep some data back to validate against.</li>
+<li><strong>Verification.</strong> Show that the model behaves correctly on simple cases where the answer is known: a single link at known flow, a signal with a textbook delay, a pair of routes where traffic should split in a predictable way (<a href="m10-simulation-validation.html">Module 10</a>, section 8).</li>
+<li><strong>Long run.</strong> Estimate how demand responds: induced and evaporated traffic, mode shift, and the user benefits of new and lost trips (<a href="m02-valuing-access.html">Module 2</a>, <a href="m05-accessibility-land-use.html">Module 5</a>). If you hold demand fixed, label the time savings as an upper bound.</li>
+<li><strong>The full vector.</strong> Estimate every term of \(W\) for every plan, and check every limit. Report the vector \((A, B, C_k, D, E)\) before any total.</li>
+<li><strong>Values and sensitivity.</strong> Value the plans with at least three national parameter sets (<a href="m14-appraisal.html#parameters">Module 14</a>). Then vary one parameter at a time: discount rate, carbon value, value of time, value of a statistical life, land rent, \(\mu\), demand elasticities and the optimism-bias uplift. Give switching values for the top two plans.</li>
+<li><strong>Distribution.</strong> Show who gains and who loses, by income and by mode, unweighted and with equity weights.</li>
+<li><strong>Reproducibility package.</strong> Publish the data sources, model files, parameter tables and scripts, so that a reviewer can rerun the ranking.</li>
+<li><strong>Summary for the decision maker.</strong> End with a summary in the structure of variant A.</li>
+</ol>
+
+<div class="box exercise">
+<div class="box-title">Assessment · Variant B</div>
+<div class="table-wrap"><table>
+<tr><th>Criterion</th><th>Weight</th><th>Excellent work…</th></tr>
+<tr><td>Objective and plans</td><td>10 %</td><td>states objective, limits and the long list; plans are distinct, realistic and precisely specified</td></tr>
+<tr><td>Estimation</td><td>25 %</td><td>uses defensible methods for every term, short and long run, with sources; each effect counted once</td></tr>
+<tr><td>Verification and calibration</td><td>20 %</td><td>shows synthetic tests, calibration fit and validation on held-back data; states what the model cannot see</td></tr>
+<tr><td>Comparison and sensitivity</td><td>25 %</td><td>includes limits, Pareto screen, three national value sets, one-at-a-time tests and switching values</td></tr>
+<tr><td>Transparency</td><td>10 %</td><td>a reviewer could rerun the result from the published package</td></tr>
+<tr><td>Summary and honesty</td><td>10 %</td><td>separates evidence from judgment; the summary could be read by a decision maker in ten minutes</td></tr>
+</table></div>
+</div>
+
+<h2 id="citizen">5. Variant C · The citizen proposal</h2>
+<p><strong>The brief.</strong> Your city plans to change a street you know, or refuses to. You want to put forward an alternative. You will present it at a public hearing, in a consultation response, or to a council committee. Officials and other residents will challenge it. Make a proposal that is concrete, tested and framed in the terms of the city's own goals, so that it has to be answered on its merits.</p>
+<p><strong>Steps.</strong></p>
+<ol>
+<li><strong>Find the decision.</strong> Who decides about this street, when, and how the public can take part: a consultation period, a hearing, a committee, a petition or a participatory budget. Your country page and the city's website are the place to start (<a href="../countries/index.html">Countries</a>).</li>
+<li><strong>Read the official plan.</strong> Find the city's objective in its mobility plan and climate and safety targets. Read the traffic study behind the official proposal, if one exists, with the questions in <a href="m14-appraisal.html#honest">Module 14</a>, section 9.</li>
+<li><strong>Collect open data.</strong> Use OpenStreetMap for the street and its surroundings, GTFS for buses and trams, the crash map, and counts. Count people yourself at a busy hour: by foot, bike, bus and car. Photograph the street at the same hours.</li>
+<li><strong>Design the alternative.</strong> Draw the cross-section and the main junctions. Say what changes for each group of users. Keep it buildable: check widths against the design guidance of <a href="m12-street-design.html">Module 12</a>.</li>
+<li><strong>Test it with open tools.</strong> Use the tools you can control: the <a href="../explorer.html">objective explorer</a> for the trade-offs; <a href="https://www.heatwalkingcycling.org/">WHO HEAT</a> for health; a simulation such as <a href="https://abstreet.org/">A/B Street</a> or <a href="https://eclipse.dev/sumo/">SUMO</a> for traffic, if you or a helper can set it up. An AI assistant can help you set up a tool or check a calculation. Check its answers against the data.</li>
+<li><strong>Write the effects table.</strong> Show physical effects for the official plan, your alternative and the reference case: people moved per hour, crashes, space for each use, trees, noise, travel times for each mode. Add money values only where a manual supplies them and they help.</li>
+<li><strong>Frame it in the city's terms.</strong> Show which of the city's own targets your alternative serves better, and which it serves worse. Do not hide the losers.</li>
+<li><strong>Prepare for the hearing.</strong> Write three questions for the authority (for example, "Did your forecast let traffic shrink when road space was reallocated?"). Prepare answers to the three strongest objections to your proposal.</li>
+</ol>
+<p><strong>The proposal pack.</strong> A one-page summary. A drawing of the street, before and after. The effects table. The three questions. A short note on your data, tools and what they cannot show.</p>
+
+<div class="box caution">
+<div class="box-title">The limits of a homemade model</div>
+<p>A simulation you build in an evening can be wrong in ways that look convincing. Treat every result as a question, not a verdict. Check it against counts you made yourself. Say plainly what the tool cannot show, such as long-run changes in where people live and work. An honest proposal with stated limits is more persuasive than a confident number that an official can take apart (<a href="m10-simulation-validation.html">Module 10</a>).</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Assessment · Variant C</div>
+<div class="table-wrap"><table>
+<tr><th>Criterion</th><th>Weight</th><th>Excellent work…</th></tr>
+<tr><td>Framing</td><td>20 %</td><td>uses the city's own stated objectives and limits, and names the decision process and its dates</td></tr>
+<tr><td>The alternative</td><td>20 %</td><td>is concrete, buildable and drawn; says what changes for each group of users</td></tr>
+<tr><td>Evidence</td><td>25 %</td><td>uses open data and the student's own counts; tests the proposal with at least one open tool; cites every source</td></tr>
+<tr><td>Fairness</td><td>15 %</td><td>shows effects for the official plan and the alternative side by side, including who loses</td></tr>
+<tr><td>Hearing-ready</td><td>20 %</td><td>has a one-page summary, three sharp questions, answers to the strongest objections and a plain statement of limits</td></tr>
+</table></div>
+</div>
+
+<h2 id="honesty">6. Rules for every variant</h2>
+<ul>
+<li><strong>Separate evidence from judgment.</strong> Label every value judgment as yours.</li>
+<li><strong>Label illustrative numbers</strong> as illustrative. Cite every other number.</li>
+<li><strong>Do not optimize the metric instead of the goal.</strong> A plan designed to score well on one indicator can do badly on what the indicator was meant to measure (<a href="m10-simulation-validation.html">Module 10</a>).</li>
+<li><strong>Say what would change your mind.</strong> Every recommendation has a condition under which it would flip. Name it.</li>
+</ul>
+
 <h2>Readings and resources</h2>
 <ul class="resources">
+<li data-type="tool"><a href="https://www.openstreetmap.org/">OpenStreetMap</a> <span class="why">Open map data for the street network and land use.</span></li>
+<li data-type="link"><a href="https://gtfs.org/">GTFS — General Transit Feed Specification</a> <span class="why">The open format in which most operators publish timetables.</span></li>
 <li data-type="tool"><a href="https://eclipse.dev/sumo/">Eclipse SUMO — Simulation of Urban MObility</a> <span class="why">Open-source microsimulation, developed at DLR, for the short-run part of Term A.</span></li>
+<li data-type="tool"><a href="https://abstreet.org/">A/B Street</a> <span class="why">An open-source traffic simulation game built so that residents can test ideas for their own streets.</span></li>
 <li data-type="tool"><a href="https://www.heatwalkingcycling.org/">WHO HEAT — Health Economic Assessment Tool</a> <span class="why">Term B.</span></li>
 <li data-type="pdf"><a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">European Commission — Handbook on the External Costs of Transport</a> <span class="why">Term C unit values.</span></li>
-<li data-type="link"><a href="https://www.gov.uk/guidance/transport-analysis-guidance-tag">UK Department for Transport — Transport Analysis Guidance (TAG)</a> <span class="why">The most complete open appraisal manual in English, with worked procedures for every term.</span></li>
+<li data-type="link"><a href="https://www.gov.uk/guidance/transport-analysis-guidance">UK Department for Transport — Transport Analysis Guidance (TAG)</a> <span class="why">The most complete open appraisal manual in English, with worked procedures for every term.</span></li>
 <li data-type="link"><a href="https://www.transportation.gov/grants/dot-navigator/benefit-cost-analysis-guidance-discretionary-grant-programs">USDOT — Benefit-Cost Analysis Guidance for Discretionary Grant Programs</a> <span class="why">US parameter values and procedure.</span></li>
+<li data-type="pdf"><a href="https://www.gov.wales/sites/default/files/publications/2023-02/the-future-road-investment-wales.pdf">Roads Review Panel — The Future of Road Investment in Wales (2023)</a> <span class="why">A model for testing road schemes against a stated objective; useful for all three variants.</span></li>
 </ul>
 
 <nav class="pager">

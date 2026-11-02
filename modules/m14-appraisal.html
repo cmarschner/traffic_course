@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 14 · Appraisal and decision-making — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Social cost-benefit analysis step by step; national appraisal frameworks compared (Germany, UK, Netherlands, Sweden, France, Japan, US, Singapore, EU); multi-criteria analysis, Pareto comparison, equity weighting, SUMP and VEP processes, optimism bias and reference-class forecasting.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="Three levels of objective (model, appraisal, society) and where they conflict; social cost-benefit analysis step by step; national appraisal frameworks compared (UK, Germany, Netherlands, Sweden, France, Japan, US, Australia, Singapore, EU) and which assumptions drive a ranking; multi-criteria analysis, Pareto comparison, equity weighting, SUMP and VEP processes, optimism bias and reference-class forecasting.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -31,21 +31,73 @@
 <h1>Appraisal and decision-making</h1>
 <p class="meta">≈ 5 hours · Prerequisites: Modules <a href="m01-objective.html">1</a>–<a href="m03-externalities.html">3</a>; helpful: <a href="m04-demand-mode-choice.html">4</a>, <a href="m13-pricing.html">13</a> · Key terms: all, especially <span class="term">E</span> and the constraints</p>
 
-<p class="lede">Appraisal is where \(W\) meets a real decision: a ministry choosing which motorway, rail line or bus network to fund, or a city adopting a mobility plan. This module walks through the procedure of social cost–benefit analysis (CBA), compares how nine appraisal systems implement it, and then looks at what CBA cannot do alone: multi-criteria analysis, Pareto comparison, distributional analysis, strategic plan-making and the politics of forecasts. The aim is to use \(W\) honestly, as a disciplined account of trade-offs rather than a machine that outputs decisions.</p>
+<p class="lede">Appraisal is where \(W\) meets a real decision: a ministry choosing which motorway, rail line or bus network to fund, or a city adopting a mobility plan. This module starts with a country that stopped most of its road building, and asks why its appraisals had not stopped those roads earlier. The answer is that three different objectives meet in every decision: the model's, the appraisal's and society's. We then walk through the procedure of social cost–benefit analysis, compare how national manuals carry it out, and find out which of their assumptions decide a ranking. The last sections look at what cost–benefit analysis cannot do alone. The aim is to use \(W\) honestly, as a disciplined account of trade-offs rather than a machine that outputs decisions.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>Which projects deserve public money, and does the appraisal in front of you measure what your city or country actually wants?</dd>
+<dt>What matters</dt><dd>Three objectives meet in every appraisal: what the traffic model computes, how the appraisal manual values the results, and what society has decided it wants (climate laws, Vision Zero, access for all). Modern manuals already value safety, emissions and distribution. Conflicts arise where the levels disagree: a model that holds traffic fixed, a carbon price where the law sets a budget, or a study that only ever looked at road options.</dd>
+<dt>Numbers to question</dt><dd>The discount rate (1.7 % in Germany, 7 % for US federal grants), the carbon value (none in US grant guidance since 2025; £280 per tonne for 2030 in the UK), the value of time, the cost and ridership forecasts (costs overrun in about nine of ten projects), and whether the forecast let traffic grow in response to the project.</dd>
+<dt>Levers</dt><dd>The terms of reference: the objective, the limits and the list of options (including pricing and management). The parameter set. A rule that limits are checked before any ratio. Independent review, and publication of every input.</dd>
+<dt>Ask your analysts</dt><dd>Which three assumptions drive this ranking, and at what values would it flip? Which effects are inside the benefit–cost ratio, and which are only beside it? Does the plan meet our climate and safety targets, or only "value for money"? Who checked the cost estimate against past projects?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>Carry out the steps of a social CBA: reference case, options, effects, monetization, discounting, appraisal period, residual value and the marginal cost of public funds.</li>
-<li>Compare the appraisal frameworks of Germany, the UK, the Netherlands, Sweden, France, Japan, the US, Singapore and the EU, including their discount rates and what they leave out.</li>
+<li>Distinguish the model's objective, the appraisal's objective and the societal objective, recognize where they conflict, and say what to change at each level.</li>
+<li>Carry out the steps of a social CBA: reference case, options, effects, monetization, discounting, appraisal period, residual value and the marginal cost of public funds. Count congestion, land and taxes once.</li>
+<li>Compare the appraisal frameworks of the UK, Germany, the Netherlands, Sweden, France, Japan, the US, Australia, Singapore and the EU, and identify the assumptions that drive a ranking: discount rate, time values, carbon value, treatment of taxes and public funds.</li>
+<li>Compute and explain a switching value.</li>
 <li>Explain when multi-criteria analysis and Pareto comparison are better tools than a single benefit–cost ratio.</li>
-<li>Apply distributional analysis and equity weights, including the 2026 UK Green Book formula.</li>
+<li>Apply distributional analysis and equity weights, including the UK Green Book formula.</li>
 <li>Place project appraisal within strategic processes such as the EU SUMP and the German <em>Verkehrsentwicklungsplan</em>.</li>
 <li>Recognize optimism bias and strategic misrepresentation, and apply reference-class forecasting.</li>
 </ul>
 </div>
 
-<h2>1. Social cost–benefit analysis step by step</h2>
+<h2 id="three-levels">1. Three objectives in one decision</h2>
+
+<div class="box story"><div class="box-title">Story · Wales reviews its roads (2021–2023)</div>
+<p>In March 2021 the Welsh Government adopted a new transport strategy. Its targets were concrete. Car mileage per person should fall by 10 % by 2030. By 2040, 45 % of journeys should be made on foot, by bike or by public transport. Net Zero Wales followed in October 2021.</p>
+<p>Most of the road schemes then in preparation were older than these targets. In June 2021, Lee Waters, the Deputy Minister for Climate Change, paused new road schemes and appointed a review panel. It was chaired by Lynn Sloman, a transport researcher.</p>
+<p>The panel reported in February 2023. It found that many studies had been framed as fixes for one stretch of trunk road. They listed dozens of options, from bus services to safety measures. But the options most likely to be built were the ones the road agency could deliver: more capacity for cars. The panel also counted carbon. The 34 schemes with a costed design could emit about 500,000 tonnes of CO₂ in construction alone. About its yardstick it was blunt: journey-time savings "are an unreliable measure of value for money in the context of current Welsh Government policy priorities."</p>
+<p>About a third of the reviewed schemes were cleared to go ahead, some in modified form. The rest were stopped or sent back to look for alternatives. The government adopted new tests: road investment should support modal shift and cut carbon, improve safety through small changes, adapt to climate change, or improve access in a way that supports modal shift.</p>
+<p>The decision was contested. Environmental groups praised it. The leader of the Welsh Conservatives condemned it. Others asked for a transition period, because many rural areas have little public transport. A poll in summer 2023 found more people in Wales opposed the cancellations than supported them.</p>
+<p class="credit">Sources: Roads Review Panel, <a href="https://www.gov.wales/sites/default/files/publications/2023-02/the-future-road-investment-wales.pdf"><em>The Future of Road Investment in Wales</em></a> (February 2023), summary and section 7; <a href="https://www.gov.wales/welsh-government-response-roads-review-html">Welsh Government response</a> (14 February 2023); reactions and counts as summarized in <a href="https://en.wikipedia.org/wiki/Welsh_Government_roads_review">Wikipedia, "Welsh Government roads review"</a>, with links to the BBC and other reports.</p>
+</div>
+
+<p>Nobody in this story did their job badly. The traffic models forecast flows. The appraisals valued time, safety and emissions as the guidance asked. The trouble was that three different objectives were at work, and they pointed in different directions. It helps to separate them.</p>
+
+<ol>
+<li><strong>The model's objective.</strong> This is what a computer model calculates or optimizes. A traffic assignment model spreads trips over the network until no driver can save time by switching route (<a href="m04-demand-mode-choice.html">Module 4</a>). A signal optimizer minimizes delay and stops (<a href="m09-junctions.html">Module 9</a>). The model's output is physical: flows, travel times, emissions, crashes.</li>
+<li><strong>The appraisal's objective.</strong> This is how the predicted outcomes are valued and compared. A national manual says which effects count, at what unit price, over how many years, with which discount rate, and which decision rule applies. The UK's TAG, Germany's BVWP method, the Dutch MKBA guide, France's <em>évaluation socio-économique</em>, US grant guidance and Australia's ATAP are such manuals.</li>
+<li><strong>The societal objective.</strong> This is what a city or country has decided it wants to become. It is written in laws, strategies and plans: climate laws, Vision Zero, a transport strategy's targets, a mobility plan (<a href="#plans">section 7</a>).</li>
+</ol>
+
+<div class="table-wrap"><table>
+<tr><th>Level</th><th>Who sets it</th><th>Typical form</th><th>In \(W\) terms</th></tr>
+<tr><td>1. Model</td><td>Modelers, software vendors, model guidance</td><td>equilibrium, minimum delay, generalized cost</td><td>delivers the physical quantities: travel times, flows, \(E_k\), \(L\)</td></tr>
+<tr><td>2. Appraisal</td><td>Finance and transport ministries, through manuals</td><td>net present value, benefit–cost ratio, summary table</td><td>sets the prices \(p_k\), \(r\), \(\mu\), the time values and the discount rate</td></tr>
+<tr><td>3. Society</td><td>Parliaments, councils, voters</td><td>targets, laws, strategies</td><td>sets the limits (\(F\le\bar F\), \(E_{\mathrm{CO_2}}\le\bar E_{\mathrm{CO_2}}\), \(A_g\ge A_{\min}\)) and the weights \(\omega_g\)</td></tr>
+</table></div>
+
+<h3>Modern appraisal is broader than its reputation</h3>
+<p>A common criticism says that appraisal only counts vehicle time savings. For today's main manuals, that is out of date. The UK's TAG reports impacts on the economy, the environment, society and public accounts. It values crashes, noise, air quality, greenhouse gases and physical activity, and has a full method for distributional impacts (<a href="#equity">section 6</a>). Germany's BVWP method adds three non-monetary modules to its cost–benefit analysis: environment and nature, spatial planning (accessibility) and urban effects. France's guidance has tool sheets for health and urban effects, and a carbon value that rises over time. Sweden reports a distributional analysis and a goal analysis next to its cost–benefit result. US grant guidance values safety. These manuals are the result of decades of work by economists and engineers, much of it aimed at exactly the biases critics describe.</p>
+<p>The problem lies less in any one level than in the joints between them.</p>
+
+<h3>Where the levels conflict</h3>
+<ul>
+<li><strong>Model versus appraisal: fixed demand.</strong> If the model does not let traffic grow when a road gets faster, the appraisal values time savings that will be eroded by induced traffic (<a href="m02-valuing-access.html">Module 2</a>, <a href="m05-accessibility-land-use.html">Module 5</a>). The manual may be sound; its inputs are not. Several manuals, including the UK's, ask for models in which demand responds when a scheme changes travel costs noticeably. Small schemes and junction studies often still use fixed demand.</li>
+<li><strong>Appraisal versus society: a price where the law sets a budget.</strong> An appraisal values each tonne of CO₂ at a unit price. Each scheme's emissions are small next to its time savings, so each scheme can pass. Many schemes together can still break a carbon budget. A price and a budget agree only if the price equals the budget's shadow price (<a href="m01-objective.html#limits">Module 1</a>). The Welsh panel made the scale tangible: to offset the 30,000 tonnes of construction emissions of one medium-sized road scheme, 2,700 average drivers would have to give up driving for ten years.</li>
+<li><strong>Standards and framing versus the options.</strong> An appraisal can only rank the options it is given. If a study is defined as "fix this stretch of road", and design standards ask for a level of service for cars (<a href="m08-capacity-los.html">Module 8</a>), road capacity options are what reach the shortlist. This conflict happens before any valuation.</li>
+<li><strong>The reverse case.</strong> Sometimes the appraisal is the stricter level. A government may fund a project with a low benefit–cost ratio for regional, symbolic or industrial reasons. An appraisal then does its most useful work: it makes the price of that choice visible.</li>
+</ul>
+<p>The practical consequence for a decision maker is simple to state. Write the societal objective into the terms of reference as limits and targets. Ask for the limits to be checked before any ratio is computed. Ask for options of every kind, including pricing, management and services. And ask whether the model covers the timescale on which the effects play out. The rest of this module shows how.</p>
+
+<h2 id="cba">2. Social cost–benefit analysis step by step</h2>
 <p>All the national manuals in this module follow the same skeleton:</p>
 <ol>
 <li><strong>Problem and objectives.</strong> What is wrong, for whom, and which terms of \(W\) are at stake? Objectives should be outcomes (access, safety, emissions), not solutions ("build a bypass").</li>
@@ -56,24 +108,36 @@
 <li><strong>Discounting and aggregation</strong> over the appraisal period, including residual value and the cost of public funds (Term E).</li>
 <li><strong>Uncertainty.</strong> Sensitivity tests, scenarios, switching values and optimism-bias adjustments.</li>
 <li><strong>Distribution.</strong> Who gains and who loses, by income, place, age, gender, disability and mode.</li>
-<li><strong>Presentation and decision.</strong> A summary table: monetized results, non-monetized impacts and distributional effects, presented to decision-makers.</li>
+<li><strong>Presentation and decision.</strong> A summary table: monetized results, non-monetized impacts and distributional effects, presented to decision makers.</li>
 </ol>
 
+<h3>Count each effect once</h3>
+<p>Three effects are easy to count twice. <a href="m01-objective.html">Module 1</a> sets out the rules. Here is how they look in an appraisal.</p>
+<ul>
+<li><strong>Congestion.</strong> The forecast travel times already include the delay drivers cause each other, so that delay is already in the user benefits (Term A). It must not also appear as an external cost in C. The same holds for crowding on buses and trains. The delay one driver imposes on others is still useful: it is the basis of a congestion charge (<a href="m13-pricing.html">Module 13</a>). Only an appraisal that holds travel times fixed must add it separately.</li>
+<li><strong>Land.</strong> Land bought for a project can enter as a purchase price in the investment cost, or as a yearly rent in Term D. Never both. Manuals choose the first route (see below). This course puts all land in D, so that old and new road land are treated alike.</li>
+<li><strong>Taxes, tolls and fares.</strong> They are transfers. Users pay them, which lowers their surplus in A. The government receives them, which lowers net public cost in E. The two cancel, except through the marginal cost of public funds \(\mu\). A toll raises welfare only by changing behavior, and through \(\mu\) when its revenue replaces distorting taxes.</li>
+</ul>
+
+<h3>How manuals treat land</h3>
+<p>Germany's BVWP puts the cost of buying land into the investment cost. At the end of the appraisal period it credits the land's value back as a residual value, on the reasoning that the land could be sold once the road or railway is removed. The UK Green Book asks that land be valued at its opportunity cost, its value in its best other use, and TAG includes land in the residual value of assets with short lives. Both are consistent: land enters once, as a cost of the project. What neither does is charge rent for land that is already under roads. That land is treated as free, which is the gap Term D fills (<a href="m01-objective.html#term-d">Module 1</a>).</p>
+
+<h3>How manuals treat taxes</h3>
+<p>Manuals reach the same principle by different routes. The Green Book states that transfers "do not, in themselves, make society as a whole either better off or worse off", and allows them either to be excluded or shown as offsetting costs and benefits. TAG works in market prices, including taxes. When a scheme moves people from cars to trains, drivers save fuel duty, and TAG books the Treasury's lost fuel duty as a negative benefit. The two cancel. Germany's BVWP takes the other route: it values fuel and electricity without VAT, fuel tax and electricity tax, so the transfer never appears. France and Sweden add a cost for each euro of public money, through \(\mu\).</p>
+
 <h3>Discounting</h3>
-<p>Benefits \(B_t\) and costs \(C_t\) in real terms are converted to a present value with a social discount rate \(r\):</p>
-$$\mathrm{NPV}=\sum_{t=0}^{T}\frac{B_t-C_t}{(1+r)^t}+\frac{RV_T}{(1+r)^T}.$$
-<p>The rate is usually justified by the Ramsey formula \(r=\delta+\eta g\): pure time preference \(\delta\), plus the elasticity of marginal utility \(\eta\) times the growth rate of consumption \(g\). It is the single most powerful parameter in appraisal. €100 of benefit in 30 years is worth today:</p>
+<p>A euro of benefit in thirty years counts for less than a euro today. One reason is that people prefer benefits sooner. Another is that people will probably be richer, so an extra euro will matter less to them. The <strong>discount rate</strong> \(r\) says how much less, per year. The <strong>net present value</strong> (NPV) adds up each year's benefits minus costs, each divided by \((1+r)^t\) for year \(t\). The discount rate is the single most powerful parameter in appraisal. €100 of benefit in 30 years is worth today:</p>
 <div class="table-wrap"><table>
 <tr><th>Rate</th><th>1.7 % (Germany BVWP)</th><th>2.8 % (Netherlands std.)</th><th>3.0 % (UK, yrs 1–30)</th><th>3.5 % (Sweden)</th><th>4.0 % (Japan)</th><th>4.5 % (France, \(\beta=1\))</th><th>7 % (US grants, 2025)</th></tr>
 <tr><td>PV of €100 in year 30</td><td class="num">60.3</td><td class="num">43.7</td><td class="num">41.2</td><td class="num">35.6</td><td class="num">30.8</td><td class="num">26.7</td><td class="num">13.1</td></tr>
 </table></div>
-<p>Low rates favor long-lived investments with benefits that grow over time (rail, land-use change, climate). High rates favor quick, cheap measures. Several countries now use <strong>declining</strong> rates for distant years (UK, Netherlands) or <strong>risk-adjusted</strong> rates (France: \(a=2.5\%+2\%\cdot\beta\), where \(\beta\) measures how strongly the project's net benefits move with GDP; the Netherlands has a "high" rate for benefits strongly tied to the state of the economy).</p>
+<p>Low rates favor long-lived investments with benefits that grow over time (rail, land-use change, climate). High rates favor quick, cheap measures. Several countries now use <strong>declining</strong> rates for distant years (UK, Netherlands), or a higher rate for benefits that rise and fall with the economy (France, Netherlands).</p>
 
 <h3>Appraisal period and residual value</h3>
-<p>Infrastructure lasts longer than any forecast. Manuals handle this in three ways. They use a long fixed period (Sweden 60 years, Japan 50 years). They use an explicit horizon plus a formula for the residual value (France: detailed benefits to 2070, then a residual value computed from net benefits for 2071–2140). Or they use asset-specific service lives, with residual value only for land (Germany's BVWP). Residual value is a large share of NPV for long-lived assets at low discount rates, and it is easily abused. Check what it assumes about traffic growth after the forecast year.</p>
+<p>Infrastructure lasts longer than any forecast. Manuals handle this in three ways. They use a long fixed period (UK 60 years, Sweden 60 years, Japan 50 years). They use an explicit horizon plus a formula for the residual value (France). Or they use asset-specific service lives, with residual value only for land (Germany). Residual value is a large share of NPV for long-lived assets at low discount rates, and it is easily abused. Check what it assumes about traffic growth after the forecast year.</p>
 
 <h3>The marginal cost of public funds <span class="term">E</span></h3>
-<p>Raising €1 of tax costs the economy more than €1 because taxes distort work and consumption. Term E multiplies net public spending by \(1+\mu\). France and Sweden apply this explicitly. Germany, Japan and the US do not apply an explicit factor in their transport manuals. The UK instead puts cost to government in the denominator of its benefit–cost ratio (BCR), which plays a similar role when budgets are fixed.</p>
+<p>Raising €1 of tax costs the economy more than €1, because taxes distort work and consumption. Term E multiplies net public spending by \(1+\mu\). France and Sweden apply this explicitly, both with \(1+\mu=1.2\). Germany, Japan and the US do not apply an explicit factor in their transport manuals. The UK instead puts cost to government in the denominator of its benefit–cost ratio (BCR), which plays a similar role when budgets are fixed.</p>
 
 <div class="box translation">
 <div class="box-title">France · the opportunity cost of public funds</div>
@@ -81,38 +145,104 @@ $$\mathrm{NPV}=\sum_{t=0}^{T}\frac{B_t-C_t}{(1+r)^t}+\frac{RV_T}{(1+r)^T}.$$
 <p>"The Quinet report of the CGSP (2013) recommends that every change in public budget expenditure and revenue be multiplied by an opportunity cost of public funds of 1 + µ = 1.2."</p>
 <p class="small">Source: DGITM, <a href="https://www.ecologie.gouv.fr/sites/default/files/documents/V.5.pdf">fiche-outil V.5, Coût d'opportunité des fonds publics et prix fictif de rareté des fonds publics</a> (version of 1 October 2014). When budgets are rationed, France adds a further "shadow price of scarcity of public funds" of 0.05. Translated by the course authors (machine-assisted).</p>
 </div>
-<p>Sweden's ASEK 8.0 sets \(\mathrm{MCPF}=1.2\) on the basis of a 2023 review that found a plausible range of 1.11–1.25, and books the excess as a negative benefit called <em>skattefinansieringskostnad</em> (tax-financing cost): \(0.2\times\) public expenditure. The notation of \(W\) is exactly the French one.</p>
+<p>Sweden's ASEK 8.0 sets \(\mathrm{MCPF}=1.2\) on the basis of a 2023 review that found a plausible range of 1.11–1.25. It books the excess as a negative benefit called <em>skattefinansieringskostnad</em> (tax-financing cost): \(0.2\times\) public expenditure. The notation of \(W\) is exactly the French one.</p>
 
 <div class="box note">
 <div class="box-title">Worked example · what \(\mu\) does to a ranking</div>
-<p>Two options with present values in € million:</p>
+<p>Two options with present values in € million. Here \(\Delta C\) is the change in external harm avoided: positive if the option reduces crashes, emissions or noise, negative if it adds to them. Congestion is not in \(\Delta C\); it is inside the user benefits A.</p>
 <div class="table-wrap"><table>
-<tr><th></th><th>User benefits (A)</th><th>Δ externalities (C)</th><th>Capital + O&amp;M (K)</th><th>Revenue (R)</th><th>NPV, \(\mu=0\)</th><th>NPV, \(\mu=0.2\)</th></tr>
+<tr><th></th><th>User benefits (A)</th><th>\(\Delta C\)</th><th>Capital + O&amp;M (K)</th><th>Revenue (R)</th><th>NPV, \(\mu=0\)</th><th>NPV, \(\mu=0.2\)</th></tr>
 <tr><td>X · tolled bypass</td><td class="num">300</td><td class="num">−20</td><td class="num">200</td><td class="num">120</td><td class="num">200</td><td class="num">184</td></tr>
 <tr><td>Y · untolled bus priority</td><td class="num">260</td><td class="num">+30</td><td class="num">90</td><td class="num">0</td><td class="num">200</td><td class="num">182</td></tr>
 </table></div>
-<p>NPV \(=A+\Delta C-(1+\mu)(K-R)\), where \(\Delta C\) is the change in external benefits (negative if the option adds externalities). The options tie at \(\mu=0\). With \(\mu=0.2\), the toll revenue makes X marginally better. Note that the toll also reduces A, which is already included. The BCRs tell a different story again: \(A/(K-R)\) is 3.75 for X and 2.9 for Y, while \((A+\Delta C)/K\) is 1.4 for X and 3.2 for Y. <strong>Always report the NPV and say which BCR definition is used.</strong></p>
+<p>The NPV is \(A+\Delta C-(1+\mu)(K-R)\). The user benefits of X are already net of the tolls users pay. The same tolls appear as revenue R. Together they cancel, as a transfer should. The options tie at \(\mu=0\). With \(\mu=0.2\), the toll revenue saves some costly taxes, and X becomes marginally better. The BCRs tell a different story again: \(A/(K-R)\) is 3.75 for X and 2.9 for Y, while \((A+\Delta C)/K\) is 1.4 for X and 3.2 for Y. <strong>Always report the NPV and say which BCR definition is used.</strong></p>
 </div>
 
-<h2>2. National appraisal frameworks compared</h2>
-<p>The table summarizes how each system implements the steps above. Parameters were checked in the cited documents in October 2026. Rates are real.</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>Discount formulas, declining and risk-adjusted rates, residual values, BCR definitions</summary>
+<h4>The net present value</h4>
+<p>With benefits \(B_t\) and costs \(C_t\) in real terms in year \(t\), a residual value \(RV_T\) at the end of the period \(T\), and a constant rate \(r\):</p>
+$$\mathrm{NPV}=\sum_{t=0}^{T}\frac{B_t-C_t}{(1+r)^t}+\frac{RV_T}{(1+r)^T}.$$
+<p>With a schedule of rates \(r_1, r_2, \dots\), each year's discount factor is the product \(\prod_{i\le t}(1+r_i)^{-1}\).</p>
+<h4>Where the rate comes from</h4>
+<p>The rate is usually justified by the Ramsey formula \(r=\delta+\eta g\). Here \(\delta\) is pure time preference, \(g\) is the growth rate of consumption per head, and \(\eta\) is the elasticity of marginal utility: how fast an extra euro loses value as people get richer. The UK's distributional weights use the same \(\eta\), estimated at 1.25 (<a href="#equity">section 6</a>). The 2026 Green Book sets 3.00 % for years 1–30, 2.50 % for years 31–75 and 2.25 % from year 76. Its earlier schedule (3.5 %, 3 %, 2.5 %) still appears in the May 2025 version of TAG Unit A1.1. TAG also uses a lower rate for health effects valued directly in utility terms, because the growth part \(\eta g\) does not apply to them.</p>
+<h4>Risk-adjusted rates</h4>
+<p>France uses \(a=2.5\%+2\%\cdot\beta\). The factor \(\beta\) measures how strongly a project's net benefits move with GDP. With \(\beta=1\) the rate is 4.5 %. The Netherlands has a standard rate of 2.8 % (years 0–35) and 1.8 % (from year 36), a low rate of 2.2/1.4 % for unavoidable fixed costs, and a high rate of 4.2/2.7 % for benefits strongly tied to the economy (<a href="https://www.rwseconomie.nl/discontovoet">from 1 January 2026</a>).</p>
+<h4>Residual values</h4>
+<p>France computes detailed benefits to 2070, then a residual value from net benefits for 2071–2140. TAG uses a standard 60-year period, includes residual values (including land) only for assets with shorter lives, and gives standard asset lives. Germany credits back land value only, for roads and railways but not waterways, because a waterway cannot be removed and the land reused.</p>
+<h4>Which BCR?</h4>
+<p>TAG defines the BCR as present value of benefits over present value of costs to the "broad transport budget". Tax revenue lost to the Treasury and costs borne by users and operators go into the benefits, not the denominator. Moving an item between numerator and denominator changes the BCR but not the NPV. That is why a ranking by BCR and a ranking by NPV can differ, as the worked example shows.</p>
+<p class="small">Sources: HM Treasury, <a href="https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026">The Green Book (2026)</a>, chapters 6–8; DfT, <a href="https://www.gov.uk/government/publications/tag-unit-a1-1-cost-benefit-analysis">TAG Unit A1.1</a> (May 2025), sections 2.3, 2.5, 2.7, 2.8; BMV, <a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">Methodenhandbuch zum BVWP 2030</a>, on land costs and residual values and on energy costs without taxes.</p>
+</details>
+
+<h2 id="frameworks">3. National appraisal frameworks compared</h2>
+<p>National manuals differ in two ways that matter to a decision maker. First, in what the number <em>does</em>: whether it decides, filters or merely informs. Second, in the assumptions that move the number. The first table covers institutions. Parameters were checked in the cited documents in October and November 2026. Rates are real.</p>
 <div class="table-wrap"><table>
-<tr><th>System</th><th>Legal / institutional basis</th><th>Core method and decision rule</th><th>Discount rate · period · residual value</th><th>MCPF</th><th>Notable features and gaps</th></tr>
-<tr><td><a href="../countries/germany.html">Germany</a> · <a href="https://www.bmv.de/SharedDocs/DE/Artikel/G/BVWP/bundesverkehrswegeplan-2030-erarbeitung.html">BVWP 2030</a> (2016) <span class="lang">(German)</span></td><td>Federal Transport Infrastructure Plan adopted by cabinet; project lists enacted in the Ausbaugesetze for road, rail and waterways</td><td>Four modules: A cost–benefit analysis (Nutzen-Kosten-Analyze, giving the NKV, i.e. BCR), B environmental and nature-protection assessment, C spatial planning (accessibility), D urban impacts. Projects ranked into priority categories</td><td>1.7 % (down from 3 % used since 1985); price level 2012; asset-specific service lives; residual value only for land</td><td>None explicit</td><td>All project dossiers public in the <a href="http://www.bvwp-projekte.de/">PRINS</a> project information system. New "implicit benefit" component (Module 2). Criticized for weak treatment of induced traffic and climate targets (e.g. Rothengatter for BUND, 2023)</td></tr>
-<tr><td>UK · <a href="https://www.gov.uk/government/publications/the-green-book-appraisal-and-evaluation-in-central-government">HM Treasury Green Book</a> (2026 edition) + DfT <a href="https://www.gov.uk/guidance/transport-analysis-guidance">TAG</a></td><td>Treasury guidance binding on central government; business-case process (strategic, economic, commercial, financial, management)</td><td>Net present social value and BCR; value-for-money judgment including non-monetized impacts, distribution and risk. "The UK government does not choose projects solely on the basis of which have the highest benefit-cost ratios"</td><td>3.00 % years 1–30, 2.50 % years 31–75, 2.25 % from year 76</td><td>Not as a factor; BCR uses cost to government</td><td>Mandatory optimism-bias adjustment; distributional weights (section 5); switching values; wider economic impacts as a sensitivity</td></tr>
-<tr><td><a href="../countries/netherlands.html">Netherlands</a> · CPB/PBL <a href="https://www.cpb.nl/publicatie/algemene-leidraad-voor-maatschappelijke-kosten-batenanalyse">Algemene leidraad MKBA</a> (2013) + <a href="https://www.rwseconomie.nl/werkwijzers">Werkwijzer MKBA bij MIRT</a> (2024) <span class="lang">(Dutch)</span></td><td>Required for national infrastructure decisions in the MIRT program; predecessor was the OEI guide (2000); large MKBAs are often reviewed by CPB or PBL</td><td>Social CBA (MKBA) presented with non-monetized effects and distribution; no binding BCR threshold</td><td><a href="https://www.rwseconomie.nl/discontovoet">Since 1 Jan. 2026</a>: standard 2.8 % (years 0–35) and 1.8 % (36+); low 2.2/1.4 % for unavoidable fixed costs; high 4.2/2.7 % for strongly cyclical benefits</td><td>None explicit</td><td>Strong institutional independence (CPB); distribution shown "without a value judgment"; KiM values (Module 2) include walking and cycling</td></tr>
-<tr><td><a href="../countries/sweden.html">Sweden</a> · Trafikverket <a href="https://bransch.trafikverket.se/asek">ASEK 8.0/8.1</a> + <a href="https://bransch.trafikverket.se/seb">SEB</a> <span class="lang">(Swedish)</span></td><td>Agency guidance for the national transport plan; two co-equal policy goals (accessibility; safety, environment and health)</td><td>Samlad effektbedömning: (i) CBA, (ii) distributional analysis, (iii) goal analysis against the transport-policy goals. Net present value ratio (NNK) reported</td><td>3.5 %; 60 years; residual value zero at end of period</td><td>1.2 (tax-financing cost = 0.2 × expenditure)</td><td>CO₂ priced through fuel prices in the forecast (Module 3); income effects removed from time values; SEBs published</td></tr>
-<tr><td><a href="../countries/france.html">France</a> · Code des transports L.1511-1 to L.1511-6 (from LOTI 1982, art. 14); <a href="https://www.ecologie.gouv.fr/politiques-publiques/evaluation-projets-transport">Instruction of 16 June 2014 and DGITM référentiel</a> <span class="lang">(French)</span></td><td>Statutory evaluation duty for large projects; Quinet report (CGSP 2013); counter-appraisal of large state-funded investments under decree 2013-1211</td><td>Socio-economic NPV (VAN-SE) as one of three components: context and objectives, effects analysis, socio-economic analysis; disaggregated results by actor</td><td>\(2.5\%+2\%\cdot\beta\) (4.5 % with \(\beta=1\)); benefits to 2070 plus residual value 2071–2140</td><td>COFP 1.2; plus 0.05 shadow price of scarce funds when budgets bind</td><td>High rising carbon value (Module 3); ex-post evaluation required; tool sheets for every effect, including health, urbanism and comfort</td></tr>
-<tr><td><a href="../countries/japan.html">Japan</a> · MLIT <a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ben-eki_2.pdf">費用便益分析マニュアル</a> (roads, Aug. 2025) <span class="lang">(Japanese)</span></td><td>Project evaluation at three stages: new-project adoption, re-evaluation and ex-post evaluation</td><td>B/C from three benefits only: travel-time savings, vehicle operating cost savings, crash reduction. Other effects may be shown separately as reference</td><td>4 %; 50 years from opening; reference values at 1 % and 2 % from FY2023</td><td>None</td><td>Per-vehicle resource-cost time values; results for each project published in standard forms; environment and access not in core B/C</td></tr>
-<tr><td><a href="../countries/us.html">United States</a> · USDOT <a href="https://www.transportation.gov/grants/dot-navigator/benefit-cost-analysis-guidance-discretionary-grant-programs">BCA Guidance for Discretionary Grant Programs</a> (updated yearly)</td><td>Required for competitive federal grants (e.g. BUILD/RAISE, INFRA); not for most formula-funded highway spending; metropolitan plans prepared by MPOs</td><td>BCA as one merit criterion among several; benefits typically time, operating cost, safety, emissions, residual value</td><td>The May 2025 update, following the reinstated OMB Circular A-94 (1992), uses 7 % (earlier 2024-cycle guidance used 3.1 %)</td><td>None</td><td>VSL $13.7 million (2024); wage-based VTTS; no national plan-level appraisal comparable to BVWP; carbon valuation withdrawn in 2025</td></tr>
-<tr><td><a href="../countries/singapore.html">Singapore</a> · LTA, <a href="https://www.lta.gov.sg/content/ltagov/en/who_we_are/our_work/land_transport_master_plan_2040.html">Land Transport Master Plan 2040</a></td><td>Planning by a single statutory authority within whole-of-government land-use planning</td><td>Not published</td><td>Not published</td><td>Not published</td><td>We could not find a public appraisal manual, parameter set or project-level CBA. Decisions are justified through master-plan targets (e.g. "20-minute towns and a 45-minute city"). Effective delivery, but opaque to outside scrutiny</td></tr>
-<tr><td>EU · DG REGIO <a href="https://ec.europa.eu/regional_policy/information-sources/publications/guides/2014/guide-to-cost-benefit-analysis-of-investment-projects-for-cohesion-policy-2014-2020_en">Guide to CBA of Investment Projects</a> (2014) and <a href="https://ec.europa.eu/regional_policy/information-sources/publications/guides/2021/economic-appraisal-vademecum-2021-2027-general-principles-and-sector-applications_en">Economic Appraisal Vademecum 2021–2027</a></td><td>Condition for major projects co-financed by EU cohesion funds</td><td>Financial analysis (does the project need the grant?) plus economic analysis (ENPV, ERR, BCR) with shadow prices</td><td>2014–2020 benchmark: 5 % in cohesion countries, 3 % elsewhere; member states may set their own</td><td>Not standard</td><td>Strong on financial sustainability and conversion factors; widely copied in Central and Eastern Europe</td></tr>
+<tr><th>System</th><th>Legal / institutional basis</th><th>Core method and decision rule</th><th>Notable features and gaps</th></tr>
+<tr><td>UK · <a href="https://www.gov.uk/government/publications/the-green-book-appraisal-and-evaluation-in-central-government">HM Treasury Green Book</a> (2026 edition) + DfT <a href="https://www.gov.uk/guidance/transport-analysis-guidance">TAG</a></td><td>Treasury guidance binding on central government; business-case process (strategic, economic, commercial, financial, management)</td><td>Net present social value and BCR; value-for-money judgment including non-monetized impacts, distribution and risk. "The UK government does not choose projects solely on the basis of which have the highest benefit-cost ratios"</td><td>Mandatory optimism-bias adjustment; distributional weights (section 6); switching values; wider economic impacts as a sensitivity</td></tr>
+<tr><td><a href="../countries/germany.html">Germany</a> · <a href="https://www.bmv.de/SharedDocs/DE/Artikel/G/BVWP/bundesverkehrswegeplan-2030-erarbeitung.html">BVWP 2030</a> (2016) <span class="lang">(German)</span></td><td>Federal Transport Infrastructure Plan adopted by cabinet; project lists enacted in the Ausbaugesetze for road, rail and waterways</td><td>Four modules: A cost–benefit analysis (Nutzen-Kosten-Analyse, giving the NKV, i.e. BCR), B environmental and nature-protection assessment, C spatial planning (accessibility), D urban impacts. Projects ranked into priority categories</td><td>All project dossiers public in the <a href="http://www.bvwp-projekte.de/">PRINS</a> project information system. New "implicit benefit" component (Module 2). Criticized for weak treatment of induced traffic and climate targets (e.g. Rothengatter for BUND, 2023)</td></tr>
+<tr><td><a href="../countries/netherlands.html">Netherlands</a> · CPB/PBL <a href="https://www.cpb.nl/publicatie/algemene-leidraad-voor-maatschappelijke-kosten-batenanalyse">Algemene leidraad MKBA</a> (2013) + <a href="https://www.rwseconomie.nl/werkwijzers">Werkwijzer MKBA bij MIRT</a> (2024) <span class="lang">(Dutch)</span></td><td>Required for national infrastructure decisions in the MIRT program; predecessor was the OEI guide (2000); large MKBAs are often reviewed by CPB or PBL</td><td>Social CBA (MKBA) presented with non-monetized effects and distribution; no binding BCR threshold</td><td>Strong institutional independence (CPB); distribution shown "without a value judgment"; official time values for walking and cycling (Module 2)</td></tr>
+<tr><td><a href="../countries/sweden.html">Sweden</a> · Trafikverket <a href="https://bransch.trafikverket.se/asek">ASEK 8.0/8.1</a> + <a href="https://bransch.trafikverket.se/seb">SEB</a> <span class="lang">(Swedish)</span></td><td>Agency guidance for the national transport plan; two co-equal policy goals (accessibility; safety, environment and health)</td><td>Samlad effektbedömning: (i) CBA, (ii) distributional analysis, (iii) goal analysis against the transport-policy goals. Net present value ratio (NNK) reported</td><td>Combined impact assessments (SEBs) published for each measure</td></tr>
+<tr><td><a href="../countries/france.html">France</a> · Code des transports L.1511-1 to L.1511-6 (from LOTI 1982, art. 14); <a href="https://www.ecologie.gouv.fr/politiques-publiques/evaluation-projets-transport">Instruction of 16 June 2014 and DGITM référentiel</a> <span class="lang">(French)</span></td><td>Statutory evaluation duty for large projects; Quinet report (CGSP 2013); counter-appraisal of large state-funded investments under decree 2013-1211</td><td>Socio-economic NPV (VAN-SE) as one of three components: context and objectives, effects analysis, socio-economic analysis; results disaggregated by actor</td><td>Ex-post evaluation required; tool sheets for every effect, including health, urbanism and comfort</td></tr>
+<tr><td><a href="../countries/japan.html">Japan</a> · MLIT <a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ben-eki_2.pdf">費用便益分析マニュアル</a> (roads, Aug. 2025) <span class="lang">(Japanese)</span></td><td>Project evaluation at three stages: new-project adoption, re-evaluation and ex-post evaluation</td><td>B/C from three benefits only: travel-time savings, vehicle operating cost savings, crash reduction. Other effects may be shown separately as reference</td><td>Results for each project published in standard forms; environment and access not in core B/C</td></tr>
+<tr><td><a href="../countries/us.html">United States</a> · USDOT <a href="https://www.transportation.gov/grants/dot-navigator/benefit-cost-analysis-guidance-discretionary-grant-programs">BCA Guidance for Discretionary Grant Programs</a> (updated yearly)</td><td>Required for competitive federal grants (e.g. BUILD/RAISE, INFRA); not for most formula-funded highway spending; metropolitan plans prepared by MPOs</td><td>BCA as one merit criterion among several; benefits typically time, operating cost, safety, emissions, residual value</td><td>VSL $13.7 million (2024); no national plan-level appraisal comparable to BVWP</td></tr>
+<tr><td>Australia · <a href="https://www.atap.gov.au/tools-techniques/cost-benefit-analysis/index">Australian Transport Assessment and Planning Guidelines (ATAP)</a></td><td>Guidelines agreed by the federal, state and territory governments; Infrastructure Australia assesses nationally significant proposals</td><td>Cost–benefit analysis within a wider planning and assessment framework; positive NPV as the efficiency test</td><td>Parameters not checked here (the ATAP site could not be reached in November 2026)</td></tr>
+<tr><td><a href="../countries/singapore.html">Singapore</a> · LTA, <a href="https://www.lta.gov.sg/content/ltagov/en/who_we_are/our_work/land_transport_master_plan_2040.html">Land Transport Master Plan 2040</a></td><td>Planning by a single statutory authority within whole-of-government land-use planning</td><td>Not published</td><td>We could not find a public appraisal manual, parameter set or project-level CBA. Decisions are justified through master-plan targets (e.g. "20-minute towns and a 45-minute city"). Effective delivery, but opaque to outside scrutiny</td></tr>
+<tr><td>EU · DG REGIO <a href="https://ec.europa.eu/regional_policy/information-sources/publications/guides/2014/guide-to-cost-benefit-analysis-of-investment-projects-for-cohesion-policy-2014-2020_en">Guide to CBA of Investment Projects</a> (2014) and <a href="https://ec.europa.eu/regional_policy/information-sources/publications/guides/2021/economic-appraisal-vademecum-2021-2027-general-principles-and-sector-applications_en">Economic Appraisal Vademecum 2021–2027</a></td><td>Condition for major projects co-financed by EU cohesion funds</td><td>Financial analysis (does the project need the grant?) plus economic analysis (ENPV, ERR, BCR) with shadow prices</td><td>2014–2020 benchmark discount rate: 5 % in cohesion countries, 3 % elsewhere; member states may set their own. Widely copied in Central and Eastern Europe</td></tr>
 </table></div>
 
-<p>Some patterns are worth noting, as a <em>qualitative interpretation</em>:</p>
+<h3 id="parameters">The assumptions that move the number</h3>
+<p>The second table lists the parameters that most often decide a ranking. Time values are compared in detail in <a href="m02-valuing-access.html">Module 2</a>, carbon values in <a href="m03-externalities.html">Module 3</a>. Currencies and price years differ, so compare orders of magnitude, not decimals.</p>
+<div class="table-wrap"><table>
+<tr><th>System</th><th>Discount rate · period</th><th>Time values</th><th>Carbon value</th><th>Taxes and public funds</th></tr>
+<tr><td>UK</td><td>3.00 % yrs 1–30, 2.50 % to yr 75, 2.25 % after (Green Book 2026); 60 years</td><td>Willingness to pay; one national average for non-work trips</td><td>"Target-consistent" (cost of meeting net zero): £241 (2020), £280 (2030), £378 (2050) per tonne, 2020 prices; low and high values ±50 % (<a href="https://www.gov.uk/government/publications/valuing-greenhouse-gas-emissions-in-policy-appraisal/valuation-of-greenhouse-gas-emissions-for-policy-appraisal-and-evaluation">DESNZ, 2021</a>)</td><td>Market prices; lost fuel duty counted as a negative benefit; no \(\mu\), but BCR uses cost to the transport budget</td></tr>
+<tr><td>Germany</td><td>1.7 %; asset-specific lives</td><td>Labor-cost and survey values, rising with trip distance</td><td>€145 per tonne (2012 prices), constant</td><td>Resource costs: energy valued without VAT and energy taxes; no \(\mu\)</td></tr>
+<tr><td>Netherlands</td><td>2.8 % (years 0–35), 1.8 % after; variants for risk</td><td>Stated-preference survey, by mode, including walking and cycling</td><td>Not checked here</td><td>No explicit \(\mu\)</td></tr>
+<tr><td>Sweden</td><td>3.5 %; 60 years</td><td>Stated-preference study; income differences removed</td><td>No separate value: built into fuel prices in the forecast</td><td>\(1+\mu=1.2\)</td></tr>
+<tr><td>France</td><td>\(2.5\%+2\%\cdot\beta\) (4.5 % with \(\beta=1\)); to 2070 plus residual value</td><td>Meta-analysis; urban and interurban values</td><td>Shadow price of the net-zero path, rising: about €246 per tonne in 2030 (2015 prices)</td><td>\(1+\mu=1.2\) on public spending and revenue</td></tr>
+<tr><td>Japan</td><td>4 %; 50 years</td><td>Resource cost per vehicle</td><td>Not in the B/C ratio</td><td>No \(\mu\)</td></tr>
+<tr><td>United States</td><td>7 % (May 2025 update; 3.1 % in the 2024 cycle)</td><td>Share of median income</td><td>None since 2025 (federal values withdrawn)</td><td>No \(\mu\)</td></tr>
+<tr><td>Australia</td><td>7 % central, with tests at 4 % and 10 %: a long-standing Infrastructure Australia convention (<a href="https://aph.gov.au/~/media/Committees/ec_ctte/estimates/bud_1415/Communications/answers/q546.pdf">as cited in 2014</a>)</td><td colspan="3">Not checked here</td></tr>
+</table></div>
+
+<h3 id="switching">Which assumptions decide a ranking?</h3>
+<p>A table of parameters does not tell a decision maker what matters for <em>their</em> project. A small example does. Take two projects, each costing €100 million today:</p>
 <ul>
-<li><strong>Breadth of Term C.</strong> France, Sweden, Germany and the Netherlands monetize climate, noise, air pollution and crashes. Japan's road manual monetizes only crashes. US grant guidance monetizes safety and some emissions. In \(W\) terms, Japan sets \(p_k=0\) for most \(k\) in the B/C ratio and handles the environment through separate assessment. This is consistent with Japan's emphasis on rail and land use in Module 1, but it means road B/C ratios are not comparable with European ones.</li>
-<li><strong>Discount rates span a factor of four</strong>, from 1.7 % to 7 %. That alone can reverse rankings between rail and road, and between building and pricing.</li>
+<li><strong>A bypass</strong> saves €6 million of travel time a year. The savings do not grow, because new traffic fills the road. It adds 8,000 tonnes of CO₂ a year.</li>
+<li><strong>A rail upgrade</strong> brings €2.5 million of user benefits in its first year. They grow by 3 % a year as the region builds around the stations. It avoids 6,000 tonnes of CO₂ a year.</li>
+</ul>
+<p>Both are valued over 60 years. The numbers are illustrative, not estimates. Here is the NPV in € million for four discount rates and three carbon values:</p>
+<div class="table-wrap"><table>
+<tr><th rowspan="2">Discount rate</th><th colspan="2">No carbon value</th><th colspan="2">€150 per tonne</th><th colspan="2">€300 per tonne</th></tr>
+<tr><th>Bypass</th><th>Rail</th><th>Bypass</th><th>Rail</th><th>Bypass</th><th>Rail</th></tr>
+<tr><td>1.7 %</td><td class="num"><strong>125</strong></td><td class="num">120</td><td class="num">80</td><td class="num"><strong>153</strong></td><td class="num">35</td><td class="num"><strong>187</strong></td></tr>
+<tr><td>3.0 %</td><td class="num"><strong>66</strong></td><td class="num">46</td><td class="num">33</td><td class="num"><strong>71</strong></td><td class="num">0</td><td class="num"><strong>95</strong></td></tr>
+<tr><td>4.5 %</td><td class="num"><strong>24</strong></td><td class="num">−3</td><td class="num">−1</td><td class="num"><strong>15</strong></td><td class="num">−26</td><td class="num"><strong>34</strong></td></tr>
+<tr><td>7.0 %</td><td class="num">−16</td><td class="num">−44</td><td class="num">−33</td><td class="num">−31</td><td class="num">−50</td><td class="num"><strong>−19</strong></td></tr>
+</table></div>
+<p>The project with the higher NPV is in bold. Four lessons follow.</p>
+<ol>
+<li><strong>The two parameters work together.</strong> Without a carbon value, the bypass wins at every rate shown. With €150 per tonne, the rail upgrade wins at every rate up to about 7 %.</li>
+<li><strong>A high discount rate can reject both.</strong> At 7 % with no carbon value, both NPVs are negative. Doing nothing wins.</li>
+<li><strong>The switching value</strong> is the value of a parameter at which the ranking flips. At 3 %, the rail upgrade wins once carbon is worth more than about €53 per tonne. At 7 %, it needs about €143. The chart below shows the whole line.</li>
+<li><strong>Ask where your country's values sit relative to that line.</strong> If they sit far from it, the ranking is robust. If they sit close, the decision rests on a contested number, and the memo should say so.</li>
+</ol>
+<figure class="photo chart"><img src="../assets/img/m14-switching.svg" width="360" height="236" alt="Chart: a rising line separates the region where the rail upgrade ranks first (above) from the region where the bypass ranks first (below), by discount rate and carbon value. Points for Germany, the UK and France lie above the line; the US point (7 %, no carbon value) lies below."><figcaption>The switching line for the example. Above it the rail upgrade has the higher NPV; below it, the bypass. The points place four national conventions on the chart, roughly: Germany (1.7 %, €145 per tonne in 2012 prices), the UK (3.0 %, plotted at 280 for £280 per tonne in 2030, 2020 prices), France (4.5 % with \(\beta=1\), about €246 per tonne in 2030, 2015 prices) and the US grant guidance (7 %, no carbon value). Price years and currencies are not converted. The table above the chart gives the numbers.</figcaption></figure>
+<p>Other parameters can be read the same way. A lower value of time shrinks the bypass's benefits most, because they are all time savings. A forecast that lets traffic grow on the bypass lowers its time savings and raises its emissions. The marginal cost of public funds penalizes both equally here, because both cost the same. In a real appraisal, the analyst should report the two or three parameters that come closest to flipping the ranking, with their switching values.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>How the example is computed</summary>
+<p>For a project with first-year user benefit \(b\), growth rate \(g\), yearly CO₂ change \(\Delta E\) (tonnes avoided, negative if added), carbon value \(p\), cost \(K_0\) in year 0 and period \(T=60\):</p>
+$$\mathrm{NPV}(r,p)=-K_0+\sum_{t=1}^{T}\frac{b\,(1+g)^{t-1}+p\,\Delta E}{(1+r)^t}.$$
+<p>Bypass: \(b=6\), \(g=0\), \(\Delta E=-8{,}000\). Rail: \(b=2.5\), \(g=0.03\), \(\Delta E=+6{,}000\). Money in € million, so \(p\,\Delta E\) is divided by \(10^6\). The switching carbon value at a given \(r\) solves \(\mathrm{NPV}_{\text{bypass}}(r,p)=\mathrm{NPV}_{\text{rail}}(r,p)\). Because NPV is linear in \(p\), this is a single division. The example simplifies on purpose: real carbon values rise over time, which would favor the rail upgrade further, and there is no residual value, no \(\mu\) and no optimism-bias uplift.</p>
+</details>
+
+<h3>Patterns worth noting</h3>
+<p>These are a <em>qualitative interpretation</em>:</p>
+<ul>
+<li><strong>Breadth of Term C.</strong> The UK, France, Germany and the Netherlands monetize climate, noise, air pollution and crashes. Japan's road manual monetizes only crashes. US grant guidance monetizes safety and some emissions. In \(W\) terms, Japan sets \(p_k=0\) for most \(k\) in the B/C ratio and handles the environment through separate assessment. This fits Japan's reliance on rail and land use for access (<a href="m01-objective.html#role-models">Module 1</a>), but it means Japanese road B/C ratios are not comparable with European ones.</li>
+<li><strong>Discount rates span a factor of four</strong>, from 1.7 % to 7 %. As the example shows, that alone can reverse rankings between rail and road, and between building and doing nothing.</li>
+<li><strong>Carbon values span from zero to several hundred euros per tonne</strong>, and rest on two different logics: damage caused, or the cost of meeting a target (<a href="m03-externalities.html">Module 3</a>). Sweden's choice to build the carbon price into fuel prices means a road project looks almost carbon-neutral in its ratio, because the forecast assumes the climate policy succeeds anyway.</li>
 <li><strong>Transparency varies.</strong> Germany's PRINS and Sweden's published SEBs let anyone check a project. Singapore publishes almost nothing.</li>
 <li><strong>The role of the number differs.</strong> In Germany a BCR above 1 is a formal precondition for inclusion in the plan. In the UK and the Netherlands it informs a broader judgment. In the US it is one grant criterion among several.</li>
 </ul>
@@ -125,28 +255,30 @@ $$\mathrm{NPV}=\sum_{t=0}^{T}\frac{B_t-C_t}{(1+r)^t}+\frac{RV_T}{(1+r)^T}.$$
 </div>
 
 <div class="box translation">
-<div class="box-title">Germany · four assessment modules</div>
-<p class="original" lang="de">Soweit wie möglich werden alle monetarisierbaren Wirkungseffekte in der Nutzen-Kosten-Analyse (NKA) erfasst (Modul A). Sie liefert im Ergebnis ein gesamtwirtschaftliches Nutzen-Kosten-Verhältnis (NKV) […].</p>
-<p>"As far as possible, all effects that can be monetized are captured in the cost–benefit analysis (NKA) (module A). Its result is an economy-wide benefit–cost ratio (NKV) […]."</p>
-<p class="small">Source: Methodenhandbuch zum Bundesverkehrswegeplan 2030, section on the evaluation modules. The text continues that land take and protection of unfragmented areas are assessed in module B, and accessibility in module C. Translated by the course authors (machine-assisted).</p>
-</div>
-
-<div class="box translation">
 <div class="box-title">Sweden · appraisal supports, it does not decide</div>
 <p class="original" lang="sv">En Samlad effektbedömning kommer inte fram till om en åtgärd ska genomföras eller inte men kan utgöra ett stöd i beslutsfattandet.</p>
 <p>"A Combined Impact Assessment does not conclude whether a measure should be carried out or not, but can serve as support in decision-making."</p>
 <p class="small">Source: <a href="https://bransch.trafikverket.se/seb">Trafikverket, Samlad effektbedömning, SEB</a> (page updated May 2026). Translated by the course authors (machine-assisted).</p>
 </div>
 
+<details class="method">
+<summary><span class="label">Under the hood</span>The German and French method texts in the original</summary>
+<div class="box translation">
+<div class="box-title">Germany · four assessment modules</div>
+<p class="original" lang="de">Soweit wie möglich werden alle monetarisierbaren Wirkungseffekte in der Nutzen-Kosten-Analyse (NKA) erfasst (Modul A). Sie liefert im Ergebnis ein gesamtwirtschaftliches Nutzen-Kosten-Verhältnis (NKV) […].</p>
+<p>"As far as possible, all effects that can be monetized are captured in the cost–benefit analysis (NKA) (module A). Its result is an economy-wide benefit–cost ratio (NKV) […]."</p>
+<p class="small">Source: Methodenhandbuch zum Bundesverkehrswegeplan 2030, section on the evaluation modules. The text continues that land take and protection of unfragmented areas are assessed in module B, and accessibility in module C. Translated by the course authors (machine-assisted).</p>
+</div>
 <div class="box translation">
 <div class="box-title">France · the statutory frame</div>
 <p class="original" lang="fr">Cette instruction présente le cadre général pour l'évaluation des projets de transports de l'État, de ses établissements publics et de ses délégataires, en application des dispositions des articles L. 1511-1 à L. 1511-6 du code des transports […].</p>
 <p>"This instruction sets out the general framework for the evaluation of transport projects of the State, its public bodies and its concessionaires, in application of articles L. 1511-1 to L. 1511-6 of the Transport Code […]."</p>
 <p class="small">Source: <a href="https://www.ecologie.gouv.fr/sites/default/files/documents/Instruction%20du%20gouvernement%20du%20160614.pdf">Instruction du Gouvernement du 16 juin 2014 relative à l'évaluation des projets de transport</a>, §2. The articles codify article 14 of the 1982 inland transport law (LOTI). Translated by the course authors (machine-assisted).</p>
 </div>
+</details>
 
-<h2>3. Multi-criteria analysis</h2>
-<p>Multi-criteria analysis (MCA) scores options on several criteria and combines the scores, often with a weighted sum \(S_i=\sum_c w_c\,s_{ic}\). It is used where effects are hard to monetize or where decision-makers want to see trade-offs explicitly. Germany's BVWP modules B–D, Sweden's goal analysis and the UK's appraisal summary table are all multi-criteria elements around a CBA core.</p>
+<h2 id="mca">4. Multi-criteria analysis</h2>
+<p>Multi-criteria analysis (MCA) scores options on several criteria and combines the scores, often as a weighted sum. It is used where effects are hard to monetize, or where decision makers want to see trade-offs explicitly. Germany's BVWP modules B–D, Sweden's goal analysis and the UK's appraisal summary table are all multi-criteria elements around a cost–benefit core.</p>
 <p>MCA has well-known pitfalls:</p>
 <ul>
 <li><strong>Weights are implicit prices.</strong> A weight of 20 % on "environment" and 40 % on "economy" implies a rate of exchange between them that nobody has justified. With normalized scores, the implied price also depends on the range of options considered.</li>
@@ -154,13 +286,14 @@ $$\mathrm{NPV}=\sum_{t=0}^{T}\frac{B_t-C_t}{(1+r)^t}+\frac{RV_T}{(1+r)^T}.$$
 <li><strong>Rank reversal.</strong> Adding or removing an irrelevant option can change the ranking of the others when scores are normalized.</li>
 <li><strong>Scale.</strong> Scores on a 1–5 scale hide whether an effect is large or trivial.</li>
 </ul>
-<p>The honest use of MCA within the \(W\) framework is narrow. Use it for effects that genuinely cannot be priced, such as heritage, landscape or community cohesion, and present it next to the monetized terms, not mixed into them. Where an effect can be quantified physically, such as emissions or exposure, show the physical quantity rather than a score.</p>
+<p>The honest use of MCA within the \(W\) framework is narrow. Use it for effects that genuinely cannot be priced, such as heritage, landscape or community cohesion. Present it next to the monetized terms, not mixed into them. Where an effect can be measured physically, such as emissions or exposure, show the physical quantity rather than a score.</p>
+<p class="small">In formula form, the weighted sum is \(S_i=\sum_c w_c\,s_{ic}\): option \(i\)'s score \(s_{ic}\) on criterion \(c\), times the weight \(w_c\), added over all criteria.</p>
 
-<h2>4. Pareto comparison</h2>
-<p>Before using any weights, check for <strong>dominance</strong>. Plan X dominates plan Y if X is at least as good on every term of \(W\) and every constraint, and strictly better on at least one. Dominated plans can be discarded without any value judgment. The rest form the <em>Pareto frontier</em>, and only the choice among them requires prices or political weights.</p>
+<h2 id="pareto">5. Pareto comparison</h2>
+<p>Before using any weights, check for <strong>dominance</strong>. Plan X dominates plan Y if X is at least as good on every term of \(W\) and every limit, and strictly better on at least one. Dominated plans can be discarded without any value judgment. The rest form the <em>Pareto frontier</em>, named after the Italian economist Vilfredo Pareto. Only the choice among them requires prices or political weights.</p>
 <div class="box note">
 <div class="box-title">Worked example · four plans for a corridor</div>
-<p>Present values in € million (positive = good), and whether the safety constraint \(F\le\bar F\) is met:</p>
+<p>Present values in € million (positive = good), and whether the safety limit \(F\le\bar F\) is met. Congestion effects are inside A; land is only in D.</p>
 <div class="table-wrap"><table>
 <tr><th>Plan</th><th>A access</th><th>B health</th><th>−C externalities</th><th>−D land</th><th>−E net cost</th><th>Safety met?</th></tr>
 <tr><td>P1 road widening</td><td class="num">180</td><td class="num">0</td><td class="num">−60</td><td class="num">−40</td><td class="num">−120</td><td>no</td></tr>
@@ -169,81 +302,103 @@ $$\mathrm{NPV}=\sum_{t=0}^{T}\frac{B_t-C_t}{(1+r)^t}+\frac{RV_T}{(1+r)^T}.$$
 <tr><td>P4 widening + bus lane</td><td class="num">170</td><td class="num">5</td><td class="num">−50</td><td class="num">−45</td><td class="num">−140</td><td>no</td></tr>
 </table></div>
 <ul>
-<li>P1 and P4 fail the safety constraint and are infeasible. Note that neither dominates the other: P4 is worse on A, D and E but better on B and C. Without the constraint check, both would stay in the comparison and a high enough value of time could make P1 the "winner". This is why the constraint check comes first.</li>
-<li>Between P2 and P3, neither dominates: P3 is better on A (+10), B (+35) and C (+5) but has a net public cost that is 20 higher (already including \(\mu\)). With equal weights, \(W(P3)-W(P2)=+30\). The decision rests on whether health benefits are valued as fully as access benefits.</li>
+<li>P1 and P4 fail the safety limit and are infeasible. Note that neither dominates the other: P4 is worse on A, D and E but better on B and C. Without the limit check, both would stay in the comparison, and a high enough value of time could make P1 the "winner". This is why the limit check comes first.</li>
+<li>Between P2 and P3, neither dominates. P3 is better on A (+10), B (+35) and C (+5), but its net public cost is 20 higher (already including \(\mu\)). With equal weights, \(W(P3)-W(P2)=+30\). The decision rests on whether health benefits are valued as fully as access benefits.</li>
 <li>Report the vector, the infeasibility of P1 and P4, and the size of the P2–P3 trade-off. That is a more useful decision document than a single BCR.</li>
 </ul>
 </div>
 
-<h2>5. Equity weighting and distributional analysis <span class="term">A</span> <span class="term">constraints</span></h2>
-<p>Standard CBA adds up money-valued gains with equal weights, \(\omega_g=1\). Because a euro matters more to a poor household, this gives the preferences of the rich more weight in welfare terms. There are three responses, which can be combined.</p>
+<h2 id="equity">6. Equity weighting and distributional analysis <span class="term">A</span> <span class="term">constraints</span></h2>
+<p>Standard CBA adds up money-valued gains with equal weights. Because a euro matters more to a poor household, this gives the preferences of the rich more weight in welfare terms. There are three responses, which can be combined.</p>
 <ol>
-<li><strong>Show the distribution, without weights.</strong> The Dutch leidraad and Sweden's distributional analysis report who gains and loses (by income group, region, mode) and leave the judgment to politicians.</li>
-<li><strong>Weight explicitly.</strong> The UK Green Book (2026) gives a formula for welfare weights based on the elasticity of marginal utility of consumption, estimated at 1.25:
+<li><strong>Show the distribution, without weights.</strong> The Dutch guide and Sweden's distributional analysis report who gains and loses (by income group, region, mode) and leave the judgment to politicians.</li>
+<li><strong>Weight explicitly.</strong> The UK Green Book gives a formula for welfare weights \(\omega_g\). It rests on how fast an extra pound loses value as income rises, an elasticity the Treasury estimates at 1.25:
 $$\omega_g=\left(\frac{\text{median equivalised income, national}}{\text{median equivalised income, group } g}\right)^{1.25}.$$
 A group with 60 % of the national median income gets \(\omega_g=(1/0.6)^{1.25}\approx1.89\). The Green Book requires weighted results to be shown <em>alongside</em> unweighted ones.</li>
-<li><strong>Use constraints.</strong> An equity floor \(A_g\ge A_{\min}\) (Module 1) guarantees minimum access regardless of weights.</li>
+<li><strong>Use limits.</strong> An equity floor \(A_g\ge A_{\min}\) (<a href="m01-objective.html#limits">Module 1</a>) guarantees minimum access regardless of weights.</li>
 </ol>
-<p>Implicit weights are everywhere. National-average time values (UK, Sweden; Module 2) remove the income gradient in Term A. Treating all \(\lambda_n\) as equal in the logsum does the same. Conversely, values per vehicle (Japan) or by distance (Germany) can favor people who drive more and farther, who tend to have higher incomes. The UK's <a href="https://www.gov.uk/government/publications/tag-unit-a4-2-distributional-impact-appraisal">TAG Unit A4.2</a> gives a practical method for mapping user benefits, noise, air quality, safety and affordability by income decile and vulnerable group.</p>
+<p>Implicit weights are everywhere. National-average time values (UK, Sweden; <a href="m02-valuing-access.html">Module 2</a>) remove the income gradient in Term A. Conversely, values per vehicle (Japan) or rising with distance (Germany) can favor people who drive more and farther, who tend to have higher incomes. The UK's <a href="https://www.gov.uk/government/publications/tag-unit-a4-2-distributional-impact-appraisal">TAG Unit A4.2</a> gives a practical method for mapping user benefits, noise, air quality, safety and affordability by income decile and vulnerable group.</p>
 
 <div class="box translation">
 <div class="box-title">Netherlands · distribution is a political matter</div>
 <p class="original" lang="nl">Als verdelingseffecten een belangrijk onderdeel van een maatregel zijn, of mogelijk juist het doel van de maatregel, dan worden in een MKBA die effecten wel weergegeven, bijvoorbeeld via mutaties in de koopkracht per inkomensgroep, maar zonder daar een waardeoordeel aan te verbinden.</p>
 <p>"If distributional effects are an important part of a measure, or possibly its very purpose, an MKBA does show these effects, for example through changes in purchasing power per income group, but without attaching a value judgment to them."</p>
-<p class="small">Source: CPB and PBL, <em>Algemene leidraad voor maatschappelijke kosten-batenanalyse</em> (2013), introduction. Translated by the course authors (machine-assisted).</p>
+<p class="small">Source: CPB and PBL, <em>Algemene leidraad voor maatschappelijke kosten-batenanalyse</em> (2013), introduction (<a href="../sources/nl-mkba-leidraad-2013.html">digest</a>). Translated by the course authors (machine-assisted).</p>
 </div>
 
-<h2>6. From projects to plans: SUMP and VEP</h2>
-<p>Project CBA answers "is this project worth it compared with doing nothing?". Cities first need to answer "what should our transport system achieve, and which mix of measures gets us there?". Strategic planning processes do that.</p>
+<h2 id="plans">7. From projects to plans: SUMP and VEP</h2>
+<p>Project CBA answers "is this project worth it compared with doing nothing?". Cities first need to answer "what should our transport system achieve, and which mix of measures gets us there?". That is the societal objective of <a href="#three-levels">section 1</a>. Strategic planning processes are where it is written down.</p>
 <h3>Sustainable Urban Mobility Plans (EU)</h3>
 <p>The European Commission's SUMP concept dates from the 2013 Urban Mobility Package and was updated in 2023. The practical <a href="https://urban-mobility-observatory.transport.ec.europa.eu/sustainable-urban-mobility-plans/sump-guidelines-and-decision-makers-summary_en">SUMP Guidelines</a> are now in a third edition (2026), which keeps the earlier methodology. The process is a cycle of phases: preparation and analysis, strategy development (vision, objectives, targets), measure planning (packages, responsibilities, funding), and implementation and monitoring. Its distinctive features are participation, integration across modes and with land use, monitoring with indicators, and a focus on people rather than vehicles. Since the revised TEN-T Regulation entered into force in July 2024, the 431 cities designated as "urban nodes" must <a href="https://transport.ec.europa.eu/transport-themes/urban-transport/sustainable-urban-mobility-planning-and-monitoring_en">adopt a SUMP and report urban mobility indicators</a>.</p>
 <h3>Verkehrsentwicklungsplan (Germany)</h3>
-<p>German cities prepare <em>Verkehrsentwicklungspläne</em> (VEP), transport development plans guided by the FGSV <em>Hinweise zur Verkehrsentwicklungsplanung</em> (2013). VEPs are not legally required, are adopted by the city council and typically follow the "avoid – shift – improve" logic of Module 1. They combine scenario analysis with an assessment of measure packages against the plan's objectives. Many recent VEPs are labeled as SUMPs as well.</p>
-<p>In \(W\) terms, a SUMP or VEP is the process that sets \(\omega_g\), the constraints and the candidate set of \(\theta\). Project appraisal then estimates \(W\) for the shortlisted packages. The risk is a disconnect: a plan whose stated objectives are accessibility and emissions, followed by project appraisals that still count only vehicle time savings.</p>
+<p>German cities prepare <em>Verkehrsentwicklungspläne</em> (VEP), transport development plans guided by the FGSV <em>Hinweise zur Verkehrsentwicklungsplanung</em> (2013). VEPs are not legally required. They are adopted by the city council and typically follow the "avoid – shift – improve" logic of Module 1. They combine scenario analysis with an assessment of measure packages against the plan's objectives. Many recent VEPs are labeled as SUMPs as well.</p>
+<p>In \(W\) terms, a SUMP or VEP is the process that sets the weights \(\omega_g\), the limits and the set of candidate plans. Project appraisal then estimates \(W\) for the shortlisted packages. The risk is the disconnect seen in Wales: a plan whose stated objectives are accessibility and emissions, followed by project studies that are still framed around vehicle time savings.</p>
 
-<h2>7. The politics: optimism bias and strategic misrepresentation</h2>
-<p>Appraisal results are only as good as their inputs, and the inputs are produced by people with an interest in the outcome. Bent Flyvbjerg and colleagues, studying 258 transport projects, found that costs were underestimated in about nine out of ten cases, with average overruns of about 45 % for rail, 34 % for bridges and tunnels and 20 % for roads, and no improvement over 70 years (<a href="https://doi.org/10.1080/01944360208976273">Flyvbjerg, Holm &amp; Buhl, 2002</a>). Rail ridership forecasts were, on average, much too high. Their explanation combined <strong>optimism bias</strong> (honest psychological error) and <strong>strategic misrepresentation</strong> (deliberate underestimation to win approval).</p>
+<h2 id="politics">8. The politics: optimism bias and strategic misrepresentation</h2>
+
+<div class="box story"><div class="box-title">History · Why the numbers had to be standardized</div>
+<figure class="photo inset"><img src="../assets/img/people/flood-1927-greenville.jpg" width="500" height="368" loading="lazy" alt="Aerial view of Greenville, Mississippi, with streets and rail yards under water during the 1927 flood."><figcaption>Greenville, Mississippi, under water in the flood of 1927, which led Congress to take over flood control. <span class="credit">NOAA Photo Library, public domain.</span></figcaption></figure>
+<p>The US Flood Control Act of 1936 made a simple test into law: a federal project should go ahead only if its benefits exceeded its costs (<a href="m01-objective.html#term-e">Module 1</a> tells that story). The law did not say how to count them.</p>
+<p>Over the next decade, agencies of the Army, the Interior Department and the Agriculture Department all appraised projects, often in the same river basins, each with its own methods. In 1946 an inter-agency committee set up a subcommittee to agree on common practice. Its report of May 1950, <em>Proposed Practices for Economic Analysis of River Basin Projects</em>, became known as the "Green Book". It was not binding.</p>
+<p>The historian Theodore Porter argues that this push for uniform rules came less from economic theory than from distrust. Rival agencies and interest groups challenged each other's numbers. Only rules that left little room for judgment could make a number credible to outsiders. Porter calls quantification a "technology of distance": a way to be trusted by people who do not know you.</p>
+<p class="credit">Sources: Subcommittee on Benefits and Costs, Federal Inter-Agency River Basin Committee, <a href="https://catalog.hathitrust.org/Record/001428891"><em>Proposed Practices for Economic Analysis of River Basin Projects</em></a> (May 1950); T. M. Porter, <em>Trust in Numbers: The Pursuit of Objectivity in Science and Public Life</em> (Princeton University Press, 1995), ch. 7.</p>
+</div>
+
+<p>Appraisal results are only as good as their inputs, and the inputs are produced by people with an interest in the outcome. Bent Flyvbjerg and colleagues studied 258 transport projects. Costs were underestimated in about nine out of ten cases. Average overruns were about 45 % for rail, 34 % for bridges and tunnels and 20 % for roads, with no improvement over 70 years (<a href="https://doi.org/10.1080/01944360208976273">Flyvbjerg, Holm &amp; Buhl, 2002</a>). Rail ridership forecasts were, on average, much too high. Their explanation combined <strong>optimism bias</strong> (honest psychological error) and <strong>strategic misrepresentation</strong> (deliberate underestimation to win approval).</p>
 <h3>Reference-class forecasting</h3>
-<p>The remedy, drawn from Kahneman and Tversky's work on the "outside view" and set out in <a href="https://doi.org/10.1177/875697280603700302">Flyvbjerg (2006)</a>, is <strong>reference-class forecasting</strong>:</p>
+<p>The remedy, drawn from Daniel Kahneman and Amos Tversky's work on the "outside view" and set out in <a href="https://doi.org/10.1177/875697280603700302">Flyvbjerg (2006)</a>, is <strong>reference-class forecasting</strong>:</p>
 <ol>
 <li>Identify a reference class of similar past projects.</li>
 <li>Establish the distribution of outcomes (cost overrun, demand shortfall) in that class.</li>
-<li>Place the new project in that distribution and adjust the "inside view" estimate to a chosen level of certainty, e.g. the uplift that keeps the risk of overrun at 20 %.</li>
+<li>Place the new project in that distribution, and adjust the "inside view" estimate to a chosen level of certainty: for example, the uplift that keeps the risk of an overrun at 20 %.</li>
 </ol>
-<p>The UK made this mandatory through the Green Book's <a href="https://www.gov.uk/government/publications/green-book-supplementary-guidance-optimism-bias">supplementary guidance on optimism bias</a>, which gives percentage uplifts by project type and stage. Denmark and other countries followed. The 2026 Green Book states that practitioners "should account for optimism bias by increasing their estimates of social costs and project durations, and decreasing their estimates of social benefits."</p>
+<p>The UK made this mandatory through the Green Book's <a href="https://www.gov.uk/government/publications/green-book-supplementary-guidance-optimism-bias">supplementary guidance on optimism bias</a>, which gives percentage uplifts by project type and stage. Denmark and other countries followed. The 2026 Green Book states that practitioners "must account for optimism bias by making explicit adjustments at the outset of an appraisal": costs and durations up, benefits down.</p>
 <h3>Institutional safeguards</h3>
 <ul>
 <li><strong>Independent review</strong>: CPB and PBL in the Netherlands; France's counter-appraisal of large state investments under decree 2013-1211; Trafikverket's regional quality review of SEBs in Sweden.</li>
 <li><strong>Transparency</strong>: publication of models, assumptions and results (PRINS, published SEBs, Japanese project sheets).</li>
-<li><strong>Ex-post evaluation</strong>: France's LOTI framework requires a review of results after opening, and Japan's manual covers ex-post evaluation (事後評価). Systematic comparison of forecasts with outcomes is the only way to calibrate the reference classes.</li>
+<li><strong>Ex-post evaluation</strong>: France's LOTI framework requires a review of results after opening, and Japan's manual covers ex-post evaluation (事後評価). Systematic comparison of forecasts with outcomes is the only way to build the reference classes.</li>
 <li><strong>Separation of roles</strong>: the promoter of a project should not be its only appraiser.</li>
 </ul>
 
-<h2>8. Using \(W\) honestly in appraisal</h2>
-<p>Module 1 ended with four rules. In appraisal practice they become a checklist:</p>
+<h2 id="honest">9. Using \(W\) honestly in appraisal</h2>
+<p><a href="m01-objective.html#honest">Module 1</a> ended with rules for using \(W\). In appraisal practice they become a checklist:</p>
 <ol>
-<li><strong>Check constraints first.</strong> Safety, carbon budget, land and equity floors. Infeasible options are not rescued by a high BCR.</li>
-<li><strong>Report the vector</strong> \((A, B, C_k, D, E)\) and the non-monetized effects before any total. Show which term drives the result.</li>
-<li><strong>Discard dominated options</strong>, then describe the trade-offs on the frontier in plain language.</li>
-<li><strong>Report distribution</strong>, weighted and unweighted, and the implicit weights in the values used.</li>
-<li><strong>Test the contested parameters</strong>: discount rate, carbon value, VSL, VTTS, \(\mu\), demand elasticities, optimism-bias uplifts. Give switching values: how much would a parameter need to change to reverse the decision?</li>
-<li><strong>State the model's blind spots</strong>: fixed demand, missing land-use response, missing active modes. Label fixed-demand time savings as an upper bound (Module 2).</li>
+<li><strong>State the societal objective first,</strong> as limits and targets in the terms of reference.</li>
+<li><strong>Check limits before any ratio.</strong> Safety, carbon budget, land and equity floors. Infeasible options are not rescued by a high BCR.</li>
+<li><strong>Report the vector</strong> \((A, B, C_k, D, E)\) and the non-monetized effects before any total. Show which term drives the result. Count congestion, land and transfers once.</li>
+<li><strong>Discard dominated options,</strong> then describe the trade-offs on the frontier in plain language.</li>
+<li><strong>Report distribution,</strong> weighted and unweighted, and the implicit weights in the values used.</li>
+<li><strong>Test the contested parameters</strong>: discount rate, carbon value, value of a statistical life, time values, \(\mu\), demand elasticities, optimism-bias uplifts. Give switching values.</li>
+<li><strong>State the model's blind spots</strong>: fixed demand, missing land-use response, missing walking and cycling. Label fixed-demand time savings as an upper bound (<a href="m02-valuing-access.html">Module 2</a>).</li>
 <li><strong>Separate the analyst from the advocate.</strong> Publish inputs so others can reproduce the result.</li>
 </ol>
-<p>The <a href="../explorer.html">objective explorer</a> lets you see how national parameter sets (discount rate, carbon value, VSL, \(\mu\)) change the ranking of stylised plans. <a href="m15-capstone.html">Module 15</a> applies the full procedure to a corridor.</p>
+<div class="box note">
+<div class="box-title">For decision makers · six questions to put to an appraisal</div>
+<ol>
+<li>Which of our targets and limits did the study check, and which options fail them?</li>
+<li>Were pricing, management and service options on the long list? Why were they dropped?</li>
+<li>Did the forecast let traffic grow or shrink in response to each option?</li>
+<li>Which three parameters come closest to flipping the ranking, and what are their switching values?</li>
+<li>What is left out of the ratio, and how large might it be?</li>
+<li>How does the cost estimate compare with the outturn of similar past projects?</li>
+</ol>
+</div>
+<p>The <a href="../explorer.html">objective explorer</a> lets you see how national parameter sets (discount rate, carbon value, value of a statistical life, \(\mu\)) change the ranking of stylized plans. <a href="m15-capstone.html">Module 15</a> applies the full procedure to a corridor, in a variant for each role.</p>
 
 <div class="box exercise">
 <div class="box-title">Exercise 14.1 · One project, four manuals</div>
 <p>A rail upgrade costs €500 million in year 0 and €5 million per year to operate. It yields user benefits of €20 million in year 1, growing 2 % per year in real terms, and avoids 20,000 t CO₂ per year.</p>
 <ol>
-<li>Compute the NPV under the German (1.7 %, 145 €/t, no MCPF), Swedish (3.5 %, 60 years, MCPF 1.2, CO₂ already in fuel prices: assume half the CO₂ benefit is captured in user benefits), French (4.5 %, horizon 2070 with residual value, COFP 1.2, carbon trajectory from Module 3) and US grant (7 %, no carbon value) conventions. Use a 40-year horizon where a rule is unclear and say so.</li>
+<li>Compute the NPV under the German (1.7 %, €145 per tonne, no \(\mu\)), Swedish (3.5 %, 60 years, \(1+\mu=1.2\), CO₂ already in fuel prices: assume half the CO₂ benefit is captured in user benefits), French (4.5 %, horizon 2070 with residual value, \(1+\mu=1.2\), carbon path from Module 3) and US grant (7 %, no carbon value) conventions. Use a 40-year horizon where a rule is unclear, and say so.</li>
 <li>Which parameters drive the differences? Compute the switching value of the discount rate.</li>
+<li>Write two sentences for a minister: is the decision robust to the choice of manual?</li>
 </ol>
 </div>
 
 <div class="box exercise">
 <div class="box-title">Exercise 14.2 · Pareto and weights</div>
-<p>Using the table in section 4, find the set of weights \((w_A,w_B,w_C,w_D,w_E)\) with \(w_A=1\) under which P2 would be preferred to P3. Is that set plausible? Then assume 60 % of P3's health benefits accrue to households in the lowest income quintile, with median income 55 % of the national median, and recompute with UK Green Book welfare weights. How should the result be presented to a council?</p>
+<p>Using the table in section 5, find the set of weights \((w_A,w_B,w_C,w_D,w_E)\) with \(w_A=1\) under which P2 would be preferred to P3. Is that set plausible? Then assume 60 % of P3's health benefits go to households in the lowest income quintile, with median income 55 % of the national median, and recompute with UK Green Book welfare weights. How should the result be presented to a council?</p>
 </div>
 
 <div class="box exercise">
@@ -251,27 +406,42 @@ A group with 60 % of the national median income gets \(\omega_g=(1/0.6)^{1.25}\a
 <p>A city's light-rail business case forecasts 40,000 boardings per day and a cost of €300 million. Find published outturn data for three to five comparable systems (start with the reference list in Flyvbjerg's papers or national ex-post evaluations). Construct a rough reference class, adjust both forecasts to an 80 % confidence level, and recompute the BCR. What institutional change would make such an adjustment routine in your country?</p>
 </div>
 
+<div class="box exercise">
+<div class="box-title">Exercise 14.4 · Three levels in one study</div>
+<p>Take a published appraisal or traffic study for a project near you (a business case, a BVWP dossier in PRINS, an SEB, or a planning application with a transport assessment).</p>
+<ol>
+<li>Name its model objective: what did the model compute, and did demand respond to the project?</li>
+<li>Name its appraisal objective: which effects were valued, at what discount rate and carbon value?</li>
+<li>Find the societal objective that applies: your city's or country's climate, safety and access targets.</li>
+<li>Where do the three conflict? Propose one change to the terms of reference that would bring them into line.</li>
+</ol>
+</div>
+
 <h2>Readings and resources</h2>
 <ul class="resources">
-<li data-type="pdf"><a href="https://www.gov.uk/government/publications/the-green-book-appraisal-and-evaluation-in-central-government">HM Treasury — The Green Book (2026)</a> <span class="why">The most complete official statement of appraisal principles: discounting, optimism bias, distributional weights, switching values.</span></li>
+<li data-type="pdf"><a href="https://www.gov.uk/government/publications/the-green-book-appraisal-and-evaluation-in-central-government">HM Treasury — The Green Book (2026)</a> <span class="why">The most complete official statement of appraisal principles: discounting, transfers, optimism bias, distributional weights, switching values.</span></li>
 <li data-type="link"><a href="https://www.gov.uk/guidance/transport-analysis-guidance">DfT — Transport Analysis Guidance (TAG)</a> <span class="why">Transport-specific guidance, including <a href="https://www.gov.uk/government/publications/tag-unit-a1-1-cost-benefit-analysis">A1.1 cost–benefit analysis</a> and <a href="https://www.gov.uk/government/publications/tag-unit-a4-2-distributional-impact-appraisal">A4.2 distributional impacts</a>.</span></li>
+<li data-type="link"><a href="https://www.gov.uk/government/publications/valuing-greenhouse-gas-emissions-in-policy-appraisal/valuation-of-greenhouse-gas-emissions-for-policy-appraisal-and-evaluation">DESNZ — Valuation of greenhouse gas emissions for policy appraisal (2021)</a> <span class="why">The UK's target-consistent carbon values used in TAG.</span></li>
 <li data-type="link"><a href="https://www.gov.uk/government/publications/green-book-supplementary-guidance-optimism-bias">HM Treasury — Supplementary guidance on optimism bias</a> <span class="why">Uplift tables based on reference-class evidence.</span></li>
+<li data-type="pdf"><a href="https://www.gov.wales/sites/default/files/publications/2023-02/the-future-road-investment-wales.pdf">Roads Review Panel — The Future of Road Investment in Wales (2023)</a> <span class="why">A government-commissioned review that tests a road programme against a new societal objective. Clear on why time savings alone mislead.</span></li>
 <li data-type="pdf"><a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">BMV — Methodenhandbuch zum BVWP 2030</a> <span class="lang">(German)</span> <span class="why">The full German method, modules A–D.</span></li>
 <li data-type="tool"><a href="http://www.bvwp-projekte.de/">PRINS — Projektinformationssystem zum BVWP 2030</a> <span class="lang">(German)</span> <span class="why">Dossiers for every assessed federal project: a unique resource for case studies.</span></li>
 <li data-type="pdf"><a href="https://www.bund.net/fileadmin/user_upload_bund/publikationen/klimawandel/wirkungsanalyse-bewertung-grundlage-bundesverkehrswege-mobilitaetsplanung-bvmp-gutachten-werner-rothengatter-bund-2023.pdf">Rothengatter (2023) — Integrierte Wirkungsanalyse und Bewertung als Grundlage einer künftigen Bundesverkehrswege- und Mobilitätsplanung (for BUND)</a> <span class="lang">(German)</span> <span class="why">A critical review of the BVWP method by a leading transport economist, commissioned by an environmental NGO.</span></li>
 <li data-type="pdf"><a href="https://www.cpb.nl/publicatie/algemene-leidraad-voor-maatschappelijke-kosten-batenanalyse">CPB/PBL — Algemene leidraad voor maatschappelijke kosten-batenanalyse (2013)</a> <span class="lang">(Dutch)</span> <span class="why">A clear, general guide to welfare-economic CBA.</span></li>
 <li data-type="link"><a href="https://www.rwseconomie.nl/werkwijzers">Rijkswaterstaat SEE — Werkwijzers MKBA</a> and <a href="https://www.rwseconomie.nl/discontovoet">current discount rates</a> <span class="lang">(Dutch)</span> <span class="why">The MIRT working guide and the 2026 discount rates.</span></li>
-<li data-type="link"><a href="https://bransch.trafikverket.se/seb">Trafikverket — Samlad effektbedömning (SEB)</a> and <a href="https://bransch.trafikverket.se/asek">ASEK</a> <span class="lang">(Swedish)</span> <span class="why">Templates, method handbooks and training material, including short YouTube tutorials linked from the page.</span></li>
+<li data-type="link"><a href="https://bransch.trafikverket.se/seb">Trafikverket — Samlad effektbedömning (SEB)</a> and <a href="https://bransch.trafikverket.se/asek">ASEK</a> <span class="lang">(Swedish)</span> <span class="why">Templates, method handbooks and training material, including short video tutorials linked from the page.</span></li>
 <li data-type="link"><a href="https://www.ecologie.gouv.fr/politiques-publiques/evaluation-projets-transport">Ministère de la Transition écologique — Évaluation des projets de transport</a> <span class="lang">(French)</span> <span class="why">The 2014 instruction, the référentiel and all tool sheets (fiches-outils).</span></li>
 <li data-type="pdf"><a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ben-eki_2.pdf">MLIT — 費用便益分析マニュアル (2025)</a> <span class="lang">(Japanese)</span> <span class="why">A 20-page manual: a model of brevity and of a deliberately narrow scope.</span></li>
 <li data-type="link"><a href="https://www.transportation.gov/grants/dot-navigator/benefit-cost-analysis-guidance-discretionary-grant-programs">USDOT — Benefit-Cost Analysis Guidance for Discretionary Grant Programs</a> <span class="why">The current US federal grant guidance and spreadsheet template.</span></li>
+<li data-type="link"><a href="https://www.atap.gov.au/tools-techniques/cost-benefit-analysis/index">ATAP — Cost benefit analysis (T2)</a> <span class="why">Australia's jointly agreed guidance for transport appraisal.</span></li>
 <li data-type="link"><a href="https://ec.europa.eu/regional_policy/information-sources/publications/guides/2021/economic-appraisal-vademecum-2021-2027-general-principles-and-sector-applications_en">European Commission — Economic Appraisal Vademecum 2021–2027</a> and the <a href="https://ec.europa.eu/regional_policy/information-sources/publications/guides/2014/guide-to-cost-benefit-analysis-of-investment-projects-for-cohesion-policy-2014-2020_en">2014 CBA Guide</a> <span class="why">EU methods for co-financed projects, with worked transport case studies in the 2014 guide.</span></li>
 <li data-type="link"><a href="https://urban-mobility-observatory.transport.ec.europa.eu/sustainable-urban-mobility-plans/sump-guidelines-and-decision-makers-summary_en">EU Urban Mobility Observatory — SUMP Guidelines</a> <span class="why">The European process for strategic urban mobility planning.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1080/01944360208976273">Flyvbjerg, Holm &amp; Buhl (2002) — Underestimating costs in public works projects: error or lie?</a> <span class="why">The empirical basis for optimism-bias adjustments.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1177/875697280603700302">Flyvbjerg (2006) — From Nobel Prize to project management: getting risks right</a> <span class="why">Reference-class forecasting explained.</span></li>
 <li data-type="book"><span>Flyvbjerg &amp; Gardner — <em>How Big Things Get Done</em> (Currency, 2023)</span> <span class="why">An accessible account of megaproject failure and remedies.</span></li>
+<li data-type="book"><span>T. M. Porter — <em>Trust in Numbers: The Pursuit of Objectivity in Science and Public Life</em> (Princeton University Press, 1995)</span> <span class="why">Why public decisions came to rely on numbers; chapter 7 on the US Army engineers and the rise of cost–benefit analysis.</span></li>
 <li data-type="book"><span>FGSV — <em>Hinweise zur Verkehrsentwicklungsplanung</em> (FGSV Verlag, 2013)</span> <span class="lang">(German)</span> <span class="why">The German guidance for municipal transport development plans.</span></li>
-<li data-type="book"><span>Boardman, Greenberg, Vining &amp; Weimer — <em>Cost-Benefit Analysis: Concepts and Practice</em> (Cambridge University Press, 5th ed., 2018)</span> <span class="why">The standard textbook on CBA, including discounting, the MCPF and distributional weights.</span></li>
+<li data-type="book"><span>Boardman, Greenberg, Vining &amp; Weimer — <em>Cost-Benefit Analysis: Concepts and Practice</em> (Cambridge University Press, 5th ed., 2018)</span> <span class="why">The standard textbook on CBA, including discounting, the cost of public funds and distributional weights.</span></li>
 </ul>
 
 <nav class="pager">
