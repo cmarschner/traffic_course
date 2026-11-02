@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 10 · Simulation, calibration and verification — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Verification, calibration and validation of traffic simulation models: the Japanese JSTE verification tests, FHWA, UK TAG, Singapore LTA, Spanish and French guidance, GEH and its limits, overfitting, SUMO and MATSim, and what a simulation can and cannot say about welfare.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="From model to decision: simulation predicts, a welfare function judges, an optimizer searches, society decides. How to question a model, red flags, Goodhart's law, open tools for your own what-if (SUMO, MATSim, A/B Street, OpenStreetMap, GTFS) and their limits; verification, calibration and validation in Japan, the US, the UK, Singapore, Spain, France and Germany.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,39 +29,93 @@
 <main>
 <p class="kicker">Part III · Traffic engineering · Module 10</p>
 <h1>Simulation, calibration and verification</h1>
-<p class="meta">≈ 6 hours · Prerequisites: <a href="m04-demand-mode-choice.html">Module 4</a>, <a href="m07-traffic-flow.html">Module 7</a>, <a href="m09-junctions.html">Module 9</a>; basic statistics · Key terms: <span class="term">A</span> <span class="term">C</span> and the whole of \(W\)</p>
+<p class="meta">≈ 6 hours · Prerequisites: <a href="m01-objective.html">Module 1</a>; for the method layers also <a href="m04-demand-mode-choice.html">Module 4</a>, <a href="m07-traffic-flow.html">Module 7</a>, <a href="m09-junctions.html">Module 9</a> and basic statistics · Key terms: <span class="term">A</span> <span class="term">C</span> and the whole of \(W\)</p>
 
-<p class="lede">Simulation models are how most transport plans are tested before they are built, so their errors become the plan's errors. This module separates three questions that practice often blurs: is the model built right (verification), has it been tuned to local data (calibration), and does it predict what it is used to predict (validation)? It compares how Japan, the US, the UK, Singapore, Spain, France and Germany answer them, explains why a good fit to counts can hide a bad model, and ends with what a simulation can and cannot tell you about \(W\).</p>
+<p class="lede">Before a road, a bus lane or a charge is built, it is usually tried out in a computer model. The model's errors then become the plan's errors. This module is about trusting, and distrusting, those models. It follows the path from a model to a decision: a simulation predicts what will happen, a welfare function judges it, an optimizer searches for something better, and society decides. It shows how to question a model as a decision maker or a citizen, how to run your own what-if with open tools, and why doing so can mislead you faster than reading a report. The technical checks that make a model trustworthy (verification, calibration, validation) follow, with the practice of Japan, the US, the UK, Singapore, Spain, France and Germany.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>Can this model's forecast be trusted for this decision? And who chose what the model was asked to optimize?</dd>
+<dt>What matters</dt><dd>Four steps, each with an owner. A simulation predicts; experts own it. A welfare function judges; its prices and limits are political choices. An optimizer searches; it will exploit any error in the other two. Society decides; it needs the trade-offs, not one number.</dd>
+<dt>Numbers to question</dt><dd>Whether demand was held fixed. The fit statistics, and whether they were tested on data the model had not seen. The range of outcomes across scenarios and contested values, not a single figure. The track record: half of road traffic forecasts miss by more than 20%.</dd>
+<dt>Levers</dt><dd>Commission studies with an explicit objective, limits and scenarios. Require verification and independent validation. Require models and assumptions to be published. Use open tools to try alternatives yourself, and have a planner check the results.</dd>
+<dt>Ask your analysts</dt><dd>What did the model optimize, and what did it hold fixed? How was it checked against reality, on which data? What would change the ranking of the options? Can I rerun it with a different assumption?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>Define verification, calibration and validation and give an example of a failure in each.</li>
-<li>Describe the Japanese JSTE standard verification process and its six test phenomena.</li>
-<li>Compute GEH, %RMSE and journey-time criteria and apply the UK TAG, Spanish, Singaporean and FHWA acceptance rules.</li>
-<li>Explain overfitting in OD-matrix estimation and network tuning, and design a validation with independent data.</li>
-<li>Choose between microscopic (SUMO), mesoscopic and agent-based (MATSim) tools for a given question.</li>
-<li>State which terms of \(W\) a calibrated traffic simulation can estimate, and which require other models.</li>
-<li>Design a verification suite of synthetic networks for a simulator.</li>
+<li>Describe the chain from simulation to welfare function to optimizer to public decision, name who should own each step, and give a typical failure of each.</li>
+<li>Explain Goodhart's law with three transport examples.</li>
+<li>Question a model or a consultant: name the assumptions to demand, recognize the red flags, and check an answer with simple means.</li>
+<li>Say what open tools and data (SUMO, MATSim, A/B Street, OpenStreetMap, GTFS) let a non-specialist try, and why one's own simulation can mislead.</li>
+<li>Define verification, calibration and validation, and give an example of a failure in each.</li>
+<li>Describe the Japanese standard verification process and what national calibration guidance requires (method layer: GEH, %RMSE, acceptance criteria).</li>
+<li>State which terms of \(W\) a calibrated traffic simulation can estimate, and which need other models.</li>
 </ul>
 </div>
 
-<h2>1. Three different questions</h2>
-<div class="table-wrap"><table>
-<tr><th>Step</th><th>Question</th><th>Compared against</th><th>Typical failure</th></tr>
-<tr><td><strong>Verification</strong></td><td>Does the program do what its model says?</td><td>Theory, on idealised test networks</td><td>A merge that discharges 10% above the specified capacity; queues that do not spill back</td></tr>
-<tr><td><strong>Calibration</strong></td><td>Which parameter values fit this place?</td><td>Local observations used for fitting</td><td>Demand inflated to hit counts while the real cause is a mis-coded junction</td></tr>
-<tr><td><strong>Validation</strong></td><td>Does the fitted model predict data it has not seen, for the use intended?</td><td>Independent observations: other days, other sites, before–after changes</td><td>Perfect base-year fit; wrong response to a road closure</td></tr>
-</table></div>
-<p>The terms are used inconsistently. US guidance often calls the whole process "calibration"; the UK's TAG calls its count comparisons "validation" even when the same counts helped build the matrix. The useful distinction is about <em>information</em>: data used to set parameters cannot validate them.</p>
+<h2>1. A forecast on trial</h2>
+<div class="box story"><div class="box-title">Stockholm, 2006 · The model meets the street</div>
+<p>In January 2006 Stockholm switched on a congestion charge for a seven-month trial (<a href="m13-pricing.html">Module 13</a>). Before the trial, transport modelers had forecast what it would do: how much traffic would fall at the cordon around the inner city, how many more people would ride public transport, what would happen on the ring roads. Then the city measured. Car traffic across the cordon fell by about 22%. Queuing time fell by a third in the morning and by half in the evening. In September 2006 the city's voters approved the charge in an advisory referendum, and it became permanent in 2007.</p>
+<p>Few forecasts are ever checked so cleanly. In 2013 Jonas Eliasson and four colleagues compared the forecasts with the outcomes. Their verdict: the model predicted traffic, ridership and vehicle-kilometers well enough to support the right decisions about the scheme. Its main weakness was that it could not capture how much queues would shrink. It still did much better than unaided expert judgment. A separate cost–benefit analysis of the scheme (Eliasson, 2009) was then based on observed data, not on the model.</p>
+<p class="credit">Sources: J. Eliasson, L. Hultkrantz, L. Nerhagen and L. Smidfelt Rosqvist, <a href="https://doi.org/10.1016/j.tra.2008.09.007">"The Stockholm congestion-charging trial 2006: overview of effects"</a>, <em>Transportation Research A</em> 43(3), 2009; J. Eliasson, D. van Amelsfort, M. Börjesson, K. Brundell-Freij and L. Engelson, <a href="https://swopec.hhs.se/ctswps/abs/ctswps2012_031.htm">"Accuracy of congestion pricing forecasts"</a>, <em>Transportation Research A</em> 52, 2013; J. Eliasson, <a href="https://ideas.repec.org/a/eee/transa/v43y2009i4p468-480.html">"A cost–benefit analysis of the Stockholm congestion charging system"</a>, <em>Transportation Research A</em> 43(4), 2009.</p>
+</div>
+<p>Stockholm shows the whole chain working. A model predicted. Economists judged the outcome by an explicit measure of welfare. Voters decided. And afterward, someone checked the model against reality.</p>
+<p>Most forecasts are never checked. When they are, the record is sobering. Bent Flyvbjerg and colleagues at Aalborg University compared forecast and actual traffic for 210 transport projects in 14 countries. For nine out of ten rail projects, passenger numbers had been overestimated, by 106% on average. Road forecasts were more balanced, but for half of the road projects the forecast missed actual traffic by more than 20% in one direction or the other, and for a quarter by more than 40%.</p>
+<p>So the question for a decision maker is not "is the model right?". No model is. The questions are: is it good enough for <em>this</em> decision, what was it asked to do, and how would we know if it were wrong?</p>
 
-<h2>2. Japan: verification as a public, standard test</h2>
-<p>Around 2000, a working group of the Japan Society of Civil Engineers and then the Traffic Simulation Committee of the Japan Society of Traffic Engineers (JSTE), chaired by Masao Kuwahara (University of Tokyo), with Ryota Horiguchi and Toshio Yoshii, published a <em>Standard Verification Process for Traffic Flow Simulation Models</em>. Its premise was that simulators had become black boxes whose results depended on the model and the operator, so users could not choose between them. The response was a common set of tests on virtual networks, and a public "clearinghouse" where developers post their results.</p>
+<h2 id="chain">2. From model to decision: four steps</h2>
+<p><a href="m01-objective.html#why-a-number">Module 1</a> introduced three uses of a welfare function: to score simulations, to search for better plans, and to open the decision to the public. Together they form a chain of four steps. Each step answers a different question. Each should have a different owner. And each fails in its own way.</p>
+<div class="table-wrap"><table>
+<tr><th>Step</th><th>Question it answers</th><th>Who should own it</th><th>Typical failure</th><th>Check</th></tr>
+<tr><td><strong>1. Simulation predicts</strong></td><td>If we do this, what will people and vehicles do?</td><td>Modelers, under published standards</td><td>The model's mechanics are wrong, or it holds fixed what will change (demand, mode, destination)</td><td>Verification, validation on independent data, track record (sections 3–6)</td></tr>
+<tr><td><strong>2. Welfare function judges</strong></td><td>Is the predicted outcome better, and for whom?</td><td>Elected decision makers, with economists</td><td>Missing terms, hidden prices, vehicles counted instead of people</td><td>The vector of effects, shown before it is summed; sensitivity to contested prices (<a href="m01-objective.html#honest">Module 1</a>)</td></tr>
+<tr><td><strong>3. Optimizer searches</strong></td><td>Which plan scores best?</td><td>Analysts, within limits set by decision makers</td><td>It finds the model's errors and exploits them; it optimizes a proxy</td><td>Check the winning plans by hand and in a second model; look for implausible mechanisms</td></tr>
+<tr><td><strong>4. Society decides</strong></td><td>Which trade-off do we accept?</td><td>Councils, parliaments, voters</td><td>Presented with one number, no alternatives and no range</td><td>Several options, their trade-offs, and the assumptions that would change the ranking</td></tr>
+</table></div>
+<p><strong>The simulation predicts, it does not judge.</strong> A traffic model produces flows, travel times, queues and emissions. It cannot say whether the simulated city is better. A model that reports "vehicle-hours saved" has already slipped in a judgment: that vehicle time is what counts.</p>
+<p><strong>The welfare function judges, and its prices are political.</strong> The value of an hour, of a statistical life, of a tonne of CO₂, and the limits on deaths and carbon, are choices. They belong to the people who answer to voters, and they should be visible (<a href="m01-objective.html">Module 1</a>).</p>
+<p><strong>The optimizer searches, and it is literal-minded.</strong> An optimizer does exactly what it is told. If the model lets cars pass through a junction faster than real cars can, the optimizer will route traffic there. If the objective counts vehicles, the optimizer will sacrifice pedestrians. Traffic engineering learned this early: TRANSYT and SCOOT minimize vehicle queues and stops, so pedestrians appear only as a loss of capacity (<a href="m09-junctions.html">Module 9</a>). Optimization also has a special difficulty in transport: travelers react to the plan. A plan that looks good with travelers held fixed can look poor once they adapt, as Braess's paradox shows (<a href="m01-objective.html#why-a-number">Module 1</a>).</p>
+<p><strong>Society decides, and needs the trade-offs.</strong> Optimizers and appraisals are most useful when they map the options rather than pick one. A council can then see that option X saves the most time, option Y saves the most lives, and option Z is nearly as good on both and much cheaper. Options that are worse on every count can be dropped without any argument about weights. Only the real trade-offs need a political decision.</p>
+
+<h3>Goodhart's law: when the measure becomes the target</h3>
+<p>In 1975 the British economist Charles Goodhart observed, about monetary policy, that a statistical regularity tends to break down once it is used as a target for control. The anthropologist Marilyn Strathern later put it more simply: "When a measure becomes a target, it ceases to be a good measure."</p>
+<p>A measure is useful because it moves together with the thing we care about. Make it the target, and people, institutions and optimizers will find ways to move the measure without moving the thing. Transport offers many examples:</p>
+<ul>
+<li><strong>Level of service.</strong> A grade for vehicle delay at a junction became a design target. Meeting it meant adding lanes, which invited more traffic and made streets harder to cross (<a href="m08-capacity-los.html">Module 8</a>).</li>
+<li><strong>Vehicle delay at signals.</strong> An adaptive controller that minimizes vehicle queues will lengthen pedestrians' waits if nothing in its objective counts them (<a href="m09-junctions.html">Module 9</a>).</li>
+<li><strong>Fit to traffic counts.</strong> Modelers judge a model by how well it reproduces counted flows. Under pressure to pass a fit test, a model can be bent until it matches the counts and predicts everything else wrongly (section 6).</li>
+<li><strong>Time savings.</strong> Appraisals that count only minutes saved favor faster travel. People then travel farther, and the minutes saved are spent on longer trips rather than on other things (<a href="m02-valuing-access.html">Module 2</a>, <a href="m05-accessibility-land-use.html">Module 5</a>).</li>
+</ul>
+<p>Goodhart's law is not an argument against measuring. It is an argument for measuring several things, keeping the goal in view, and checking from time to time that the measure still tracks it.</p>
+<p class="small">Sources for the two formulations: M. Strathern, "'Improving ratings': audit in the British University system", <em>European Review</em> 5(3), 1997, pp. 305–321; quoted with Goodhart's 1975 wording in <a href="https://arxiv.org/abs/2410.09638">"On Goodhart's law, with an application to value alignment"</a> (2024).</p>
+
+<h2>3. Three questions every model must answer</h2>
+<p>Modelers distinguish three kinds of checks. They sound alike but answer different questions:</p>
+<div class="table-wrap"><table>
+<tr><th>Check</th><th>Question</th><th>Compared against</th><th>Typical failure</th></tr>
+<tr><td><strong>Verification</strong></td><td>Does the program do what its model says it does?</td><td>Theory, on small idealized test networks</td><td>A merge that lets through 10% more cars than its specified capacity; queues that do not spill back</td></tr>
+<tr><td><strong>Calibration</strong></td><td>Which parameter values fit this place?</td><td>Local observations used for fitting</td><td>Demand inflated to hit the counts, while the real cause is a wrongly coded junction</td></tr>
+<tr><td><strong>Validation</strong></td><td>Does the fitted model predict data it has not seen, for the use intended?</td><td>Independent observations: other days, other sites, before–after changes</td><td>Perfect fit for today; wrong response to a road closure</td></tr>
+</table></div>
+<p>The terms are used inconsistently. US guidance often calls the whole process "calibration". The UK's appraisal guidance calls its count comparisons "validation", even when the same counts helped build the model. The useful distinction is about <em>information</em>. Data used to set a model's parameters cannot also prove that those parameters are right. That needs data the model has not seen.</p>
+<p>For a decision maker, the three checks translate into three questions. Has the software been tested on cases with known answers? Has it been fitted to our city? Has it ever predicted something here that was then observed?</p>
+
+<h2>4. Japan: verification as a public test</h2>
+<p>Around 2000, Japanese traffic engineers faced a problem every city faces. Consultants used many different simulators, and the results depended on which simulator was used and who operated it. Users had no way to tell which to trust. A working group of the Japan Society of Civil Engineers, and then the Traffic Simulation Committee of the Japan Society of Traffic Engineers (JSTE), chaired by Masao Kuwahara of the University of Tokyo with Ryota Horiguchi and Toshio Yoshii, responded with a <em>Standard Verification Process for Traffic Flow Simulation Models</em>. It defined a common set of tests on small virtual networks with known answers, and a public "clearinghouse" where developers post their results.</p>
 <div class="box translation">
 <div class="box-title">Japanese · JSTE Traffic Simulation Clearinghouse</div>
 <p class="original">モデル検証プロセスは大きく2段階に分けられますが，ここでは理想的なデータセットを使って，モデルの動作原理が正しく機能しているかどうかをチェックする「基本検証(verification)」の結果を紹介します．</p>
-<p>"The model verification process is broadly divided into two stages. Here we present the results of 'basic verification', which uses idealised data sets to check whether the model's operating principles function correctly." The clearinghouse also records the criticism it responds to: that simulation is "a black box, so it is not clear what calculation is being done", and that "if the model or the operator differs, the answers to the same problem vary". The second stage, validation (妥当性確認) against real data, was to use shared benchmark data sets. <em>Source: JSTE Traffic Simulation Clearinghouse pages (archived 2025). Translated by the course authors (machine-assisted).</em></p>
+<p>"The model verification process is broadly divided into two stages. Here we present the results of 'basic verification', which uses idealized data sets to check whether the model's operating principles function correctly." The clearinghouse also records the criticism it responds to: that simulation is "a black box, so it is not clear what calculation is being done", and that "if the model or the operator differs, the answers to the same problem vary". The second stage, validation (妥当性確認) against real data, was to use shared benchmark data sets. <em>Source: JSTE Traffic Simulation Clearinghouse pages (archived 2025). Translated by the course authors (machine-assisted).</em></p>
 </div>
+<p>The archived clearinghouse lists about twenty models, commercial and academic, Japanese and foreign, each marked as published, in preparation or not applicable. Two ideas from the manual deserve to travel. First, verification is explicitly <em>not</em> about whether the model agrees with real traffic, and not about ranking models. It checks that each model does what it claims, so that users understand its behavior. Second, small differences in mechanics can decide <em>who</em> bears the delay. A model in which queues take up no space lets cars that do not need the bottleneck drive past the queue. A model in which queues occupy road space makes them wait behind it. Both can match the same traffic counts, and still assign the delay to entirely different people.</p>
+<p>The Japanese idea is simple and transferable: a city or a ministry can require any simulator used for its decisions to pass published tests, with published results.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>The six JSTE verification tests</summary>
 <p>The six basic verification tests, as listed in the clearinghouse table and the English manual:</p>
 <div class="table-wrap"><table>
 <tr><th>#</th><th>Japanese</th><th>English</th><th>Theory it is checked against</th></tr>
@@ -72,10 +126,27 @@
 <tr><td>5</td><td>信号交差点での右折容量</td><td>Right-turn capacity at signalized intersections (Japan drives on the left, so right turns cross opposing traffic)</td><td>Gap acceptance against opposing flow (<a href="m09-junctions.html">Module 9</a>)</td></tr>
 <tr><td>6</td><td>経路選択挙動</td><td>Route choice behavior</td><td>Equilibrium or logit route splits on simple networks</td></tr>
 </table></div>
-<p>The archived clearinghouse lists results for about twenty models, including AIMSUN, VISSIM, Paramics and many Japanese models (AVENUE, SOUND, NETSTREAM, SIPA and others), each marked as published, in preparation, or not applicable. Two ideas from the manual deserve to travel. First, it explicitly states that verification is <em>not</em> about whether the model agrees with real traffic, and not about ranking models: it checks that each model does what it claims, so that users understand its behavior. Second, it shows why the difference between point queues and physical queues matters: in a physical queue, vehicles that do not need to pass the bottleneck are delayed by the spillback, in a point queue they are not. A model can fit link counts with either representation and still allocate delay to entirely different people.</p>
+<p>Models listed in the archived clearinghouse include AIMSUN, VISSIM, Paramics and many Japanese models (AVENUE, SOUND, NETSTREAM, SIPA and others). The manual explains the difference between <em>point queues</em>, in which a queue has no length and vehicles not bound for the bottleneck pass freely, and <em>physical queues</em>, which spill back and block upstream junctions.</p>
+</details>
 
-<h2>3. Calibration in practice: what the guidance says</h2>
-<h3>United States: FHWA Traffic Analysis Toolbox Volume III (2019 update)</h3>
+<h2>5. What national guidance asks for</h2>
+<p>Most countries that use models for public decisions publish rules for checking them. The rules differ in detail, but the best of them share a few ideas that a decision maker can demand by name:</p>
+<ul>
+<li><strong>Hold data back.</strong> Spain requires that a model's error also be checked on at least 10% of the traffic counts that were not used to fit it.</li>
+<li><strong>Limit the bending.</strong> The UK limits how far modelers may change the estimated pattern of trips to make the model match the counts. Singapore requires prior approval for any change to the default driver-behavior parameters, with a written justification.</li>
+<li><strong>Check more than flows.</strong> The US, Singapore and the UK ask for travel times, and in congested networks queue lengths and the timing of bottlenecks, not only counted volumes.</li>
+<li><strong>Respect day-to-day variation.</strong> The US asks that a model be compared with a representative real day, and accepts errors no larger than the differences between real days.</li>
+<li><strong>Do not chase a perfect fit.</strong> France warns that beyond a point, a better fit makes a worse forecast:</li>
+</ul>
+<div class="box translation">
+<div class="box-title">French · CEREMA (2019), Recommendations for traffic studies and socio-economic appraisals of road projects</div>
+<p class="original">Il est utile de rappeler qu'il ne faut pas chercher un calage parfait du modèle. Au contraire, au-delà d'un certain point, améliorer artificiellement la qualité d'un modèle se fera aux dépens de la capacité du modèle à se comporter de façon adéquate en prévision.</p>
+<p>"It is worth recalling that one should not seek a perfect calibration of the model. On the contrary, beyond a certain point, artificially improving the quality of a model will come at the expense of the model's ability to behave adequately in forecasting." The same section says calibration "is often not sufficient to ensure validity", distinguishes validation on another data set (another year, data from before a past project opened) from continuous maintenance of a model across projects, and asks that validation include checking that the model's elasticities have plausible orders of magnitude. It asks reports to map fit statistics and all network modifications made during calibration, and warns that errors in reproduced travel-time savings have a "double impact": on route choice in the traffic study and on total time savings in the appraisal. <em>Source: Cerema, Recommandations pour la réalisation d'études de trafic et d'évaluations socio-économiques de projets d'infrastructure de transport routier, §3.2.3. Translated by the course authors (machine-assisted).</em></p>
+</div>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>National calibration and validation criteria in detail: US, UK, Singapore, Spain, Germany</summary>
+<h4>United States: FHWA Traffic Analysis Toolbox Volume III (2019 update)</h4>
 <p>FHWA's guidance for microsimulation calibration starts from day-to-day variability. Analysts cluster observed days into "travel conditions" (for example, normal weekday, incident, rain), choose for each a <em>representative day</em> closest to the cluster's average time profile, and calibrate a model variant to that day, never to a synthetic average day that combines bottlenecks which never occur together. Bottleneck throughput and its timing are calibrated first, then demand. Acceptance uses four criteria per key measure, applied to time series (for example 15-minute travel times):</p>
 <ol>
 <li>95% of simulated values lie within about ±2 standard deviations of the representative day (the day-to-day spread within the cluster);</li>
@@ -84,11 +155,8 @@
 <li>the simulation is not systematically biased by more than a third of that bound.</li>
 </ol>
 <p>The logic is welfare-relevant: a model need not be closer to one day than real days are to each other. FHWA also notes that variation between random seeds is small compared with day-to-day variation, and that large seed-to-seed differences usually indicate coding errors or gridlock rather than genuine behavior.</p>
-
-<h3>United Kingdom: TAG unit M3.1</h3>
-<p>The Department for Transport's TAG unit M3.1 (Highway Assignment Modeling; updated May 2026) sets widely copied acceptability guidelines for strategic highway models. Flows are compared with counts using the GEH statistic</p>
-$$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
-<p>with \(M\) the modeled and \(C\) the observed <em>hourly</em> flow. The statistic is named after its inventor, Geoffrey E. Havers. TAG's criteria:</p>
+<h4>United Kingdom: TAG unit M3.1</h4>
+<p>The Department for Transport's TAG unit M3.1 (Highway Assignment Modeling; updated May 2026) sets widely copied acceptability guidelines for strategic highway models. Flows are compared with counts using the GEH statistic (section 6). TAG's criteria:</p>
 <div class="table-wrap"><table>
 <tr><th>Criterion</th><th>Guideline</th></tr>
 <tr><td>Flows &lt; 700 veh/h within ±100 veh/h; 700–2,700 within ±15%; &gt; 2,700 within ±400 veh/h</td><td>&gt; 85% of cases</td></tr>
@@ -96,72 +164,142 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <tr><td>Modeled journey times within 15% of observed (or 1 minute, if higher)</td><td>&gt; 85% of routes</td></tr>
 </table></div>
 <p>TAG asks for these comparisons on counts that were <em>not</em> used in matrix estimation where possible, and limits how far matrix estimation may change the prior matrix: for example, a regression of zonal cell values after against before should have a slope between 0.98 and 1.02 and \(R^2\) above 0.95, and mean trip lengths should change by less than 5% (TAG M3.1, Table 5). Those rules are as important as the thresholds.</p>
-
-<h3>Singapore: LTA transport impact assessments</h3>
+<h4>Singapore: LTA transport impact assessments</h4>
 <p>The Land Transport Authority's 2020 addendum to its Transport Impact Assessment guidelines requires developers' consultants to submit link and turn GEH tables with \(R^2\) plots, queue-length comparisons, and travel-time calibration on agreed corridors, measured by floating car or extracted from Google Maps with timestamps. Acceptable travel-time error is ±1 minute for 3–5 minute trips, ±2 for 6–10, ±3 for 11–15, ±4 for 16–20 and ±20% above 20 minutes. Validation is separate: observed versus modeled average speeds on key corridors and the number of signal cycles needed to clear each junction. Changes to default driver-behavior parameters require prior LTA approval and must be listed with justifications. This last rule is an anti-overfitting device.</p>
-
-<h3>Spain: %RMSE and a hold-out sample</h3>
+<h4>Spain: %RMSE and a hold-out sample</h4>
 <div class="box translation">
 <div class="box-title">Spanish · Nota de Servicio 5/2014, §6.3</div>
 <p class="original">El valor de %RMSE debe ser inferior al 30%. En redes complejas con muchos tramos, para asegurar la validez de la calibración deberá de cumplirse también esta condición en una muestra de las observaciones, cuyos valores no hayan sido utilizados en la calibración del modelo. El tamaño de esta muestra de contraste será al menos del 10% de los aforos.</p>
 <p>"The %RMSE must be below 30%. In complex networks with many links, to ensure the validity of the calibration, this condition must also be met in a sample of observations whose values were not used in calibrating the model. The size of this test sample shall be at least 10% of the counts." The note also asks for a regression of modeled on observed volumes with slope near 1, intercept near 0 and \(r^2\) desirably above 0.7, and for sensitivity tests on value of time and toll sensitivity. <em>Source: Dirección General de Carreteras, Nota de Servicio 5/2014. Translated by the course authors (machine-assisted).</em></p>
 </div>
-<p>Here \(\%\text{RMSE}=100\,\sqrt{\sum_i(E_i-O_i)^2/(N-1)}\,\big/\,(\sum_i O_i/N)\). Spain's explicit hold-out sample is a small rule with large consequences: it is the simplest guard against fitting noise.</p>
-
-<h3>France: do not chase a perfect fit</h3>
-<div class="box translation">
-<div class="box-title">French · CEREMA (2019), Recommendations for traffic studies and socio-economic appraisals of road projects</div>
-<p class="original">Il est utile de rappeler qu'il ne faut pas chercher un calage parfait du modèle. Au contraire, au-delà d'un certain point, améliorer artificiellement la qualité d'un modèle se fera aux dépens de la capacité du modèle à se comporter de façon adéquate en prévision.</p>
-<p>"It is worth recalling that one should not seek a perfect calibration of the model. On the contrary, beyond a certain point, artificially improving the quality of a model will come at the expense of the model's ability to behave adequately in forecasting." The same section says calibration "is often not sufficient to ensure validity", distinguishes validation on another data set (another year, data from before a past project opened) from continuous maintenance of a model across projects, and asks that validation include checking that the model's elasticities have plausible orders of magnitude. It asks reports to map GEH values and all network modifications made during calibration, and warns that errors in reproduced travel-time savings have a "double impact": on route choice in the traffic study and on total time savings in the appraisal. <em>Source: Cerema, Recommandations pour la réalisation d'études de trafic et d'évaluations socio-économiques de projets d'infrastructure de transport routier, §3.2.3. Translated by the course authors (machine-assisted).</em></p>
-</div>
-
-<h3>Germany: research on calibration and the Stuttgart school</h3>
+<p>Here \(\%\text{RMSE}=100\,\sqrt{\sum_i(E_i-O_i)^2/(N-1)}\,\big/\,(\sum_i O_i/N)\), with \(E_i\) the modeled and \(O_i\) the observed value at count site \(i\), and \(N\) the number of sites. Spain's explicit hold-out sample is a small rule with large consequences: it is the simplest guard against fitting noise.</p>
+<h4>Germany: research on calibration and the Stuttgart school</h4>
 <p>German practice relies on the FGSV's guidance on transport models and on strong university groups. At the University of Stuttgart, Markus Friedrich's chair (<em>Verkehrsplanung und Verkehrsleittechnik</em>) proposed the <strong>scalable GEH</strong> (SQV), a bounded 0–1 quality measure for comparing observed and modeled values that adds a scaling factor so the same threshold can be used for hourly and daily volumes (Friedrich, Pestel, Schiller and Simon, 2019). The chair's current projects include <em>SEED</em> (2025–2028), a single-source approach to jointly estimating origin–destination relationships and calibrating demand models, and specification and quality assurance for the update of the Munich city and regional demand model (2025–2027). The SQV is a model-fit statistic; it has nothing to do with the HBS quality levels (QSV) in <a href="m08-capacity-los.html">Module 8</a>.</p>
+</details>
 
-<h2>4. GEH and its limits</h2>
-<p>GEH is popular because one threshold works across flow levels: it behaves like a relative error at high flows and an absolute error at low flows. Three examples: \(M=1100, C=1000\) gives GEH 3.1; \(M=5300, C=5000\) gives 4.2; \(M=150, C=100\) gives 4.5. All "pass", though the last is a 50% error. Limits to keep in mind:</p>
+<h2>6. When a good fit hides a bad model</h2>
+<p>Most model reports contain a table of fit statistics: how closely the model reproduces traffic counted on a few hundred roads. The most widely used statistic, GEH, is named after its inventor, Geoffrey E. Havers. A common rule is that 85% of counted roads should have a GEH below 5. A report that passes this test looks reassuring. It can still hide a bad model, for two reasons.</p>
+<p><strong>First, the test is loose and partial.</strong> On a quiet road with 100 counted cars an hour, a model that shows 150 still passes, though it is 50% too high. The test ignores where the errors lie: 85% of roads can pass while every road in one corridor is 12% too high, because one stream of trips is wrong. And it says nothing about speeds, queues or delay. Downstream of a bottleneck, every model shows the same flow, the bottleneck's capacity, whether its queue is in the right place or not. Delay is what matters for welfare.</p>
+<p><strong>Second, a model can be bent to fit.</strong> A city model with 1,000 zones has about a million possible origin–destination pairs, and perhaps a few hundred counts per hour. The pattern of trips between zones is called the <strong>OD matrix</strong> (origin–destination). Modelers usually start from a survey-based estimate and then adjust it until the modeled flows match the counts. With so many more unknowns than counts, countless different trip patterns fit the counts equally well. The method picks the one closest to the starting estimate. If that estimate is poor, or if errors in the road network are being absorbed by adjusting trips, the fitted model will reproduce the counts and mispredict everything else: trip lengths, mode shares, and the response to a new road. This is called <strong>overfitting</strong>. It is Goodhart's law inside the model.</p>
+<p>Warning signs of overfitting:</p>
 <ul>
-<li><strong>It is defined for hourly flows.</strong> Applied to daily volumes, the same threshold is far stricter; applied to 15-minute counts, far looser. The SQV's scaling factor addresses this.</li>
-<li><strong>It ignores spatial correlation.</strong> 85% of links passing can hide one corridor where every link is 12% high because a single OD pair is wrong.</li>
-<li><strong>It says nothing about speeds, queues or delay.</strong> A model can match flows downstream of a bottleneck exactly (they equal capacity) while its queue is in the wrong place. Delay is what enters \(W\).</li>
+<li>large changes to the starting trip pattern, especially for short trips; trip lengths that drift away from survey data;</li>
+<li>many local edits to road capacities, speeds or invented "penalties", each justified only by a better fit;</li>
+<li>an excellent fit on the counts used for fitting, and a noticeably worse one on counts held back;</li>
+<li>implausible responses, for example a road closure that diverts almost all traffic with no change in total travel.</li>
+</ul>
+<p>The remedies are the ones national guidance already contains: hold data back, limit and document changes, compare travel times and queues, validate on another period or a past intervention, and check that the model's responses have plausible sizes.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>The GEH statistic, its limits, and identifiability</summary>
+<p>For a modeled hourly flow \(M\) and an observed hourly flow \(C\),</p>
+$$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}}.$$
+<p>GEH is popular because one threshold works across flow levels: it behaves like a relative error at high flows and an absolute error at low flows. Three examples: \(M=1100, C=1000\) gives GEH 3.1; \(M=5300, C=5000\) gives 4.2; \(M=150, C=100\) gives 4.5. All "pass", though the last is a 50% error. Further limits:</p>
+<ul>
+<li><strong>It is defined for hourly flows.</strong> Applied to daily volumes, the same threshold is far stricter; applied to 15-minute counts, far looser. The Stuttgart group's scalable GEH addresses this.</li>
+<li><strong>It ignores spatial correlation</strong> and <strong>says nothing about speeds, queues or delay</strong>, as explained above.</li>
 <li><strong>It rewards the wrong fixes.</strong> Flows can be matched by distorting demand, link capacities or route-choice parameters. Only some of these are true.</li>
 </ul>
 <p>Good practice reports distributions of errors by road class, volume range, time of day and area, maps them (as CEREMA asks), and always includes travel times and, in congested networks, queue lengths and bottleneck activation times (as FHWA and LTA ask).</p>
-
-<h2>5. Overfitting and identifiability</h2>
-<p>A city model with 1,000 zones has about a million OD cells, and perhaps a few hundred counts per hour. <strong>OD-matrix estimation</strong> (matrix correction) adjusts the prior matrix until assigned flows match counts. With so many more unknowns than observations, an infinite number of matrices fit the counts equally well; the method picks the one closest to the prior. If the prior is poor, or if network errors are being absorbed by the matrix, the fitted matrix will reproduce counts and mispredict everything else: trip lengths, mode shares, and the response to a new road.</p>
-<p>Symptoms of overfitting:</p>
-<ul>
-<li>large changes to the prior matrix, especially in short trips or intrazonal cells; trip-length distributions that drift away from survey data;</li>
-<li>many local edits to link capacities, speeds or "dummy" penalties, each justified only by fit;</li>
-<li>excellent fit on calibration counts, noticeably worse on hold-out counts;</li>
-<li>implausible elasticities, for example a road closure that diverts almost all traffic with no change in total travel.</li>
-</ul>
-<p>Remedies are the ones the guidance already contains: hold out counts (Spain: at least 10%), validate on another period or a past intervention (France), limit parameter changes and document them (Singapore), use time series rather than single averages (FHWA), and check elasticities. Parameter <em>identifiability</em> deserves a test of its own: if two parameters (say, the IDM time gap and a link capacity factor) can be traded off with no change in fit, the data cannot tell you which is right, and the model's response to a design change may depend on the arbitrary choice.</p>
-
-<h2>6. The tools</h2>
-<div class="table-wrap"><table>
-<tr><th>Tool</th><th>Type</th><th>Origin and status</th><th>Good for</th></tr>
-<tr><td><a href="https://eclipse.dev/sumo/">SUMO</a></td><td>Microscopic, multimodal</td><td>Developed at the German Aerospace Center (DLR) since 2001; open source as an Eclipse project</td><td>Corridors and city networks, signal control, V2X; full transparency of code</td></tr>
-<tr><td><a href="https://www.matsim.org/">MATSim</a></td><td>Agent-based, queue-based mobility simulation with co-evolutionary re-planning</td><td>Developed mainly at ETH Zürich and TU Berlin; open source</td><td>Daily activity plans, departure-time and mode adaptation, pricing; large regions</td></tr>
-<tr><td>VISSIM, Aimsun, Paramics</td><td>Microscopic (Aimsun also meso/macro)</td><td>Commercial</td><td>Junction and corridor design, transit priority, pedestrians (with add-ons)</td></tr>
-<tr><td>Static assignment (Visum, Emme, Cube, TransCAD)</td><td>Macroscopic, equilibrium</td><td>Commercial</td><td>Strategic demand and appraisal (<a href="m04-demand-mode-choice.html">Module 4</a>)</td></tr>
-</table></div>
-<p>Open tools have a verification advantage: anyone can read the car-following and junction code that determines capacity. Proprietary tools can be verified only as black boxes, which is exactly why the Japanese test suite exists.</p>
+<p>Parameter <strong>identifiability</strong> deserves a test of its own. If two parameters, say the desired time gap in the car-following model and a link capacity factor, can be traded off against each other with no change in fit, the data cannot tell which is right. The model's response to a design change may then depend on an arbitrary choice.</p>
+</details>
 
 <h2>7. What a simulation can and cannot say about \(W\)</h2>
+<p>Even a well-verified, well-calibrated traffic simulation answers only part of the welfare question. The table shows which terms of \(W\) it can estimate and which need other models or data.</p>
 <div class="table-wrap"><table>
 <tr><th>Term</th><th>A calibrated traffic simulation can estimate…</th><th>…but needs other models or data for</th></tr>
-<tr><td><span class="term">A</span></td><td>Short-run changes in travel time, delay and reliability for <em>today's</em> demand on the modeled network</td><td>Induced demand, mode shift, destination and departure-time change (demand models, <a href="m04-demand-mode-choice.html">Module 4</a>); land-use response (<a href="m05-accessibility-land-use.html">Module 5</a>); option value of new modes</td></tr>
+<tr><td><span class="term">A</span></td><td>Short-run changes in travel time, delay and reliability for <em>today's</em> demand on the modeled network, including the delay drivers cause each other. That delay is counted here, once; its marginal value sets a congestion charge (<a href="m01-objective.html#term-c">Module 1</a>), it is not added again in C.</td><td>Induced demand, mode shift, destination and departure-time change (demand models, <a href="m04-demand-mode-choice.html">Module 4</a>); land-use response (<a href="m05-accessibility-land-use.html">Module 5</a>); the value of new options</td></tr>
 <tr><td><span class="term">B</span></td><td>Pedestrian and cyclist delay, if they are modeled</td><td>Changes in walking and cycling volumes and their health effects (<a href="m06-transit-active-modes.html">Module 6</a>)</td></tr>
-<tr><td><span class="term">C</span></td><td>Speed profiles and stops for emission and noise models; external congestion cost; surrogate safety indicators (time-to-collision, conflicts)</td><td>Crash numbers and severity (crash prediction models, <a href="m11-safety.html">Module 11</a>): simulated drivers do not crash; severance</td></tr>
+<tr><td><span class="term">C</span></td><td>Speed profiles and stops as inputs to emission and noise models; surrogate safety indicators (near misses, time-to-collision)</td><td>Crash numbers and severity (crash prediction models, <a href="m11-safety.html">Module 11</a>): simulated drivers do not crash; severance</td></tr>
 <tr><td><span class="term">D</span></td><td>Nothing directly</td><td>Land take from the design drawings; land value</td></tr>
 <tr><td><span class="term">E</span></td><td>Operating cost of signals, transit run times</td><td>Construction cost, revenue</td></tr>
 </table></div>
-<p>The most common misuse is to run a microsimulation of a road widening or a road diet with a fixed OD matrix and report the change in vehicle-hours as the benefit. That is the classic objective \(\min\sum q\,t\) of <a href="m01-objective.html">Module 1</a> with all five simplifications. It is legitimate for operational questions over weeks; it is not a welfare estimate for a change that will alter travel behavior for decades. A simulation report should say so explicitly.</p>
+<p>The most common misuse is to run a traffic simulation of a road widening or a road diet with a fixed pattern of trips, and to report the change in vehicle-hours as the benefit. That is the classic objective \(\min\sum q\,t\) of <a href="m01-objective.html#classic">Module 1</a>, with all five of its simplifications. It is legitimate for operational questions over weeks, such as retiming signals during roadworks. It is not a welfare estimate for a change that will alter travel behavior for decades. A simulation report should say so explicitly.</p>
 
-<h2>8. A proposal: a verification suite of synthetic networks</h2>
-<p>Building on the JSTE tests and the national capacity methods of Modules 7–9, a simulator used for planning should pass a suite of small synthetic networks <em>before</em> it is calibrated to any city. Each case has a known or independently estimated answer and a stated tolerance. A possible core set:</p>
+<h2 id="questioning">8. Questioning a model: a guide for decision makers and citizens</h2>
+<p>A council member or a resident at a hearing does not need to know how a car-following model works. They need to know which questions to ask, which answers should worry them, and how to check a number without rebuilding the model. This section collects the lessons of the course into a guide.</p>
+
+<h3>Assumptions to demand</h3>
+<ol>
+<li><strong>The objective.</strong> What was the model asked to minimize or maximize? Which effects were counted: time, safety, health, emissions, noise, land, cost? At which prices? Were people counted, or vehicles? Which hours: the peak hour only, or the whole day and week?</li>
+<li><strong>Demand: fixed or variable.</strong> Did the number, timing, mode and destinations of trips respond to the plan, or were they held fixed? For any project that adds or removes road capacity, this is the single most important assumption. In 1994 a British government advisory committee (SACTRA) concluded from before-and-after evidence that new road capacity does generate extra traffic, against the fixed-trip assumption then built into official forecasting (<a href="m05-accessibility-land-use.html">Module 5</a>).</li>
+<li><strong>Evidence that the model fits the purpose.</strong> Was the software verified on test cases? Which data were used to calibrate it? Was it validated on data it had not seen, ideally a past change in this city?</li>
+<li><strong>Sensitivity to contested values.</strong> How do the results change with the value of time, the value of a statistical life, the carbon price, the discount rate and the strength of the demand response? Does the ranking of the options change?</li>
+<li><strong>Scenarios.</strong> Which futures were tested: fuel prices, remote work, electric and automated vehicles, population growth? A plan that wins only in one future is a bet on that future.</li>
+<li><strong>The vector, not just the sum.</strong> Can I see each effect separately, before they are added up (<a href="m01-objective.html#honest">Module 1</a>)?</li>
+</ol>
+
+<h3>Red flags</h3>
+<ul>
+<li><strong>Fixed demand for a capacity project.</strong> A widening, a new road, a lane removal or a road diet evaluated with a fixed pattern of trips will overstate the benefits of adding capacity and the harm of removing it.</li>
+<li><strong>An unverified simulator,</strong> or undocumented changes to its default parameters.</li>
+<li><strong>A single scenario and a single number,</strong> with no range, no sensitivity test and, for a simulation, results from only one random run.</li>
+<li><strong>Optimizing a proxy.</strong> Vehicle delay, level of service or a fit statistic presented as if it were the goal (Goodhart's law, section 2).</li>
+<li><strong>A perfect fit,</strong> with no data held back for validation.</li>
+<li><strong>A closed model.</strong> Assumptions, inputs or software that nobody outside the consultancy may inspect or rerun.</li>
+</ul>
+
+<h3>How to check an answer</h3>
+<ul>
+<li><strong>Do a back-of-the-envelope test.</strong> A lane of road carries at most about 1,800 to 2,000 cars per hour of green (<a href="m09-junctions.html">Module 9</a>). A signal that gives a road half the cycle as green can pass about half that. If a forecast puts 3,000 cars an hour through one lane at a signal, something is wrong.</li>
+<li><strong>Compare with the track record.</strong> For half of road projects, forecasts miss by more than 20%. Rail ridership forecasts have been too high by 106% on average. A forecast that claims much greater precision should explain why.</li>
+<li><strong>Ask for a test against the past.</strong> What does the model predict for a change that already happened here, such as a closure, a new bridge or a fare change? Does it match what was observed? Stockholm's forecasters were checked this way.</li>
+<li><strong>Ask for one rerun with one assumption changed.</strong> Variable instead of fixed demand; a doubled carbon price; pedestrians counted. If the ranking flips, the decision hinges on that assumption, and the assumption deserves a public debate.</li>
+<li><strong>Ask who gains, where and when.</strong> A credible result comes with a mechanism you can explain in two sentences. "Travel time falls because fewer people drive at the peak" is a mechanism. "The model says so" is not.</li>
+</ul>
+
+<div class="box note">
+<div class="box-title">Six questions to put to any model</div>
+<ol>
+<li>What did it optimize, and whose time, health and money did it count?</li>
+<li>What did it hold fixed that will in fact change?</li>
+<li>How was it checked against reality, and on which data?</li>
+<li>Which assumption, if changed, would change the recommendation?</li>
+<li>What range of outcomes is plausible, not just the central number?</li>
+<li>Can someone outside the team rerun it?</li>
+</ol>
+</div>
+
+<h2 id="own-what-if">9. Running your own what-if, and its limits</h2>
+<p>Until recently, a decision maker or a neighborhood group who wanted to test an idea had to commission a study. Open data and open software have changed this. Four pieces now fit together.</p>
+<ul>
+<li><strong>Maps: OpenStreetMap.</strong> Founded in London in 2004 by Steve Coast, at a time when Britain's official map data could not be freely reused, it is a free map of the world built by volunteers. Simulators can import its roads, lanes and junctions.</li>
+<li><strong>Timetables: GTFS.</strong> A simple, open format for public transport schedules (story below). Transit agencies around the world publish their timetables in it, so a simulator or an accessibility tool can read where buses and trains go and when.</li>
+<li><strong>Simulators: SUMO and MATSim.</strong> SUMO, developed at the German Aerospace Center (DLR) since 2001, simulates individual vehicles, cyclists and pedestrians on a street network. MATSim, developed mainly at ETH Zürich and TU Berlin, simulates the daily plans of millions of synthetic residents, who adapt their routes, departure times and modes from day to day. Both are open source.</li>
+<li><strong>Citizen tools: A/B Street and its successors.</strong> Dustin Carlino built A/B Street as an open-source "traffic simulation game" so that Seattle residents could redesign their own streets (<a href="m01-objective.html#why-a-number">Module 1</a>). By 2025 the project had grown into several smaller tools, including one for planning low-traffic neighborhoods.</li>
+</ul>
+<div class="box story"><div class="box-title">Portland, 2005 · How timetables became open</div>
+<p>In the spring of 2005, Bibiana McHugh, who worked at TriMet, Portland's transit agency, noticed that Google Maps had just begun giving driving directions. Asking for transit directions was still hard. "It was actually Google Maps that sparked it," she later recalled. She contacted Google, where the engineer Chris Harrelson had been working on transit directions in his spare time. TriMet exported its schedule database as a set of plain text tables. Google Transit launched with Portland's data in December 2005.</p>
+<p>TriMet then did something unusual: it published the same data openly, for any developer. Other agencies followed, and scheduling-software vendors added an export button. Google renamed the "Google Transit Feed Specification" the <em>General</em> Transit Feed Specification, to encourage others to adopt it. A format built for one company's map became the common language of public transport data, and the raw material for citizens' own analyses.</p>
+<p class="credit">Source: <a href="https://www.goswift.ly/blog/interview-bibiana-mchugh-gtfs">interview with Bibiana McHugh</a>, Swiftly, June 2024.</p>
+</div>
+<p>With these tools, a council member can, in an afternoon with some help, see how a bus lane would change bus travel times, or how a filtered street would shift traffic to neighboring streets. A citizens' group can build an alternative to an official proposal and put it on the table in the same terms. AI assistants are making this easier still: they can write the scenario files and explain the error messages.</p>
+
+<div class="table-wrap"><table>
+<tr><th>Tool</th><th>Type</th><th>Origin and status</th><th>Good for</th></tr>
+<tr><td><a href="https://eclipse.dev/sumo/">SUMO</a></td><td>Microscopic: every vehicle, multimodal</td><td>German Aerospace Center (DLR), since 2001; open source as an Eclipse project</td><td>Corridors and city networks, signal control, connected vehicles; full transparency of code</td></tr>
+<tr><td><a href="https://www.matsim.org/">MATSim</a></td><td>Agent-based: every resident's daily plan, with re-planning</td><td>Mainly ETH Zürich and TU Berlin; open source</td><td>Daily activity plans, departure-time and mode adaptation, pricing; large regions</td></tr>
+<tr><td><a href="https://github.com/a-b-street/abstreet">A/B Street</a> and its successor tools</td><td>Simplified simulation and street-editing tools for non-specialists</td><td>Dustin Carlino and contributors; open source</td><td>Trying street changes and low-traffic neighborhoods; explaining ideas to others</td></tr>
+<tr><td>VISSIM, Aimsun, Paramics</td><td>Microscopic (Aimsun also coarser levels)</td><td>Commercial</td><td>Junction and corridor design, transit priority, pedestrians (with add-ons)</td></tr>
+<tr><td>Visum, Emme, Cube, TransCAD</td><td>Macroscopic: flows on links, network equilibrium</td><td>Commercial</td><td>Strategic demand forecasts and appraisal (<a href="m04-demand-mode-choice.html">Module 4</a>)</td></tr>
+</table></div>
+<p>Open tools have a verification advantage: anyone can read the code that determines how many cars pass a junction. Proprietary tools can be verified only as black boxes, which is exactly why the Japanese test suite exists.</p>
+
+<h3>The limits of empowerment</h3>
+<p>A decision maker who runs their own simulation can be misled faster than one who reads a report. The reasons are worth knowing before the first run.</p>
+<ul>
+<li><strong>Answers arrive faster than checks.</strong> A what-if takes minutes. Verifying it takes days. Errors come out at the same speed as answers, and look just as convincing.</li>
+<li><strong>Defaults are assumptions.</strong> Every tool ships with default values for how drivers accept gaps, how fast queues drain and how people choose routes. They are the tool's assumptions, rarely your city's (<a href="m09-junctions.html">Module 9</a> shows national capacity methods differing by more than 50%).</li>
+<li><strong>Maps have gaps.</strong> Open maps often lack lane counts, turn restrictions or signal timings. Importers fill the gaps with guesses, and the guesses decide capacity.</li>
+<li><strong>Demand is usually fixed.</strong> A street-level simulation typically keeps the trips it is given. It will show traffic jamming after a lane is removed, and cannot show the people who would change their route, time or mode. That is the first red flag of section 8, now in your own hands.</li>
+<li><strong>You choose when to stop.</strong> Run twenty variants, and the one that confirms your view will look most convincing. Statisticians call this the garden of forking paths.</li>
+</ul>
+<p>The remedy is not to leave models to experts. It is to use them the way good experts do. Write down the question, and what result would change your mind, before you run anything. Keep a log of every run, not only the best. Publish your files so that others can rerun them. And treat your own result as a question to put to a planner, not as an answer. Decision makers and planners then work as partners: one owns the question and the objective, the other the mechanics and the checks.</p>
+
+<h2>10. For planners: a verification suite</h2>
+<p>Building on the Japanese tests and the national capacity methods of Modules 7–9, this course proposes that a simulator used for planning should pass a suite of small synthetic networks <em>before</em> it is calibrated to any city. Each case has a known or independently estimated answer and a stated tolerance. The suite should run automatically after every software or model update, like the tests of any engineering code. It separates two questions that a city-wide fit statistic mixes up: <em>does the simulator reproduce the mechanics of traffic?</em> and <em>does its demand reproduce the traffic of this city?</em> Until they are separated, improving the fit can hide defects in either.</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>Sixteen test networks with their expected results</summary>
 <div class="table-wrap"><table>
 <tr><th>#</th><th>Network</th><th>Expected result (reference)</th></tr>
 <tr><td>1</td><td>Single link, varying demand</td><td>Arrival distribution and free-flow travel time; stable maximum throughput equal to specified capacity</td></tr>
@@ -177,11 +315,11 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <tr><td>11</td><td>Two-lane roundabout, asymmetric turning</td><td>Lane use consistent with destination-based lane choice (Spanish DGT guidance)</td></tr>
 <tr><td>12</td><td>Short link between two signals</td><td>Spillback blocks the upstream junction (physical queue), as Singapore's LTA warns</td></tr>
 <tr><td>13</td><td>Two parallel routes</td><td>Equilibrium or logit split as specified; stable convergence (JSTE test 6)</td></tr>
-<tr><td>14</td><td>Grid with increasing demand</td><td>A network MFD with a maximum and a declining branch; gridlock behavior</td></tr>
+<tr><td>14</td><td>Grid with increasing demand</td><td>A network-wide flow–density relation (MFD) with a maximum and a declining branch; gridlock behavior</td></tr>
 <tr><td>15</td><td>Mixed cars and bicycles on a shared lane</td><td>Overtaking and queueing consistent with observed speeds and headways; no cyclists "teleported"</td></tr>
 <tr><td>16</td><td>Repeated seeds, every case</td><td>Seed-to-seed variance small relative to day-to-day variance (FHWA)</td></tr>
 </table></div>
-<p>The suite should run automatically after every model or software update, like the unit tests of any engineering code. It separates two questions that a city-wide fit statistic confounds: <em>does the simulator reproduce the mechanics of traffic?</em> and <em>does its demand reproduce the traffic of this city?</em> Until they are separated, improving GEH can hide defects in either.</p>
+</details>
 
 <div class="box exercise">
 <div class="box-title">Exercise 10.1 · Count fit is not enough</div>
@@ -190,7 +328,7 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <li>Randomly hold out 20 sites, recalibrate the OD matrix on the remaining 100, and recompute GEH on both sets. How large is the gap?</li>
 <li>Compare trip-length distributions before and after matrix estimation. Which changed most?</li>
 <li>Close one major link in the model. Compute the resulting change in total vehicle-km and vehicle-hours. Is the implied elasticity plausible compared with evidence on traffic evaporation after road closures?</li>
-<li>Write the paragraph of the model report that tells a decision-maker what the model can and cannot be used for.</li>
+<li>Write the paragraph of the model report that tells a decision maker what the model can and cannot be used for.</li>
 </ol>
 </div>
 
@@ -199,8 +337,24 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <p>Implement cases 2, 7 and 10 of the verification suite in SUMO (or another simulator). For case 10, plot simulated entry capacity against conflicting flow alongside the SETRA, Swiss and Siegloch curves from Module 9. Change one behavioral parameter (for example the minimum gap or impatience) and show how much the curve moves. Which parameter would you calibrate against local roundabout data, and what data would you need?</p>
 </div>
 
+<div class="box exercise">
+<div class="box-title">Exercise 10.3 · Question a real study (no modeling needed)</div>
+<p>Find the traffic or appraisal study for a recent project near you: a widening, a bypass, a bus lane or a street redesign. Most are published with planning applications or council papers.</p>
+<ol>
+<li>Answer the six questions of section 8 from the document. Mark each answer as stated, implied or missing.</li>
+<li>List every red flag you find.</li>
+<li>Write three questions for the next public hearing, each in one sentence, each asking for a specific number or rerun.</li>
+<li>If you tried the project yourself in an open tool, which of the limits of section 9 would apply most? Who would you ask to check your result?</li>
+</ol>
+</div>
+
 <h2>Readings and resources</h2>
 <ul class="resources">
+<li data-type="link"><a href="https://doi.org/10.1016/j.tra.2008.09.007">Eliasson, Hultkrantz, Nerhagen &amp; Smidfelt Rosqvist (2009) — The Stockholm congestion-charging trial 2006: overview of effects, Transportation Research A</a> <span class="why">What was measured during the trial.</span></li>
+<li data-type="link"><a href="https://swopec.hhs.se/ctswps/abs/ctswps2012_031.htm">Eliasson, van Amelsfort, Börjesson, Brundell-Freij &amp; Engelson — Accuracy of congestion pricing forecasts (CTS working paper 2012; Transportation Research A, 2013)</a> <span class="why">A rare published comparison of a transport model's forecasts with the outcome.</span></li>
+<li data-type="link"><a href="https://ideas.repec.org/a/taf/transr/v26y2005i1p1-24.html">Flyvbjerg, Skamris Holm &amp; Buhl — Inaccuracy in traffic forecasts, Transport Reviews 26(1)</a> <span class="why">Forecast versus actual traffic for 210 projects in 14 countries.</span></li>
+<li data-type="link"><a href="https://trid.trb.org/View/412156">SACTRA (1994) — Trunk Roads and the Generation of Traffic (TRID record)</a> <span class="why">The British committee report that ended the fixed-demand assumption in official road appraisal.</span></li>
+<li data-type="link"><a href="https://arxiv.org/abs/2410.09638">On Goodhart's law, with an application to value alignment (2024)</a> <span class="why">Goodhart's 1975 wording, Strathern's 1997 version and a careful analysis of when measures fail as targets.</span></li>
 <li data-type="pdf"><a href="https://ops.fhwa.dot.gov/publications/fhwahop18036/chapter5.htm">FHWA — Traffic Analysis Toolbox Volume III: Guidelines for Applying Traffic Microsimulation Modeling Software, 2019 update, Chapter 5: Model calibration</a> <span class="why">Representative days, bottleneck-first calibration and the four acceptance criteria. <a href="https://ops.fhwa.dot.gov/publications/fhwahop18036/fhwahop18036.pdf">Full report (PDF)</a>.</span></li>
 <li data-type="link"><a href="https://www.gov.uk/government/publications/tag-unit-m3-1-highway-assignment-modelling">UK Department for Transport — TAG unit M3.1: Highway assignment modelling</a> <span class="why">GEH, flow and journey-time criteria, limits on matrix estimation (updated 2026).</span></li>
 <li data-type="pdf"><a href="https://www.lta.gov.sg/content/dam/ltagov/industry_innovations/industry_matters/development_construction_resources/Street_Work_Proposals/Guidelines/Addendum_to_2017_TIA_Guidelines_for_Developers-Jan2020.pdf">Singapore LTA — Addendum to the TIA Guidelines for Developers (January 2020, PDF)</a> <span class="why">Travel-time thresholds, required calibration and validation tables, control of parameter changes.</span></li>
@@ -216,6 +370,9 @@ $$\text{GEH}=\sqrt{\frac{2\,(M-C)^2}{M+C}},$$
 <li data-type="tool"><a href="https://eclipse.dev/sumo/">Eclipse SUMO — Simulation of Urban MObility</a> <span class="why">Open-source microscopic simulator from DLR. <a href="https://sumo.dlr.de/docs/index.html">Documentation</a> and <a href="https://sumo.dlr.de/docs/Tutorials/index.html">tutorials</a>; see also <a href="https://sumo.dlr.de/docs/Car-Following-Models.html">car-following models</a> and <a href="https://sumo.dlr.de/docs/Simulation/Why_Vehicles_are_teleporting.html">why vehicles teleport</a> (a classic verification trap).</span></li>
 <li data-type="link"><a href="https://doi.org/10.1109/ITSC.2018.8569938">Lopez et al. (2018) — Microscopic traffic simulation using SUMO</a> <span class="why">Reference description of SUMO's architecture and models.</span></li>
 <li data-type="book"><a href="https://www.matsim.org/the-book/">Horni, Nagel &amp; Axhausen (eds., 2016) — <em>The Multi-Agent Transport Simulation MATSim</em> (open access)</a> <span class="why">Free book on agent-based simulation, including calibration (Cadyts) and welfare evaluation with agents' scores.</span></li>
+<li data-type="tool"><a href="https://github.com/a-b-street/abstreet">A/B Street (GitHub)</a> <span class="why">The open-source citizen simulation game and links to its successor tools, including the low-traffic neighborhood tool.</span></li>
+<li data-type="tool"><a href="https://www.openstreetmap.org/">OpenStreetMap</a> and <a href="https://wiki.openstreetmap.org/wiki/History_of_OSM">its history</a> <span class="why">The open map that most citizen and research simulations start from.</span></li>
+<li data-type="link"><a href="https://gtfs.org/">GTFS — General Transit Feed Specification</a> <span class="why">The open timetable format; documentation and lists of published feeds.</span></li>
 <li data-type="course"><a href="https://ocw.tudelft.nl/courses/traffic-flow-theory-simulation/subjects/12-evaluation-simulation-guidelines/">TU Delft OCW — Lecture 12: Evaluation, simulation and guidelines</a> <span class="why">Short lecture on how simulation studies should be set up and evaluated.</span></li>
 <li data-type="pdf"><a href="https://www.mainroads.wa.gov.au/globalassets/technical-commercial/technical-library/road-and-traffic-engineering/traffic-modelling/operational-modelling/operational-modelling.pdf">Main Roads Western Australia — Operational Modelling Guidelines v2.0 (2021, PDF)</a> <span class="why">Detailed Australian practice for calibration, seeds and reporting.</span></li>
 <li data-type="course"><a href="https://ocw.mit.edu/courses/1-201j-transportation-systems-analysis-demand-and-economics-fall-2008/">MIT OCW 1.201J — Transportation Systems Analysis: Demand and Economics</a> <span class="why">Estimation and validation of the demand side that traffic simulation takes as given.</span></li>

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 9 · Junctions: signals, roundabouts and priority — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Gap acceptance, Webster's signal timing, adaptive control (SCOOT, SCATS), and national roundabout traditions: France (GIRABASE), UK (Kimber), Germany (HBS), Netherlands (turbo-roundabouts), Spain, Italy and Australia, with the safety case and the welfare view.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="Priority junctions, signals and roundabouts as choices with different objectives: delay, safety, space, pedestrians and cost. Webster, TRANSYT, SCOOT and SCATS; France's roundabout history and GIRABASE; British, German, Dutch, Spanish, Italian and Australian practice; the safety evidence and the welfare view.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -31,168 +31,225 @@
 <h1>Junctions: signals, roundabouts and priority</h1>
 <p class="meta">≈ 5 hours · Prerequisites: <a href="m07-traffic-flow.html">Module 7</a>, <a href="m08-capacity-los.html">Module 8</a> · Key terms: <span class="term">A</span> <span class="term">C</span> <span class="term">D</span> <span class="term">E</span> <span class="term">constraints</span></p>
 
-<p class="lede">In cities, junctions set the capacity of the network, most of its delay and a large share of its serious crashes. Countries have answered the same geometric problem in strikingly different ways: Germany and the US with carefully timed signals, France, Spain and Italy with tens of thousands of roundabouts, the Netherlands with turbo-roundabouts and protected cycle crossings, Australia and Britain with empirical and lane-by-lane capacity models. This module teaches the core methods, then reads each tradition as a choice about which terms of \(W\) to protect.</p>
+<p class="lede">Where two streets cross, someone has to wait. In cities, junctions cause most of the delay on the network and a large share of its serious crashes. They also decide how long a child waits to cross the road. Countries have answered the same problem in strikingly different ways. Germany and the US time their junctions with signals. France, Spain and Italy have built tens of thousands of roundabouts. The Netherlands invented the turbo-roundabout and the protected cycle crossing. This module treats each answer as a choice between objectives: delay, safety, space, pedestrians and cost.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>Should this junction be a give-way junction, a set of signals or a roundabout, and how big should it be? Each answer favors different people and different hours of the day.</dd>
+<dt>What matters</dt><dd>Delay in the peak and in the other twenty hours of the day; severe crashes, which depend mostly on speed and the angle of impact; land; the waiting time of pedestrians, cyclists and bus passengers; and the cost of building, powering and maintaining the junction for decades.</dd>
+<dt>Numbers to question</dt><dd>The design-hour traffic flow; the capacity formula (national methods differ by more than 50% for the same entry); the walking speed and the waiting time assumed for pedestrians; the crash reductions claimed; the "reserve capacity" a design is required to keep.</dd>
+<dt>Levers</dt><dd>The junction type. Its size: French guidance tells designers to shrink oversized roundabouts. The signal cycle length and the pedestrian phases. Bus priority. And the objective written into an adaptive signal controller.</dd>
+<dt>Ask your analysts</dt><dd>Which hours and which road users did the comparison count? Was the capacity method checked against local observations? What does the signal controller minimize? Could the junction be smaller and still work?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>Compute the capacity of a minor stream by gap acceptance (Harders, Siegloch) and explain why British practice prefers empirical regressions (Kimber).</li>
-<li>Time a fixed-time signal with Webster's method and estimate its delay; explain intergreen times, actuated and adaptive control.</li>
-<li>Compute roundabout entry capacity with the French SETRA/GIRABASE-type formula and compare it with British, Swiss, US and German methods.</li>
-<li>Describe Dutch turbo-roundabouts and protected intersections, Spanish lane-allocation guidance and Italian geometric rules.</li>
-<li>Compare roundabouts and signals on conflict points, speeds and crash outcomes, and connect the comparison to Term C and the safety constraint.</li>
-<li>Explain why the objective used to time signals or size a junction (vehicle delay, person delay, or \(W\)) changes the design.</li>
+<li>Compare priority junctions, signals and roundabouts on delay, safety, land, pedestrians and cost, and say which terms of \(W\) each choice protects.</li>
+<li>Explain in words why the capacity of a give-way entry falls as the main-road flow rises, and why British practice prefers measured capacities to behavioral theory.</li>
+<li>Explain the trade-off behind a signal's cycle length, and apply Webster's rule (method layer: compute the timing and the delay).</li>
+<li>Tell the history of signal optimization from TRANSYT to SCOOT and SCATS, and name the objective these systems minimize.</li>
+<li>Tell the history of the modern roundabout from Paris to Britain and back to France, and explain GIRABASE's advice against oversizing.</li>
+<li>Describe the Dutch turbo-roundabout and protected intersection, and the evidence on roundabout safety, including for cyclists and blind pedestrians.</li>
 </ul>
 </div>
 
-<h2>1. Conflicts and three ways to resolve them</h2>
-<p>A four-leg junction of two two-way roads has 32 vehicle–vehicle conflict points: 16 crossing, 8 merging and 8 diverging. Crossing conflicts produce right-angle and turning collisions, the most severe kind at urban speeds. There are three basic ways to resolve them:</p>
+<h2>1. One junction, three answers</h2>
+<p>Picture a junction on the edge of a mid-sized town. A main road carries 800 cars an hour in the evening peak. A side road brings 300. A bus line turns here, and children from a nearby school cross on foot. The town council has to choose how this junction will work for the next forty years.</p>
+<p>A junction is dangerous because paths cross. Engineers call each place where two vehicle paths meet a <strong>conflict point</strong>. A crossroads of two two-way streets has 32 of them: 16 where paths cross, 8 where they merge and 8 where they split. Crossing conflicts are the dangerous ones. They produce side impacts and turning crashes, the most severe kind at town speeds.</p>
+<p>There are three basic ways to manage these conflicts:</p>
 <div class="table-wrap"><table>
-<tr><th>Control</th><th>Mechanism</th><th>Instrument family (<a href="m01-objective.html">Module 1</a>)</th></tr>
-<tr><td>Priority (yield/stop)</td><td>Minor stream waits for gaps in major stream</td><td>Rules, low cost; capacity falls fast with major flow</td></tr>
-<tr><td>Signals</td><td>Separate conflicting streams in time</td><td>Active control; high capacity, needs power, maintenance and compliance</td></tr>
-<tr><td>Roundabout</td><td>Convert crossing conflicts into merges at low speed; all entries yield to the ring</td><td>Passive, self-regulating geometry; needs land</td></tr>
+<tr><th>Control</th><th>How it works</th><th>What it is good at</th><th>What it costs</th></tr>
+<tr><td><strong>Priority</strong> (give way or stop)</td><td>The side road waits for gaps in the main road's traffic.</td><td>Cheap, compact, no waiting for the main road.</td><td>Side-road delay grows fast as main-road traffic rises. Crossing conflicts remain.</td></tr>
+<tr><td><strong>Signals</strong></td><td>Conflicting streams take turns, separated in time.</td><td>High capacity in the peak. Protected crossing phases. Can favor buses and coordinate a corridor.</td><td>Everyone waits at red, also at night. Needs power, detectors, maintenance and retiming. Red-light running causes severe crashes.</td></tr>
+<tr><td><strong>Roundabout</strong></td><td>Everyone turns the same way around an island. Entering traffic gives way to traffic already on the ring.</td><td>No crossing conflicts between vehicles. Low speeds enforced by the geometry. Little waiting at low and medium traffic.</td><td>Needs a circle of land. Hard to give priority to buses. Hard for blind pedestrians and, at large designs, for cyclists.</td></tr>
 </table></div>
-<p>A single-lane roundabout has 8 conflict points (4 merging, 4 diverging) and no crossing conflicts between vehicles. Grade separation removes crossing conflicts altogether at a much higher cost in land and money.</p>
+<p>A single-lane roundabout has 8 conflict points: 4 merges and 4 splits, and no crossings. Building the roads on two levels removes crossing conflicts altogether, at a much higher cost in land and money.</p>
+<p>None of the three is best everywhere. Each serves some objectives better than others. The rest of this module asks, for each type: where did it come from, what does it assume, which objective does it serve, where does it fail, and what do other countries do instead?</p>
 
-<h2>2. Priority junctions and gap acceptance</h2>
-<p>A driver on the minor road accepts a gap in the major stream only if it is at least the <strong>critical gap</strong> \(t_c\). If several vehicles are queued, they follow each other into a long gap at the <strong>follow-up time</strong> \(t_f\). If major-stream headways are exponential with flow \(q_p\) (veh/s), two classical results give the minor-stream capacity:</p>
+<h2>2. Priority junctions: waiting for a gap</h2>
+<p>A driver waiting on the side road watches the main road. They pull out only when the gap to the next car is long enough. The shortest gap a driver will accept is called the <strong>critical gap</strong>. At a single-lane roundabout entry it is about 4 to 4.5 seconds. For a left turn from a minor road across two-way traffic in the US, it is about 7 seconds. When several cars are queued, they follow each other into a long gap at intervals of about 2.5 to 3 seconds. This interval is called the <strong>follow-up time</strong>.</p>
+<p>If main-road cars arrive at random, long gaps become rare as main-road traffic grows. So the side road's capacity falls steeply. With 800 cars an hour on the main road and typical roundabout values, the side road can feed about 690 cars an hour into the stream. With 1,200 cars an hour, the figure falls to about 510. German engineers derived such formulas from probability theory in the late 1960s and early 1970s. They are the basis of the German capacity manual, the HBS (<a href="m08-capacity-los.html">Module 8</a>).</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>Gap-acceptance capacity formulas and a worked example</summary>
+<p>Write \(t_c\) for the critical gap and \(t_f\) for the follow-up time, both in seconds. Write \(q_p\) for the flow on the main road (the "priority" stream), in vehicles per second. If the main-road headways are exponentially distributed (random arrivals), two classical results give the capacity of the minor stream:</p>
 $$C_{\text{Harders}} = \frac{q_p\, e^{-q_p t_c}}{1-e^{-q_p t_f}}, \qquad
 C_{\text{Siegloch}} = \frac{1}{t_f}\,\exp\!\Big[-q_p\Big(t_c - \tfrac{t_f}{2}\Big)\Big].$$
-<p>Harders (1968) underlies the German HBS procedures for unsignalized junctions; Siegloch (1973) gives a nearly identical curve in a simpler form. Tanner's extension accounts for minimum headways in the major stream, and Brilon and Wu developed the version used for German roundabouts. Typical values for a single-lane roundabout entry are \(t_c\approx4\)–4.5 s and \(t_f\approx2.5\)–3 s; at two-way-stop junctions in the US, \(t_c\) for a left turn from the minor road is around 7 s.</p>
-<p><strong>Example.</strong> With \(q_p=800\) veh/h (0.222 veh/s), \(t_c=4.1\) s, \(t_f=2.9\) s, Siegloch gives \(C = 1241\times e^{-0.222\times2.65}\approx690\) veh/h.</p>
-<h3>The British critique: empiricism</h3>
-<p>Kimber (1989) compared gap-acceptance predictions with capacities observed at saturated entries in the UK. Gap-acceptance theory tended to overpredict capacity when conflicting flow was low and underpredict it when conflicting flow was high, because real drivers force gaps, the major stream yields informally, and drivers adapt to queue length. His conclusion was methodological: a capacity formula should be judged by how well it predicts observed saturated flows, not by the elegance of its behavioral story. British practice therefore uses regressions of entry capacity on geometry and circulating flow, estimated from many saturated sites (§4). This is a useful warning for simulation (<a href="m10-simulation-validation.html">Module 10</a>): a microsimulator with a textbook gap-acceptance rule may produce the wrong capacity curve, and the right test is against observed saturated flows.</p>
+<p>Harders (1968) underlies the German HBS procedures for unsignalized junctions. Siegloch (1973) gives a nearly identical curve in a simpler form. Tanner's extension accounts for a minimum headway between main-road vehicles, and Brilon and Wu developed the version used for German roundabouts.</p>
+<p><strong>Example.</strong> With \(q_p=800\) veh/h (0.222 veh/s), \(t_c=4.1\) s and \(t_f=2.9\) s, Siegloch gives</p>
+$$C = \frac{3600}{2.9}\times e^{-0.222\times(4.1-1.45)} = 1241\times e^{-0.589}\approx 690\ \text{veh/h}.$$
+<p>At \(q_p=1200\) veh/h (0.333 veh/s) the exponent becomes \(-0.883\), and \(C\approx 1241\times0.414\approx 510\) veh/h.</p>
+</details>
 
-<h2>3. Traffic signals</h2>
-<h3>Saturation flow, lost time and the cycle</h3>
-<p>When a queue discharges during green, it does so at roughly constant <strong>saturation flow</strong> \(s\), about 1,800–2,000 passenger-car units per hour of green per lane in many countries, after a start-up loss. Part of the amber is used. Each phase loses some time (start-up plus clearance); the total lost time per cycle is \(L\). For phase \(i\) with critical flow \(q_i\), the <strong>flow ratio</strong> is \(y_i=q_i/s_i\) and the junction total is \(Y=\sum_i y_i\). The junction can work only if \(Y&lt;1-L/c\).</p>
-<h3>Webster's method</h3>
-<p>Webster (1958, UK Road Research Laboratory) derived from simulation an approximately delay-minimizing cycle length</p>
+<h3>The British critique: measure, don't assume</h3>
+<p>In Britain, R. M. Kimber of the Transport and Road Research Laboratory (TRRL) tested gap-acceptance theory against reality. He measured how many cars actually entered at roundabouts where a queue was waiting all the time, at many public sites. The theory tended to predict too much capacity when the ring was quiet and too little when it was busy. Real drivers force their way into gaps, drivers on the ring let others in, and impatience grows with queue length. Kimber (1989) drew a methodological conclusion. A capacity formula should be judged by how well it predicts observed capacities, not by how elegant its story of driver behavior is. British practice therefore uses statistical fits of measured entry capacity to the geometry and the circulating flow (<a href="#uk">section 4</a>). The lesson reaches beyond junctions. A traffic simulator with a textbook rule for gap acceptance can produce the wrong capacity, and the right test is against observed queues (<a href="m10-simulation-validation.html">Module 10</a>).</p>
+
+<h2>3. Traffic signals: who waits, and for how long</h2>
+<h3>The cycle-length trade-off</h3>
+<p>A signal gives each group of streams a turn, called a <strong>phase</strong>. One round of all phases is a <strong>cycle</strong>. Every change of phase wastes a few seconds: the last cars clear the junction, and the first cars of the next queue need time to react and accelerate. This waste is called <strong>lost time</strong>.</p>
+<p>The choice of cycle length is a trade-off. A long cycle changes phase less often, so less time is lost and more cars get through per hour. But everyone waits longer at red, including pedestrians. A short cycle means short waits but more lost time, so the junction jams sooner when traffic is heavy.</p>
+<p>During green, a queue drains at a roughly constant rate, about 1,800 to 2,000 cars per hour of green per lane in many countries. This rate is called the <strong>saturation flow</strong>. It is the most important number in signal design, and it is worth checking against local observation.</p>
+
+<h3>Webster's rule</h3>
+<p>In 1958 F. V. Webster of the UK Road Research Laboratory (RRL) published <em>Traffic Signal Settings</em>. He simulated cars arriving at signals and fitted simple formulas to the results. His rule gives the cycle length that roughly minimizes the average delay per vehicle. Green time is then shared between the phases in proportion to how loaded each one is. In words: the busier the junction is relative to its saturation flows, the longer the best cycle. As the junction approaches its capacity, the best cycle, and the delay, grow without limit.</p>
+<p>A worked example in the box below takes a junction with 600 and 450 cars an hour on its two busiest approaches. Webster's cycle is about 41 seconds. Cars wait on average about 13 and 17 seconds. Both are good values by the standards of the US Highway Capacity Manual (<a href="m08-capacity-los.html">Module 8</a>).</p>
+<p>Now add a pedestrian crossing. A 14 m crossing at a walking speed of 1.2 m/s needs about 12 seconds to clear, plus a few seconds of walk signal. That alone is longer than the 14 seconds of green Webster gives one of the two phases. So the cycle must get longer, and vehicle delay rises. <strong>Webster minimizes vehicle delay.</strong> Pedestrians do not appear in his objective. Neither does the number of people on a bus. A welfare objective would count people, not vehicles, and would weigh time spent waiting on a curb more heavily than time sitting in a car, because travelers dislike waiting more (<a href="m02-valuing-access.html">Module 2</a>). Short cycles favor pedestrians; long cycles favor vehicle capacity.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>Webster's formulas and the worked example step by step</summary>
+<p>For phase \(i\), let \(q_i\) be the flow on its most heavily loaded approach and \(s_i\) the saturation flow. The <strong>flow ratio</strong> is \(y_i=q_i/s_i\), and the junction total is \(Y=\sum_i y_i\). Let \(L\) be the total lost time per cycle, in seconds. The junction can work only if \(Y&lt;1-L/c\) for cycle length \(c\).</p>
+<p>Webster's approximately delay-minimizing cycle length is</p>
 $$c_0 = \frac{1.5\,L + 5}{1-Y}\ \text{(seconds)},$$
-<p>with effective green split in proportion to the flow ratios, \(g_i = (c_0 - L)\,y_i/Y\), and the average delay per vehicle</p>
+<p>with effective green split in proportion to the flow ratios, \(g_i = (c_0 - L)\,y_i/Y\). The average delay per vehicle on an approach is</p>
 $$d = \frac{c(1-\lambda)^2}{2(1-\lambda x)} + \frac{x^2}{2q(1-x)} - 0.65\Big(\frac{c}{q^2}\Big)^{1/3} x^{(2+5\lambda)},$$
-<p>where \(\lambda=g/c\) and \(x=qc/(sg)\) is the degree of saturation. The first term is uniform delay; the second is random-arrival delay that explodes as \(x\to1\).</p>
+<p>where \(\lambda=g/c\) is the green share and \(x=qc/(sg)\) the <strong>degree of saturation</strong>. The first term is the delay of cars arriving at a steady rate. The second is the extra delay from random arrivals, which explodes as \(x\to1\). The third is an empirical correction.</p>
 <p><strong>Worked example.</strong> Two phases. North–south critical flow 600 veh/h, east–west 450 veh/h, saturation flow 1,800 veh/h for both, 4 s lost per phase (\(L=8\) s).</p>
 <ul>
 <li>\(y_1=600/1800=0.333\), \(y_2=450/1800=0.250\), \(Y=0.583\).</li>
 <li>\(c_0=(1.5\times8+5)/(1-0.583)=17/0.417\approx41\) s.</li>
 <li>Effective green available \(=41-8=33\) s: \(g_1=33\times0.333/0.583\approx18.9\) s, \(g_2\approx14.1\) s.</li>
 <li>Degree of saturation is about 0.72 on both phases (equal by construction).</li>
-<li>Delay on the north–south approach: \(\lambda=0.46\); uniform term 9.0 s, random term 5.7 s, correction −1.9 s, so \(d\approx12.8\) s/veh. East–west: \(d\approx16.7\) s/veh. Both are HCM LOS B.</li>
+<li>Delay on the north–south approach: \(\lambda=0.46\); uniform term 9.0 s, random term 5.7 s, correction −1.9 s, so \(d\approx12.8\) s/veh. East–west: \(d\approx16.7\) s/veh. Both are HCM level of service B.</li>
 </ul>
-<p>Now add pedestrians. A 14 m crossing at 1.2 m/s needs about 12 s clearance plus a minimum walk signal of several seconds, so the pedestrian phase alone may exceed the 14 s vehicle green on the east–west phase; the cycle must lengthen, and vehicle delay rises. Webster minimizes <em>vehicle</em> delay. A welfare objective weights pedestrians' waiting, which travelers value at a premium over in-vehicle time (<a href="m02-valuing-access.html">Module 2</a>), and bus passengers by occupancy. Short cycles favor pedestrians; long cycles favor vehicle capacity.</p>
+<h4>Germany: the RiLSA and intergreen times</h4>
+<p>The German <em>Richtlinien für Lichtsignalanlagen</em> (RiLSA, published by the road research association FGSV) govern signal design. They are notable for detailed rules on <strong>intergreen times</strong> (<em>Zwischenzeiten</em>): the time between the end of green for one stream and the start of green for a conflicting stream. It is computed from the clearing distance, the clearing speed and the entering stream's approach distance, separately for vehicles, cyclists and pedestrians. Capacity and quality of signalized junctions are then assessed with the HBS. German practice combines this rigor with a dense use of signals in cities, including separate signals for cyclists. The RiLSA and HBS are paid FGSV publications.</p>
+<h4>Actuated control</h4>
+<p><strong>Actuated (vehicle-responsive) control</strong> extends a green while detectors in the road register arriving vehicles, up to a maximum. It is standard in Germany and the US for isolated junctions. Pedestrian push buttons are the pedestrian side of the same idea. Where they only <em>request</em> a phase that would come anyway, or add a long wait, they mainly serve vehicle capacity.</p>
+</details>
 
-<h3>Germany: the RiLSA</h3>
-<p>The German <em>Richtlinien für Lichtsignalanlagen</em> (RiLSA, FGSV) govern signal design and are notable for their detailed rules on <strong>intergreen times</strong> (<em>Zwischenzeiten</em>): the time between the end of green for one stream and the start of green for a conflicting stream is computed from clearing distance, clearing speed and the entering stream's approach distance, separately for vehicles, cyclists and pedestrians. Capacity and QSV of signalized junctions are then assessed with the HBS. German practice combines this rigour with a dense use of signals in cities, including for cyclists. The RiLSA and HBS are paid FGSV publications.</p>
+<h3>From hand calculation to computers: TRANSYT, SCOOT and SCATS</h3>
+<p>Webster timed one junction at a time. Along a city street, though, the signals interact: a platoon released by one signal should arrive at the next one on green. In 1967 Dennis Robertson's program TRANSYT, at the same British laboratory, searched for the timings of a whole network at once. <a href="m01-objective.html#why-a-number">Module 1</a> tells that story. TRANSYT optimized a "performance index", a weighted sum of vehicle delay and stops. That index is an objective function, and it counts vehicles.</p>
+<p>TRANSYT's plans were fixed. They were computed from traffic counts and then left alone, often for years, while traffic changed. In 1973 the Transport and Road Research Laboratory began work on a system that would retime signals continuously from live data. It worked with three British signal companies, Ferranti, GEC and Plessey. The result was <strong>SCOOT</strong> (Split, Cycle and Offset Optimisation Technique). Detectors placed upstream of each junction measure the traffic heading toward it. Every few seconds a computer predicts the queues and makes small adjustments to the green times, the cycle length and the coordination between neighboring signals. Trials in Glasgow in 1979 and Coventry in 1980 covered 62 signals. The 1981 report concluded that SCOOT cut vehicle delay by about 12% compared with up-to-date fixed plans, and by more where the fixed plans were old.</p>
+<p>The report also shows how such a system "sees" pedestrians. SCOOT's performance index is the sum of the predicted vehicle queues, optionally plus weighted stops. At one Coventry junction, a pedestrian phase called on demand stopped an important through movement. Under SCOOT the junction lost 11% in evening-peak journey time compared with the old fixed plan. The engineers' fix was to run that junction on a cycle half as long as its neighbors' ("double cycling"), so each pedestrian call stopped traffic only briefly. It turned the loss into a 3% gain. To the optimizer, the people crossing were a capacity problem. A shorter cycle happened to serve them too.</p>
+<p>At about the same time, the Department of Main Roads of New South Wales developed <strong>SCATS</strong> (Sydney Coordinated Adaptive Traffic System) in Sydney. SCATS measures, at the stop line, how fully each green is used, and adjusts cycle lengths and splits from plans prepared in advance. Today TRL Software reports SCOOT in over 350 towns and cities, and Transport for NSW reports SCATS at more than 60,000 intersections in over 30 countries.</p>
+<p>Adaptive systems usually reduce vehicle delay compared with outdated fixed plans. But their default objective is vehicle delay and stops. Configured naively, they can lengthen cycles, and with them pedestrians' waits. Bus priority and short pedestrian waits must be written into the objective, or the controller will minimize vehicle delay, \(\sum q\,t\), in real time. Who sets these weights is a policy decision, not a technical detail.</p>
+<p class="small">Sources: P. B. Hunt, D. I. Robertson, R. D. Bretherton and R. I. Winton, <a href="https://www.trl.co.uk/uploads/trl/documents/LR1014.pdf"><em>SCOOT: a traffic responsive method of coordinating signals</em></a>, TRRL Laboratory Report 1014 (1981); <a href="https://www.scats.nsw.gov.au/home">Transport for NSW, SCATS</a>; <a href="https://trlsoftware.com/software/intelligent-signal-control/scoot/">TRL Software, SCOOT</a>.</p>
 
-<h3>Actuated and adaptive control</h3>
-<ul>
-<li><strong>Actuated (vehicle-responsive) control</strong> extends greens while detectors register arrivals, up to a maximum. Standard in Germany and the US for isolated junctions.</li>
-<li><strong>SCOOT</strong> (Split Cycle Offset Optimization Technique), developed by the UK Transport Research Laboratory and partners from the 1970s, uses upstream detectors to model cyclic flow profiles and makes frequent small adjustments to splits, cycle and offsets. TRL Software reports use in over 350 towns and cities.</li>
-<li><strong>SCATS</strong> (Sydney Coordinated Adaptive Traffic System), established by the New South Wales government in the mid-1970s, uses stop-line detectors to measure the degree of saturation and selects among plans. Transport for NSW reports installations at more than 60,000 intersections in over 30 countries.</li>
-</ul>
-<p>Adaptive systems typically reduce vehicle delay relative to outdated fixed plans, but their default objective is vehicle delay and stops. Configured naively they can lengthen cycles and pedestrian waits. Bus priority and pedestrian-friendly settings must be written into the objective; otherwise the controller optimizes the classic \(\min\sum q\,t\) in real time.</p>
-
-<h2>4. Roundabouts: national traditions</h2>
-<p>Modern roundabouts, with priority to circulating traffic, were developed in Britain in the 1960s. France adopted them on a large scale from the 1980s (GIRABASE's documentation dates their regulation to 1984), followed by Spain, Italy, the Netherlands, Germany and many others. OpenStreetMap-based counts suggest France has the most roundabouts in Europe, followed by the UK, Italy and Spain; such counts depend heavily on mapping rules and are only indicative.</p>
-
-<h3>France: GIRABASE and the SETRA formula</h3>
-<p>France's national tool is <strong>GIRABASE</strong>, developed by Bernard Guichet (CETE de l'Ouest) from capacity and safety studies begun in the early 1980s, and given national status in 1997 after validation by CERTU and SETRA; it is now distributed by CEREMA. It treats a roundabout as a succession of T-junctions. For each entry, capacity falls exponentially with the <em>trafic gênant</em> (conflicting traffic) according to a Siegloch-type curve, where the conflicting traffic combines circulating flow past the entry and part of the flow exiting at that same arm, because waiting drivers cannot always tell whether a vehicle will exit.</p>
-<p>A simpler linear method, published by SETRA in 1987 and used in Italian teaching as the basis of Italian pre-standards, computes entry capacity \(K\) in passenger-car equivalents per hour:</p>
-$$Q_u' = Q_u\,\frac{15-\text{SEP}}{15},\qquad
-Q_d = \big(Q_c + \tfrac23 Q_u'\big)\big[1-0.085(\text{ANN}-8)\big],$$
-$$K = (1330 - 0.7\,Q_d)\,\big[1+0.1(\text{ENT}-3.5)\big],$$
-<p>where \(Q_c\) is circulating flow passing the entry, \(Q_u\) exiting flow at the same arm, SEP the width of the splitter island (m; exits are ignored if SEP ≥ 15 m), ANN the ring width (m) and ENT the entry width (m). The formula quoted in this course's source discussion, \(C=(1330-0.7Q_g)(1+0.1(l_e-3.5))\), is this formula with the conflicting-traffic adjustments folded into \(Q_g\). It is <strong>verified</strong> against the University of Cagliari course notes below, which cite SETRA (1987); the original SETRA document was not consulted. Treat it as a planning-level approximation for single-lane French-style roundabouts, not as a universal law.</p>
-
-<div class="box translation">
-<div class="box-title">Italian · University of Cagliari lecture notes on roundabout capacity</div>
-<p class="original">Il calcolo della capacità delle rotatorie secondo la prenormativa italiana: metodo messo a punto in Francia nel 1987 dal SETRA… il parametro geometrico fondamentale per il calcolo della capacità è la larghezza ENT… ed in particolare lo scarto rispetto ad una larghezza standard di 3,5 m.</p>
-<p>"Calculating roundabout capacity according to the Italian pre-standard: a method developed in France in 1987 by SETRA… the fundamental geometric parameter for the capacity calculation is the width ENT [measured behind the first car stopped at the give-way line]… and in particular its deviation from a standard width of 3.5 m." The notes then set out the method of the equations above, and contrast it with the Swiss formula \(C_e=1500-\tfrac89Q_g\), Kimber's British regression and US practice. <em>Source: Università di Cagliari, course slides "Rotatorie: capacità". Translated by the course authors (machine-assisted).</em></p>
+<h2>4. Roundabouts: from Paris to Britain and back</h2>
+<div class="box story"><div class="box-title">History · Who gives way?</div>
+<figure class="photo inset"><img src="../assets/img/history/henard-carrefour-a-giration.png" width="599" height="410" loading="lazy" alt="Drawing of a large circular junction on the Paris Grands Boulevards, with carriages and pedestrians circulating around a central island."><figcaption>Eugène Hénard's "carrefour à giration" for the Grands Boulevards in Paris. <span class="credit">Eugène Hénard, public domain, via <a href="https://commons.wikimedia.org/wiki/File:Henard_Carrefour_a_Giration_des_Grands_Boulevards_1910.png">Wikimedia Commons</a>.</span></figcaption></figure>
+<p>The circular junction is a French idea. Around 1906 the Paris architect Eugène Hénard proposed the <em>carrefour à giration</em>: all traffic would turn the same way around a central island, so that no two carriages ever crossed head-on. In New York, William Phelps Eno promoted the same one-way rotary movement at existing circles. Paris applied it at the Place de l'Étoile.</p>
+<p>These early circles had a flaw. Entering traffic had priority, following the general rule of giving way to the right. Once the ring filled with cars, nobody could leave and the circle locked solid. Circles fell out of favor in France and the US.</p>
+<p>Britain fixed the flaw. After local trials, it made the opposite rule general in 1966: traffic entering a roundabout gives way to traffic already on the ring. A full ring can then always empty, so it cannot lock. With this rule, roundabouts could be smaller and still keep traffic moving.</p>
+<p>France adopted the British rule in 1984. A Swiss review counts some 500 French circles before the change, and about 30,000 roundabouts by 2010. An American historian of the subject, writing in 1988, described the shift: following the British example, French engineers had turned to smaller circles in which entering traffic gives way.</p>
+<p class="credit">Sources: K. Todd, <a href="https://trid.trb.org/view/289521">"A history of roundabouts in the United States and France"</a>, <em>Transportation Quarterly</em> 42(4), 1988; Citec, <a href="https://www.citec.ch/wp-content/uploads/2010/04/20-Citec-Tufo-Golay-VSS-05-2010.pdf">"Les giratoires, un outil toujours aussi en vogue"</a>, <em>Route et trafic</em> 5/2010 (French).</p>
 </div>
+<p>The British example spread from the 1980s to Spain, Italy, the Netherlands, Germany and many other countries. Counts based on OpenStreetMap suggest that France has the most roundabouts in Europe, followed by the UK, Italy and Spain. Such counts depend heavily on mapping rules and are only indicative.</p>
 
-<p>What distinguishes French guidance most is not the formula but its attitude to <strong>oversizing</strong>. The GIRABASE manual tells designers that a roundabout is working well in the peak hour with 25–80% reserve capacity on all entries, and that large reserves are a reason to <em>shrink</em> the design:</p>
+<h3>France: GIRABASE, and the advice to build smaller</h3>
+<p>France's national capacity tool is <strong>GIRABASE</strong>. Bernard Guichet developed it at the regional public engineering center in Nantes (CETE de l'Ouest), from capacity and safety studies begun in the early 1980s. It received national status in 1997 after validation by the national technical agencies CERTU and SETRA. Today it is distributed by their successor, CEREMA.</p>
+<p>GIRABASE treats a roundabout as a series of T-junctions. At each entry, capacity falls as the "disturbing traffic" (<em>trafic gênant</em>) rises. That traffic is mainly the flow circulating past the entry. It also includes part of the flow leaving at that same arm, because a waiting driver cannot always tell whether an approaching car will exit or carry on. The shape of the curve is the same as in the gap-acceptance theory of section 2, but the parameters are fitted to French observations.</p>
+<p>What distinguishes French guidance most is not the formula. It is the attitude to <strong>oversizing</strong>. The GIRABASE manual tells designers that a roundabout works well in the peak hour with 25–80% reserve capacity on all entries, and that a large reserve is a reason to <em>shrink</em> the design:</p>
 <div class="box translation">
 <div class="box-title">French · GIRABASE 4 user manual (CERTU/CEREMA)</div>
 <p class="original">Si toutes les entrées ont une large réserve de capacité (plus de 50 %), le dimensionnement global du giratoire pourra être réduit : un rayon de 15 à 20 m peut suffire plutôt que 35 à 50 m pour des 3 ou 4 branches (ceci va aussi dans le sens de la sécurité en heure creuse).</p>
 <p>"If all entries have a large capacity reserve (more than 50%), the overall size of the roundabout can be reduced: a radius of 15 to 20 m may be enough rather than 35 to 50 m for 3 or 4 arms (this also improves safety in off-peak hours)." Elsewhere the manual advises narrowing a two-lane (7 m) entry with more than 50% reserve to one lane (3.5–4 m), because one lane "leaves sufficient capacity and improves safety (pedestrian crossing, entry speed in off-peak hours…)". <em>Source: CEREMA, GIRABASE 4 documentation, §1.3.1. Translated by the course authors (machine-assisted).</em></p>
 </div>
-<p>In the language of \(W\): French guidance accepts a little peak delay (Term A) to gain off-peak safety (Term C) and save land (Term D). The manual also notes that GIRABASE computes waiting times for a stationary hour and "does not include a peak factor".</p>
+<p>In the language of \(W\): French guidance accepts a little peak delay (Term A) to gain off-peak safety (Term C) and save land (Term D). The manual also notes that GIRABASE computes waiting times for a steady hour and "does not include a peak factor", the adjustment for the busiest quarter-hour that US practice applies (<a href="m08-capacity-los.html">Module 8</a>). Two national methods can thus disagree on a design even before their formulas differ.</p>
 
-<h3>United Kingdom: Kimber's regression</h3>
-<p>Kimber's TRRL Laboratory Report LR942 (1980), based on saturated entries at many public-road sites, found entry capacity to be linear in circulating flow, \(Q_e = k(F - f_cQ_c)\), with \(F\) and \(f_c\) functions of entry width \(e\), approach half-width \(v\), flare length, entry radius, entry angle and inscribed circle diameter. Entry width and flare matter most; entry angle and radius less. These relationships are implemented in TRL's ARCADY software and the UK design manual. The British tradition thus favors wide, flared entries for capacity, which raises entry speeds, a trade-off the French guidance resolves differently.</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>The SETRA 1987 linear formula, with the Italian source</summary>
+<p>A simpler linear method, published by SETRA in 1987 and used in Italian teaching as the basis of Italian pre-standards, computes entry capacity \(K\) in passenger-car equivalents per hour:</p>
+$$Q_u' = Q_u\,\frac{15-\text{SEP}}{15},\qquad
+Q_d = \big(Q_c + \tfrac23 Q_u'\big)\big[1-0.085(\text{ANN}-8)\big],$$
+$$K = (1330 - 0.7\,Q_d)\,\big[1+0.1(\text{ENT}-3.5)\big],$$
+<p>where \(Q_c\) is the circulating flow passing the entry, \(Q_u\) the exiting flow at the same arm, SEP the width of the splitter island (m; exits are ignored if SEP ≥ 15 m), ANN the ring width (m) and ENT the entry width (m). The short form \(C=(1330-0.7Q_g)(1+0.1(l_e-3.5))\) is the same formula with the conflicting-traffic adjustments folded into \(Q_g\). It is verified against the University of Cagliari course notes below, which cite SETRA (1987); the original SETRA document was not consulted. Treat it as a planning-level approximation for single-lane French-style roundabouts, not as a universal law.</p>
+<div class="box translation">
+<div class="box-title">Italian · University of Cagliari lecture notes on roundabout capacity</div>
+<p class="original">Il calcolo della capacità delle rotatorie secondo la prenormativa italiana: metodo messo a punto in Francia nel 1987 dal SETRA… il parametro geometrico fondamentale per il calcolo della capacità è la larghezza ENT… ed in particolare lo scarto rispetto ad una larghezza standard di 3,5 m.</p>
+<p>"Calculating roundabout capacity according to the Italian pre-standard: a method developed in France in 1987 by SETRA… the fundamental geometric parameter for the capacity calculation is the width ENT [measured behind the first car stopped at the give-way line]… and in particular its deviation from a standard width of 3.5 m." The notes then set out the method of the equations above, and contrast it with the Swiss formula \(C_e=1500-\tfrac89Q_g\), Kimber's British regression and US practice. <em>Source: Università di Cagliari, course slides "Rotatorie: capacità". Translated by the course authors (machine-assisted).</em></p>
+</div>
+</details>
 
-<h3>Germany: HBS and gap acceptance</h3>
-<p>German roundabout capacity in the HBS follows a gap-acceptance approach developed by Brilon and colleagues (Ruhr-Universität Bochum), with parameters estimated for German single-lane and two-lane roundabouts. German practice has been cautious with multi-lane rings because of their crash record, and makes heavy use of compact single-lane roundabouts on rural and suburban roads.</p>
+<h3 id="uk">United Kingdom: wide entries for capacity</h3>
+<p>Kimber's TRRL Laboratory Report LR942 (1980) is based on saturated entries at many public-road sites. It found entry capacity to fall in a straight line as circulating flow rises. The capacity at a given circulating flow depends mostly on the entry width and the length of the flare, where the approach widens just before the entry. Entry angle and radius matter less. These relationships are built into TRL's ARCADY software and the UK design manual. The British tradition thus favors wide, flared entries for capacity. Wide entries also raise entry speeds. French guidance resolves that trade-off the other way, toward narrow entries and safety.</p>
 
-<h3>Netherlands: turbo-roundabouts and cyclists</h3>
-<p>Where one lane is not enough, a conventional two-lane roundabout lets drivers change lanes on the ring and creates weaving conflicts. The Dutch <strong>turbo-roundabout</strong>, developed in the Netherlands by Lambertus Fortuijn, uses raised lane dividers and spiral markings so that drivers choose their lane before entry and cannot change it on the ring. Fortuijn (2009) reports conflict-point reductions and safety performance close to single-lane roundabouts at substantially higher capacity. Dutch design guidance (CROW) also treats cyclists explicitly: on urban roundabouts, cyclists normally ride on a separate path around the ring and usually have priority over entering and exiting motor traffic, while on rural roundabouts they usually do not. This is a qualitative summary; check current CROW guidance for details.</p>
-<p>At signalized junctions the Dutch <strong>protected intersection</strong> keeps cyclists on a separated path with corner islands that set back the cycle crossing by several meters. Turning drivers then meet cyclists at a near right angle, in view, after slowing for the corner. The design trades some land (Term D) for safety (Term C) and comfort (\(\mathbf{x}\) in Term A for cyclists).</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>Kimber's regression</summary>
+<p>Kimber's model is \(Q_e = k(F - f_cQ_c)\), where \(Q_e\) is entry capacity and \(Q_c\) circulating flow. The intercept \(F\) and slope \(f_c\) are functions of entry width \(e\), approach half-width \(v\), effective flare length, entry radius, entry angle and inscribed circle diameter; \(k\) is a correction for entry angle and radius. The functional forms are given in LR942 and in the UK Design Manual for Roads and Bridges.</p>
+</details>
 
-<h3>Spain: lane choice before entry</h3>
-<p>Spanish practice emphasizes that capacity and safety on multi-lane roundabouts (<em>glorietas</em>) depend on how drivers distribute across entry lanes according to their exits. The Dirección General de Tráfico (DGT) recommends lane-allocation signs and markings on approaches, and the national Nota de Servicio 5/2014 prescribes analysis methods for roundabouts (HCM 2010 methods, deterministic models or simulation, depending on complexity) and evaluates LOS by lane, approach and junction.</p>
+<h3>Germany: compact single-lane roundabouts</h3>
+<p>German roundabout capacity in the HBS follows the gap-acceptance approach of section 2, developed by Werner Brilon and colleagues at the Ruhr University Bochum, with parameters estimated for German single-lane and two-lane roundabouts. German practice has been cautious with multi-lane rings because of their crash record. It makes heavy use of compact single-lane roundabouts on rural and suburban roads.</p>
+
+<h3>Netherlands: the turbo-roundabout</h3>
+<p>Sometimes one lane is not enough. A conventional two-lane roundabout lets drivers change lanes on the ring. That creates new conflicts, where cars cut across each other. In 1996 the Dutch engineer Lambertus (Bertus) Fortuijn of Delft University of Technology proposed a different layout, the <strong>turbo-roundabout</strong>. Raised dividers separate the lanes, and the markings form a spiral. Drivers choose their lane before they enter, according to their exit, and cannot change it on the ring. The name refers to the spiral shape, not to speed.</p>
+<figure class="photo"><img src="../assets/img/m09-turbo-roundabout-conflicts.png" width="1200" height="552" loading="lazy" alt="Two diagrams side by side. Left: a conventional two-lane roundabout with 16 red conflict points. Right: a turbo-roundabout with spiral lanes and 10 conflict points."><figcaption>Conflict points (red) at a conventional two-lane roundabout (left, 16) and a turbo-roundabout (right, 10). On the turbo design, lanes are fixed before entry, so drivers do not cut across each other on the ring. <span class="credit">DaddyCell / <a href="https://commons.wikimedia.org/wiki/File:Two-lane_roundabout_and_turborondabout_intersection_diagram.svg">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</span></figcaption></figure>
+<p>Fortuijn (2009) reports fewer conflict points and safety close to that of single-lane roundabouts, at substantially higher capacity. The Dutch road safety institute SWOV, as summarized by the US Federal Highway Administration, found that after adjusting for traffic volumes, turbo-roundabouts are about as safe as single-lane ones. The US opened its first turbo-roundabout in Jacksonville, Florida, after more than a decade of promotion.</p>
+<p>Dutch design guidance (CROW) also treats cyclists explicitly. On urban roundabouts, cyclists normally ride on a separate path around the ring and usually have priority over entering and exiting motor traffic. On rural roundabouts they usually do not. This is a qualitative summary; check current CROW guidance for details.</p>
+<p>At signalized junctions, the Dutch <strong>protected intersection</strong> keeps cyclists on a separate path, with corner islands that set the cycle crossing back by several meters. Turning drivers then meet cyclists at nearly a right angle, in full view, after slowing for the corner. The design trades some land (Term D) for safety (Term C) and comfort (the comfort attributes \(\mathbf{x}\) in Term A for cyclists).</p>
+<p class="small">Source on origin and safety: FHWA, <a href="https://international.fhwa.dot.gov/programs/tbp/docs/35976_FHWA_HPIP_Turbo_Roundabout_Factsheet_v05_Release_508.pdf"><em>Turbo Roundabouts: Support Safety, Efficiency, and Increased Capacity</em></a> (fact sheet, PDF).</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>Four more national traditions: Spain, Italy, Australia, Japan</summary>
+<h4>Spain: lane choice before entry</h4>
+<p>Spanish practice emphasizes that capacity and safety on multi-lane roundabouts (<em>glorietas</em>) depend on how drivers spread across the entry lanes according to their exits. The Dirección General de Tráfico (DGT) recommends lane-allocation signs and markings on approaches. The national Nota de Servicio 5/2014 prescribes analysis methods for roundabouts (HCM 2010 methods, deterministic models or simulation, depending on complexity) and evaluates level of service by lane, approach and junction.</p>
 <div class="box translation">
 <div class="box-title">Spanish · DGT, recommendations for interurban road safety, §21 "Traffic organization at roundabouts"</div>
 <p class="original">Resulta fundamental conocer el tráfico de la glorieta con detalle de giros y matriz origen-destino a fin de establecer cuál es la oferta de carriles más adecuada… Es importante utilizar el número mínimo requerido de carriles sujeto a consideraciones de capacidad para evitar puntos de conflicto adicionales.</p>
 <p>"It is essential to know the roundabout's traffic in detail, with turning movements and the origin–destination matrix, in order to determine the most suitable lane provision… It is important to use the minimum number of lanes required for capacity, to avoid additional conflict points." The section explains that signs and markings on the approaches should tell drivers which lane to take for their exit, so that decisions are made before entering rather than by lane changes on the ring. <em>Source: Dirección General de Tráfico, Recomendaciones para la mejora de la seguridad vial en entornos interurbanos. Translated by the course authors (machine-assisted).</em></p>
 </div>
-<p>For simulation, the Spanish lesson is that a badly reproduced roundabout may not be a car-following problem at all: it may be a failure of destination-aware lane choice upstream.</p>
-
-<h3>Italy: geometry by decree</h3>
+<p>For simulation, the Spanish lesson is that a badly reproduced roundabout may not be a car-following problem at all. It may be a failure of destination-aware lane choice upstream.</p>
+<h4>Italy: geometry by decree</h4>
 <p>Italy's Ministerial Decree of 19 April 2006, <em>Norme funzionali e geometriche per la costruzione delle intersezioni stradali</em>, classifies roundabouts by outer diameter: conventional (40–50 m), compact (25–40 m) and mini (14–25 m, with a partly or fully traversable central island below 25 m and 18 m respectively). Its main geometric criterion is speed control through deflection.</p>
 <div class="box translation">
 <div class="box-title">Italian · DM 19 April 2006, §4.5.3 "Geometry of roundabouts"</div>
 <p class="original">Il criterio principale per definire la geometria delle rotatorie riguarda il controllo della deviazione delle traiettorie in attraversamento del nodo… Per ciascun braccio di immissione si raccomanda un valore dell'angolo di deviazione β di almeno 45°.</p>
 <p>"The main criterion for defining the geometry of roundabouts concerns the control of the deflection of paths crossing the junction… For each entry arm, a deflection angle β of at least 45° is recommended." The decree explains that vehicles must be deflected by the central island to prevent them crossing the junction at an inappropriate speed. <em>Source: Ministero delle Infrastrutture e dei Trasporti, DM 19/04/2006, Gazzetta Ufficiale n. 170, 24 July 2006. Translated by the course authors (machine-assisted).</em></p>
 </div>
-<p>The decree also requires that roundabouts be dimensioned for capacity and level of service in the design peak period (§5). Practice is heterogeneous across regions, and Italian traffic includes many powered two-wheelers, which uniform passenger-car gap-acceptance models represent poorly.</p>
-
-<h3>Australia: lane-by-lane and platooned circulating flow</h3>
-<p>Australian practice, set out in the Austroads <em>Guide to Traffic Management</em> and implemented in the SIDRA INTERSECTION software developed by Rahmi Akçelik, analyses each entry lane separately, with lane-specific critical gaps and follow-up times, and models circulating traffic with a headway distribution that separates bunched (platooned) vehicles from free ones. Two circulating streams with the same flow can thus offer different numbers of usable gaps. SIDRA is widely used outside Australia, including in the US. The Western Australian road agency's operational modeling guidelines show how SIDRA is used alongside microsimulation.</p>
-
-<h3>Japan: a late adopter</h3>
+<p>The decree also requires that roundabouts be dimensioned for capacity and level of service in the design peak period (§5). Practice is heterogeneous across regions, and Italian traffic includes many powered two-wheelers, which gap-acceptance models built for cars represent poorly.</p>
+<h4>Australia: lane by lane, with platoons</h4>
+<p>Australian practice, set out in the Austroads <em>Guide to Traffic Management</em> and implemented in the SIDRA INTERSECTION software developed by Rahmi Akçelik, analyzes each entry lane separately, with lane-specific critical gaps and follow-up times. It models circulating traffic with a headway distribution that separates bunched (platooned) vehicles from free ones. Two circulating streams with the same flow can thus offer different numbers of usable gaps. SIDRA is widely used outside Australia, including in the US. The Western Australian road agency's operational modeling guidelines show how SIDRA is used alongside microsimulation.</p>
+<h4>Japan: a late adopter</h4>
 <p>Japan legally defined roundabouts (環状交差点) in an amendment to the Road Traffic Act that took effect in 2014, and their number remains small compared with Europe. Japanese urban junctions are overwhelmingly signalized, with pedestrian scramble phases at busy station areas.</p>
+</details>
 
-<h3>Comparing the formulas</h3>
-<p>For a single-lane entry with 800 pcu/h conflicting flow (no exit interference, standard widths):</p>
+<h3>Same entry, five answers</h3>
+<p>How much do the national methods differ? Take a single-lane entry with 800 passenger cars an hour circulating past it, standard widths and no exiting traffic in the way:</p>
 <div class="table-wrap"><table>
 <tr><th>Method</th><th>Entry capacity (pcu/h)</th><th>Note</th></tr>
-<tr><td>SETRA 1987 linear (ENT = 3.5 m)</td><td class="num">≈ 770</td><td>\(1330-0.7\times800\)</td></tr>
-<tr><td>Swiss (Bovy), \(1500-\tfrac89 Q_g\)</td><td class="num">≈ 790</td><td>as given in the Cagliari notes</td></tr>
-<tr><td>Siegloch, \(t_c=4.1\), \(t_f=2.9\) s</td><td class="num">≈ 690</td><td>parameters illustrative</td></tr>
-<tr><td>HCM 2010 single-lane, \(1130\,e^{-0.001 Q_c}\)</td><td class="num">≈ 510</td><td>US drivers in 2000s data; HCM 6 raised the intercept to about 1380 (≈ 610)</td></tr>
+<tr><td>France, SETRA 1987 linear (entry width 3.5 m)</td><td class="num">≈ 770</td><td>\(1330-0.7\times800\)</td></tr>
+<tr><td>Switzerland (Bovy), \(1500-\tfrac89 Q_g\)</td><td class="num">≈ 790</td><td>as given in the Cagliari notes</td></tr>
+<tr><td>Gap acceptance (Siegloch), \(t_c=4.1\), \(t_f=2.9\) s</td><td class="num">≈ 690</td><td>parameters illustrative</td></tr>
+<tr><td>US, HCM 2010 single-lane, \(1130\,e^{-0.001 Q_c}\)</td><td class="num">≈ 510</td><td>US drivers in 2000s data; HCM 6 raised the intercept to about 1,380 (≈ 610)</td></tr>
 </table></div>
-<p class="meta">HCM coefficients from the course authors' knowledge of the manuals; verify in the HCM before use.</p>
-<p>The spread, more than 50% between the lowest and highest, is the main lesson. The international review of roundabout capacity modeling by Yap, Gibson and Waterson (University of Southampton, 2013) concluded that none of the empirical, gap-acceptance or simulation approaches works without local calibration, and that parameters do not transfer reliably between countries. Driver behavior differs; so does what each country counts as capacity.</p>
+<p class="meta">pcu = passenger-car units. HCM coefficients from the course authors' knowledge of the manuals; verify in the HCM before use.</p>
+<p>The spread, more than 50% between the lowest and highest, is the main lesson. An international review by Yap, Gibson and Waterson (University of Southampton, 2013) concluded that none of the approaches, whether empirical, gap-acceptance or simulation, works without local calibration, and that parameters do not transfer reliably between countries. Drivers behave differently in different places. So does what each country counts as capacity. For a decision maker this has a practical meaning. Whether a roundabout "works" at a given site can depend on which country's manual the consultant used.</p>
 
 <h2>5. Safety: roundabouts versus signals</h2>
-<p>The safety advantage of roundabouts comes from two physical facts: fewer and less severe conflicts (merges at small angles instead of right-angle crossings) and low speeds enforced by deflection, typically 25–35 km/h through a well-designed single-lane roundabout. Kinetic energy, and therefore injury severity, rises with the square of impact speed (<a href="m11-safety.html">Module 11</a>).</p>
+<p>The safety advantage of roundabouts comes from two physical facts. First, conflicts are fewer and less severe: merges at small angles replace right-angle crossings. Second, the geometry forces low speeds, typically 25–35 km/h through a well-designed single-lane roundabout. The energy of a crash, and with it the severity of injuries, rises with the square of the impact speed (<a href="m11-safety.html">Module 11</a>).</p>
 <ul>
-<li>A US before–after study of 23 junctions converted to roundabouts (Persaud, Retting, Gårder and Lord, 2001), using the empirical Bayes method, estimated reductions of about 39% in all crashes, 76% in injury crashes and about 90% in fatal and incapacitating-injury crashes.</li>
-<li>Elvik's (2003) meta-analysis of non-US studies also found substantial reductions in injury crashes, with larger reductions for fatal crashes, and smaller effects when converting junctions that were already signalized.</li>
-<li>The benefits are smaller, and can reverse, for <strong>cyclists</strong>, especially at multi-lane roundabouts and where cycle lanes run on the ring. Separated cycle paths with clear priority rules perform best. Multi-lane conventional roundabouts also show more property-damage crashes than single-lane ones, which motivated the turbo design.</li>
+<li>A US before–after study of 23 junctions converted to roundabouts (Persaud, Retting, Gårder and Lord, 2001) estimated reductions of about 39% in all crashes, 76% in injury crashes and about 90% in fatal and incapacitating-injury crashes. It used the "empirical Bayes" method, which corrects for the fact that junctions are often rebuilt right after an unusually bad run of crashes.</li>
+<li>Elvik's (2003) meta-analysis of studies outside the US also found substantial reductions in injury crashes, with larger reductions for fatal crashes, and smaller effects when the junction converted had already been signalized.</li>
+<li>The benefits are smaller, and can reverse, for <strong>cyclists</strong>, especially at multi-lane roundabouts and where cycle lanes run on the ring itself. Separated cycle paths with clear priority rules perform best. Multi-lane conventional roundabouts also show more property-damage crashes than single-lane ones, which motivated the turbo design.</li>
 </ul>
-<p>Under a <strong>safety constraint</strong> \(F(\theta)\le\bar F\), a junction type that eliminates high-energy crossing conflicts relaxes the constraint for the whole network at once; under pricing alone, the crash savings enter Term C. Either way, the roundabout's off-peak benefit counts in every hour, while its capacity disadvantage relative to a well-timed signal counts only in the few hours near capacity. This is the same asymmetry as the design-hour argument of <a href="m08-capacity-los.html">Module 8</a>.</p>
+<p>A society can treat road deaths as a price or as a limit (<a href="m01-objective.html#limits">Module 1</a>). Under a <strong>safety limit</strong>, written \(F(\theta)\le\bar F\) for deaths \(F\) under plan \(\theta\), a junction type that removes high-energy crossing conflicts relaxes the limit for the whole network at once. Under pricing alone, the crash savings enter Term C. Either way, the roundabout's off-peak benefit counts in every hour of the day. Its capacity disadvantage, compared with a well-timed signal, counts only in the few hours near capacity. This is the same asymmetry as the design-hour argument of <a href="m08-capacity-los.html">Module 8</a>.</p>
 <div class="box caution">
 <div class="box-title">Caution: pedestrians at roundabouts</div>
-<p>Roundabouts give pedestrians short, two-stage crossings with low-speed traffic, but no protected phase. Blind and partially sighted pedestrians find gaps hard to judge at multi-lane entries and exits. US guidance has therefore considered signalized or beacon-controlled crossings at multi-lane roundabouts. A design good for drivers' safety is not automatically good for everyone's.</p>
+<p>Roundabouts give pedestrians short, two-stage crossings with low-speed traffic, but no protected phase. Blind and partially sighted pedestrians find gaps hard to judge at multi-lane entries and exits. US guidance has therefore considered signalized or beacon-controlled crossings at multi-lane roundabouts. A design that is good for drivers' safety is not automatically good for everyone's.</p>
 </div>
 
-<h2>6. Passive versus active control, read through \(W\)</h2>
+<h2>6. Choosing: passive versus active control, read through \(W\)</h2>
+<p>A roundabout is a <em>passive</em> instrument: the geometry does the work, without power or software. A signal is an <em>active</em> one: it needs equipment, data and someone to keep it tuned (<a href="m01-objective.html#instruments">Module 1</a>). The table compares a signalized junction with a compact roundabout, term by term.</p>
 <div class="table-wrap"><table>
 <tr><th>Term</th><th>Signals (active)</th><th>Compact roundabout (passive)</th></tr>
-<tr><td><span class="term">A</span> peak delay</td><td>Lower delay near capacity if well timed; coordination along corridors possible; bus priority possible</td><td>Lower delay at low and medium flows, no red-light waiting off-peak; no corridor coordination</td></tr>
-<tr><td><span class="term">A</span> pedestrians, cyclists</td><td>Protected phases but long waits with long cycles</td><td>Short crossings, no protection; poor at multi-lane designs</td></tr>
+<tr><td><span class="term">A</span> peak delay</td><td>Lower delay near capacity if well timed; corridor coordination possible; bus priority possible</td><td>Lower delay at low and medium flows, no waiting at red off-peak; no corridor coordination</td></tr>
+<tr><td><span class="term">A</span> pedestrians, cyclists</td><td>Protected phases, but long waits with long cycles</td><td>Short crossings, no protection; poor at multi-lane designs</td></tr>
 <tr><td><span class="term">C</span> crashes, noise</td><td>Right-angle and red-light-running crashes at speed; stop–start noise</td><td>Fewer severe crashes; smoother, slower flow</td></tr>
-<tr><td><span class="term">D</span> land</td><td>Compact footprint, but turn pockets add width</td><td>Needs a circle; compact designs 26–40 m diameter</td></tr>
-<tr><td><span class="term">E</span> cost</td><td>Equipment, power, maintenance and retiming over decades</td><td>Higher construction cost at retrofit, very low operating cost</td></tr>
+<tr><td><span class="term">D</span> land</td><td>Compact footprint, but turn lanes add width</td><td>Needs a circle; compact designs 26–40 m in diameter</td></tr>
+<tr><td><span class="term">E</span> public cost</td><td>Equipment, power, maintenance and retiming over decades</td><td>Higher construction cost when rebuilding an existing junction, very low operating cost</td></tr>
 <tr><td>Robustness</td><td>Fails in power cuts; depends on detectors and maintenance</td><td>Works without power; hard to change once built</td></tr>
 </table></div>
-<p>The choice is not ideological. A busy urban junction with heavy pedestrian flows, trams and closely spaced neighbors may be best signalized; a suburban or rural junction with balanced flows is usually better as a compact roundabout. What matters is that the objective used to decide includes the off-peak hours, the non-motorized users and the safety constraint, not only the peak-hour vehicle delay.</p>
+<p class="small">Count land once: the value of the land a design takes belongs in Term D, so the construction cost in Term E should exclude land purchase (<a href="m01-objective.html#term-d">Module 1</a>).</p>
+<p>The choice is not ideological. A busy urban junction with heavy pedestrian flows, trams and buildings close by may be best signalized. A suburban or rural junction with balanced flows is usually better as a compact roundabout. What matters is that the objective used to decide includes the off-peak hours, the people on foot, on bikes and on buses, and the safety limit, not only the peak-hour vehicle delay.</p>
+<p>Junction models are also where many traffic simulations go wrong. A simulator's capacity at a junction comes from its rules for gaps and saturation flow. If those rules are not checked against the methods and observations of this module, the simulation's delays are not to be trusted. <a href="m10-simulation-validation.html">Module 10</a> shows how to check.</p>
 
 <div class="box exercise">
 <div class="box-title">Exercise 9.1 · Signal timing for vehicles and for people</div>
-<p>Use the Webster example above. A bus route with 20 buses per hour (average 40 passengers) runs north–south; cars carry 1.3 persons.</p>
+<p>Use the Webster example in section 3 (method layer). A bus route with 20 buses per hour (average 40 passengers) runs north–south; cars carry 1.3 persons.</p>
 <ol>
 <li>Recompute cycle length and splits if a pedestrian phase must cross the 14 m north–south road at 1.2 m/s with a 6 s walk interval, running with the east–west vehicle phase.</li>
 <li>Compute average delay per <em>person</em> on each approach, and per pedestrian (assume random arrival: average wait ≈ red²/(2c)).</li>
@@ -201,7 +258,7 @@ $$K = (1330 - 0.7\,Q_d)\,\big[1+0.1(\text{ENT}-3.5)\big],$$
 </div>
 
 <div class="box exercise">
-<div class="box-title">Exercise 9.2 · One roundabout, five countries</div>
+<div class="box-title">Exercise 9.2 · One roundabout, several countries</div>
 <p>A four-arm single-lane roundabout has entry flows (pcu/h) N 600, E 400, S 550, W 350, with turning proportions: 25% left, 50% ahead, 25% right on each arm. Entry width 4 m, ring width 8 m, splitter islands 5 m.</p>
 <ol>
 <li>Compute circulating and exiting flows at each entry.</li>
@@ -211,9 +268,21 @@ $$K = (1330 - 0.7\,Q_d)\,\big[1+0.1(\text{ENT}-3.5)\big],$$
 </ol>
 </div>
 
+<div class="box exercise">
+<div class="box-title">Exercise 9.3 · Reading a junction study (no calculation needed)</div>
+<p>A consultant recommends replacing a roundabout near a primary school with signals. The report shows that peak-hour vehicle delay falls from 28 to 19 seconds per vehicle.</p>
+<ol>
+<li>List four effects that the comparison leaves out, and say which term of \(W\) or which limit each belongs to.</li>
+<li>Which of the five "Ask your analysts" questions at the top of this module would you put first, and why?</li>
+<li>If signals are built, what should the signal controller's objective include? Who should decide the weights?</li>
+</ol>
+</div>
+
 <h2>Readings and resources</h2>
 <ul class="resources">
 <li data-type="translation"><a href="https://publications.cerema.fr/webdcdc/logiciels/Girabase4050.pdf">CEREMA — GIRABASE 4: roundabout capacity calculation, user documentation (PDF)</a> <span class="lang">(French)</span> <span class="why">Principles of the French method, interpretation of capacity reserves and explicit advice against oversizing.</span></li>
+<li data-type="link"><a href="https://trid.trb.org/view/289521">Todd (1988) — A history of roundabouts in the United States and France, Transportation Quarterly</a> <span class="why">Eno and Hénard, the lock-up of early circles, and France's adoption of the British rule.</span></li>
+<li data-type="translation"><a href="https://www.citec.ch/wp-content/uploads/2010/04/20-Citec-Tufo-Golay-VSS-05-2010.pdf">Citec (2010) — Les giratoires, un outil toujours aussi en vogue, Route et trafic (PDF)</a> <span class="lang">(French)</span> <span class="why">Short history of priority to the ring in Britain, Switzerland and France, and roundabouts with trams and buses.</span></li>
 <li data-type="translation"><a href="https://web.unica.it/static/resources/cms/documents/09lucidi_rotatoriecapacit.pdf">Università di Cagliari — Rotatorie: capacità (course slides, PDF)</a> <span class="lang">(Italian)</span> <span class="why">SETRA 1987 method with a worked four-arm example, plus Swiss, British (Kimber) and US formulas side by side.</span></li>
 <li data-type="translation"><a href="https://www.mit.gov.it/normativa/decreto-ministeriale-19042006">Italian Ministry of Infrastructure and Transport — DM 19 April 2006, functional and geometric standards for road intersections</a> <span class="lang">(Italian)</span> <span class="why">Roundabout typology by diameter, deflection rule, sight lines and capacity requirements.</span></li>
 <li data-type="translation"><a href="https://cdn.transportes.gob.es/portal-web-transportes/carreteras/normativa_tecnica/04_seguridad_vial/%2826%29_alta-_-libro-dgt-medidas-interurbanas_%281%29.pdf">DGT — Recomendaciones para la mejora de la seguridad vial en entornos interurbanos (PDF, large)</a> <span class="lang">(Spanish)</span> <span class="why">Section 21 on lane organization at roundabouts; other sections on Safe System measures.</span></li>
@@ -224,10 +293,12 @@ $$K = (1330 - 0.7\,Q_d)\,\big[1+0.1(\text{ENT}-3.5)\big],$$
 <li data-type="link"><a href="https://doi.org/10.1080/01441647.2013.830160">Yap, Gibson &amp; Waterson (2013) — An international review of roundabout capacity modelling, Transport Reviews</a> <span class="why">Compares empirical, gap-acceptance and simulation approaches across countries; parameters do not transfer without local calibration.</span></li>
 <li data-type="link"><a href="https://doi.org/10.3141/2071-12">Brilon (2008) — Delay at unsignalized intersections, Transportation Research Record</a> <span class="why">From the German school of gap-acceptance and delay modeling.</span></li>
 <li data-type="link"><a href="https://doi.org/10.3141/2096-03">Fortuijn (2009) — Turbo roundabouts: design principles and safety performance, Transportation Research Record</a> <span class="why">The Dutch turbo-roundabout by its designer.</span></li>
+<li data-type="pdf"><a href="https://international.fhwa.dot.gov/programs/tbp/docs/35976_FHWA_HPIP_Turbo_Roundabout_Factsheet_v05_Release_508.pdf">FHWA — Turbo Roundabouts: Support Safety, Efficiency, and Increased Capacity (fact sheet, PDF)</a> <span class="why">Origin in the Netherlands in 1996, SWOV safety finding, first US example.</span></li>
 <li data-type="link"><a href="https://doi.org/10.3141/1751-01">Persaud, Retting, Gårder &amp; Lord (2001) — Safety effect of roundabout conversions in the United States</a> <span class="why">Empirical Bayes before–after evidence.</span></li>
 <li data-type="link"><a href="https://doi.org/10.3141/1847-01">Elvik (2003) — Effects on road safety of converting intersections to roundabouts: review of evidence from non-US studies</a> <span class="why">Meta-analysis of European and Australian evidence.</span></li>
 <li data-type="pdf"><a href="https://doi.org/10.17226/22914">NCHRP Report 672 (2010) — Roundabouts: An Informational Guide, 2nd edition</a> <span class="why">Comprehensive US design and operations guide, free from the National Academies Press.</span></li>
 <li data-type="pdf"><a href="https://doi.org/10.17226/22097">NCHRP Report 812 (2015) — Signal Timing Manual, 2nd edition</a> <span class="why">US practice on cycle, splits, coordination, actuation, pedestrians and priority.</span></li>
+<li data-type="pdf"><a href="https://www.trl.co.uk/uploads/trl/documents/LR1014.pdf">Hunt, Robertson, Bretherton &amp; Winton (1981) — SCOOT: a traffic responsive method of coordinating signals, TRRL LR 1014 (PDF)</a> <span class="why">The original SCOOT report: model, optimizer, performance index and the Glasgow and Coventry trials.</span></li>
 <li data-type="pdf"><a href="https://www.mainroads.wa.gov.au/globalassets/technical-commercial/technical-library/road-and-traffic-engineering/traffic-modelling/operational-modelling/operational-modelling.pdf">Main Roads Western Australia — Operational Modelling Guidelines v2.0 (2021, PDF)</a> <span class="why">How SIDRA, LinSig and microsimulation are used and checked in Australian practice.</span></li>
 <li data-type="tool"><a href="https://www.sidrasolutions.com/">SIDRA Solutions — SIDRA INTERSECTION</a> <span class="why">Lane-by-lane junction software of the Australian school (commercial).</span></li>
 <li data-type="tool"><a href="https://trlsoftware.com/software/junctions-signal-design/junctions/">TRL Software — Junctions (ARCADY, PICADY)</a> <span class="why">Implements the TRL/Kimber empirical relationships (commercial).</span></li>
