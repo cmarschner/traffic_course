@@ -10,7 +10,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <script defer src="assets/site.js?v=16"></script>
-<script defer src="assets/explorer.js?v=16"></script>
+<script defer src="assets/explorer.js?v=17"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -28,7 +28,7 @@
 <main class="wide">
 <p class="kicker">Interactive</p>
 <h1>Objective explorer</h1>
-<p class="lede" style="max-width:46rem">The same four plans for one congested 3 km urban arterial, ranked by the welfare objective \(W\) under different parameter choices. Pick a national preset, then move the sliders and watch the ranking change.</p>
+<p class="lede" style="max-width:46rem">The same four plans for one congested 3 km urban arterial, ranked by the welfare objective \(W\) under different parameter choices. Pick a national preset, then move the sliders and watch the ranking change. Below the ranking, the explorer shows which single assumption would change the winner: the question a decision maker should put to every appraisal.</p>
 
 <div class="explorer">
 <div>
@@ -76,6 +76,9 @@
     <thead><tr><th>Plan</th><th class="num">A access</th><th class="num">B health</th><th class="num">C externalities</th><th class="num">D land</th><th class="num">E public cost</th><th class="num">W</th></tr></thead>
     <tbody id="breakdown"></tbody>
   </table></div>
+  <h3>What would change the winner?</h3>
+  <p class="meta">Plan <strong id="switch-top"></strong> wins now. Each line changes one assumption and keeps the rest:</p>
+  <ul id="switching" class="small"></ul>
 </div>
 </div>
 
@@ -85,6 +88,7 @@
 <li>Choose <em>Sweden</em>. Widening is ruled out by the Vision Zero constraint, not by its price. Untick the constraint and see whether the crash price alone would have excluded it.</li>
 <li>Choose <em>Singapore</em>, then drag the land value \(r\) down to zero. Which plan does a land-abundant city prefer?</li>
 <li>In any long-run preset, set the carbon value to €1,000/t. At corridor scale CO₂ rarely decides the ranking. Crashes, health and land usually matter more. Why, and what does that imply for climate policy at network scale?</li>
+<li>Pick any preset and read "What would change the winner?". Which assumptions are close to a switching point? Those are the numbers to ask your analysts about.</li>
 <li>Pricing (D) has a large revenue term. Why does that revenue not count as a benefit in itself? Look at Terms A and E together and see <a href="modules/m13-pricing.html">Module 13</a>.</li>
 </ol>
 
@@ -108,7 +112,7 @@
 <tr><td>C · BRT</td><td class="num">+0.15 / +0.45</td><td class="num">−1.0 / −5.0</td><td class="num">+0.5 / +0.8</td><td class="num">−0.8 / −1.0</td><td class="num">0</td><td class="num">4.2</td><td class="num">0.6</td></tr>
 <tr><td>D · Congestion charge</td><td class="num">+0.20 / +0.20</td><td class="num">−4.0 / −5.0</td><td class="num">+0.4 / +0.6</td><td class="num">−0.6 / −0.8</td><td class="num">0</td><td class="num">3.0</td><td class="num">6.0</td></tr>
 </table></div>
-<p class="meta">Source code: <a href="assets/explorer.js?v=16">assets/explorer.js</a>. Change the numbers to your own corridor; the page needs no build step.</p>
+<p class="meta">Source code: <a href="assets/explorer.js?v=17">assets/explorer.js</a>. Change the numbers to your own corridor; the page needs no build step.</p>
 </main>
 
 <footer class="site-footer"><div class="inner">

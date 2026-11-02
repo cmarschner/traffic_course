@@ -112,6 +112,52 @@
         }).join("") + "</tr>";
     }).join("");
     $("breakdown").innerHTML = rows;
+    renderSwitching(p, ranked[0].plan);
+  }
+
+  // The best feasible plan under parameters p.
+  function winner(p) {
+    var best = null, bestW = -Infinity, bestFeasible = false;
+    PLANS.forEach(function (pl) {
+      var r = evaluate(pl, p), feasible = r.violations.length === 0;
+      if ((feasible && !bestFeasible) || (feasible === bestFeasible && r.W > bestW)) {
+        best = pl; bestW = r.W; bestFeasible = feasible;
+      }
+    });
+    return best;
+  }
+
+  function short(plan) { return plan.name.split(":")[0].split(" · ")[0]; }
+
+  // For each assumption, the nearest value at which a different plan would win.
+  function renderSwitching(p, top) {
+    var items = [];
+    SLIDERS.forEach(function (k) {
+      var el = $(k), lo = parseFloat(el.min), hi = parseFloat(el.max), step = parseFloat(el.step);
+      var label = el.previousElementSibling.firstChild.textContent.trim();
+      [[1, hi], [-1, lo]].forEach(function (dir) {
+        for (var v = p[k] + dir[0] * step; dir[0] > 0 ? v <= hi + 1e-9 : v >= lo - 1e-9; v += dir[0] * step) {
+          var q = Object.assign({}, p); q[k] = v;
+          var w = winner(q);
+          if (w !== top) {
+            items.push("<li><strong>" + label + "</strong> " + (dir[0] > 0 ? "above " : "below ") +
+              (+v.toFixed(2)) + ": plan " + short(w) + " wins.</li>");
+            break;
+          }
+        }
+      });
+    });
+    var q = Object.assign({}, p); q.horizon = p.horizon === "short" ? "long" : "short";
+    var wh = winner(q);
+    if (wh !== top) items.push("<li><strong>Time horizon</strong> switched to the " + (q.horizon === "long" ? "long run (induced demand, mode shift)" : "short run (fixed demand)") + ": plan " + short(wh) + " wins.</li>");
+    CHECKS.forEach(function (k) {
+      var q2 = Object.assign({}, p); q2[k] = !p[k];
+      var wc = winner(q2);
+      if (wc !== top) items.push("<li><strong>" + $(k).parentNode.textContent.trim() + "</strong> " + (p[k] ? "dropped" : "added") + ": plan " + short(wc) + " wins.</li>");
+    });
+    $("switching").innerHTML = items.length ? items.join("") :
+      "<li>No single assumption within the slider ranges changes the winner. The ranking is robust to each of them on its own.</li>";
+    $("switch-top").textContent = short(top);
   }
 
   function applyPreset(key) {
