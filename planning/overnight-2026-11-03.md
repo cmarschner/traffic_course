@@ -43,9 +43,28 @@ claims the agents could not verify, and loose ends between pages.
 - **Citizen toolkit:** LUTRAQ results (secondary sources); Dutch Awb right to submit views
   (belanghebbenden vs anyone under the Omgevingswet); Swedish three-week granskning after later
   amendments; US draft EIS comment period after the 2025 NEPA changes.
+- **Country pages (US, DE, JP, SG):** Singapore state land share ~90% (Knight Frank via EdgeProp);
+  ARTBA 87% formula share; "no benefit–cost analysis required for formula-funded projects";
+  Hankyu model copied by Tokyu; Katy $2.8bn and 26 lanes; DB punctuality 62.5%/~60%; Munich
+  Deutschlandticket shares; Singapore ~20,000 extra COEs, ERP 2 counts; Japan IRTAD 2.6 per
+  100,000; Germany's 2030 transport budget 85 Mt (UBA page also says 84 Mt).
+- **Country pages (NL, SE, FR, more):** Italy 694 cars per 1,000; Bologna first-year results;
+  Copenhagen bike share (2025: 43%?); Swiss 960,000 truck crossings, vote, 650,000 cap (no link);
+  2019 Korean exemption; Grattan "over half" (no link); China Document No. 52 thresholds (no
+  link); Hong Kong ~90%; Lobau revival; RVS 02.01.22; Sweden 2008 speed-limit scale and 2024
+  biofuel cut; France ZFE vote status and 2012 counter-appraisal threshold; Utrecht Centraal
+  12,500 bike places; Milan Area C "a third"; Vienna pass prices and 220,000 flats;
+  Cheonggyecheon figures.
 - **Module 1 / CR-14 leftovers:** Hansen's later career; "father of SCATS" for Arthur Sims.
 
 ## Loose ends between pages
+
+- Suggestions from agents not yet applied: Module 14 could cite Annema et al. (2017) and
+  Eliasson & Lundberg (2012) on how little appraisal predicts political choice, and use the
+  German two-channel appraisal and US formula vs competitive funding; Module 13 could note that
+  Stockholm's charge revenue was earmarked for the bypass; Module 11 could note that Sweden missed
+  its 400-deaths goal for 2000 (591 died).
+- `more.html` has no "same problem" box per country (deliberately, to keep it short).
 
 - UK discount rates: TAG A1.1 (May 2025) 3.5/3/2.5% vs Green Book 2026 3.00/2.50/2.25%. Say which
   document is quoted wherever UK rates appear; check the explorer presets (UK not a preset).
