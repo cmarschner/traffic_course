@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 7 · Traffic flow, congestion and shockwaves — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Fundamental diagrams, kinematic waves, shockwaves, cumulative curves, capacity drop, car-following and lane-changing models, the macroscopic fundamental diagram, three-phase theory and heterogeneous traffic, connected to the external cost of congestion.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="Why queues form, grow backwards and outlast their cause; why a bottleneck discharges less once a queue has formed; why a lane added upstream of a bottleneck does nothing; ramp metering, the macroscopic fundamental diagram and Zurich's perimeter control; and where congestion belongs in the welfare function. Car-following, cell-transmission and three-phase models in optional boxes.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,153 +29,256 @@
 <main>
 <p class="kicker">Part III · Traffic engineering · Module 7</p>
 <h1>Traffic flow, congestion and shockwaves</h1>
-<p class="meta">≈ 6 hours · Prerequisites: <a href="m01-objective.html">Module 1</a>, <a href="m03-externalities.html">Module 3</a>; calculus · Key terms: <span class="term">A</span> <span class="term">C</span></p>
+<p class="meta">≈ 4 hours, plus about 2 hours for the "Under the hood" boxes · Prerequisites: <a href="m01-objective.html">Module 1</a>; calculus only inside the "Under the hood" boxes · Key terms: <span class="term">A</span> <span class="term">C</span></p>
 
-<p class="lede">Congestion is where traffic engineering and welfare economics meet. A queue is a physical object: it has a length, a density and an upstream edge that moves at a predictable speed. It is also an economic object: every vehicle that joins it delays everyone behind, and those delays are an externality. This module builds the physics from conservation of vehicles to car-following models and network-wide diagrams, and at each step asks what it tells us about the external congestion cost in Term C and the travel time inside Term A.</p>
+<p class="lede">Most drivers have sat in a queue that seemed to have no cause. This module explains where queues come from, why they grow backwards, and why they last longer than whatever started them. It shows why many bottlenecks carry less traffic once a queue has formed, and why a lane added just upstream of a bottleneck does nothing. It then moves from one road to a whole city center, where Zurich has held cars at its edge since 2007. It ends with what all this means for the welfare function: delay belongs in Term A, and the delay one driver imposes on others sets the right congestion charge.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>Why do queues form, why do they last so long, and what can a city do about them without building road space that fills up again?</dd>
+<dt>What matters</dt><dd>A road carries the most traffic at a medium density. Beyond that point, more cars on the road means fewer cars getting through. Every road delivers no more than its tightest point, the bottleneck, lets through. Once a queue forms there, many bottlenecks let through a few percent less than before. A whole city center behaves the same way.</dd>
+<dt>Numbers to question</dt><dd>The capacity a study assumes per lane; whether its model lets queues grow backwards and lets capacity drop; travel-time savings from widening a road upstream of a bottleneck that stays as it is; and the value of an hour that turns delay into money (<a href="m02-valuing-access.html">Module 2</a>).</dd>
+<dt>Levers</dt><dd>Ramp meters, signals that hold traffic at a city's edge, and variable speed limits work within months and keep bottlenecks from breaking down. Congestion charges (<a href="m13-pricing.html">Module 13</a>) keep demand below the breaking point. Fixing the bottleneck itself helps until traffic grows into the new space (<a href="m05-accessibility-land-use.html">Module 5</a>). Adding lanes anywhere else does not help.</dd>
+<dt>Ask your analysts</dt><dd>Where is the bottleneck, and does the project change its capacity? Does the model let queues spill back to junctions upstream? Is each hour of delay counted once? Does traffic in the forecast respond to the new capacity?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>Use \(q=kv\) and a fundamental diagram to describe free-flow and congested states, and explain capacity and capacity drop.</li>
-<li>Derive the shockwave speed from conservation of vehicles and apply it to a bottleneck, predicting queue length, duration and delay.</li>
-<li>Read and draw cumulative (N-) curves and compute total delay from them.</li>
-<li>State the Intelligent Driver Model, Gipps' model and MOBIL, and explain platoon (string) instability and stop-and-go waves.</li>
-<li>Explain the cell transmission model, the macroscopic fundamental diagram (MFD) and perimeter control.</li>
-<li>Summarize Kerner's three-phase critique and the challenges of heterogeneous, weak-lane-discipline traffic.</li>
-<li>Compute the external congestion cost as marginal minus average cost, and explain why welfare is lost mainly in queues.</li>
+<li>Describe traffic with flow, density and speed, and explain why one flow can mean free traffic or a jam.</li>
+<li>Explain capacity, the fundamental diagram and why the tail of a queue moves upstream; compute the speed of a queue tail.</li>
+<li>Read cumulative curves and compute the total delay of a queue.</li>
+<li>Explain capacity drop, why a lane added upstream of a bottleneck does not reduce delay, and why ramp metering can raise throughput.</li>
+<li>Explain stop-and-go waves without a bottleneck, using the 2008 ring-road experiment.</li>
+<li>Explain the macroscopic fundamental diagram and perimeter control, using Zurich as the example.</li>
+<li>Place congestion correctly in \(W\): delay in Term A, and the delay imposed on others as the basis of the congestion charge.</li>
+<li><em>Under the hood:</em> state the kinematic-wave model, the Intelligent Driver Model, Gipps' model, MOBIL and the cell transmission model, and summarize the three-phase debate.</li>
 </ul>
 </div>
 
-<h2>1. Three variables and one identity</h2>
-<p>Traffic on a road section is described at the macroscopic level by three variables:</p>
-<ul>
-<li><strong>flow</strong> \(q\) (vehicles per hour passing a point),</li>
-<li><strong>density</strong> \(k\) (vehicles per kilometer at an instant), and</li>
-<li><strong>space-mean speed</strong> \(v\) (km/h, averaged over the vehicles on the section).</li>
-</ul>
-<p>They are linked by the identity</p>
-$$q = k\,v .$$
-<p>The speed in this identity must be the <em>space-mean</em> speed, the harmonic mean of the spot speeds measured at a detector. The arithmetic average of spot speeds (the <em>time-mean</em> speed) is always at least as large, because fast vehicles pass a detector more often per unit time. Inductive-loop data in many countries report time-mean speeds, and using them in \(q=kv\) overestimates speed and underestimates density. In congested traffic the error is large. Single loops also measure <em>occupancy</em> (fraction of time the detector is covered) rather than density; density is then estimated as occupancy divided by an assumed effective vehicle length, which is a significant source of error with mixed car and truck traffic.</p>
-<p>At the microscopic level the corresponding quantities are the <strong>time headway</strong> \(h\) (seconds between successive vehicles at a point, \(q = 1/\bar h\)) and the <strong>spacing</strong> \(s\) (meters front-to-front, \(k = 1/\bar s\)).</p>
+<h2>1. A jam with no cause</h2>
+<div class="box story"><div class="box-title">History · Twenty-two cars on a circle</div>
+<p>In 2008 a team of Japanese physicists led by Yuki Sugiyama of Nagoya University published an unusual experiment. They placed 22 cars on a circular track 230 meters around. The drivers were asked to cruise at about 30 km/h and to follow the car ahead safely. Nothing else.</p>
+<p>At first the cars moved evenly around the circle. Then small differences in spacing appeared. They grew as they passed from car to car. After a few minutes several cars had to stop completely for a moment. A small jam of about five cars had formed. It moved backwards around the circle at roughly 20 km/h, about the speed at which jams travel on real motorways. Cars left its front and joined its back, so the jam kept its size while every car kept moving forwards.</p>
+<p>There was no lane drop, no junction and no crash. The authors concluded that "a bottleneck is only a trigger and not the essential origin of a traffic jam."</p>
+<p class="credit">Source: Y. Sugiyama et al., <a href="https://doi.org/10.1088/1367-2630/10/3/033001">"Traffic jams without bottlenecks: experimental evidence for the physical mechanism of the formation of a jam"</a>, <em>New Journal of Physics</em> 10 (2008), open access. Try it yourself on Martin Treiber's <a href="https://traffic-simulation.de/ring.html">ring-road simulation</a>.</p>
+</div>
+<p>The experiment is extreme on purpose. On real roads most queues do start at a <strong>bottleneck</strong>: a place where the road can carry less traffic than just before it, such as a lane drop, a merge, a steep grade or a junction. But the circle shows what traffic is made of. Each driver reacts to the driver ahead, a little late and a little too strongly. When cars are close together, that reaction turns a small disturbance into a wave.</p>
+<p>Two lessons run through this module. First, a queue is a physical object. It has a length, a density, and a tail that moves at a speed we can predict. Second, the place where drivers feel a delay is often far from its cause, both in space and in time. A decision maker who wants to cure a queue has to find its cause first.</p>
+<figure class="photo"><img src="../assets/img/history/boston-traffic-jam-us3-us20.jpg" width="1280" height="783" loading="lazy" alt="Black-and-white photo of a dense jam of 1940s cars approaching a bridge in Boston."><figcaption>U.S. Routes 3 and 20 in Boston, undated (the cars suggest the late 1940s). The Federal Highway Administration's history pages use the photo to show how congested city roads were when the Interstate system was planned. The jam ends where the road narrows onto the bridge. <span class="credit">Federal Highway Administration, <a href="https://highways.dot.gov/highway-history/interstate-system/designating-urban-interstates/us-route-3-and-20-boston-mass">Highway History</a>, public domain (work of the US federal government).</span></figcaption></figure>
 
-<h2>2. Fundamental diagrams</h2>
-<p>Empirically, in stationary traffic flow and density are related. The function \(q=Q(k)\) is called the <strong>fundamental diagram</strong>. Its key parameters are the free-flow speed \(v_f\), the <strong>capacity</strong> \(q_{\max}\) reached at critical density \(k_c\), and the jam density \(k_j\).</p>
+<h2>2. Three numbers that describe traffic</h2>
+<p>Engineers describe the traffic on a stretch of road with three numbers:</p>
+<ul>
+<li><strong>Flow</strong> \(q\): the number of vehicles passing a point per hour. A roadside counter measures it.</li>
+<li><strong>Density</strong> \(k\): the number of vehicles on one kilometer of road at one instant. An aerial photo shows it.</li>
+<li><strong>Speed</strong> \(v\): the average speed of the vehicles on that kilometer.</li>
+</ul>
+<p>The three are linked by one identity:</p>
+$$q = k\,v .$$
+<p>Take 20 vehicles per kilometer, moving at 100 km/h. Each hour, 20 × 100 = 2,000 vehicles pass a point. Now take 100 vehicles per kilometer, crawling at 20 km/h. Again 2,000 vehicles pass each hour. The flow is the same, but the first road is free and the second is jammed.</p>
+<p>This is the most important point of this section. A count alone does not say whether a road is congested. A traffic study that reports only volumes cannot tell a smooth road from a queue.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>Measuring flow, density and speed, and two common errors</summary>
+<p>The speed in \(q=kv\) must be the <em>space-mean</em> speed: the average over the vehicles on a stretch at one instant. At a single detector it equals the harmonic mean of the spot speeds. The arithmetic average of spot speeds, called the <em>time-mean</em> speed, is always at least as large, because fast vehicles pass a detector more often per unit of time. Many loop detectors report time-mean speeds. Using them in \(q=kv\) overestimates speed and underestimates density, and the error is large in congested traffic.</p>
+<p>Single loops also do not measure density. They measure <em>occupancy</em>, the share of time the detector is covered by a vehicle. Density is then estimated as occupancy divided by an assumed effective vehicle length. With a mix of cars and trucks, that assumed length is a significant source of error.</p>
+<p>At the level of single vehicles, the matching quantities are the <strong>time headway</strong> \(h\) (seconds between successive vehicles passing a point, so \(q = 1/\bar h\)) and the <strong>spacing</strong> \(s\) (meters from front to front, so \(k = 1/\bar s\)).</p>
+</details>
+
+<h2>3. The fundamental diagram: how much a road can carry</h2>
+<p>Put a detector on one motorway lane. Record flow and density every few minutes for a month. Then plot each pair as a point, with density across and flow up. The points form a hump. Engineers call this curve the <strong>fundamental diagram</strong>.</p>
+<p>Read it from left to right:</p>
+<ul>
+<li><strong>Few cars.</strong> Drivers travel at their desired speed, the <em>free-flow speed</em>. Each extra car adds to the flow.</li>
+<li><strong>The top of the hump.</strong> At a certain density, the <em>critical density</em>, flow reaches its maximum. This maximum is the road's <strong>capacity</strong>. A motorway lane typically carries around 1,800 to 2,200 vehicles per hour at capacity.</li>
+<li><strong>More cars.</strong> Drivers are now so close that they slow down. They slow down faster than density rises, so flow falls.</li>
+<li><strong>Jam density.</strong> Cars stand nearly bumper to bumper, and flow is zero.</li>
+</ul>
+<p>Two facts follow that matter for every planning decision. First, every flow below capacity can occur in two states: free (few cars, fast) and congested (many cars, slow). Second, capacity is a maximum, not a target. On the right side of the hump, more cars on the road means fewer cars getting through.</p>
+<p>The idea is old. Bruce Greenshields fitted the first such relation to observed traffic in 1935, assuming that speed falls in a straight line as density rises. Later work by Gordon Newell and Carlos Daganzo simplified the hump to a triangle. Its left side is a straight line at the free-flow speed. Its right side is another straight line, whose slope says that disturbances in a queue travel <em>backwards</em> at a nearly constant speed, typically 15 to 20 km/h. That is the speed of the jam on Sugiyama's circle.</p>
+<p>The diagram has limits. It counts vehicles, not people: a bus with 60 riders counts as one large vehicle. It describes a uniform road; on city streets the junctions decide how much gets through, and the relevant number is the flow a signal can discharge per hour of green (<a href="m09-junctions.html">Module 9</a>). And it serves no objective by itself. It is physics. Module 8 shows how it became the basis of a grading system that did serve one: the motorist's delay (<a href="m08-capacity-los.html">Module 8</a>).</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>Shapes of the fundamental diagram</summary>
+<p>Write \(v_f\) for the free-flow speed, \(q_{\max}\) for capacity, \(k_c\) for critical density and \(k_j\) for jam density.</p>
 <div class="table-wrap"><table>
 <tr><th>Model</th><th>Form</th><th>Comment</th></tr>
-<tr><td>Greenshields (1935)</td><td>\(v = v_f(1-k/k_j)\), so \(Q(k)=v_f k(1-k/k_j)\)</td><td>Parabolic. Historically important, but speed falls too early: real speeds stay near \(v_f\) up to quite high flows.</td></tr>
-<tr><td>Triangular (Newell; Daganzo)</td><td>\(Q(k)=\min\{v_f k,\; w\,(k_j-k)\}\)</td><td>Two straight branches. Free-flow waves travel at \(v_f\), congested waves travel <em>backwards</em> at constant speed \(w\) (typically 15–20 km/h). The workhorse of modern theory.</td></tr>
-<tr><td>With capacity drop</td><td>Discharge from a queue \(q_{\text{dis}}&lt;q_{\max}\)</td><td>The free-flow branch can reach a higher maximum than the flow discharged once a queue has formed. See §5.</td></tr>
+<tr><td>Greenshields (1935)</td><td>\(v = v_f(1-k/k_j)\), so \(Q(k)=v_f k(1-k/k_j)\)</td><td>A parabola. Historically important, but speed falls too early: real speeds stay near \(v_f\) up to quite high flows.</td></tr>
+<tr><td>Triangular (Newell; Daganzo)</td><td>\(Q(k)=\min\{v_f k,\; w\,(k_j-k)\}\)</td><td>Two straight branches. Free-flow waves travel downstream at \(v_f\); congested waves travel upstream at the constant speed \(w\). The workhorse of modern theory.</td></tr>
+<tr><td>With capacity drop</td><td>Queue discharge \(q_{\text{dis}}&lt;q_{\max}\)</td><td>The free-flow branch reaches a higher maximum than the flow discharged once a queue has formed (<a href="#bottlenecks">section 6</a>).</td></tr>
 </table></div>
-<p>Two facts about the fundamental diagram matter for planning. First, every flow below capacity can occur in two states: free-flowing (low density, high speed) and congested (high density, low speed). A detector showing 1,500 veh/h per lane says nothing about congestion until you also know the speed. Second, capacity is a <em>maximum flow</em>, not a target. On the congested branch, more vehicles on the road means less throughput.</p>
-<p>The fundamental diagram differs by facility. A motorway lane typically discharges around 1,800–2,200 veh/h. An urban street is governed by its intersections, where the relevant quantity is the <em>saturation flow</em> during green, and the link-level "fundamental diagram" largely reflects signal timing (<a href="m09-junctions.html">Module 9</a>).</p>
+<p>The congested-wave speed of the triangle follows from its corners: \(w = q_{\max}/(k_j - k_c)\). With 2,000 veh/h, 150 veh/km and 20 veh/km per lane, \(w = 2000/130 \approx 15.4\) km/h.</p>
+</details>
 
-<h2>3. Kinematic waves: the LWR model</h2>
-<p>Conservation of vehicles on a road without entrances or exits gives</p>
-$$\frac{\partial k}{\partial t} + \frac{\partial q}{\partial x} = 0 .$$
-<p>Lighthill and Whitham (1955) and Richards (1956) closed this equation by assuming that flow is always in equilibrium with density, \(q=Q(k)\). The result, the <strong>LWR model</strong>, is a first-order hyperbolic conservation law: small changes in density propagate as <em>kinematic waves</em> with speed \(Q'(k)\). On the free-flow branch waves move downstream with traffic; on the congested branch they move upstream. That is why a queue grows backwards from a bottleneck while every vehicle in it moves forwards.</p>
-<p>Where two traffic states \(1\) (upstream) and \(2\) (downstream) meet, the boundary is a <strong>shockwave</strong>. Conservation across the boundary gives its speed:</p>
+<h2>4. Why queues grow backwards</h2>
+<p>Picture the tail of a queue upstream of a lane closure. Cars arrive at the tail from upstream. Cars leave at the front, at the rate the closure lets through. If more cars arrive than leave, the queue gains cars and its tail moves upstream, towards the arriving traffic. Every car in it still moves forwards, slowly.</p>
+<p>How fast does the tail move? It depends on two numbers. The first is how many more cars arrive per hour than leave. The second is how many more cars per kilometer the queue packs than the free traffic arriving at it. Divide the first by the second, and you get the speed of the tail in kilometers per hour. Engineers call such a moving boundary between two traffic states a <strong>shockwave</strong>. For an upstream state 1 and a downstream state 2:</p>
 $$w_{12} = \frac{q_2 - q_1}{k_2 - k_1}.$$
-<p>Graphically, \(w_{12}\) is the slope of the chord joining the two states on the fundamental diagram. Newell's simplified kinematic wave theory (1993) shows that, with a triangular diagram, the whole LWR solution can be computed from cumulative counts at the boundaries. This is the theoretical basis of the cumulative-curve method in §4.</p>
+<p>A negative result means the boundary moves upstream.</p>
+<p>The theory came from rivers. In 1955 the British applied mathematicians James Lighthill and Gerald Whitham published two papers on "kinematic waves". The first was about flood waves in long rivers. The second applied the same mathematics to "long crowded roads". The American Paul Richards found the same result independently in 1956. Engineers call it the <strong>LWR model</strong>, after the three of them. By December 1959 the new field was large enough for General Motors' research laboratories in Warren, Michigan, to host the first international symposium on the theory of traffic flow.</p>
 
-<h3>Worked example: a lane closure on a three-lane motorway</h3>
-<p>Assume a triangular diagram per lane with \(v_f=100\) km/h, capacity 2,000 veh/h and jam density 150 veh/km. Critical density is \(k_c=20\) veh/km and the congested-wave speed is \(w=-2000/(150-20)\approx-15.4\) km/h. A road-works lane closure reduces a three-lane motorway to two lanes, a bottleneck of capacity \(C=4{,}000\) veh/h. Upstream demand is 5,000 veh/h for 45 minutes, then falls to 3,000 veh/h.</p>
+<div class="box exercise">
+<div class="box-title">Worked example · A lane closure on a three-lane motorway</div>
+<p>Road works close one lane of a three-lane motorway. The remaining two lanes form a bottleneck with a capacity of 4,000 vehicles per hour. Upstream demand is 5,000 vehicles per hour for 45 minutes, then falls to 3,000. Each lane follows a triangular diagram with a free-flow speed of 100 km/h, a capacity of 2,000 vehicles per hour and a jam density of 150 vehicles per km.</p>
 <ol>
-<li><strong>Arriving state A</strong> (three lanes, free flow): \(q_A=5000\), \(k_A=5000/100=50\) veh/km.</li>
-<li><strong>Queue state Q</strong> (three lanes, congested branch, discharging at 4,000 veh/h): the congested branch for three lanes is \(q = 15.4\,(450-k)\), so \(k_Q = 450-4000/15.4 \approx 190\) veh/km. Speed in the queue \(=4000/190\approx 21\) km/h.</li>
-<li><strong>Shock between A and Q</strong>: \(w_{AQ}=(4000-5000)/(190-50)\approx -7.1\) km/h. The tail of the queue moves upstream at about 7 km/h. After 45 minutes it is \(0.75\times7.1\approx5.4\) km long.</li>
-<li><strong>After demand falls</strong> (state D: \(q_D=3000\), \(k_D=30\)): \(w_{DQ}=(4000-3000)/(190-30)\approx+6.3\) km/h. The tail now moves <em>downstream</em> and reaches the bottleneck after \(5.4/6.3\approx0.86\) h, about 51 minutes. The queue exists for about 96 minutes in total.</li>
+<li><strong>Arriving traffic</strong> (three lanes, free): 5,000 veh/h at 100 km/h, so the density is 5000/100 = 50 veh/km.</li>
+<li><strong>The queue</strong> (three lanes, congested, discharging 4,000 veh/h): the congested branch of the diagram gives a density of about 190 veh/km. The speed in the queue is 4000/190 ≈ 21 km/h.</li>
+<li><strong>The tail</strong>: \(w = (4000-5000)/(190-50) \approx -7.1\) km/h. The tail moves upstream at about 7 km/h. After 45 minutes the queue is \(0.75\times7.1\approx5.4\) km long.</li>
+<li><strong>After demand falls</strong> (3,000 veh/h at 30 veh/km): \(w=(4000-3000)/(190-30)\approx+6.3\) km/h. The tail now moves <em>downstream</em> and reaches the closure after \(5.4/6.3\approx0.86\) h, about 51 minutes. The queue exists for about 96 minutes in total.</li>
 </ol>
-<p>Note what a detector 3 km upstream of the bottleneck sees: free flow at 100 km/h until the tail passes it (about 25 minutes after onset), then 21 km/h, then free flow again when the receding tail passes. The speed drop arrives at the detector long after the cause started, and lasts much shorter than the queue does. Detector data are a time-and-space sample of a moving object.</p>
+</div>
+<p>Now look at what a detector 3 km upstream of the closure sees. It sees free traffic at 100 km/h until the tail passes it, about 25 minutes after the queue began. Then it sees 21 km/h. Later it sees free traffic again when the tail recedes past it. The slowdown arrives at the detector long after its cause began, and it lasts far shorter than the queue does. Detector data are samples of a moving object.</p>
 
-<h2>4. Cumulative curves and delay</h2>
-<p>Let \(A(t)\) be the cumulative number of vehicles that would have reached the bottleneck by time \(t\) in free flow, and \(D(t)\) the cumulative number that have actually passed it. These are <strong>N-curves</strong> (cumulative curves). The vertical distance \(A(t)-D(t)\) is the number of vehicles in the queue (in excess of free-flow occupancy). The horizontal distance is the delay of an individual vehicle under first-in-first-out. The area between the curves is the <strong>total delay</strong>.</p>
-<p>For the example, treating the bottleneck as a point queue: excess arrivals are \((5000-4000)\times0.75=750\) vehicles. After demand falls, the queue shrinks at 1,000 veh/h and is gone 0.75 h later, 90 minutes after onset. The area of the triangle is</p>
-$$\text{total delay} = \tfrac12 \times 750\ \text{veh}\times 1.5\ \text{h} \approx 560\ \text{vehicle-hours}.$$
-<p>The point queue says 90 minutes and LWR said 96. The difference arises because the demand drop was defined at different places: at the bottleneck in the point-queue model, and at the queue tail, 5.4 km upstream, in the LWR calculation. Differences of this kind between point queues and physical queues are exactly what the Japanese verification protocol in <a href="m10-simulation-validation.html">Module 10</a> asks every simulation model to demonstrate.</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>The LWR model, the shockwave formula and Newell's shortcut</summary>
+<p>Vehicles are neither created nor destroyed on a road without entrances or exits. On a short stretch, density rises exactly as fast as more vehicles flow in at one end than out at the other. In the limit this gives the conservation law</p>
+$$\frac{\partial k}{\partial t} + \frac{\partial q}{\partial x} = 0 .$$
+<p>Lighthill, Whitham and Richards closed it by assuming that flow is always in equilibrium with density, \(q=Q(k)\), the fundamental diagram. The result is a first-order hyperbolic conservation law. Small changes in density travel as <em>kinematic waves</em> at the speed \(Q'(k)\), the slope of the diagram. On the free-flow branch the slope is positive, so waves move downstream. On the congested branch it is negative, so waves move upstream.</p>
+<p>Where two states meet, conservation across the moving boundary gives the shockwave speed \(w_{12} = (q_2 - q_1)/(k_2 - k_1)\). On the fundamental diagram it is the slope of the straight line joining the two states.</p>
+<p>In the worked example, three lanes have a jam density of 450 veh/km and a congested-wave speed of 15.4 km/h, so the congested branch is \(q = 15.4\,(450-k)\). Setting \(q=4000\) gives \(k_Q = 450-4000/15.4 \approx 190\) veh/km.</p>
+<p>Gordon Newell (1993) showed that with a triangular diagram the whole LWR solution can be computed from cumulative vehicle counts at the boundaries of a road section. That result is the theoretical basis of the cumulative curves in the next section.</p>
+</details>
+
+<h2>5. Counting the delay: cumulative curves</h2>
+<p>How much time does the queue cost? A simple picture answers this. Imagine two counters. The first counts the cars that <em>would</em> reach the closure if there were no queue. The second counts the cars that actually pass the closure. Plot both running totals against the clock. Engineers call these lines <strong>cumulative curves</strong> or N-curves.</p>
+<ul>
+<li>The <em>vertical</em> gap between the two lines is the number of cars waiting in the queue.</li>
+<li>The <em>horizontal</em> gap is the delay of one car, if cars leave in the order they arrived.</li>
+<li>The <em>area</em> between the lines is the total delay of all cars.</li>
+</ul>
+<p>In the example, for 45 minutes, 5,000 cars arrive per hour but only 4,000 leave. So the queue holds \((5000-4000)\times0.75=750\) extra cars when demand falls. Then 3,000 arrive and 4,000 leave per hour, so the queue shrinks by 1,000 per hour and is gone 45 minutes later. The area between the curves is a triangle:</p>
+$$\text{total delay} = \tfrac12 \times 750\ \text{vehicles}\times 1.5\ \text{h} \approx 560\ \text{vehicle-hours}.$$
+<p>This simple model treats the queue as if it sat at a single point, and says the queue lasts 90 minutes. The shockwave calculation said 96. The difference arises because the drop in demand reaches the closure at once in the point model, but reaches the tail of the real queue, 5.4 km upstream, first. Differences of this kind between "point queues" and physical queues are exactly what Japan's verification protocol asks every simulation model to demonstrate (<a href="m10-simulation-validation.html">Module 10</a>).</p>
 <div class="box note">
-<div class="box-title">The welfare reading of an N-curve</div>
-<p>Valued at, say, €15 per vehicle-hour, the incident costs about €8,400 in travel time, all of which appears in Term A as lost consumer surplus. The N-curve also shows who imposes it. A vehicle arriving at the start of the queue delays each of the roughly 6,000 vehicles that pass the bottleneck before the queue clears by \(1/C\) hours, about 0.9 seconds each. Its external delay is therefore about \(6000/4000=1.5\) vehicle-hours, the remaining life of the queue. That is the external congestion cost in Term C (§10).</p>
+<div class="box-title">The welfare reading of a cumulative curve</div>
+<p>At €15 per vehicle-hour, the closure costs about €8,400 in lost time. All of it appears in Term A, because Term A is computed from everyone's travel times as they actually are, queue included (<a href="m01-objective.html#term-c">Module 1, "Where is congestion?"</a>).</p>
+<p>The curves also show who causes the delay. Take one car arriving just as the queue starts. About 6,000 cars pass the closure before the queue clears, and the extra car delays each of them by the time it takes to pass, \(1/4000\) of an hour, about 0.9 seconds. Its delay to others is therefore \(6000/4000=1.5\) vehicle-hours, the remaining life of the queue. At €15 per hour that is about €22. This delay is <em>already inside</em> the 560 vehicle-hours in Term A. It is not a further loss. It is the basis of the right <strong>congestion charge</strong> for that car at that moment (<a href="#welfare">section 9</a>, <a href="m13-pricing.html">Module 13</a>).</p>
 </div>
 
-<h2>5. Bottlenecks and capacity drop</h2>
-<p>A bottleneck is any location where capacity falls: a lane drop, an on-ramp merge, a weaving section, an uphill grade or sag, a tunnel entrance, a work zone. Detailed observations at freeway bottlenecks (for example Cassidy &amp; Bertini, 1999) found that once a queue forms upstream, the discharge flow is lower than the maximum flows observed just before breakdown. Reported drops are typically of the order of a few percent to about 15–20%, varying by site. This <strong>capacity drop</strong> has two consequences:</p>
-<ul>
-<li><strong>Breakdown is costly beyond the excess demand.</strong> In the example, a 10% drop in discharge (from 4,000 to 3,600 veh/h) raises the excess to 1,050 vehicles, the queue lasts 1.75 h after the peak instead of 0.75 h, and total delay rises from about 560 to about 1,300 vehicle-hours. A small loss of capacity more than doubles the welfare loss.</li>
-<li><strong>Keeping flow just below capacity can raise throughput.</strong> Ramp metering and variable speed limits try to prevent breakdown. This is one of the few active-control instruments whose benefit has a solid physical basis.</li>
-</ul>
-<p>Breakdown is also <em>probabilistic</em>: the same flow can be stable on one day and break down on another. German research (Brilon and colleagues) therefore treats capacity as a random variable with a distribution, rather than a single number. That idea matters for <a href="m08-capacity-los.html">Module 8</a>.</p>
+<h2 id="bottlenecks">6. Bottlenecks: capacity drop, the useless extra lane, and metering</h2>
+<p>A bottleneck is any place where capacity falls: a lane drop, an on-ramp merge, a section where cars must change lanes across each other, an uphill grade or a dip, a tunnel entrance, a work zone, a signalized junction. Three facts about bottlenecks matter more for decisions than anything else in this module.</p>
 
-<h2>6. Car-following models</h2>
-<p>Microscopic simulators move each vehicle by a car-following rule. Two are standard references.</p>
-<h3>The Intelligent Driver Model (IDM)</h3>
-<p>Treiber, Hennecke and Helbing (2000) proposed an acceleration function that is smooth, collision-free and has interpretable parameters:</p>
+<h3>A road delivers what its bottleneck lets through</h3>
+<p>Go back to the lane closure and add a fourth lane upstream of it, all the way back. Does that help? The closure still lets through 4,000 cars per hour. The same cars arrive at the same times, and they pass the closure at the same rate. So the two cumulative curves do not change, and neither does the area between them. Total delay stays at about 560 vehicle-hours.</p>
+<p>What does change is the shape of the queue. Four lanes store more cars per kilometer than three, so the queue is shorter: its tail moves upstream at about 3.4 km/h instead of 7.1, and after 45 minutes it is about 2.6 km long instead of 5.4. The jam looks smaller on a traffic map. No driver arrives earlier. And the wider queue must now squeeze from four lanes into two at the closure, which can make the merge worse.</p>
+<p>The same holds for any widening upstream of a bridge, a tunnel or a busy junction that stays as it is. It moves the queue. It does not remove the delay. Widening the bottleneck itself does help, until demand grows into the new space (<a href="m05-accessibility-land-use.html">Module 5</a>) or the queue moves to the next bottleneck downstream.</p>
+
+<h3>Capacity drops once a queue forms</h3>
+<p>Careful observations at freeway bottlenecks, for example by Michael Cassidy and Robert Bertini (1999), found that the flow leaving a queue is lower than the highest flows seen just before the queue formed. Reported drops range from a few percent to about 15–20%, varying by site. A common explanation is that drivers accelerating out of a queue leave longer gaps than drivers who were cruising before it formed. This <strong>capacity drop</strong> makes a breakdown expensive.</p>
+<p>In the worked example, suppose the closure discharges 10% less once the queue forms: 3,600 instead of 4,000 cars per hour. The queue then gains 1,400 cars per hour instead of 1,000, and holds 1,050 cars when demand falls. Afterwards it shrinks by only 600 per hour, so it lasts another 1.75 hours instead of 45 minutes. Total delay rises from about 560 to about \(\tfrac12\times1050\times2.5\approx1{,}300\) vehicle-hours. A 10% loss of capacity more than doubles the delay.</p>
+<p>Breakdown is also a matter of chance. The same flow can run smoothly on one day and break down on the next. German researchers, notably Werner Brilon and colleagues at Bochum, therefore treat capacity as a random number with a probability distribution rather than a fixed value. German capacity practice builds on this idea (<a href="m08-capacity-los.html">Module 8</a>).</p>
+
+<h3>Keeping a bottleneck just below breakdown</h3>
+<p>If a breakdown costs capacity, preventing it gains capacity. This is the physical case for <strong>ramp meters</strong>: traffic signals on motorway on-ramps that release cars one or two at a time, so that the merge stays just below breakdown. Variable speed limits that smooth traffic approaching a bottleneck follow the same logic. Few active traffic controls have so solid a physical basis.</p>
+<div class="box story"><div class="box-title">History · Minnesota switches its meters off</div>
+<p>Minnesota's transport department first tested ramp meters in 1969. By 2000 about 430 of them managed the freeways of Minneapolis–Saint Paul, and some members of the public had begun to question whether the waits at the ramps were worth it. The state legislature responded with an unusual law: switch the meters off and measure what happens. In the autumn of 2000, the department measured traffic for several weeks with meters on, then for several weeks with all of them dark.</p>
+<p>Without meters, the waits at the ramps disappeared. But freeway travel times on the test corridors rose by 22%, freeway throughput in peak conditions fell by 14%, travel times became far less predictable, and peak-period crashes on the previously metered freeways and ramps rose by 26%, after adjusting for the season. The consultants estimated the meters' net benefit at $32–37 million a year. They also found one cost: with meters, cars burned more fuel, about 5.5 million gallons a year. The meters came back, and many travelers asked for shorter waits at the ramps.</p>
+<p class="credit">Source: Cambridge Systematics, <a href="https://www.dot.state.mn.us/rampmeter/pdf/finalreport/9.pdf"><em>Twin Cities Ramp Meter Evaluation</em>, final report, chapter 9</a> (Minnesota Department of Transportation, February 2001); background in <a href="https://www.dot.state.mn.us/rampmeter/pdf/finalreport/1.pdf">chapter 1</a>.</p>
+</div>
+<p>Metering moves the queue from the motorway, where it blocks everyone, to the ramps, where it blocks only those entering. That is its strength and its political weakness. The people who wait at the ramp are visible and local. The people who gain on the motorway are many and diffuse. Metering also does not reduce demand. If more people want to drive than the bottleneck can carry, the queue has to be somewhere. Only pricing, other modes or other destinations change that (<a href="m13-pricing.html">Module 13</a>).</p>
+
+<h2>7. Stop-and-go waves and the drivers who make them</h2>
+<p>Return to Sugiyama's circle. Why did a small disturbance grow? Each driver reacts to the car ahead with a delay of about a second, and tends to brake a little harder than the car ahead did. When cars are far apart, the extra braking dies out along the line. When they are close, it grows from driver to driver. Engineers call a line of vehicles <strong>string unstable</strong> when a small speed change by one driver grows as it passes back through the line. On motorways, string instability produces stop-and-go waves that travel upstream at roughly 15–20 km/h, often long after and far from any bottleneck.</p>
+<p>The rules by which simulated drivers follow each other are called <strong>car-following models</strong>. Every microscopic simulator, which moves each vehicle separately, contains one (<a href="m10-simulation-validation.html">Module 10</a>). The two most important parameters are easy to state in words. The first is the time gap a driver keeps to the car ahead. The second is how hard drivers accelerate and brake. Short gaps raise capacity: halving the time gap almost doubles the flow a lane can carry. Short gaps combined with gentle acceleration make waves more likely.</p>
+<p>Two practical lessons follow. First, a simulator calibrated only to match counts can still be wrong about waves, and therefore about how reliable travel times are. Reliability has a value of its own (<a href="m02-valuing-access.html">Module 2</a>). Second, string stability is now a design requirement for adaptive cruise control and automated vehicles. The same equations decide whether a fleet of automated cars damps waves or amplifies them.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>Car-following and lane-changing models: IDM, Gipps, MOBIL</summary>
+<h4>The Intelligent Driver Model (IDM)</h4>
+<p>Martin Treiber, Ansgar Hennecke and Dirk Helbing (2000) proposed an acceleration rule that is smooth, free of collisions and has parameters with a plain meaning:</p>
 $$\dot v = a\left[1-\left(\frac{v}{v_0}\right)^{\delta}-\left(\frac{s^*(v,\Delta v)}{s}\right)^2\right],\qquad
-s^*(v,\Delta v)= s_0 + vT + \frac{v\,\Delta v}{2\sqrt{ab}} ,$$
-<p>where \(v_0\) is the desired speed, \(T\) the desired time gap, \(s_0\) the minimum standstill gap, \(a\) the maximum acceleration, \(b\) the comfortable deceleration, \(\delta\) an exponent (usually 4), \(s\) the actual gap and \(\Delta v\) the approach rate to the leader. Typical motorway values are \(v_0=120\) km/h, \(T=1.5\) s, \(s_0=2\) m, \(a=1\) m/s², \(b=1.5\) m/s². In equilibrium (\(\dot v=0\), \(\Delta v=0\)) the IDM implies a fundamental diagram, and capacity depends mainly on \(T\) and vehicle length: halving \(T\) almost doubles capacity. This is why calibrating time gaps is the first lever when a simulator's bottleneck capacity is wrong.</p>
-<h3>Gipps' model</h3>
-<p>Gipps (1981) chooses the speed for the next reaction-time step \(\tau\) as the minimum of a free-acceleration speed and the largest speed from which the driver could stop safely if the leader braked hard:</p>
+s^*(v,\Delta v)= s_0 + vT + \frac{v\,\Delta v}{2\sqrt{ab}} .$$
+<p>Here \(v_0\) is the desired speed, \(T\) the desired time gap, \(s_0\) the minimum gap at standstill, \(a\) the maximum acceleration, \(b\) the comfortable deceleration, \(\delta\) an exponent (usually 4), \(s\) the actual gap and \(\Delta v\) the speed at which the driver approaches the leader. Typical motorway values are \(v_0=120\) km/h, \(T=1.5\) s, \(s_0=2\) m, \(a=1\) m/s² and \(b=1.5\) m/s². In equilibrium (\(\dot v=0\), \(\Delta v=0\)) the IDM implies a fundamental diagram. Its capacity depends mainly on \(T\) and vehicle length, which is why time gaps are the first parameter to calibrate when a simulator's bottleneck capacity is wrong. Its stability depends on \(a\), \(b\) and \(T\).</p>
+<h4>Gipps' model</h4>
+<p>Peter Gipps (1981) chooses the speed for the next reaction-time step \(\tau\) as the smaller of two speeds: a free-acceleration speed, and the largest speed from which the driver could still stop safely if the leader braked hard:</p>
 $$v_n(t+\tau)=\min\Big\{v_n+2.5a_n\tau\big(1-\tfrac{v_n}{V_n}\big)\sqrt{0.025+\tfrac{v_n}{V_n}},\;\; b_n\tau+\sqrt{b_n^2\tau^2-b_n\big[2(x_{n-1}-S_{n-1}-x_n)-v_n\tau-\tfrac{v_{n-1}^2}{\hat b}\big]}\Big\}$$
-<p>with \(b_n&lt;0\) the driver's maximum deceleration, \(\hat b\) the driver's estimate of the leader's, \(V_n\) the desired speed and \(S_{n-1}\) the leader's effective length. Gipps-type safe-speed logic underlies several commercial simulators. SUMO's default car-following model is a Krauss model, a stochastic relative of this safe-speed idea.</p>
+<p>with \(b_n&lt;0\) the driver's maximum deceleration, \(\hat b\) the driver's estimate of the leader's, \(V_n\) the desired speed and \(S_{n-1}\) the leader's effective length. Safe-speed logic of this kind underlies several commercial simulators. The default car-following model of the open-source simulator SUMO is a Krauss model, a stochastic relative of the same idea.</p>
+<h4>Lane changing: MOBIL</h4>
+<p>Arne Kesting, Martin Treiber and Dirk Helbing (2007) proposed MOBIL ("minimizing overall braking induced by lane changes"). A driver \(c\) changes lane if the change is safe for the new follower \(n\), meaning \(\tilde a_n \ge -b_{\text{safe}}\), and if it is worth it after counting part of the disadvantage it causes others:</p>
+$$\tilde a_c - a_c + p\,\big[(\tilde a_n - a_n) + (\tilde a_o - a_o)\big] &gt; \Delta a_{\text{th}} .$$
+<p>Tildes mark accelerations after the change, \(o\) is the old follower, \(p\in[0,1]\) a <em>politeness factor</em> and \(\Delta a_{\text{th}}\) a threshold that prevents constant switching. With \(p=0\) drivers are selfish. With \(p=1\) a driver changes lane only if total acceleration in the neighborhood rises. MOBIL is a small behavioral model with its own small welfare function: a "polite" population takes part of its effect on others into account.</p>
+</details>
 
-<h3>Lane changing: MOBIL</h3>
-<p>Kesting, Treiber and Helbing (2007) proposed MOBIL ("minimizing overall braking induced by lane changes"). A driver \(c\) changes lane if the change is safe for the new follower \(n\), \(\tilde a_n \ge -b_{\text{safe}}\), and if it is worth it, counting part of the disadvantage it causes others:</p>
-$$\tilde a_c - a_c + p\,\big[(\tilde a_n - a_n) + (\tilde a_o - a_o)\big] &gt; \Delta a_{\text{th}} ,$$
-<p>where tildes denote accelerations after the change, \(o\) is the old follower, \(p\in[0,1]\) is a <em>politeness factor</em> and \(\Delta a_{\text{th}}\) a threshold that prevents frantic switching. With \(p=0\) drivers are selfish; with \(p=1\) a driver changes lane only if total acceleration in the neighborhood rises. MOBIL is an unusually clean example of a behavioral model that contains its own small welfare function. A "polite" population internalizes part of its external effect.</p>
+<h2>8. Whole cities: the macroscopic fundamental diagram and Zurich</h2>
+<p>A single road has a capacity. Does a whole city center? In 2007 Carlos Daganzo at Berkeley argued that a neighborhood behaves like a bathtub. Cars flow in, and trips end at a rate that depends on how many cars are inside. In 2008 Nikolas Geroliminis and Daganzo tested the idea with loop detectors and taxi GPS data from Yokohama in Japan. They found a clear relation between the average density of cars in the network and the rate at which the network moved them. They called it the <strong>macroscopic fundamental diagram</strong> (MFD).</p>
+<p>Like the diagram for one lane, it rises to a maximum and then falls. Past a critical number of cars, adding more makes the whole network finish <em>fewer</em> trips per hour. The reason is spillback: queues from one junction reach back into the junction behind, and block traffic that wanted to go elsewhere. At the extreme this is gridlock.</p>
+<p>The MFD justifies <strong>perimeter control</strong>, also called gating. Signals at the edge of a protected area hold cars back when the area is near its critical point. Queues form at the edge, where they block only the cars entering, instead of inside, where they block everyone.</p>
+<p>Zurich built such a system before the theory existed. Since 2007 the city has monitored the flow on about 23 roads in a city center of roughly 2.6 square kilometers. When the center fills up, signals on the main roads leading in, some of them more than 5 km away, shorten their green times by about 5–20%. A second layer, close to or inside the center, cuts green times by a third or by half once flows inside reach about 95% of their expected maximum. Trams and buses get priority at the city's signals. A 2018 study by Lukas Ambühl, Allister Loder, Monica Menendez and Kay Axhausen at ETH Zurich used the MFD to evaluate the system with data from loop detectors across the city, and found that it performs well. The authors note that the city "planned and implemented the current system before the concept of the MFD was even formulated."</p>
+<p>In welfare terms, gating rations a scarce resource, space in the center, by waiting time at the edge. A congestion charge rations it by price (<a href="m13-pricing.html">Module 13</a>). Waiting is a pure loss, while a charge is a transfer that returns as public revenue, so pricing can do the same job at lower cost. Gating, though, needs no new law and works within months. The MFD also has limits. It is well-defined only when congestion is spread fairly evenly across the area. It traces different paths while congestion builds up and while it clears. And like every diagram in this module, it counts vehicles, not people.</p>
 
-<h2>7. Stability and stop-and-go waves</h2>
-<p>A platoon of vehicles is <strong>string unstable</strong> if a small speed perturbation by one driver is amplified as it passes back through the platoon. Instability produces stop-and-go waves that travel upstream at roughly 15–20 km/h with no fixed bottleneck. Sugiyama and colleagues (2008) demonstrated this with 22 cars on a 230 m circular track in Japan: a jam formed spontaneously and traveled backwards around the circle. In IDM, stability depends on \(a\), \(b\) and \(T\). Low acceleration and short time gaps make waves more likely. You can reproduce the experiment on Treiber's <a href="https://traffic-simulation.de/ring.html">ring-road simulation</a>.</p>
-<p>Two practical lessons follow. First, a simulator calibrated only to flows can still be wrong about waves and therefore about travel-time variability, which enters \(V_{nj}\) through reliability. Second, string stability is now a design requirement for adaptive cruise control and automated vehicles: the same equations govern whether a fleet of automated vehicles dampens or amplifies waves.</p>
-
-<h2>8. From cells to networks: CTM and the MFD</h2>
-<h3>The cell transmission model</h3>
-<p>Daganzo (1994) discretized LWR with a triangular diagram into the <strong>cell transmission model (CTM)</strong>. The road is split into cells of length \(v_f\Delta t\). In each time step, the flow from cell \(i\) to \(i+1\) is the minimum of what \(i\) can <em>send</em> and what \(i+1\) can <em>receive</em>:</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>The cell transmission model</summary>
+<p>Carlos Daganzo (1994) turned the LWR model into a computer recipe, the <strong>cell transmission model</strong> (CTM). The road is cut into cells of length \(v_f\Delta t\), the distance a free car travels in one time step. In each step, the number of vehicles moving from cell \(i\) to cell \(i+1\) is the smallest of three numbers: what cell \(i\) can <em>send</em>, what the road can carry, and what cell \(i+1\) can <em>receive</em>:</p>
 $$y_i = \min\big\{\,v_f k_i\,,\; q_{\max}\,,\; w\,(k_j - k_{i+1})\,\big\}\Delta t .$$
-<p>This "sending and receiving" (demand and supply) principle extends naturally to merges and diverges and underlies many mesoscopic simulators and dynamic traffic assignment (<a href="m04-demand-mode-choice.html">Module 4</a>). It reproduces queues, spillback and shockwaves at a fraction of the cost of microsimulation, but not stop-and-go waves or capacity drop unless extended.</p>
-<h3>The macroscopic fundamental diagram</h3>
-<p>Daganzo (2007) argued that a whole urban neighborhood behaves like a reservoir with an outflow that depends on the vehicles inside it. Geroliminis and Daganzo (2008), using loop-detector and taxi GPS data from Yokohama, found a well-defined relation between average network density and average network flow: the <strong>macroscopic fundamental diagram (MFD)</strong>. Like a link-level diagram, it rises to a maximum and then falls. Past the critical accumulation, adding vehicles to the network <em>reduces</em> the rate at which trips are completed, because queues spill back and block intersections (gridlock).</p>
-<p>The MFD justifies <strong>perimeter control</strong> (gating): hold vehicles at the boundary of a protected region, for example with longer red times on inbound signals, so that the accumulation inside stays near the critical value. Keyvan-Ekbatani and colleagues (2012) designed a simple feedback controller for this. Gating moves queues from places where they block everyone to places where they block only those entering. In welfare terms it is a quantity-based way of internalizing the congestion externality, a cousin of the congestion charge in <a href="m13-pricing.html">Module 13</a>. The MFD is well-defined only for reasonably homogeneous congestion, and it shows hysteresis during onset and recovery.</p>
+<p>This "sending and receiving" principle extends naturally to merges and diverges. It underlies many mesoscopic simulators and dynamic traffic assignment (<a href="m04-demand-mode-choice.html">Module 4</a>). It reproduces queues, spillback and shockwaves at a fraction of the computing cost of microsimulation. Without extensions it reproduces neither stop-and-go waves nor capacity drop. Network versions of the CTM are a common way to design perimeter controllers; Mehdi Keyvan-Ekbatani and colleagues (2012) designed a simple feedback gating controller from the MFD.</p>
+</details>
 
-<h2>9. Rival theories and other traffic</h2>
-<h3>Kerner's three-phase theory</h3>
-<p>Boris Kerner, working largely from German motorway data, argued that traffic has three phases rather than two: <strong>free flow</strong> (F), <strong>synchronised flow</strong> (S: congested but moving, with speeds similar across lanes) and <strong>wide moving jams</strong> (J). In his account, breakdown is an F→S transition that can occur over a range of flows, and synchronised flow covers a two-dimensional region of the flow–density plane rather than a curve. Kerner and his followers argue that models built on a fundamental diagram cannot reproduce these features. Treiber, Kesting and Helbing (2010) replied that two-phase models with a fundamental diagram plus stochasticity or driver heterogeneity reproduce the same "stylised facts". The debate is unresolved and partly about definitions. Chinese researchers have recently applied three-phase concepts to expressway data (for example Chen et al., 2024). For practice the lesson is modest but real: heavy, slow-but-moving traffic and a full breakdown are different states, and a model that confuses them will misestimate delay.</p>
-<h3>Heterogeneous traffic without lanes</h3>
-<p>Lane-based car-following assumes that vehicles occupy discrete lanes and follow one leader. In much of South and Southeast Asia, motorcycles, auto-rickshaws, cars, buses and bicycles share the road without lane discipline. Indian research has responded with dynamic passenger-car-unit factors (the Indian Highway Capacity Manual, Indo-HCM, published by CSIR-CRRI in 2017) and with "area-based" microscopic models in which each vehicle chooses a lateral position and a gap in two dimensions (for example Sarkar, Bhaskar, Zheng and Miska, 2020). The problem is not only Asian: cyclists filtering past queues, e-scooters and delivery vehicles in European cities pose the same modeling difficulty, and a lane-based model will misplace their delay and their exposure to conflicts.</p>
+<h2 id="welfare">9. What congestion costs, and where it is counted</h2>
+<p><a href="m01-objective.html#term-c">Module 1</a> settled where congestion belongs in the welfare function. Here is the short version, with the physics of this module added.</p>
+<p>Term A is computed from the travel times that people actually experience, with all the traffic on the road. A queue therefore lowers Term A by the full delay of everyone in it, including the delay that each driver imposes on the others. That delay must not be subtracted a second time in Term C. Only if a model holds travel times fixed must the delay to others be added separately, and never both.</p>
+<p>The delay a driver imposes on others still matters, for a different reason. Let \(t(q)\) be the average travel time on a link with flow \(q\). Total travel time is \(q\,t(q)\). One more vehicle adds</p>
+$$\frac{d\,[q\,t(q)]}{dq} = \underbrace{t(q)}_{\text{felt by the new driver}} + \underbrace{q\,t'(q)}_{\text{imposed on everyone else}} .$$
+<p>The new driver weighs only the first part. The second part, the <strong>external congestion cost</strong>, is ignored. That is why too many people drive at the peak, and it sets the right <strong>congestion charge</strong>: a charge equal to the money value of \(q\,t'(q)\) makes each driver weigh it (<a href="m13-pricing.html">Module 13</a>).</p>
+<p>With the US Bureau of Public Roads link function, \(t=t_0[1+0.15(q/C)^4]\), where \(t_0\) is the free-flow time and \(C\) the capacity, the delay to others is \(q\,t'(q)=0.6\,t_0(q/C)^4\). At half capacity it is about 4% of the free-flow time. At 90% of capacity it is about 39%. At a bottleneck with a queue, section 5 showed it equals the remaining life of the queue, often far more than the new driver's own delay. <a href="m01-objective.html#term-c">Module 1</a> plots this curve.</p>
+<p>Two conclusions follow.</p>
+<ol>
+<li><strong>Time is lost in queues.</strong> Almost all of the delay drivers impose on each other arises in a few hours at a few bottlenecks and junctions. Away from capacity, \(t'(q)\approx0\). A citywide average "congestion index" hides this concentration.</li>
+<li><strong>Delay removed is not the same as welfare gained.</strong> Adding capacity at a bottleneck removes the queue only if demand stays fixed. If new trips come, traffic again settles on the steep part of \(t(q)\). The gain in Term A is then the value of the extra trips, not the vanished delay. A congestion charge removes the excess by deterring the trips worth less than the delay they impose, without taking land (Term D) or public money (Term E).</li>
+</ol>
+<p>The classic engineering objective, to minimize total vehicle-hours \(\sum_a q_a t_a\) on all links \(a\), counts every driver's delay, including the delay each imposes on the others. It is the time part of Term A when demand is held fixed. It leaves out every other term, and it assumes that no one changes their trip when the network changes. The physics of this module tells you where the queues are. Only the demand models of <a href="m04-demand-mode-choice.html">Module 4</a> tell you what happens when you remove them.</p>
+
+<div class="box caution">
+<div class="box-title">Caution: what a flow model does not measure</div>
+<p>Higher speeds after a queue is removed raise crash severity and noise, and above roughly 70–90 km/h they raise fuel use per kilometer for cars. A traffic-flow model sees the time saving, not these costs in Term C. Nor does it see the pedestrian who must now cross a wider, faster road. Report these alongside any delay result.</p>
+</div>
+
+<h2>10. Where the models fail, and what other traditions do</h2>
+<p>Everything above comes from one tradition: the kinematic-wave theory of Lighthill, Whitham and Richards, refined mainly in the United States, the Netherlands and Germany. It assumes that traffic flows in lanes, that drivers are broadly alike, and that speed settles to a value set by density. Each assumption fails somewhere, and other traditions have responded differently.</p>
+<ul>
+<li><strong>Germany: capacity as chance.</strong> Rather than one capacity per road, German research treats breakdown as a probability that rises with flow (<a href="#bottlenecks">section 6</a>). Its practical lesson: design and operate for a low risk of breakdown, not for the maximum flow ever observed.</li>
+<li><strong>Japan: test the simulator, not just the road.</strong> The Japan Society of Traffic Engineers asks every traffic simulator to show that it reproduces a short list of basic phenomena before it is used in practice (box below and <a href="m10-simulation-validation.html">Module 10</a>).</li>
+<li><strong>India and Southeast Asia: traffic without lanes.</strong> Where motorcycles, auto-rickshaws, cars, buses and bicycles share the road without lane discipline, a model of one car following one leader does not fit. Indian researchers have developed passenger-car-unit factors that change with traffic conditions (the Indian Highway Capacity Manual, Indo-HCM, published by CSIR-CRRI in 2017) and "area-based" models in which each vehicle chooses a sideways position and a gap in two dimensions (for example Sarkar, Bhaskar, Zheng and Miska, 2020). The problem is not only Asian: cyclists filtering past queues, e-scooters and delivery vehicles in European cities pose the same difficulty. A lane-based model misplaces their delay and their exposure to conflicts.</li>
+<li><strong>A rival theory.</strong> Boris Kerner, working largely from German motorway data, argues that traffic has three phases rather than two. The debate is technical and unresolved (box below). Its practical lesson is modest but real: heavy but moving traffic and a full breakdown are different states, and a model that confuses them misestimates delay.</li>
+</ul>
 
 <div class="box translation">
 <div class="box-title">Japanese · What a simulator must reproduce</div>
 <p class="original">渋滞の延伸と解消　停止波と発進波の伝播</p>
-<p>"Growth and dissolution of congestion: propagation of stopping waves and starting waves." This is test 3 of the six basic verification tests of the Japan Society of Traffic Engineers (JSTE) for traffic simulation models. Tests 2 and 4 cover bottleneck capacity and saturation flow, and merge/diverge capacity. <em>Source: JSTE Traffic Simulation Clearinghouse, verification results page (archived January 2025). Translated by the course authors (machine-assisted).</em> The full list is in <a href="m10-simulation-validation.html">Module 10</a>.</p>
+<p>"Growth and dissolution of congestion: propagation of stopping waves and starting waves." This is test 3 of the six basic verification tests of the Japan Society of Traffic Engineers (JSTE) for traffic simulation models. Tests 2 and 4 cover bottleneck capacity and saturation flow, and merge and diverge capacity. <em>Source: JSTE Traffic Simulation Clearinghouse, verification results page (archived January 2025). Translated by the course authors (machine-assisted).</em> The full list is in <a href="m10-simulation-validation.html">Module 10</a>.</p>
 </div>
 
-<h2>10. Congestion in the welfare function</h2>
-<p>Let average travel time on a link be \(t(q)\) and total travel time \(T(q)=q\,t(q)\). The <strong>marginal</strong> time cost of one more vehicle is</p>
-$$\frac{dT}{dq} = \underbrace{t(q)}_{\text{borne by the traveler}} + \underbrace{q\,t'(q)}_{\text{imposed on others}} .$$
-<p>The first term is the <em>average</em> cost the entering traveler experiences and already counts in their choice; it lives inside \(V_{nj}\) in Term A. The second term, marginal minus average, is the <strong>external congestion cost</strong>. It belongs in Term C (<a href="m03-externalities.html">Module 3</a>), and it is the textbook basis for congestion pricing.</p>
-<p>With the US Bureau of Public Roads function \(t=t_0[1+0.15(q/C)^4]\), the external cost is \(q\,t'(q)=0.6\,t_0(q/C)^4\). At \(q/C=0.5\) it is about 4% of free-flow time, negligible. At \(q/C=0.9\) it is \(0.39\,t_0\), about 36% of the traveler's own time. At a bottleneck with a queue, §4 showed it equals the remaining lifetime of the queue, often far larger than the entering driver's own delay. Two conclusions follow:</p>
-<ol>
-<li><strong>Welfare is lost in queues.</strong> Almost all external congestion cost arises in a few hours at a few bottlenecks and junctions. Away from capacity, \(t'(q)\approx0\). A network-wide average "congestion index" hides this concentration.</li>
-<li><strong>Delay is not the same as welfare loss.</strong> Removing a queue by adding capacity removes the external cost only if demand stays fixed. If capacity induces new trips, the new equilibrium again sits on the steep part of \(t(q)\), and the welfare gain is the consumer surplus of the extra trips, not the vanished delay. A congestion price removes the externality by deterring the trips whose benefit is less than the delay they impose, without requiring land (Term D) or capital (Term E).</li>
-</ol>
-<p>The classic engineering objective, minimize total vehicle-hours \(\sum_a q_a t_a\), is in fact the <em>system optimum</em> with fixed demand. It correctly recognizes the external part of delay but values none of the other terms and assumes demand cannot respond. The physics of this module tells you where the externality is. Only the demand models of <a href="m04-demand-mode-choice.html">Module 4</a> tell you what happens when you remove it.</p>
-
-<div class="box caution">
-<div class="box-title">Caution: what a flow model does not measure</div>
-<p>Higher speeds from decongestion raise crash severity, noise and, above roughly 70–90 km/h for cars, fuel use per km. A traffic-flow model sees the time saving, not these costs in Term C. Nor does it see the pedestrian who must now cross a wider, faster road (severance). Report these alongside any delay result.</p>
-</div>
+<details class="method">
+<summary><span class="label">Under the hood</span>Kerner's three-phase theory and the reply</summary>
+<p>Boris Kerner distinguishes <strong>free flow</strong> (F), <strong>synchronized flow</strong> (S: congested but moving, with similar speeds across lanes) and <strong>wide moving jams</strong> (J). In his account, breakdown is a transition from F to S that can occur over a range of flows, and synchronized flow covers a two-dimensional region of the flow–density plane rather than a curve. Kerner and his followers argue that models built on a fundamental diagram cannot reproduce these features.</p>
+<p>Martin Treiber, Arne Kesting and Dirk Helbing (2010) replied that two-phase models with a fundamental diagram, plus randomness or differences between drivers, reproduce the same observed regularities. The debate is unresolved and partly about definitions. Chinese researchers have recently applied three-phase concepts to expressway data (for example Chen et al., 2024).</p>
+</details>
 
 <div class="box exercise">
 <div class="box-title">Exercise 7.1 · A bottleneck by hand and by simulation</div>
-<p>A two-lane urban motorway (per-lane triangular diagram: \(v_f=90\) km/h, capacity 1,900 veh/h, jam density 140 veh/km) has an on-ramp. Downstream of the merge, capacity is 3,800 veh/h. Mainline demand is 3,200 veh/h and ramp demand 900 veh/h from 07:15 to 08:00, then 2,600 and 500.</p>
+<p>A two-lane urban motorway (per-lane triangular diagram: free-flow speed 90 km/h, capacity 1,900 veh/h, jam density 140 veh/km) has an on-ramp. Downstream of the merge, capacity is 3,800 veh/h. Mainline demand is 3,200 veh/h and ramp demand 900 veh/h from 07:15 to 08:00, then 2,600 and 500.</p>
 <ol>
 <li>Find the queue state, the speed of the queue tail and the maximum queue length (ignore how the queue splits between ramp and mainline).</li>
-<li>Draw N-curves and compute total delay. Repeat with a 10% capacity drop.</li>
+<li>Draw cumulative curves and compute total delay. Repeat with a 10% capacity drop.</li>
 <li>Build the corridor on <a href="https://traffic-simulation.de/onramp.html">traffic-simulation.de</a> (on-ramp scenario) or in SUMO. Does the simulated queue tail move at the speed you predicted? If not, which IDM parameter would you change?</li>
-<li>Compute the external delay caused by one extra ramp vehicle entering at 07:30. What congestion charge (at €15/h) would internalize it?</li>
+<li>Compute the delay one extra ramp vehicle entering at 07:30 imposes on others. What congestion charge (at €15/h) would make the driver weigh it? Explain why this delay must not be added to the total delay you computed in step 2.</li>
 </ol>
 </div>
 
 <div class="box exercise">
-<div class="box-title">Exercise 7.2 · Capacity from car-following parameters</div>
+<div class="box-title">Exercise 7.2 · A widening in front of a bridge</div>
+<p>A city plans to widen a 1.5 km approach road from two to three lanes. The approach ends at a two-lane bridge that will not change. The consultant's report shows the evening queue on the approach shrinking from 1.4 km to 0.9 km.</p>
+<ol>
+<li>Using cumulative curves, explain what happens to total delay. Under what conditions could delay rise?</li>
+<li>Which three questions would you put to the consultant before the council votes?</li>
+<li>Name two alternatives that act on the bottleneck or on demand, and the terms of \(W\) each would affect.</li>
+</ol>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 7.3 · Capacity from car-following parameters (uses the "Under the hood" box in section 7)</div>
 <p>Using the IDM equilibrium (\(\Delta v=0\), \(\dot v=0\)), derive the steady-state gap \(s_e(v)\) and plot \(q(k)\) for \(T=1.0\), 1.5 and 2.0 s, with vehicle length 5 m and \(s_0=2\) m. Read off capacity for each. A city wants to reduce motorway speed limits from 120 to 100 km/h. Using your plots, discuss whether capacity changes much, and list which terms of \(W\) the speed change affects besides travel time.</p>
 </div>
 
@@ -188,16 +291,18 @@ $$\frac{dT}{dq} = \underbrace{t(q)}_{\text{borne by the traveler}} + \underbrace
 <li data-type="tool"><a href="https://www.traffic-simulation.de/">traffic-simulation.de — interactive microsimulation (IDM + MOBIL)</a> <span class="why">Change time gap, acceleration and politeness live and watch waves and bottlenecks form. Ideal for building intuition before using SUMO.</span></li>
 <li data-type="book"><a href="https://www.traffic-flow-dynamics.org/">Treiber &amp; Kesting — <em>Traffic Flow Dynamics: Data, Models and Simulation</em> (Springer; 2nd ed. 2025), book website</a> <span class="why">The standard graduate textbook. The website has samples and simulations; the book itself is paid.</span></li>
 <li data-type="course"><a href="https://www.civil.iitb.ac.in/tvm/nptel/">Tom V. Mathew (IIT Bombay) — Transportation Systems Engineering lecture notes</a> <span class="why">Free written notes with numerical examples: fundamental relations, stream models, car-following, lane changing, cell transmission models.</span></li>
-<li data-type="link"><a href="https://doi.org/10.1098/rspa.1955.0089">Lighthill &amp; Whitham (1955) — On kinematic waves II: a theory of traffic flow on long crowded roads</a> <span class="why">The founding paper of LWR theory. Read with Richards (1956), <a href="https://doi.org/10.1287/opre.4.1.42">Shock waves on the highway</a>.</span></li>
+<li data-type="link"><a href="https://doi.org/10.1088/1367-2630/10/3/033001">Sugiyama et al. (2008) — Traffic jams without bottlenecks: experimental evidence</a> <span class="why">The ring-road experiment: string instability in real drivers. Open access, with videos.</span></li>
+<li data-type="link"><a href="https://doi.org/10.1098/rspa.1955.0089">Lighthill &amp; Whitham (1955) — On kinematic waves II: a theory of traffic flow on long crowded roads</a> <span class="why">The founding paper of LWR theory. Part I, on flood waves in rivers, is <a href="https://doi.org/10.1098/rspa.1955.0088">here</a>. Read with Richards (1956), <a href="https://doi.org/10.1287/opre.4.1.42">Shock waves on the highway</a>.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/0191-2615(93)90038-C">Newell (1993) — A simplified theory of kinematic waves in highway traffic</a> <span class="why">Why cumulative curves and a triangular diagram are enough.</span></li>
-<li data-type="link"><a href="https://doi.org/10.1016/0191-2615(94)90002-7">Daganzo (1994) — The cell transmission model</a> <span class="why">The discretization used in most mesoscopic models and DTA.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/S0191-2615(98)00023-X">Cassidy &amp; Bertini (1999) — Some traffic features at freeway bottlenecks</a> <span class="why">Careful empirical evidence on bottleneck discharge and capacity drop using cumulative curves.</span></li>
+<li data-type="pdf"><a href="https://www.dot.state.mn.us/rampmeter/pdf/finalreport/9.pdf">Cambridge Systematics (2001) — Twin Cities Ramp Meter Evaluation, final report, chapter 9</a> <span class="why">The meters-off experiment: travel time, throughput, reliability, crashes, fuel and the cost–benefit result.</span></li>
+<li data-type="link"><a href="https://doi.org/10.1016/j.trb.2006.03.001">Daganzo (2007) — Urban gridlock: macroscopic modeling and mitigation approaches</a> and <a href="https://doi.org/10.1016/j.trb.2008.02.002">Geroliminis &amp; Daganzo (2008) — Existence of urban-scale macroscopic fundamental diagrams</a> <span class="why">The MFD and its empirical confirmation in Yokohama.</span></li>
+<li data-type="pdf"><a href="https://zenodo.org/records/1483417">Ambühl, Loder, Menendez &amp; Axhausen (2018) — A case study of Zurich's two-layered perimeter control</a> <span class="why">How Zurich's gating works and how the MFD shows its effect. Open access (Transport Research Arena 2018).</span></li>
+<li data-type="link"><a href="https://doi.org/10.1016/j.trb.2012.06.008">Keyvan-Ekbatani et al. (2012) — Exploiting the fundamental diagram of urban networks for feedback-based gating</a> <span class="why">A simple perimeter controller derived from the MFD.</span></li>
+<li data-type="link"><a href="https://doi.org/10.1016/0191-2615(94)90002-7">Daganzo (1994) — The cell transmission model</a> <span class="why">The discretization used in most mesoscopic models and dynamic traffic assignment.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1103/PhysRevE.62.1805">Treiber, Hennecke &amp; Helbing (2000) — Congested traffic states in empirical observations and microscopic simulations</a> <span class="why">Introduces the IDM.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/0191-2615(81)90037-0">Gipps (1981) — A behavioural car-following model for computer simulation</a> <span class="why">The safe-speed model.</span></li>
 <li data-type="link"><a href="https://doi.org/10.3141/1999-10">Kesting, Treiber &amp; Helbing (2007) — General lane-changing model MOBIL for car-following models</a> <span class="why">Lane changing with a politeness factor.</span></li>
-<li data-type="link"><a href="https://doi.org/10.1088/1367-2630/10/3/033001">Sugiyama et al. (2008) — Traffic jams without bottlenecks: experimental evidence</a> <span class="why">The circular-track experiment: string instability in real drivers.</span></li>
-<li data-type="link"><a href="https://doi.org/10.1016/j.trb.2006.03.001">Daganzo (2007) — Urban gridlock: macroscopic modeling and mitigation approaches</a> and <a href="https://doi.org/10.1016/j.trb.2008.02.002">Geroliminis &amp; Daganzo (2008) — Existence of urban-scale macroscopic fundamental diagrams</a> <span class="why">The MFD and its empirical confirmation in Yokohama.</span></li>
-<li data-type="link"><a href="https://doi.org/10.1016/j.trb.2012.06.008">Keyvan-Ekbatani et al. (2012) — Exploiting the fundamental diagram of urban networks for feedback-based gating</a> <span class="why">Perimeter control in practice.</span></li>
 <li data-type="book"><span>Kerner — <em>The Physics of Traffic</em> (Springer, 2004)</span> <span class="why">The full statement of three-phase theory. See also <a href="https://doi.org/10.1103/PhysRevLett.81.3797">Kerner (1998), Physical Review Letters</a>.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/j.trb.2010.03.004">Treiber, Kesting &amp; Helbing (2010) — Three-phase traffic theory and two-phase models with a fundamental diagram in the light of empirical stylized facts</a> <span class="why">The main rebuttal of the three-phase critique.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/j.physa.2024.129953">Chen et al. (2024) — Empirical dynamics of traffic moving jams: insights from Kerner's three-phase traffic theory</a> <span class="why">A recent application to Chinese expressway data.</span></li>
