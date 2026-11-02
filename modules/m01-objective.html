@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 1 · What should a transport system optimize? — Welfare-Centered Transport Planning</title>
 <meta name="description" content="The welfare objective function at the center of the course: access and mode choice, health, externalities, land, costs and hard constraints.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -32,6 +32,17 @@
 <p class="meta">≈ 3 hours · Prerequisites: the <a href="../index.html">introduction</a> · Key terms: all</p>
 
 <p class="lede">The introduction ended with a principle: transport should improve the welfare of the people who use it, while minimizing the harm it does to everyone else. This module turns that principle into something you can calculate. We first ask why we would want a number at all. Then we build it piece by piece, looking at the shape of each piece and the history behind it. The full welfare function appears only at the end, once every part of it is familiar.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>What should a transport plan be judged by? Every traffic study answers this question, often without saying so.</dd>
+<dt>What matters</dt><dd>Five effects: access and choice, health, harm to others, land, and public cost. And four limits many societies will not trade away: road deaths, the carbon budget, land, and a minimum of access for everyone. A plan is only as good as the objective it was scored on.</dd>
+<dt>Numbers to question</dt><dd>The value of an hour, the value of a life, the price of a tonne of CO₂ (from €55 to €1,000 in official use today), the discount rate, and whether the model let traffic grow in response to the plan.</dd>
+<dt>Levers</dt><dd>Prices and rules act within months. Street design acts within years. Networks and land use shape a city for generations.</dd>
+<dt>Ask your analysts</dt><dd>Which effects did the study include, and at what prices? Which limits did it respect? Can I see each effect separately before they are added up?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
@@ -176,6 +187,7 @@ $$A_i = \sum_j O_j \, f(c_{ij}).$$
 <tr><td>Bus</td><td class="num">60 min</td><td class="num">€15</td><td class="num">€5 ticket</td><td class="num">€20</td><td class="num">−2.0</td></tr>
 <tr><td>Bike</td><td class="num">40 min, ×2 for effort</td><td class="num">€20</td><td class="num">€0</td><td class="num">€20</td><td class="num">−2.0</td></tr>
 </tbody></table></div>
+<p class="small">Why do the bike's minutes count double? Analysts often weight minutes by how they feel. A minute spent waiting or walking to a stop typically counts 1.5 to 2 times a minute sitting in a vehicle. Here we assume the same for pedaling up the hill.</p>
 <p class="small">The hidden part is measured in the same points. A hidden part of +1.2 for the bus means this person likes the bus €12 more than its time and cost suggest, perhaps because they can read on the way. Most hidden parts lie between −1 and +2 points.</p>
 <div class="demo-controls">
 <label>Car <input type="range" min="-3" max="3" step="0.1" value="-1" data-name="Car"> <output>−1.0</output></label>
@@ -403,12 +415,22 @@ $$C = \sum_k p_k\,E_k .$$
 <tr><td>CO₂</td><td>Climate change</td><td>tonnes CO₂-equivalent</td><td>carbon value</td></tr>
 <tr><td>air</td><td>NOₓ and PM₂.₅ damage to health</td><td>emissions weighted by exposed population</td><td>damage cost per tonne, by location</td></tr>
 <tr><td>noise</td><td>Annoyance, sleep disturbance, cardiovascular disease</td><td>people exposed above thresholds, in dB bands</td><td>€ per person per dB band</td></tr>
-<tr><td>congestion</td><td>Delay each driver imposes on <em>other</em> road users</td><td>marginal minus average travel time</td><td>value of time</td></tr>
-<tr><td>severance</td><td>Barrier effect on pedestrians, children's independent mobility</td><td>detours and waiting at crossings</td><td>value of time, stated preference</td></tr>
+<tr><td>severance</td><td>Barrier effect on pedestrians, children's independent mobility</td><td>detours and waiting at crossings, where these are not already in Term A</td><td>value of time, stated preference</td></tr>
 </table></div>
+<p>Each harm in the table falls on people whose loss does not show up in Term A. That rule explains a surprising gap in the table: congestion.</p>
 <h3>Why these shapes</h3>
 <p>The sum is linear in the quantities \(E_k\), but the quantities are anything but linear in traffic.</p>
-<p><strong>Congestion is strongly convex.</strong> With the classic Bureau of Public Roads (1964) link function \(t(q) = t_0\,[1 + \alpha (q/Q)^\beta]\), usually with \(\alpha = 0.15\) and \(\beta = 4\), each extra vehicle delays all the others by \(q\,t'(q) = t_0\,\alpha\beta\,(q/Q)^\beta\). Alan Walters (1961) and William Vickrey (1969) made this marginal-versus-average distinction the basis of congestion pricing. Near capacity, the delay a driver imposes on others is larger than the delay they suffer. Only this <em>external</em> part belongs in C. The delay people experience themselves is already counted in Term A.</p>
+<h3>Where is congestion?</h3>
+<p>Congestion is the textbook example of an externality, so its absence from Term C needs an explanation. Take a road with 1,000 drivers, each taking 20 minutes. One more driver joins, and every trip gets 0.01 minutes slower.</p>
+<ul>
+<li>The newcomer spends 20 minutes. They weigh this when deciding to drive.</li>
+<li>The other 1,000 drivers lose 0.01 minutes each: 10 minutes in total. The newcomer ignores this. It is the <strong>external congestion cost</strong>.</li>
+<li>Total travel time rises by 30 minutes.</li>
+</ul>
+<p>Term A is computed from everyone's travel times as the model predicts them, with all the traffic on the road. So it already falls by all 30 minutes, including the 10 minutes suffered by others. Subtracting those 10 minutes again in Term C would count them twice. The same holds for crowding on buses and trains.</p>
+<p>The external cost still matters, for two reasons. It explains why congested roads waste time: each driver ignores what they do to the others, so more people drive at the peak than is best for all of them. And it tells us the right <strong>congestion charge</strong>: the money value of the delay a driver imposes on others, 10 minutes in the example. Alan Walters (1961) and William Vickrey (1969) built congestion pricing on this idea (<a href="m13-pricing.html">Module 13</a>).</p>
+<p>One caution. Older appraisals sometimes hold travel times fixed and ignore how traffic slows down. Only then must the delay imposed on others be added separately. The rule: count each delay once, either through the model's travel times in Term A or as a separate cost, never both.</p>
+<p><strong>Congestion is strongly convex.</strong> With the classic Bureau of Public Roads (1964) link function \(t(q) = t_0\,[1 + \alpha (q/Q)^\beta]\), usually with \(\alpha = 0.15\) and \(\beta = 4\), each extra vehicle delays all the others by \(q\,t'(q) = t_0\,\alpha\beta\,(q/Q)^\beta\). Near capacity, the delay a driver imposes on others is larger than the delay they suffer themselves. So the right charge rises steeply as a road fills up.</p>
 <aside class="person">
 <img src="../assets/img/people/vickrey-1951.jpg" alt="Portrait of William Vickrey, 1951" loading="lazy">
 <div><p class="person-name">William Vickrey <span>1914–1996</span></p>
@@ -416,7 +438,7 @@ $$C = \sum_k p_k\,E_k .$$
 <p class="small"><a href="https://www.trl.co.uk/uploads/trl/documents/MISC17.pdf">The Smeed Report (1964), free PDF</a> · <a href="https://www.nationalacademies.org/read/9649/chapter/21">National Academy of Sciences biographical memoir</a></p>
 <p class="credit">Photo: <em>Scarsdale Inquirer</em>, 1951, public domain.</p></div>
 </aside>
-<figure class="photo chart"><img src="../assets/img/m01-shape-congestion.svg" width="360" height="230" alt="Chart: average travel time rises gently with volume, while the external cost per vehicle rises steeply near capacity."><figcaption>At capacity the external cost (0.6 × t₀ here) is already much larger than the increase in each driver's own travel time (0.15 × t₀). Above capacity it dominates.</figcaption></figure>
+<figure class="photo chart"><img src="../assets/img/m01-shape-congestion.svg" width="360" height="230" alt="Chart: average travel time rises gently with volume, while the external cost per vehicle rises steeply near capacity."><figcaption>At capacity the delay one extra driver causes to others (0.6 × t₀ here) is already much larger than the increase in each driver's own travel time (0.15 × t₀). Above capacity it dominates. This is the delay a congestion charge should price.</figcaption></figure>
 <p><strong>Crash harm rises with roughly the fourth power of speed.</strong> Göran Nilsson's power model (2004) relates deaths to mean speed as \((v_1/v_0)^4\) and injuries more gently. A 10% higher mean speed means roughly 46% more deaths. The physics of impact energy, \(\tfrac12 m v^2\), and of the difference in mass between a truck and a pedestrian, sits behind it (<a href="m11-safety.html">Module 11</a>).</p>
 <p class="small">Nilsson first fitted the model to Swedish speed-limit changes of 1967–72 and to an energy-saving cut from 110 to 90 km/h in the summer of 1979. His 2004 Lund thesis is <a href="https://lup.lub.lu.se/search/files/4394446/1693353.pdf">free to read</a>.</p>
 <figure class="photo chart"><img src="../assets/img/m01-shape-speed.svg" width="360" height="230" alt="Chart: relative number of deaths rises with the fourth power of mean speed."><figcaption>Fatalities rise roughly with the fourth power of mean speed, so small speed changes have large safety effects.</figcaption></figure>
@@ -464,7 +486,7 @@ $$C = \sum_k p_k\,E_k .$$
 <tr><td>Air pollution</td><td><strong>Exhaust gases disappear, dust does not.</strong> NOₓ and exhaust particles go to zero. Particles from tire, brake and road wear remain. The OECD estimates that light electric cars emit 11–13% less fine dust than petrol cars, and heavy ones 3–8% more, because weight increases tire wear (<a href="https://www.oecd.org/en/publications/non-exhaust-particulate-emissions-from-road-transport_4a4dc6ca-en.html">OECD, 2020</a>).</td></tr>
 <tr><td>Noise</td><td><strong>Quieter only at low speed.</strong> Above roughly 20–30 km/h, tire noise drowns out the engine, for both kinds of car. EU rules even require electric cars to make an artificial sound below 20 km/h, so that pedestrians hear them.</td></tr>
 <tr><td>Crashes</td><td><strong>Not lower.</strong> Heavier cars carry more energy into a crash, \(\tfrac12 m v^2\). Speed and street design matter far more than the drive train.</td></tr>
-<tr><td>Congestion, severance, land</td><td><strong>Unchanged.</strong> An electric car takes as much road and parking space as a petrol car.</td></tr>
+<tr><td>Congestion (counted in Term A), severance, land</td><td><strong>Unchanged.</strong> An electric car takes as much road and parking space as a petrol car.</td></tr>
 </tbody></table></div>
 <p>Electric cars also change the other terms of \(W\):</p>
 <ul>
@@ -493,6 +515,9 @@ $$D = r\,L ,$$
 <p>A Yale-trained economist who spent four decades at UCLA arguing that free parking is never free. <em>The High Cost of Free Parking</em> (2005) became an unlikely bestseller among planners, who call themselves "Shoupistas". His three proposals were to charge the right price for curb parking, return the revenue to the neighborhood, and abolish minimum parking requirements. Many cities have since adopted versions of them (<a href="m05-accessibility-land-use.html">Module 5</a>). He died in February 2025.</p>
 <p class="credit">Photo: still from an Active Towns video, 2025, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p></div>
 </aside>
+<h3>Count land once</h3>
+<p>A new road often needs land that has to be bought. The purchase price then appears in the construction cost \(K\) of Term E. If Term D also charges the rent \(r\,L\) for the same land, the land is counted twice. A purchase price is roughly the future rents paid in advance, so the two measure the same thing.</p>
+<p>The rule: land already used for transport is valued in Term D. Land bought for a project goes either into \(K\) as a purchase price or into D as a yearly rent, never both. This course puts all land in D, so that roads built long ago and roads built tomorrow are treated alike.</p>
 <h3>Alternatives</h3>
 <p>\(r\) can be estimated from market rents, from land-value models, or as the shadow price of a land limit (Singapore). Land-value capture, in which a railway funds itself from the rise in land values around its stations (Japan, Hong Kong), is Term D seen from the other side (<a href="m05-accessibility-land-use.html">Module 5</a>).</p>
 
@@ -506,7 +531,7 @@ $$D = r\,L ,$$
 <p class="credit">Sources: J. L. Arnold, <a href="https://commons.wikimedia.org/wiki/File:The_evolution_of_the_1936_Flood_Control_Act_-_USACE-p16021coll4-257.pdf"><em>The Evolution of the 1936 Flood Control Act</em></a> (US Army Corps of Engineers, 1988); <a href="https://www.law.cornell.edu/uscode/text/33/701a">33 U.S.C. §701a</a>; <a href="https://ageconsearch.umn.edu/record/329104/files/EconRiverBasinProjects.pdf">"Green Book" (1950)</a>. Further reading: T. M. Porter, <em>Trust in Numbers</em> (1995), ch. 7.</p>
 </div>
 $$E = (1+\mu)\,\big[K - R\big],$$
-<p>with \(K\) the annualized capital plus operating and maintenance cost, \(R\) the revenue, and \(\mu\) the <em>marginal cost of public funds</em>. That is the extra welfare lost because each euro of public money is raised through taxes that distort work and spending. France applies such a factor, and many other manuals set \(\mu = 0\) (<a href="m14-appraisal.html">Module 14</a>).</p>
+<p>with \(K\) the annualized capital plus operating and maintenance cost, excluding land (which is in Term D), \(R\) the revenue, and \(\mu\) the <em>marginal cost of public funds</em>. That is the extra welfare lost because each euro of public money is raised through taxes that distort work and spending. France applies such a factor, and many other manuals set \(\mu = 0\) (<a href="m14-appraisal.html">Module 14</a>).</p>
 <h3>Turning an investment into a yearly cost</h3>
 <p>A capital cost \(K_0\) spread over \(n\) years at interest rate \(i\) becomes an annual cost \(K_0 \cdot \tfrac{i(1+i)^n}{(1+i)^n - 1}\), the capital recovery factor. More generally, every term is a stream over time, and future values are discounted. One euro of net benefit in year \(t\) counts as \((1+i)^{-t}\) today.</p>
 <figure class="photo chart"><img src="../assets/img/m01-shape-discount.svg" width="360" height="230" alt="Chart: the weight of future benefits declines with time, faster at higher discount rates."><figcaption>At 7% a year, a benefit 30 years away counts for about an eighth of its value. At 1.7% (Germany's federal transport plan) it counts for about 60%. The discount rate decides how much the future matters.</figcaption></figure>
@@ -584,7 +609,7 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 <p>Planning documents usually list objectives rather than a function. The eight that recur internationally map onto \(W\) as follows:</p>
 <div class="table-wrap"><table>
 <tr><th>Objective dimension</th><th>Representative metrics</th><th>Where it lives in \(W\)</th></tr>
-<tr><td>1. Vehicle mobility</td><td>vehicle-hours of delay, speeds, reliability</td><td>part of A (time and reliability in \(V\)); external congestion in C</td></tr>
+<tr><td>1. Vehicle mobility</td><td>vehicle-hours of delay, speeds, reliability</td><td>A (time and reliability in \(V\), including delay caused by others); the external part sets the congestion charge</td></tr>
 <tr><td>2. Human accessibility</td><td>jobs reachable in 30 min, generalized cost</td><td>A (the logsum itself)</td></tr>
 <tr><td>3. Safety and health</td><td>KSI (killed or seriously injured), exposure to pollution</td><td>C (crash, air), B (activity), safety limit</td></tr>
 <tr><td>4. Environment</td><td>CO₂e, NOₓ, PM₂.₅, energy</td><td>C, carbon budget</td></tr>
@@ -667,7 +692,7 @@ $$\min_\theta \; \sum_{a} q_a(\theta)\,t_a\big(q_a(\theta)\big)$$
 
 <div class="box exercise">
 <div class="box-title">Exercise 1.3 · How convex is congestion?</div>
-<p>A link has free-flow time \(t_0=10\) min and capacity \(Q=2{,}000\) veh/h, with the BPR function (\(\alpha=0.15,\ \beta=4\)). At \(q=1{,}600\) and at \(q=2{,}200\) veh/h, compute (a) each driver's travel time, (b) the delay one extra vehicle imposes on all others, and (c) the corresponding Pigouvian charge at a value of time of €15/h. Why is (b) the relevant quantity for Term C and (a) for Term A?</p>
+<p>A link has free-flow time \(t_0=10\) min and capacity \(Q=2{,}000\) veh/h, with the BPR function (\(\alpha=0.15,\ \beta=4\)). At \(q=1{,}600\) and at \(q=2{,}200\) veh/h, compute (a) each driver's travel time, (b) the delay one extra vehicle imposes on all others, and (c) the corresponding Pigouvian charge at a value of time of €15/h. Term A already contains everyone's travel time, including the delay in (b). Why, then, does (b) still matter?</p>
 </div>
 
 <div class="box exercise">

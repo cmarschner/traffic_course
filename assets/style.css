@@ -276,3 +276,20 @@ main h4 { color: var(--accent); }
 .demo-dist .rug { stroke: var(--accent-2); stroke-width: 2; }
 .demo-people .parts { color: var(--ink-3); font-weight: 400; font-size: .78rem; }
 @media (max-width: 640px) { .demo-people .parts { display: block; } }
+
+/* ---------- reader layers (CR-20) ---------- */
+/* "In brief": what a decision maker needs from the module, at its top. */
+.box.brief { border-left: 4px solid var(--accent-2); }
+.box.brief dl { margin: 0; display: grid; grid-template-columns: 9.5rem 1fr; gap: .45rem 1rem; }
+.box.brief dt { font-family: var(--sans); font-weight: 700; font-size: .85rem; color: var(--ink-2); padding-top: .15rem; }
+.box.brief dd { margin: 0; }
+@media (max-width: 640px) { .box.brief dl { grid-template-columns: 1fr; gap: .1rem; } .box.brief dd { margin-bottom: .5rem; } }
+/* "Under the hood": derivations and method detail, collapsed; readers can skip it. */
+details.method { border: 1px solid var(--rule); border-left: 4px solid var(--ink-3); border-radius: 10px; margin: 1.2rem 0; background: var(--card); }
+details.method > summary { cursor: pointer; padding: .8rem 1.2rem; font-family: var(--sans); font-size: .92rem; color: var(--ink-2); list-style-position: inside; }
+details.method > summary::marker { color: var(--ink-3); }
+details.method > summary .label { font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; margin-right: .5rem; color: var(--ink-3); }
+details.method[open] > summary { border-bottom: 1px solid var(--rule); }
+details.method > :not(summary) { margin-left: 1.2rem; margin-right: 1.2rem; }
+details.method > :last-child { margin-bottom: 1rem; }
+@media print { details.method > :not(summary) { display: block; } }

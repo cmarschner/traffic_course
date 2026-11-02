@@ -33,6 +33,11 @@
     });
   }
 
+  // Print the collapsed "under the hood" layers too.
+  window.addEventListener("beforeprint", function () {
+    document.querySelectorAll("details.method").forEach(function (d) { d.open = true; });
+  });
+
   document.addEventListener("DOMContentLoaded", function () {
     buildToc();
     renderMath();
