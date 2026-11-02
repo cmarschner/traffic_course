@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Clemens Marschner">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Citizen toolkit — Welfare-Centered Transport Planning</title>
+<meta name="description" content="A toolkit for residents, parents, cyclists, drivers, shop owners, journalists and volunteers: how to read a traffic study, what to ask at a hearing, how to build and test an alternative with open tools, and where decisions can be influenced in seven countries.">
+<link rel="stylesheet" href="assets/style.css?v=16">
+<script defer src="assets/site.js?v=16"></script>
+</head>
+<body>
+<header class="site-header"><div class="inner">
+  <a class="brand" href="index.html">Welfare-Centered <span>Transport Planning</span></a>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="syllabus.html">Syllabus</a>
+    <a href="countries/index.html">Countries</a>
+    <a href="sources/index.html">Sources &amp; translations</a>
+    <a href="explorer.html">Objective explorer</a>
+    <a href="about.html">About</a>
+  </nav>
+</div></header>
+
+<div class="layout-notes">
+<nav class="toc" data-auto><h2>On this page</h2><ol></ol></nav>
+<main>
+<p class="kicker">For citizens</p>
+<h1>A citizen's toolkit</h1>
+<p class="meta">≈ 1 hour to read · No prerequisites · Companion to <a href="modules/m01-objective.html">Module 1</a></p>
+
+<p class="lede">Imagine a letter in your mailbox. The city plans to widen the road outside your child's school, and a public meeting is set for next month. A traffic study is attached, and it says the widening will "reduce congestion." You suspect it will mostly bring more cars. Until recently, that suspicion was all most residents could bring to the meeting. This page shows how to turn it into a question the study must answer, and, if you want, into an alternative that has been tested as carefully as the official plan.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>How can someone without transport training be heard on a transport decision, and be taken seriously?</dd>
+<dt>What matters</dt><dd>Argue about the assumptions, not only the conclusions. Every traffic study rests on choices: which effects it counts, at what prices, and whether it lets traffic grow when a road gets bigger. Those choices can be read, questioned and changed.</dd>
+<dt>Numbers to question</dt><dd>The forecast of future traffic, the money value of saved minutes, the price put on a tonne of CO₂, and whether any effect on walking, cycling, health or land was left out.</dd>
+<dt>Levers</dt><dd>Formal comment periods and objections, hearings, council meetings, participatory budgets, referendums and, as a last resort, the courts. Open maps, open timetables and open simulators let you test an alternative yourself.</dd>
+<dt>Ask the planners</dt><dd>What is the plan trying to achieve? Which effects did you count, and which did you leave out? Did the model let traffic grow in response to the plan? What happens to the result if the main assumptions change?</dd>
+</dl>
+</div>
+
+<div class="box key">
+<div class="box-title">What you will be able to do</div>
+<ul>
+<li>Read a traffic study or appraisal and find the handful of assumptions that drive its result.</li>
+<li>Ask precise questions at a hearing or council meeting.</li>
+<li>Build an alternative proposal with open data and open tools, and describe it in terms of what it does for people.</li>
+<li>Find the formal and informal routes for influence in seven countries.</li>
+<li>Know the limits of your own model, and hold it to the same standard you ask of the official one.</li>
+</ul>
+</div>
+
+<h2>1. Why a citizen can now be heard</h2>
+<p>Until about twenty years ago, a transport study was a closed box. The map of the road network, the bus timetables and the traffic model all sat inside a consultant's office. A resident could only disagree with the result. Today much of the box is open.</p>
+<ul>
+<li><strong>Open maps.</strong> <a href="https://www.openstreetmap.org/">OpenStreetMap</a> is a map of the world built by volunteers, like a wiki. Anyone can download it, including streets, footpaths, cycle lanes and speed limits.</li>
+<li><strong>Open timetables.</strong> Many transit agencies publish their routes and schedules in a shared file format called GTFS (General Transit Feed Specification). <a href="https://gtfs.org/">GTFS</a> is an open standard used by over 10,000 agencies in more than 100 countries. With it, a computer can work out how far you can get by bus or train in 30 minutes.</li>
+<li><strong>Open simulators.</strong> A simulator is a program that moves virtual people and vehicles through a virtual city. <a href="https://github.com/a-b-street/abstreet">A/B Street</a> began as a game-like tool for redesigning streets and watching the effect; since 2025 its work continues in several successor tools, including one for planning low-traffic neighborhoods. <a href="https://eclipse.dev/sumo/">Eclipse SUMO</a> simulates individual vehicles at junctions and on corridors. <a href="https://www.matsim.org/">MATSim</a> simulates the whole day of every resident of a city. All three are free and open source. <a href="modules/m01-objective.html#why-a-number">Module 1</a> shows screenshots of each.</li>
+<li><strong>AI assistants.</strong> Setting up these tools used to need a programmer. A general-purpose AI assistant can now help a patient non-specialist download the data, run a scenario and explain an error message. It can also make mistakes that look convincing, which is why section 6 matters.</li>
+</ul>
+
+<h3>From conclusions to assumptions</h3>
+<p>Without data, a public meeting tends to become a contest of conclusions. One side says "this will cause congestion." The other says "this will save time." Neither can show why, so the louder or more official voice wins.</p>
+<p>A written objective changes the conversation. <a href="modules/m01-objective.html#why-a-number">Module 1, section 2</a> explains the idea: if a study says what it is trying to achieve, and how it scores each effect, then people can argue about those choices. "Your study values a minute saved by a driver, but gives no value to a minute lost by a child walking to school" is a much stronger statement than "this is bad for children." It points to a specific assumption, which the planners must either defend or change.</p>
+<p>The course uses one objective throughout. It adds up five effects of a plan: <strong>access and choice</strong> (how easily people reach what they need), <strong>health</strong> (for example from walking and cycling), <strong>harm to others</strong> (crashes, noise, air pollution, climate), <strong>land</strong> (how much space transport takes) and <strong>public cost</strong>. It also sets four <strong>limits</strong> that many societies will not trade away: road deaths, a carbon budget, land, and a minimum of access for everyone. You can try different weights in the <a href="explorer.html">objective explorer</a>.</p>
+
+<div class="box story"><div class="box-title">Story · Portland, 1990s: a citizens' group models an alternative to a freeway</div>
+<p>In the late 1980s, Oregon's transport department planned the Western Bypass, a new freeway through the suburbs of Washington County, west of Portland. The land-use watchdog 1000 Friends of Oregon went to court, arguing that officials had to show the freeway fit the state's land-use goals (<a href="https://www.opb.org/article/2022/08/05/oregon-growth-management-system-state-freeways-highways-westside-bypass/">OPB, 2022</a>).</p>
+<p>The group did more than object. From the early 1990s it ran a study called LUTRAQ (Land Use, Transportation, Air Quality). LUTRAQ designed a different future for the same area: new homes and jobs clustered around transit, with better walking and cycling. It then tested that future against the official options with a travel model, as the planners would (<a href="https://trid.trb.org/View/451449">TRID summary</a>). Metro, the regional government, helped fund the study, partly to improve its own land-use and travel models (<a href="https://rim.oregonmetro.gov/WebDrawer/Record/3160/File/document">Metro resolution, 1991</a>); one of the study's reports is devoted to <a href="https://trid.trb.org/View/369444">model modifications</a>. Compared with a "highways only" option, the published results showed 22.5% fewer work trips by people driving alone and 27% more trips by transit, walking and cycling (<a href="https://americawalks.org/bypassing-the-bypass-oregon/">America Walks</a>).</p>
+<p>Because the alternative had been modeled with accepted methods, the transport department could not dismiss it. In late 1992 it recommended carrying the LUTRAQ alternative forward, with four others, into the draft environmental impact statement (<a href="https://rim.oregonmetro.gov/WebDrawer/Record/3281/File/document">Metro Council resolution 92-1706</a>). Support for the bypass ebbed, and it was cancelled in 1997 (<a href="https://www.opb.org/article/2022/08/05/oregon-growth-management-system-state-freeways-highways-westside-bypass/">OPB</a>).</p>
+<p><em>Lesson:</em> the group won the argument on the planners' own ground. It accepted their model and changed the plan that was fed into it.</p>
+</div>
+
+<div class="box story"><div class="box-title">Story · Berlin, 2016–2018: a citizens' initiative writes a law</div>
+<p>In 2016 a group of Berlin cyclists, <em>Volksentscheid Fahrrad</em>, started a petition for a referendum on a cycling law. In about three and a half weeks it collected 105,425 signatures and handed them to the city parliament on 14 June 2016 (<a href="https://changing-cities.org/volksentscheid-fahrrad/">Changing Cities</a>). Instead of a vote, the city government negotiated a cycling law with the initiative and with cycling, walking and environmental associations. Parliament adopted it on 28 June 2018 as part of the <a href="https://gesetze.berlin.de/bsbe/document/jlr-MobGBErahmen">Berlin Mobility Act</a>, which gives walking, cycling and public transport priority in planning. Delivery has since been slower than the law's targets. See the <a href="countries/germany.html">Germany page</a> for the full story.</p>
+<p><em>Lesson:</em> a concrete demand, backed by many signatures, is harder to ignore than a complaint. It is also not the end: each street still has to be won project by project.</p>
+</div>
+
+<h2>2. How to read a traffic study or appraisal</h2>
+<p>Most large transport projects come with two kinds of documents. A <strong>traffic study</strong> forecasts how many people and vehicles will use each road or line. An <strong>appraisal</strong> (often called a cost–benefit analysis) puts money values on the effects and adds them up. Both are often long. You do not need to read every page. You need to find a few choices that drive the result.</p>
+<p>Take the school-road example from the top of this page. Suppose the study claims the widening "saves 400 hours of driving per day." Here is where to look, and why.</p>
+
+<h3>What is the plan for?</h3>
+<p>Look for the stated objective, sometimes called "purpose and need." If it says "reduce peak-hour delay for cars," then a bus lane or a safer school route can never win, because they were not what the study was asked to find. A narrow objective is a choice, and it can be challenged. <a href="modules/m01-objective.html">Module 1</a> shows how "minimize vehicle-hours" is a special case of a broader objective.</p>
+
+<h3>Which effects are counted, and at what prices?</h3>
+<p>Most appraisals count time savings, construction cost and crashes. Many leave out health from walking and cycling, the land taken by roads and parking, or the effect on people who do not drive. Find the summary table of benefits and costs. Check each of the five effects (access, health, harm to others, land, public cost) and note which are missing. Then check the prices: the value of an hour (<a href="modules/m02-valuing-access.html">Module 2</a>), the price of a tonne of CO₂ and of noise and crashes (<a href="modules/m03-externalities.html">Module 3</a>). Official prices for a tonne of CO₂ differ by more than ten times between countries.</p>
+
+<h3>Was demand fixed?</h3>
+<p>This is often the most important question. A model with <strong>fixed demand</strong> assumes the same number of trips whatever is built. With a wider road, the same cars just move faster. In reality, a faster road attracts new trips, longer trips and trips switched from bus or bike. This is called <strong>induced traffic</strong>, and the evidence for it is strong (<a href="modules/m05-accessibility-land-use.html">Module 5, section 4</a>). If the study held demand fixed, its time savings are likely too large and its extra emissions too small.</p>
+
+<h3>Base year and forecast</h3>
+<p>Every forecast starts from a <strong>base year</strong>, when traffic was counted, and projects it forward. Ask when the counts were made. Counts from before 2020 may not reflect changes in working from home. Ask where the growth figure for future traffic comes from. A forecast that assumes traffic keeps rising will always find a need for more road.</p>
+
+<h3>Sensitivity tests</h3>
+<p>A good study shows what happens to its answer when key assumptions change: lower traffic growth, a higher carbon price, higher construction cost. If the answer flips under a plausible change, the case is weak. If the study shows no such tests, ask for them. Large projects also tend to cost more and carry fewer people than forecast (<a href="modules/m14-appraisal.html">Module 14, section 7</a>).</p>
+
+<h3>Who commissioned it?</h3>
+<p>A study paid for by the project's promoter is not wrong for that reason. But it is fair to ask whether anyone independent has reviewed it, and whether the model and its inputs can be released.</p>
+
+<div class="box note"><div class="box-title">Checklist · Reading a study in one evening</div>
+<ol>
+<li><strong>Objective.</strong> What does the study say the project is for? Could another kind of plan meet that aim?</li>
+<li><strong>Options.</strong> Which alternatives were compared? Was a "do minimum" or a non-road option among them?</li>
+<li><strong>Effects.</strong> Which of access, health, harm to others, land and public cost appear in the totals? Which are missing?</li>
+<li><strong>Prices.</strong> What value per hour, per tonne of CO₂, per serious injury?</li>
+<li><strong>Demand.</strong> Fixed or variable? Is induced traffic modeled?</li>
+<li><strong>Who gains, who loses.</strong> Are results shown for people walking, cycling, using transit, and for those living along the route?</li>
+<li><strong>Base year and growth.</strong> When were counts taken? What growth is assumed, and from where?</li>
+<li><strong>Sensitivity.</strong> Does the ranking of options survive changes in growth, cost and prices?</li>
+<li><strong>Limits.</strong> Does the plan respect safety and climate limits, or only trade them off?</li>
+<li><strong>Independence and openness.</strong> Who paid, who reviewed, and can the model be inspected?</li>
+</ol>
+</div>
+
+<h2>3. Questions to ask at a hearing or council meeting</h2>
+<p>A hearing usually gives each speaker a few minutes. A precise question uses them better than a speech. It also leaves a record: officials must answer it, or be seen not to. Here are questions you can use as written. Pick two or three.</p>
+<h3>On the objective</h3>
+<ul>
+<li>"What problem is this project meant to solve, and was any option other than more road capacity tested against that problem?"</li>
+<li>"If the goal is that people can reach school, work and shops more easily, how many more people can reach them under each option, by each mode?"</li>
+</ul>
+<h3>On the numbers</h3>
+<ul>
+<li>"Did the traffic model allow the number of car trips to grow because of the new road? If not, why not?"</li>
+<li>"What share of the benefits comes from time savings for drivers? How much of that would remain if traffic grows back?"</li>
+<li>"What value per tonne of CO₂ was used, and what would the result be at the national guidance value?"</li>
+<li>"Were health effects from walking and cycling counted? Were changes in road danger for children counted?"</li>
+<li>"What happens to the result if construction costs rise by a third, or if traffic grows only half as fast as forecast?"</li>
+</ul>
+<h3>On fairness</h3>
+<ul>
+<li>"Who loses under this plan? For example, residents along the route, people who do not drive, or businesses during construction. How will they be compensated or protected?"</li>
+<li>"How many households along the route will be exposed to more noise or air pollution?"</li>
+</ul>
+<h3>On process</h3>
+<ul>
+<li>"Will you publish the model inputs and outputs so that independent people can check them?"</li>
+<li>"If residents submit an alternative that has been tested, will it be assessed on the same basis as the official options?"</li>
+<li>"When is the last point at which this decision can still change, and who takes it?"</li>
+</ul>
+<div class="box caution"><div class="box-title">Tone</div>
+<p>Ask, do not accuse. Planners often share your doubts but work within a brief they did not write. A question that helps them argue for a broader study inside their own organization is more useful than one that puts them on the defensive.</p>
+</div>
+
+<h2>4. Building an alternative</h2>
+<p>Questions can stop a bad plan. An alternative can replace it. The LUTRAQ story shows the pattern: accept the rules of the game, then change the plan that goes in.</p>
+
+<h3>Step 1: Sketch</h3>
+<p>Start with a map and a sentence. "Instead of widening Main Street, run a frequent bus on it, make the school street car-free at drop-off times, and close two rat-runs to through traffic." Walk the area. Talk to the people who use it: shop owners, parents, bus drivers. Check your sketch against the street design ideas in <a href="modules/m12-street-design.html">Module 12</a> and the safety principles in <a href="modules/m11-safety.html">Module 11</a>.</p>
+
+<h3>Step 2: Gather data</h3>
+<ul>
+<li>The street network from OpenStreetMap. Check it on the ground and correct errors; corrections help everyone.</li>
+<li>Transit routes and times from the agency's GTFS feed.</li>
+<li>Traffic counts from the city or the national road agency. If none exist, count yourself. A few volunteers with tally sheets at peak hours give useful numbers.</li>
+<li>Where people live and work: census and employment statistics, usually published by area.</li>
+<li>The official study itself, which often contains the counts and forecasts you need.</li>
+</ul>
+
+<h3>Step 3: Test</h3>
+<p>Choose the simplest tool that answers the question. To show how many people can reach a school or a clinic within 15 minutes on foot or by bike, an accessibility calculation on OpenStreetMap is enough. To show what happens to queues at a junction, a corridor simulation in SUMO is the right tool. To show how trips shift across a whole city, you need a citywide model such as MATSim, which is a much larger project. Always run the official plan and your alternative in the same tool, with the same data. The comparison is what counts. <a href="modules/m06-transit-active-modes.html">Module 6</a> covers transit networks and the health effects of walking and cycling.</p>
+
+<h3>Step 4: Frame it in terms of the objective</h3>
+<p>Describe your alternative by what it does for people, effect by effect, as in this sketch:</p>
+<div class="table-wrap"><table>
+<tr><th>Effect</th><th>Question to answer</th><th>Example of a result</th></tr>
+<tr><td>Access and choice</td><td>How many people can reach jobs, schools and shops, by which means?</td><td>"1,800 more residents can reach the high school within 15 minutes without a car."</td></tr>
+<tr><td>Health</td><td>Will more people walk or cycle?</td><td>"An estimated 300 more children cycle to school."</td></tr>
+<tr><td>Harm to others</td><td>Crashes, noise, air pollution, climate</td><td>"Peak traffic past the school falls by a third."</td></tr>
+<tr><td>Land</td><td>How much space does each option take?</td><td>"No houses demolished; 40 parking spaces become a play street."</td></tr>
+<tr><td>Public cost</td><td>What does it cost to build and run?</td><td>"About a fifth of the widening's cost."</td></tr>
+<tr><td>Limits</td><td>Does it respect safety, climate and minimum access?</td><td>"Speeds on the school street stay below 30 km/h."</td></tr>
+</table></div>
+<p class="small">The numbers in the right-hand column are invented to show the format. Yours must come from your own tests.</p>
+<p>Be honest about losses. If some drivers take longer, say so and say by how much. A proposal that admits its costs is far more credible than one that claims to help everyone.</p>
+
+<h3>Step 5: Present it</h3>
+<ul>
+<li>Lead with one map and three numbers.</li>
+<li>Publish your data and method so others can check them.</li>
+<li>Submit it formally, within the deadlines described in section 5. A proposal that arrives after the comment period may legally be ignored.</li>
+<li>Seek allies: neighborhood groups, schools, business associations, local press.</li>
+<li>Ask for a written answer explaining how your alternative was assessed.</li>
+</ul>
+<p>The course capstone, <a href="modules/m15-capstone.html">Module 15</a>, walks through a full proposal for one corridor; its citizen-proposal variant follows the steps above.</p>
+
+<h2>5. Where decisions can be influenced, by country</h2>
+<p>Every country has formal routes, set in law, and informal ones. Formal routes have deadlines. Missing them can mean losing the right to object later. The table lists the main formal routes for transport projects and plans in the course's seven countries. The notes below add informal routes. Each country has its own page under <a href="countries/index.html">Countries</a>.</p>
+<div class="table-wrap"><table>
+<tr><th>Country</th><th>Main formal routes</th><th>Key detail</th></tr>
+<tr><td><a href="countries/us.html">United States</a></td><td>Comments on a draft environmental impact statement under NEPA (the National Environmental Policy Act); public participation in the regional transport plan of the metropolitan planning organization (MPO)</td><td>For federal highway and transit projects, the draft statement is published for comment for 45 to 60 days, sometimes with a hearing (<a href="https://www.law.cornell.edu/cfr/text/23/771.123">23 CFR 771.123</a>). MPOs must give a reasonable opportunity to comment on their long-range plan and their program of projects (<a href="https://www.law.cornell.edu/cfr/text/23/450.316">23 CFR 450.316</a>). Federal NEPA rules changed in 2025, so check the agency's current procedures (<a href="https://nepa.gov/">nepa.gov</a>).</td></tr>
+<tr><td><a href="countries/germany.html">Germany</a></td><td>Objections (<em>Einwendungen</em>) in the plan approval procedure (<em>Planfeststellungsverfahren</em>) for roads and railways; early public participation; participation in local land-use plans</td><td>The plan is put on display for one month; objections close a set time later, and late objections are excluded (<a href="https://www.gesetze-im-internet.de/vwvfg/__73.html">§ 73 VwVfG</a>). Authorities should push for early participation before the application (<a href="https://www.gesetze-im-internet.de/vwvfg/__25.html">§ 25(3) VwVfG</a>). Local land-use plans are published for at least 30 days (<a href="https://www.gesetze-im-internet.de/bbaug/__3.html">§ 3 BauGB</a>).</td></tr>
+<tr><td><a href="countries/france.html">France</a></td><td>Public debate (<em>débat public</em>) or prior consultation run by the National Commission for Public Debate (CNDP); public inquiry (<em>enquête publique</em>)</td><td>A public debate lasts up to four to six months and asks whether the project should happen at all. The public inquiry comes at the end; an investigating commissioner appointed by the administrative court gathers views and gives an opinion (<a href="https://www.debatpublic.fr/les-mots-du-debat-7">CNDP glossary</a>). 10,000 EU citizens resident in France can refer a large project to the CNDP (<a href="https://www.debatpublic.fr/vos-droits-668">CNDP, your rights</a>).</td></tr>
+<tr><td><a href="countries/netherlands.html">Netherlands</a></td><td>Participation under the Environment and Planning Act (<em>Omgevingswet</em>), in force since 2024; written views (<em>zienswijzen</em>) on draft decisions</td><td>For a project decision (<em>projectbesluit</em>), anyone may put forward information or alternative solutions during the exploration phase; the authority decides whether to consider them, and the proposer can ask for independent expert advice (<a href="https://iplo.nl/regelgeving/omgevingswet/participatie/participatie-instrumenten/participatie-projectbesluit/">IPLO</a>). Draft decisions are open for views for six weeks (<a href="https://wetten.overheid.nl/BWBR0005537/">Awb art. 3:15–3:16</a>).</td></tr>
+<tr><td><a href="countries/sweden.html">Sweden</a></td><td>Consultation (<em>samråd</em>) and review (<em>granskning</em>) of road and railway plans by the Transport Administration (Trafikverket)</td><td>Consultation runs continuously while the plan is prepared; all input is summarized in a consultation report (<a href="https://trafikverket.se/planlaggning">Trafikverket</a>). The finished proposal is then open for written comments for at least three weeks, and every comment must be answered in a review statement (<a href="https://rkrattsdb.gov.se/SFSdoc/12/120707.PDF">Road Ordinance 2012:707, §§ 15–20</a>).</td></tr>
+<tr><td><a href="countries/japan.html">Japan</a></td><td>Public comment on national rules (<em>paburikku komento</em>); hearings and written opinions on city plans; public involvement in road planning</td><td>Draft national rules must be open for comment for at least 30 days (<a href="https://laws.e-gov.go.jp/law/405AC0000000088">Administrative Procedure Act, art. 39</a>; portal: <a href="https://public-comment.e-gov.go.jp/">e-Gov</a>). A draft city plan is displayed for two weeks, during which residents can submit written opinions; hearings are held where needed (<a href="https://laws.e-gov.go.jp/law/343AC0000000100">City Planning Act, arts. 16–17</a>). The road ministry has a guideline for resident participation at the concept stage (<a href="https://www.mlit.go.jp/road/pi/">MLIT</a>).</td></tr>
+<tr><td><a href="countries/singapore.html">Singapore</a></td><td>Public consultations on the government's REACH portal; agency consultations by the Land Transport Authority (LTA)</td><td>Ministries and agencies post consultation papers on <a href="https://www.reach.gov.sg/Participate/Public-Consultation">REACH</a>; responses go directly to the agency that posted the paper (<a href="https://www.reach.gov.sg/About-Us/FAQs">REACH FAQs</a>). In October 2026, for example, LTA consulted on changes to the categories of car entitlement certificates (COE).</td></tr>
+</table></div>
+
+<h3>Notes on informal and other routes</h3>
+<ul>
+<li><strong>Referendums.</strong> In 2006 Stockholm ran a seven-month trial of a congestion charge and then held a referendum; 53% of valid votes in the city were in favor, and the charge became permanent in 2007 (<a href="https://www.transportportal.se/swopec/cts2014-7.pdf">Eliasson, 2014</a>; see the <a href="countries/sweden.html">Sweden page</a>). Trying a measure before voting on it let people judge results rather than fears. Germany's city-states and municipalities allow citizens' initiatives, as the Berlin story above shows.</li>
+<li><strong>Participatory budgets.</strong> In a participatory budget, residents propose projects and vote on how part of a city's investment money is spent. Paris has run one for over ten years (<a href="https://www.paris.fr/budget-participatif">Ville de Paris</a>).</li>
+<li><strong>Courts.</strong> Courts rarely decide whether a plan is wise. They do decide whether it follows the law. In 2018 Germany's Federal Administrative Court ruled, in a case brought by the environmental group Deutsche Umwelthilfe, that clean-air plans may include bans on older diesel vehicles where that is the only way to meet air-quality limits, with exceptions and a phase-in (<a href="https://www.bverwg.de/pm/2018/9">BVerwG press release 9/2018</a>). Points not raised during the formal procedure can be hard to bring later, which is another reason to meet the deadlines.</li>
+<li><strong>Elected representatives and the press.</strong> Councillors and journalists need clear, checkable material. A one-page summary with a map, three numbers and a link to your method is often what turns a local dispute into a public debate.</li>
+<li><strong>Singapore.</strong> Transport policy is set nationally, by the Land Transport Authority and its ministry. Influence runs mainly through consultations and direct feedback to the agencies.</li>
+</ul>
+<p class="small">Rules change. Check the current text and the deadlines in the official notice for your project. The links above were checked in November 2026.</p>
+
+<h2>6. Limits and fair play</h2>
+<p>Open tools give citizens real power. They also make it easy to be wrong with confidence. A model is a simplified picture of a city, and every simplification can hide something.</p>
+<h3>What open tools cannot show</h3>
+<ul>
+<li><strong>Long-run change.</strong> Most simulators take where people live and work as given. Over years, a new road or tram line moves homes and jobs. That effect is large but hard to model (<a href="modules/m05-accessibility-land-use.html">Module 5</a>).</li>
+<li><strong>Behavior you did not observe.</strong> A model needs to know how people choose between car, bus and bike. Borrowing those numbers from another city is a guess.</li>
+<li><strong>Data gaps.</strong> OpenStreetMap may miss a footpath or a turn ban. A GTFS feed shows the timetable, not how late the buses actually run.</li>
+<li><strong>Things no model counts well.</strong> How a street feels, its history, and who belongs there. These matter, and they belong in your argument in words.</li>
+</ul>
+<h3>The same standard for everyone</h3>
+<p>If you ask the planners to show their assumptions, you must show yours. If you ask whether their model matches real traffic counts, yours must match them too. <a href="modules/m10-simulation-validation.html">Module 10</a> explains how a model is checked: whether it does what it claims (verification), whether it reproduces observed counts and travel times (calibration and validation), and why a model tuned to hit one number can still be wrong about everything else.</p>
+<p>A few rules of fair play follow from this:</p>
+<ul>
+<li>Compare like with like: run both plans in the same tool, with the same data.</li>
+<li>Publish your inputs and method, so that anyone can repeat your result.</li>
+<li>Report results that go against you as well as those that help you.</li>
+<li>Say what your model leaves out.</li>
+<li>Check what an AI assistant tells you against the data and the tool's documentation.</li>
+<li>Treat the planners as people who can be persuaded, not as opponents to be beaten.</li>
+</ul>
+<p>Done this way, a citizen's model does more than win one argument. It makes it normal for every plan, official or not, to show its assumptions. That is the aim of this course.</p>
+
+<h2>Further reading</h2>
+<ul>
+<li><a href="modules/m01-objective.html">Module 1</a>: the objective in full, with stories and the limits of a single number.</li>
+<li><a href="modules/m05-accessibility-land-use.html">Module 5</a>: accessibility and induced traffic.</li>
+<li><a href="modules/m06-transit-active-modes.html">Module 6</a>: transit, walking, cycling and health.</li>
+<li><a href="modules/m10-simulation-validation.html">Module 10</a>: how to check a simulation.</li>
+<li><a href="modules/m11-safety.html">Module 11</a>: road safety and Vision Zero.</li>
+<li><a href="modules/m12-street-design.html">Module 12</a>: street design and low-traffic neighborhoods.</li>
+<li><a href="modules/m14-appraisal.html">Module 14</a>: how appraisals work in different countries.</li>
+<li><a href="modules/m15-capstone.html">Module 15</a>: the capstone, including a citizen proposal.</li>
+<li><a href="countries/index.html">Countries</a> and <a href="sources/index.html">Sources &amp; translations</a>: national practice and the original documents.</li>
+</ul>
+</main>
+</div>
+
+<footer class="site-footer"><div class="inner">
+Welfare-Centered Transport Planning — an open course. Text licensed CC BY 4.0.
+</div></footer>
+</body>
+</html>
