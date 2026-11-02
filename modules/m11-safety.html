@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 11 · Safety: Vision Zero, Sustainable Safety, Safe System — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Road safety as a price and as a constraint: Sweden's Vision Zero, Dutch Sustainable Safety, the Safe System, kinetic energy and survivable speeds, and national practice in Germany, the US, Japan and France.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="Road safety as a limit rather than a price: Sweden's Vision Zero, Dutch Sustainable Safety, US Vision Zero cities and their mixed results, the physics of speed and mass, what actually reduces deaths, how fast and at what cost, and what to ask of a safety audit.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,34 +29,46 @@
 <main>
 <p class="kicker">Part IV · Policy levers · Module 11</p>
 <h1>Safety: Vision Zero, Sustainable Safety, Safe System</h1>
-<p class="meta">≈ 4 hours · Prerequisites: Modules <a href="m01-objective.html">1</a> and <a href="m03-externalities.html">3</a> · Key terms: C (crash externality), safety constraint \(F\le\bar F\)</p>
+<p class="meta">≈ 4 hours · Prerequisites: Modules <a href="m01-objective.html">1</a> and <a href="m03-externalities.html">3</a> · Key terms: C (crash harm), safety limit \(F\le\bar F\), shadow price \(\nu\)</p>
 
-<p class="lede">Road crashes kill about 20,000 people a year in the European Union and about 40,000 in the United States. For most of the twentieth century, safety was treated as one cost among many: something to reduce where the benefit–cost ratio was good enough. Since the 1990s, Sweden, the Netherlands and then the OECD have argued for a different logic. People will always make mistakes, so the system must be designed so that mistakes are not fatal. This module covers that shift, its physics, and what it means for the objective \(W\): is safety a price in Term C or a constraint on the whole problem?</p>
+<p class="lede">In 1998 Swedish road workers began re-marking an ordinary two-lane road near Gävle. They painted three lanes where there had been two and strung a steel cable down the middle. Head-on crashes on that stretch became nearly impossible. The road was the first answer to a decision the Swedish parliament had taken the year before: that no one should be killed or seriously injured on the country's roads. Sweden did not put a higher price on a life. It set a limit, and then changed the roads, the speeds and the rules until the limit came within reach. This module follows that idea from Sweden to the Netherlands and to American cities. It asks what actually reduces road deaths, how fast, at what cost, and what a decision maker should ask before signing off a road design.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>Should road deaths be one cost among many, traded against travel time at a price? Or a limit that every design must meet first? And which measures actually bring the number of deaths down?</dd>
+<dt>What matters</dt><dd>Whether a crash kills depends mostly on the speed and the difference in mass at the moment of impact. Separating people who move at different speeds, and slowing traffic where they mix, removes most deaths. Measures that only ask people to behave better remove few.</dd>
+<dt>Numbers to question</dt><dd>The value of a statistical life (the US value is three to four times the European ones). The "survivable" impact speeds of 30, 50 and 70 km/h. How strongly deaths respond to speed. Whether countries are compared per person or per kilometer driven.</dd>
+<dt>Levers</dt><dd>Speed limits and automated enforcement work within a year. Median barriers, roundabouts and redesigned streets work within a few years, road by road. Vehicle rules such as speed assistance work over the fifteen or more years it takes the car fleet to turn over. Less driving, through land use, works over a generation.</dd>
+<dt>Ask your analysts</dt><dd>How many deaths and serious injuries does the plan predict, for which groups? Where can crashes still happen above survivable speeds? Does the appraisal let time savings pay for extra deaths? What did the independent safety audit find, and which of its findings were rejected, and why?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>State the ethical and design principles of Vision Zero (Sweden, 1997), Sustainable Safety (Netherlands, 1992/2005/2018) and the Safe System approach (ITF/OECD, Australia, US).</li>
-<li>Use kinetic energy, stopping distance, momentum exchange and the power model to explain why speed and mass differences dominate injury outcomes.</li>
-<li>Explain what survivable impact speeds (the "Wramborg curves") are, and why their evidential basis is contested.</li>
-<li>Organize countermeasures with the Haddon matrix.</li>
-<li>Write safety as a price (VSL in Term C) and as a constraint (\(F\le\bar F\)), derive the shadow price from the Lagrangian, and interpret the difference.</li>
-<li>Compare national performance using fatality rates per capita, with attention to definitions and data years.</li>
+<li>State the principles of Vision Zero (Sweden, 1997), Sustainable Safety (Netherlands, 1992, 2005, 2018) and the Safe System approach (ITF/OECD, Australia, US), and explain why they treat deaths as a limit rather than a price.</li>
+<li>Assess the record: what Sweden, the Netherlands and US Vision Zero cities achieved, and where progress stalled.</li>
+<li>Use kinetic energy, stopping distance and differences in mass to explain why speed and vehicle size dominate injury outcomes.</li>
+<li>Rank common measures by evidence of effect, time to effect and type of cost, and organize them with the Haddon matrix.</li>
+<li>Explain what a limit on deaths costs in travel time, using its shadow price, and why a high shadow price is a signal to change the system rather than only lower speeds.</li>
+<li>Put the right questions to a road safety audit.</li>
 </ul>
 </div>
 
 <h2>1. From "accidents" to system failures</h2>
-<p>Classic traffic safety work had three pillars, often called the three Es: engineering, education and enforcement. Its working assumption was that most crashes are caused by driver error, so the main task is to make road users behave better. Engineering focused on "black spots", locations with an unusual concentration of crashes, and a countermeasure was funded when its crash savings, valued in money, exceeded its cost.</p>
+<p>Classic traffic safety work had three pillars, often called the three Es: engineering, education and enforcement. Its working assumption was that most crashes are caused by driver error. The main task was therefore to make road users behave better. Engineering focused on "black spots", locations with an unusual concentration of crashes. A countermeasure was funded when its crash savings, valued in money, exceeded its cost.</p>
 <p>Three observations undermined this model:</p>
 <ul>
 <li><strong>Error is normal.</strong> Even careful drivers misjudge gaps, overlook cyclists and lose attention. Training and enforcement reduce error rates, but never to zero. A system that requires perfect behavior will keep killing people.</li>
-<li><strong>Harm depends on energy, not on blame.</strong> Whether a crash is fatal depends mainly on the kinetic energy transferred to a human body. A pedestrian hit at 30 km/h usually survives. At 60 km/h usually not, whoever is at fault.</li>
+<li><strong>Harm depends on energy, not on blame.</strong> Whether a crash is fatal depends mainly on the energy of motion that reaches a human body. A pedestrian hit at 30 km/h usually survives. At 60 km/h usually not, whoever is at fault.</li>
 <li><strong>Black spots are only part of the picture.</strong> On rural roads in particular, fatal crashes are spread thinly over long road lengths. Treating the worst sites leaves most of the risk untouched. Risk has to be removed from the network as a whole, for example by separating oncoming traffic everywhere.</li>
 </ul>
-<p>The 1990s visions that follow all start from these observations. They differ in emphasis, in legal status and in how they handle the trade-off with travel time.</p>
+<p>The approaches that follow all start from these observations. They differ in emphasis, in legal status and in how they handle the trade-off with travel time.</p>
 
-<h2>2. Sweden: Vision Zero (Nollvisionen) <span class="term">constraints</span></h2>
-<p>In October 1997 the Swedish Riksdag adopted the government bill <em>Nollvisionen och det trafiksäkra samhället</em> (Prop. 1996/97:137, "Vision Zero and the traffic-safe society"), on the basis of committee report 1997/98:TU4. The intellectual architect was Claes Tingvall, then director of traffic safety at the Swedish National Road Administration (Vägverket). The bill makes three moves that matter for this course.</p>
+<h2>2. Sweden: Vision Zero, a limit rather than a price <span class="term">constraints</span></h2>
+<p>Most appraisals put a money value on each death avoided, the <em>value of a statistical life</em>, and add it to the other costs (<a href="m03-externalities.html">Module 3</a>). With such a price, enough minutes saved by enough drivers can outweigh a death. <a href="m01-objective.html#limits">Module 1, section 9</a> introduced the alternative: a <strong>limit</strong>, a condition a plan must meet before its benefits are added up at all. It also told how Claes Tingvall answered "Zero!" when the Swedish transport minister asked how many deaths the country should accept. This section shows what Sweden did with that answer.</p>
+<p>In October 1997 the Swedish parliament, the Riksdag, adopted the government bill <em>Nollvisionen och det trafiksäkra samhället</em> (Prop. 1996/97:137, "Vision Zero and the traffic-safe society"). The bill makes moves that matter for this course.</p>
 
 <div class="box translation">
 <div class="box-title">Prop. 1996/97:137 — key passages <span class="lang">(Swedish)</span></div>
@@ -68,30 +80,33 @@
 <p>"The system designers bear the ultimate responsibility for the design and functioning of the road transport system." <em>Shared responsibility: road users must follow the rules; if people are still killed or seriously injured, the designers must take further measures.</em></p>
 <p class="original" lang="sv">"Människans fysiska förutsättningar att tåla yttre våld vid trafikolyckor … bör vara normgivande vid utformningen av vägtransportsystemet." (§ 5.2)</p>
 <p>"The human body's physical capacity to withstand external force in traffic crashes … should set the standard for the design of the road transport system."</p>
-<p class="small">Translated by the course authors (machine-assisted). Source: Prop. 1996/97:137, full text at lagen.nu (linked below).</p>
+<p class="small">Translated by the course authors (machine-assisted). Source: Prop. 1996/97:137, full text at lagen.nu (linked below); <a href="../sources/sv-nollvisionen-1997.html">English digest</a>.</p>
 </div>
 
-<p>Read as engineering, the third and fourth passages are the important ones. Responsibility moves from the person who made the mistake to the people who designed a system in which the mistake was fatal: road authorities, vehicle makers, fleet operators, regulators. And the design standard is the tolerance of the human body, which translates directly into maximum impact speeds (Section 5).</p>
+<p>Read as engineering, the third and fourth passages are the important ones. Responsibility moves from the person who made the mistake to the people who designed a system in which the mistake was fatal: road authorities, vehicle makers, fleet operators, regulators. And the design standard becomes the tolerance of the human body. That tolerance translates directly into maximum speeds at the moment of impact (section 5).</p>
 
 <h3>The signature measure: 2+1 roads with cable barriers</h3>
-<p>On Swedish rural main roads, head-on collisions were the leading cause of death. Separating oncoming traffic with a conventional dual carriageway is expensive. The Swedish answer was the <strong>2+1 road</strong> (<em>mötesfri väg</em>, "meeting-free road"): an existing 13 m wide two-lane road is re-marked into three lanes, with a middle lane that alternates direction every few kilometers to provide overtaking, and a flexible wire-rope (cable) barrier along the center line. The first such scheme opened on the E4 near Gävle in 1998. Trafikverket now reports roughly 3,250 km (325 Swedish <em>mil</em>) of 2+1 road. Evaluations by VTI and Trafikverket report reductions in deaths on converted sections in the range of roughly 70–80 %, at a fraction of the cost of a motorway. The cable barrier is struck often, so maintenance is a real cost. Motorcyclist organizations have also criticized wire-rope barriers.</p>
-<p>The 2+1 road is a clean illustration of the Safe System idea. It does not stop drivers from making errors, such as falling asleep or misjudging an overtaking maneuver. It changes the consequence of the error from a head-on crash at a closing speed of 180 km/h into a glancing blow against a barrier.</p>
+<figure class="photo"><img src="../assets/img/history/e20-2plus1-skara-2007.jpg" width="1024" height="768" loading="lazy" alt="A Swedish rural road with two lanes in one direction and one in the other, separated by a low steel cable barrier on posts."><figcaption>A typical Swedish 2+1 road: the E20 west of Skara, 2007. Two lanes in one direction, one in the other, and a cable barrier between them. The two-lane section switches sides every few kilometers so that both directions get places to overtake. <span class="credit">Joel Torsson / Wikimedia Commons, public domain.</span></figcaption></figure>
+<p>On Swedish rural main roads in the 1990s, head-on and run-off-road crashes caused most deaths. Separating oncoming traffic with a conventional motorway is expensive. The Swedish answer was the <strong>2+1 road</strong> (<em>mötesfri väg</em>, "meeting-free road"). An existing 13 m wide road is re-marked into three lanes. The middle lane alternates direction every few kilometers to provide overtaking. A flexible wire-rope barrier (a "cable barrier") runs along the center line. The first scheme opened on the E4 near Gävle in 1998. Trafikverket, the Swedish transport administration, now reports roughly 3,250 km of 2+1 road.</p>
+<p>An evaluation by the Swedish road research institute VTI found that deaths on converted roads fell by 77 %. Deaths plus serious injuries fell by 51 % on roads signed at 110 km/h and by 63 % on roads signed at 90 km/h. The safety level per kilometer driven became about the same as on motorways. The costs are real, too. The barrier is struck often and must be repaired. Capacity fell by about 15 %, because a road with one lane in one direction can carry less traffic. Motorcyclist organizations have criticized wire-rope barriers. (<a href="https://bransch.trafikverket.se/contentassets/6af107d0cbe94281af73a57b9761c189/16_safety_benefits_vadeby.pdf">A. Vadeby, VTI, for the Trafikverket Vision Zero Academy</a>.)</p>
+<p>The 2+1 road is a clean illustration of the Safe System idea. It does not stop drivers from making errors, such as falling asleep or misjudging an overtaking maneuver. It changes the consequence of the error. A head-on crash at a closing speed of 180 km/h becomes a glancing blow against a barrier.</p>
+<p><strong>The record.</strong> Sweden had about 540 road deaths a year in the mid-1990s (<a href="https://trid.trb.org/View/507578">Swedish National Road Administration, 1997</a>). In 2024 it had 213, or 2.0 per 100,000 inhabitants, among the lowest rates in the world (section 8). Not all of the fall is due to Vision Zero. Cars became much safer everywhere in the same decades. But Sweden fell further than most countries that started from a similar level.</p>
 
 <div class="box caution">
 <div class="box-title">What Vision Zero is not</div>
-<p>Vision Zero did not abolish cost–benefit analysis in Sweden. Trafikverket still values crashes with ASEK unit values in appraisal. The goal is long-term, and Sweden also sets interim targets: halve road deaths between 2020 and 2030, measured from the 2017–2019 average, and cut serious injuries by 25 %. In the terms of this course, Sweden runs a <em>price</em> in its appraisals and a <em>constraint</em> in its long-term design philosophy at the same time. Section 8 shows why these can be consistent.</p>
+<p>Vision Zero did not abolish cost–benefit analysis in Sweden. Trafikverket still values crashes with its official unit values (called ASEK) in appraisal. The goal of zero is long-term, and Sweden also sets interim targets: halve road deaths between 2020 and 2030, measured from the 2017–2019 average, and cut serious injuries by 25 %. In the terms of this course, Sweden runs a <em>price</em> in its appraisals and a <em>limit</em> in its long-term design philosophy at the same time. Section 9 shows why the two can be consistent.</p>
 </div>
 
 <h2>3. Netherlands: Sustainable Safety (Duurzaam Veilig) <span class="term">C</span> <span class="term">constraints</span></h2>
-<p>The Dutch road safety institute SWOV published the Sustainable Safety vision in 1992. Where Vision Zero starts from ethics and responsibility, Sustainable Safety starts from road design: give every road one clear function and make its layout match that function. The vision has had three editions.</p>
+<p>The Dutch road safety institute SWOV published the Sustainable Safety vision in 1992. Vision Zero starts from ethics and responsibility. Sustainable Safety starts from road design: give every road one clear function, and make its layout match that function. The vision has had three editions.</p>
 <div class="table-wrap"><table>
 <tr><th>Edition</th><th>Principles</th></tr>
 <tr><td>1992 (original)</td><td>Functionality, homogeneity, predictability</td></tr>
-<tr><td>2005, <em>Door met Duurzaam Veilig</em></td><td>Functionality; homogeneity of mass, speed and direction; predictability and recognisability of road course and road user behavior; forgivingness of the environment and of road users; state awareness (road users' ability to assess their own capacity to drive)</td></tr>
+<tr><td>2005, <em>Door met Duurzaam Veilig</em></td><td>Functionality; homogeneity of mass, speed and direction; predictability and recognizability of road course and road user behavior; forgivingness of the environment and of road users; state awareness (road users' ability to assess their own capacity to drive)</td></tr>
 <tr><td>2018, <em>DV3 — Visie Duurzaam Veilig Wegverkeer 2018–2030</em></td><td>Three design principles: functionality of roads; (bio)mechanics, meaning limiting differences in speed, direction, mass and size and providing protection; psychologics, meaning aligning the road environment with road user competencies. Two organizational principles: effectively allocating responsibility; learning and innovating.</td></tr>
 </table></div>
 
-<p><strong>Functionality</strong> means a strict road hierarchy. Every road is either a <em>stroomweg</em> (through road: high speed, no at-grade conflicts), a <em>gebiedsontsluitingsweg</em> (distributor: moderate speed, conflicts handled at junctions such as roundabouts) or an <em>erftoegangsweg</em> (access road: low speed, mixed traffic). Mixed-function roads, such as a 50 km/h arterial that is also a residential street with driveways, are where design and behavior disagree, and so where crashes happen. <strong>Homogeneity</strong> means that road users who might collide should have similar speeds and masses, or be physically separated. Where cars and cyclists mix, cars must go slowly. Where cars go fast, cyclists must have their own path.</p>
+<p><strong>Functionality</strong> means a strict road hierarchy. Every road is one of three kinds. A <em>stroomweg</em> (through road) carries fast traffic with no crossings at the same level. A <em>gebiedsontsluitingsweg</em> (distributor road) carries moderate speeds, with conflicts handled at junctions such as roundabouts. An <em>erftoegangsweg</em> (access road) has low speeds and mixed traffic. Crashes concentrate on mixed-function roads, such as a 50 km/h arterial that is also a residential street with driveways. There, design and behavior disagree. <strong>Homogeneity</strong> means that road users who might collide should have similar speeds and masses, or be physically separated. Where cars and cyclists mix, cars must go slowly. Where cars go fast, cyclists must have their own path.</p>
 
 <div class="box translation">
 <div class="box-title">SWOV — the DV3 vision in its own words <span class="lang">(Dutch)</span></div>
@@ -100,27 +115,35 @@
 <p class="small">Translated by the course authors (machine-assisted). Source: SWOV, duurzaamveiligwegverkeer.nl (2018).</p>
 </div>
 
-<p>Results were strong for two decades. The Netherlands converted most urban residential streets to 30 km/h zones, built tens of thousands of roundabouts and separated cycle paths along distributor roads. A neutral account must also note that Dutch progress has stalled. In ETSC's figures, Dutch road deaths <em>rose</em> from 570 in 2014 to 675 in 2024 (34 → 38 per million inhabitants), driven largely by older cyclists, many in single-bicycle crashes, and by e-bikes. The Netherlands now has a higher fatality rate than Germany, the UK or Switzerland. Sustainable Safety handles conflicts between vehicles well. It has had less to say about falls from bicycles and about an aging population.</p>
+<p><strong>The record.</strong> From 1998 the national and local governments ran a start-up program. They classified the whole road network by function, converted most residential streets into 30 km/h zones and rural access roads into 60 km/h zones, and built many roundabouts. SWOV's evaluation of 1998–2007 estimated that these measures prevented 300 to 400 deaths in 2007 alone, about 30 % fewer than expected without them. It estimated the benefits at several times the costs (<a href="https://swov.nl/en/fact/sustainable-safety-has-sustainable-safety-increased-road-safety">SWOV fact sheet</a>; Weijermars &amp; Wegman, 2011).</p>
+<p>A fair account must also note that Dutch progress has stalled. In the European Transport Safety Council's figures, Dutch road deaths <em>rose</em> from 570 in 2014 to 675 in 2024 (from 34 to 38 per million inhabitants). Older cyclists account for much of the rise, many of them in crashes involving no other vehicle, and so do electric bicycles. The Netherlands now has a higher death rate than Germany, the UK or Switzerland. Sustainable Safety handles conflicts between vehicles well. It has had less to say about falls from bicycles and about an aging population.</p>
 
 <h2>4. The Safe System approach <span class="term">constraints</span></h2>
-<p>The OECD's International Transport Forum (ITF) generalized the Swedish and Dutch ideas as the <strong>Safe System</strong> in <em>Towards Zero</em> (2008) and <em>Zero Road Deaths and Serious Injuries: Leading a Paradigm Shift to a Safe System</em> (2016). Australia adopted it early. Its national road safety strategies have been built around the Safe System since the 2000s, and Victoria's "Toward Zero" campaign is a well-known application. The common core:</p>
+<p>The International Transport Forum (ITF) at the OECD generalized the Swedish and Dutch ideas as the <strong>Safe System</strong>. It did so in two reports: <em>Towards Zero</em> (2008) and <em>Zero Road Deaths and Serious Injuries: Leading a Paradigm Shift to a Safe System</em> (2016). Australia adopted the approach early. Its national road safety strategies have been built around the Safe System since the 2000s. The common core:</p>
 <ol>
 <li>People make mistakes, so crashes will happen.</li>
-<li>The human body has a limited tolerance to kinetic energy before death or serious injury occurs.</li>
+<li>The human body has a limited tolerance to the energy of a crash before death or serious injury occurs.</li>
 <li>Responsibility is shared between road users and those who design, build, manage and use the system.</li>
-<li>All parts of the system must be strengthened so that if one part fails, the others still protect people (redundancy).</li>
+<li>All parts of the system must be strengthened, so that if one part fails, the others still protect people (redundancy).</li>
 <li>The approach is proactive: remove risk before crashes reveal it.</li>
 </ol>
-<p>The standard elements are safe road users, safe vehicles, safe roads and roadsides, <strong>safe speeds</strong>, and post-crash care. The ITF report's slogan is "think safe roads, not safer roads": the goal is to bring the risk of death or serious injury to near zero by design, not to improve on yesterday.</p>
+<p>The standard elements are safe road users, safe vehicles, safe roads and roadsides, <strong>safe speeds</strong>, and care after the crash. The ITF report's slogan is "think safe roads, not safer roads". The goal is to bring the risk of death or serious injury close to zero by design, not just to improve on yesterday.</p>
 
-<h2>5. The physics: energy, speed and mass <span class="term">C</span></h2>
+<h2>5. United States: Vision Zero cities and their mixed results <span class="term">constraints</span></h2>
+<p>US Vision Zero began in cities, not in the national government. New York adopted a Vision Zero action plan in 2014. San Francisco, Los Angeles, Chicago, Boston and many others followed, supported by the Vision Zero Network. The national picture since then has been bleak. US road deaths rose sharply after 2019, and pedestrian deaths reached their highest levels in decades.</p>
+<p>Did the cities that adopted Vision Zero do better? A 2026 study by Robert Schneider and colleagues compared the 100 largest US cities. Seventeen of them had adopted Vision Zero early, between 2012 and 2016. Between 2008–2012 and 2018–2022, the traffic death rate of all 100 cities rose by a third. In the 17 early adopters, it rose by 15 %. In the other 83 cities, it rose by 40 %. Only three Vision Zero cities saw their death rate fall: New York, Boston and San Francisco (<a href="https://doi.org/10.32866/001c.155976">Schneider et al., <em>Findings</em>, 2026</a>). The comparison is descriptive. Cities that adopt Vision Zero may differ from others in many ways. But it suggests that the pledge alone changes little. What changes outcomes is what a city then builds and enforces.</p>
+<p>New York shows both sides. The city reported 205 traffic deaths in 2025, the fewest since its records began in 1910, and 31 % fewer than when Vision Zero started. Yet the count had already been 206 in 2018, and it climbed back above 250 in 2021 and again in 2024. The city credits automated speed cameras, which run around the clock since 2022, along with street redesigns and enforcement against unregistered vehicles (<a href="https://www.nyc.gov/html/dot/html/pr2026/traffic-deaths-reach-all-time-low.shtml">NYC DOT, January 2026</a>). These are the city's own figures and attributions.</p>
+<p>Hoboken, New Jersey, a dense city of about 60,000, has recorded no traffic deaths since January 2017. It systematically "daylighted" its intersections, removing parking spaces next to crossings so that drivers and pedestrians can see each other. It also lowered speed limits and changed signals. Treat single-city streaks with care: in a small population, a run of years without deaths can happen by chance.</p>
+<p>At the federal level, the US Department of Transportation published the <strong>National Roadway Safety Strategy</strong> in January 2022. It names zero deaths as the long-term goal and adopts the Safe System approach. The 2021 Infrastructure Investment and Jobs Act created the Safe Streets and Roads for All grant program, which funds local safety action plans. The US strengths are data and research. Its national crash census (FARS), the <em>Highway Safety Manual</em> and its catalog of crash modification factors are used worldwide. The weaknesses are high exposure (Americans drive a great deal), wide multi-lane urban arterials with high speeds, ever heavier vehicles, and limited use of automated enforcement in many states.</p>
+
+<h2>6. The physics: energy, speed and mass <span class="term">C</span></h2>
 <h3>Kinetic energy</h3>
-<p>A vehicle of mass \(m\) moving at speed \(v\) carries kinetic energy</p>
+<p>A moving vehicle carries energy of motion, its <em>kinetic energy</em>. For a vehicle of mass \(m\) moving at speed \(v\), it is</p>
 $$E_k=\tfrac12 m v^2 .$$
-<p>Energy grows with the square of speed. A car at 50 km/h carries \((50/30)^2\approx 2.8\) times the energy it carries at 30 km/h. Injury depends on how much of that energy is absorbed by a body and how quickly, which is closely related to the change in velocity \(\Delta v\) that the body undergoes.</p>
+<p>Energy grows with the square of speed. A car at 50 km/h carries \((50/30)^2\approx 2.8\) times the energy it carries at 30 km/h. Injury depends on how much of that energy reaches a body and how quickly.</p>
 
 <h3>Stopping distance: why 30 km/h is not just "a bit slower"</h3>
-<p>With reaction time \(t_r\) and deceleration \(a\),</p>
+<p>A driver who sees a hazard needs a moment to react, the reaction time \(t_r\). During it, the car travels on at full speed. Then the brakes slow it with a deceleration \(a\). The total stopping distance is</p>
 $$d_{\text{stop}}=v\,t_r+\frac{v^2}{2a}.$$
 <div class="box note">
 <div class="box-title">Worked example · A child steps out 15 m ahead</div>
@@ -129,42 +152,88 @@ $$d_{\text{stop}}=v\,t_r+\frac{v^2}{2a}.$$
 <li>At 30 km/h (8.33 m/s): \(d_{\text{stop}}=8.33+\dfrac{8.33^2}{14}=8.33+4.96=13.3\) m. The car stops 1.7 m short of the child.</li>
 <li>At 50 km/h (13.9 m/s): the car travels 13.9 m during the reaction time and has only 1.1 m left to brake. Impact speed: \(v_i=\sqrt{v^2-2a s}=\sqrt{193-2\cdot7\cdot1.1}=13.3\) m/s \(\approx 48\) km/h.</li>
 </ul>
-<p>Lowering the travel speed by 20 km/h changes the impact speed by 48 km/h, from almost unbraked to no collision at all. This non-linearity is the main engineering argument for 30 km/h where pedestrians and vehicles mix. Spain's Royal Decree 970/2020 states that the risk of death for a pedestrian is reduced "at least five-fold" when the impact speed is 30 rather than 50 km/h (see <a href="m12-street-design.html">Module 12</a>).</p>
+<p>Lowering the travel speed by 20 km/h changes the impact speed by 48 km/h: from almost unbraked to no collision at all. This is the main engineering argument for 30 km/h where pedestrians and vehicles mix. Spain's Royal Decree 970/2020 states that the risk of death for a pedestrian is reduced "at least five-fold" when the impact speed is 30 rather than 50 km/h (see <a href="m12-street-design.html">Module 12</a>).</p>
 </div>
 
-<h3>Mass differences: momentum exchange</h3>
-<p>In a collision between two vehicles that move together after impact (perfectly plastic), conservation of momentum gives each vehicle's velocity change:</p>
+<h3>How the risk of death rises with impact speed</h3>
+<p>How likely is a pedestrian to die when hit at a given speed? Brian Tefft of the AAA Foundation for Traffic Safety estimated it from US crash records. On average, the risk of death is 10 % at an impact speed of 23 mph (37 km/h), 25 % at 32 mph (51 km/h), 50 % at 42 mph (68 km/h) and 90 % at 58 mph (93 km/h). Risk rises much faster for older people. A 70-year-old struck at 25 mph faces about the same risk of severe injury or death as a 30-year-old struck at 35 mph (<a href="https://aaafoundation.org/impact-speed-pedestrians-risk-severe-injury-death/">Tefft, 2011</a>). For a country such as Japan, where more than half of road deaths are people over 65, that matters a great deal (section 8).</p>
+
+<h3>Mass: who absorbs the blow</h3>
+<p>When a light vehicle hits a heavy one, the light one's speed changes much more. Its occupants absorb most of the blow. A 1,500 kg car that hits a 2,500 kg SUV head-on, both at 50 km/h, undergoes a sudden change of speed of about 62 km/h. The SUV undergoes about 37 km/h. Against a 40-tonne truck, the car's change of speed is almost the whole closing speed. For a cyclist or pedestrian hit by any car, it is essentially the whole impact speed. This is the physics behind Sustainable Safety's homogeneity principle, and behind the debate about ever heavier cars in the US and Europe. The derivation is in the box below.</p>
+
+<h3>Speed across a whole network</h3>
+<p><a href="m01-objective.html#term-c">Module 1</a> introduced Göran Nilsson's <em>power model</em>: across a road network, deaths change roughly with the fourth power of the change in mean speed. A 10 % lower mean speed means roughly a third fewer deaths. Later work refined the rule. Rune Elvik of the Norwegian Institute of Transport Economics (TØI) pooled 115 studies in 2009. He found that the effect is stronger on rural roads and motorways than in towns. For people killed, his exponent is about 4.6 on rural roads and motorways but about 3.0 on urban roads (<a href="https://www.onisr.securite-routiere.gouv.fr/sites/default/files/2019-02/02-Mod%C3%A9l%20de%20Nilson%20et%20d%27Elvik.pdf">ONISR summary of Nilsson and Elvik</a>). Two lessons follow for decision makers. A modest cut in mean speed is one of the most powerful safety measures there is. And a single exponent applied everywhere overstates the effect in towns and understates it on fast roads.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>Momentum exchange, power-model exponents, and why they differ</summary>
+<p><strong>Momentum exchange.</strong> Take a collision in which two vehicles move together after impact (a "perfectly plastic" collision). Momentum, mass times velocity, is conserved. Let \(v_{\text{rel}}\) be the closing speed. Then each vehicle's change of speed is</p>
 $$\Delta v_1=\frac{m_2}{m_1+m_2}\,v_{\text{rel}},\qquad \Delta v_2=\frac{m_1}{m_1+m_2}\,v_{\text{rel}} .$$
-<p>A 1,500 kg car hitting a 2,500 kg SUV head-on at 50 km/h each (\(v_{\text{rel}}=100\) km/h) experiences \(\Delta v=62.5\) km/h. The SUV experiences 37.5 km/h. Against a 40 t truck the car's \(\Delta v\) is 96 % of the closing speed. For a 75 kg cyclist hit by any car, it is essentially the whole impact speed. This is the physics behind Sustainable Safety's homogeneity principle and behind the debate about growing vehicle mass in the US and Europe.</p>
-
-<h3>The power model</h3>
-<p>Across a road network, the Swedish researcher Göran Nilsson's <em>power model</em> relates changes in mean speed to changes in crash outcomes:</p>
+<p>For the car (1,500 kg) and SUV (2,500 kg) at \(v_{\text{rel}}=100\) km/h: \(\Delta v_1=\tfrac{2500}{4000}\cdot100=62.5\) km/h and \(\Delta v_2=37.5\) km/h. Against a 40 t truck: \(\Delta v_1=\tfrac{40000}{41500}\cdot100\approx 96\) km/h. Real crashes are partly elastic and rotate the vehicles, so these are upper bounds, but the ratio is robust.</p>
+<p><strong>The power model.</strong> For mean speeds \(\bar v_1\) before and \(\bar v_2\) after a change, Nilsson wrote</p>
 $$\frac{F_2}{F_1}=\left(\frac{\bar v_2}{\bar v_1}\right)^{4},\qquad \frac{S_2}{S_1}=\left(\frac{\bar v_2}{\bar v_1}\right)^{3},\qquad \frac{I_2}{I_1}=\left(\frac{\bar v_2}{\bar v_1}\right)^{2},$$
-<p>for fatalities \(F\), fatal plus serious injuries \(S\) and all injury crashes \(I\). A 10 % cut in mean speed (e.g., 50 → 45 km/h) predicts \(1-0.9^4\approx 34\,\%\) fewer deaths. Later meta-analyses, notably by Rune Elvik at the Norwegian Institute of Transport Economics (TØI), confirm the model's broad shape, with exponents that vary by road type. Treat the exponents as approximate.</p>
+<p>for fatal crashes \(F\), fatal plus serious injury crashes \(S\) and all injury crashes \(I\). Elvik's 2009 update (TØI report 1034/2009) estimated separate exponents by road type:</p>
+<div class="table-wrap"><table>
+<tr><th>Outcome</th><th>Rural roads and motorways</th><th>Urban roads</th></tr>
+<tr><td>Injury crashes</td><td>1.6</td><td>1.2</td></tr>
+<tr><td>People injured</td><td>2.2</td><td>1.4</td></tr>
+<tr><td>Fatal crashes</td><td>4.1</td><td>2.6</td></tr>
+<tr><td>People killed</td><td>4.6</td><td>3.0</td></tr>
+</table></div>
+<p><strong>Why the exponents differ.</strong> A power model says that the same <em>percentage</em> change in speed has the same percentage effect, whatever the starting speed. A 10 % cut from 100 km/h (10 km/h) and from 30 km/h (3 km/h) would be equally effective. Physics suggests that the <em>absolute</em> change matters too, and urban crashes involve more pedestrians, junctions and low speeds. Elvik's later work therefore also compares the power model with an exponential model, in which each km/h has a fixed percentage effect. For appraisal, use exponents for the right road type, report the range, and do not extrapolate to speed changes far outside the evidence.</p>
+</details>
 
-<h3>Survivable impact speeds ("Wramborg curves")</h3>
-<p>Safe System documents often state that the human body tolerates roughly:</p>
+<h3>Survivable impact speeds</h3>
+<p>Safe System documents often state that the human body tolerates roughly the impact speeds in the table. They come from curves of fatality risk against impact speed presented by Per Wramborg of the Swedish Road Administration in 2005, often called the "Wramborg curves".</p>
 <div class="table-wrap"><table>
 <tr><th>Conflict type</th><th>Commonly cited maximum impact speed</th><th>Design implication</th></tr>
 <tr><td>Vehicle vs pedestrian or cyclist</td><td>≈ 30 km/h</td><td>30 km/h where people on foot and bike mix with cars, or physical separation</td></tr>
 <tr><td>Side impact, car vs car (e.g., at a junction)</td><td>≈ 50 km/h</td><td>Roundabouts or low approach speeds at junctions with crossing traffic</td></tr>
-<tr><td>Head-on, car vs car</td><td>≈ 70 km/h</td><td>Median separation (2+1, barriers) above ~70 km/h</td></tr>
+<tr><td>Head-on, car vs car</td><td>≈ 70 km/h</td><td>Median separation (2+1, barriers) above about 70 km/h</td></tr>
 </table></div>
-<p>These numbers come from curves of fatality probability against impact speed presented by Per Wramborg of the Swedish Road Administration in 2005. They are widely used, but Australian researchers from ARRB and the University of Adelaide's Centre for Automotive Safety Research (Jurewicz et al., 2015–2016) note that the original conference paper cited no underlying data. They propose alternative curves for serious injury (MAIS3+) and argue that the critical speed for frail or very young pedestrians may be below 30 km/h. Use the thresholds as design heuristics, not as precise biomechanical constants.</p>
+<p>These thresholds are widely used, but their basis is thin. Australian researchers from ARRB and the University of Adelaide's Centre for Automotive Safety Research (Jurewicz and colleagues, 2015–2016) note that the original conference paper cited no underlying data. They propose alternative curves for serious injury, and argue that the critical speed for frail or very young pedestrians may be below 30 km/h. Use the thresholds as design rules of thumb, not as precise biomechanical constants.</p>
 
-<h2>6. The Haddon matrix <span class="term">C</span></h2>
-<p>William Haddon Jr., the first head of the US National Highway Safety Bureau (today's NHTSA), proposed in the late 1960s to analyze injuries along two dimensions: the <em>phase</em> of the event and the <em>factor</em> involved. The matrix is a checklist that prevents the analyst from fixating on driver behavior.</p>
+<h2>7. What actually reduces deaths: how fast, and at what cost <span class="term">C</span> <span class="term">A</span></h2>
+<p>A decision maker has a budget, a term of office and a list of possible measures. The table brings together evidence from this module. The effect sizes come from different places and methods, so compare their order of magnitude, not their decimals.</p>
+<div class="table-wrap"><table>
+<tr><th>Measure</th><th>Evidence of effect</th><th>Time to effect</th><th>Main cost</th></tr>
+<tr><td>Automated speed enforcement</td><td>France: national camera program from November 2003, associated with about 20 % fewer deaths and injury crashes (<a href="https://www.onisr.securite-routiere.gouv.fr/sites/default/files/2019-04/Blais%20et%20Carnis%20%20Speed%20Camera%20journal%20of%20safety%20research.pdf">Blais &amp; Carnis, 2015</a>). Sweden: about 30 % fewer deaths at camera sites (Vadeby, VTI).</td><td>Months</td><td>Modest money; political cost and some travel time</td></tr>
+<tr><td>Lower speed limits matched to the road</td><td>Sweden's 2008–2009 review of rural limits: about 17 fewer deaths a year, mostly where limits fell from 90 to 80 km/h (Vadeby, VTI)</td><td>Months, if limits are respected</td><td>Travel time; needs enforcement or design to stick</td></tr>
+<tr><td>Separating oncoming traffic (2+1 roads, median barriers)</td><td>Sweden: deaths on converted roads down 77 % (section 2)</td><td>Years, road by road</td><td>Construction, barrier repairs, about 15 % less capacity</td></tr>
+<tr><td>Network classification, 30 km/h zones, roundabouts</td><td>Netherlands 1998–2007: about 30 % fewer deaths than expected by 2007, benefits several times costs (section 3)</td><td>Years to a decade</td><td>Construction; longer car trips on access roads</td></tr>
+<tr><td>Street redesign at crossings (daylighting, raised crossings, protected bike lanes)</td><td>Strong in single cities (Hoboken, New York); hard to separate from other measures</td><td>Years</td><td>Curb space, parking spaces (<a href="m12-street-design.html">Module 12</a>)</td></tr>
+<tr><td>Vehicle standards (automatic emergency braking, intelligent speed assistance)</td><td>The EU has required intelligent speed assistance, which warns drivers above the limit, in all newly registered cars since July 2024</td><td>Fifteen years or more, as the fleet turns over</td><td>Paid by car buyers; drivers can switch the system off</td></tr>
+<tr><td>Less exposure: shorter trips, more walking, cycling and transit</td><td>Explains much of the per-person gap between the US and Europe (section 8)</td><td>A generation</td><td>Land-use and network change (<a href="m05-accessibility-land-use.html">Module 5</a>)</td></tr>
+</table></div>
+<p>Three patterns stand out. First, speed is the fastest lever, through limits and above all through enforcement. It is also the most unpopular (France, section 8). Second, physical separation is slower and costs money, but it keeps working when people make mistakes and needs no daily enforcement. Third, measures that only inform or exhort road users are missing from the table. That is not because nobody tries them. It is because their effect on deaths is hard to show on its own.</p>
+
+<h3>A checklist: the Haddon matrix</h3>
+<p>William Haddon Jr., the first head of the US National Highway Safety Bureau (today's NHTSA), proposed in the late 1960s to analyze injuries along two dimensions. One is the <em>phase</em> of the event: before, during and after the crash. The other is the <em>factor</em> involved: the human, the vehicle, and the environment. The resulting matrix is a checklist that keeps the analyst from fixating on driver behavior.</p>
 <div class="table-wrap"><table>
 <tr><th>Phase</th><th>Human</th><th>Vehicle</th><th>Environment (road, rules, institutions)</th></tr>
-<tr><td><strong>Pre-crash</strong> (prevent the crash)</td><td>training, alcohol and drug limits, fatigue rules, enforcement</td><td>brakes, lighting, intelligent speed assistance (ISA), automatic emergency braking</td><td>speed limits matched to design, roundabouts, sight lines, separated cycle tracks, filtered permeability</td></tr>
-<tr><td><strong>Crash</strong> (reduce harm)</td><td>seat belts, helmets</td><td>crumple zones, airbags, pedestrian-friendly front ends, vehicle mass and bonnet height</td><td>cable barriers, forgiving roadsides, crash cushions, low impact speeds by design</td></tr>
+<tr><td><strong>Pre-crash</strong> (prevent the crash)</td><td>training, alcohol and drug limits, fatigue rules, enforcement</td><td>brakes, lighting, intelligent speed assistance, automatic emergency braking</td><td>speed limits matched to design, roundabouts, sight lines, separated cycle tracks, closing streets to through traffic</td></tr>
+<tr><td><strong>Crash</strong> (reduce harm)</td><td>seat belts, helmets</td><td>crumple zones, airbags, pedestrian-friendly front ends, vehicle mass and hood height</td><td>cable barriers, forgiving roadsides, crash cushions, low impact speeds by design</td></tr>
 <tr><td><strong>Post-crash</strong> (survive)</td><td>first-aid knowledge</td><td>eCall automatic emergency call (mandatory in new EU car types since 2018)</td><td>emergency response times, trauma care, crash investigation and learning</td></tr>
 </table></div>
-<p>A Safe System reading of the matrix says: rely most on the <em>crash</em> row and the <em>environment</em> and <em>vehicle</em> columns, because they work even when the human in the pre-crash cell fails.</p>
+<p>A Safe System reading of the matrix says: rely most on the <em>crash</em> row and on the <em>vehicle</em> and <em>environment</em> columns. They work even when the human in the pre-crash cell fails.</p>
 
-<h2>7. National practice compared</h2>
+<h3>What to ask of a safety audit</h3>
+<p>A <strong>road safety audit</strong> is an independent check of a road design for safety problems, made before it is built and again before it opens. In the EU, Directive 2008/96/EC made audits mandatory on the trans-European road network. Its 2019 revision (Directive 2019/1936) extended them to motorways and other primary roads and added explicit attention to vulnerable road users such as pedestrians and cyclists (<a href="https://eur-lex.europa.eu/eli/dir/2008/96/2019-12-16/eng">consolidated text</a>). Many cities apply audits to their own streets voluntarily. An audit is only as useful as the questions it answers. A decision maker can ask:</p>
+<div class="box note">
+<div class="box-title">Questions for a road safety audit</div>
+<ol>
+<li><strong>Who audited, and how independent were they?</strong> The auditor should not have worked on the design.</li>
+<li><strong>Against which standard?</strong> Was the design checked against survivable impact speeds for every conflict (people on foot and bike, crossing traffic, oncoming traffic)? Or only against design standards for the vehicle, such as sight distance at a design speed?</li>
+<li><strong>Which users were considered?</strong> Children, older people, people with disabilities, cyclists, motorcyclists, at night and in winter?</li>
+<li><strong>What speeds will people actually drive?</strong> A street that looks fast will be driven fast, whatever the sign says (<a href="m12-street-design.html">Module 12</a>).</li>
+<li><strong>How many deaths and serious injuries are predicted,</strong> using which crash model, for which groups? Is that consistent with the city's limit?</li>
+<li><strong>Which findings did the designers reject, and why?</strong> Ask for the audit report and the designers' response, not a summary.</li>
+<li><strong>Will there be a follow-up</strong> after opening, with crash and speed data published?</li>
+</ol>
+</div>
+
+<h2>8. National practice compared</h2>
 <h3>International fatality rates</h3>
-<p>Rates per capita are the simplest comparison, but they mix exposure (how much people travel and by which mode) with risk. All figures below use the international 30-day definition unless noted.</p>
+<p>Rates per person are the simplest comparison. But they mix exposure (how much people travel, and by which mode) with risk. All figures below count deaths within 30 days of the crash, the international definition, unless noted.</p>
 <div class="table-wrap"><table>
 <tr><th>Country</th><th>Road deaths</th><th>Deaths per 100,000 inhabitants</th><th>Year · source</th></tr>
 <tr><td>Norway</td><td>89</td><td>1.6</td><td>2024 · ETSC PIN 2025 (provisional)</td></tr>
@@ -182,7 +251,7 @@ $$\frac{F_2}{F_1}=\left(\frac{\bar v_2}{\bar v_1}\right)^{4},\qquad \frac{S_2}{S
 <tr><td>Romania</td><td>1,477</td><td>7.7</td><td>2024 · ETSC PIN 2025 (provisional)</td></tr>
 <tr><td>United States</td><td>40,901</td><td>12.2</td><td>2023 · NHTSA (FARS)</td></tr>
 </table></div>
-<p>Three cautions. First, Japan's headline statistic counts deaths within 24 hours. Multiply by about 1.2 to compare with the 30-day figures used elsewhere, as Japan's own plan does. Second, the US rate per vehicle-mile (1.26 per 100 million VMT in 2023) is closer to European rates than the per-capita rate, because Americans drive much more. The per-capita gap is partly an exposure gap, and exposure is itself a planning outcome (<a href="m05-accessibility-land-use.html">Module 5</a>). Third, small countries' annual figures fluctuate. Use multi-year averages for serious comparisons. For global coverage, use the WHO <em>Global status report on road safety 2023</em> and the ITF's IRTAD annual reports.</p>
+<p>Three cautions. First, Japan's headline statistic counts deaths within 24 hours. Multiply by about 1.2 to compare with the 30-day figures used elsewhere, as Japan's own plan does. Second, the US rate per vehicle-mile (1.26 deaths per 100 million miles in 2023) is closer to European rates than the per-person rate, because Americans drive much more. The per-person gap is partly an exposure gap, and exposure is itself a planning outcome (<a href="m05-accessibility-land-use.html">Module 5</a>). Third, small countries' annual figures fluctuate. Use multi-year averages for serious comparisons. For global coverage, use the WHO <em>Global status report on road safety 2023</em> and the ITF's IRTAD annual reports.</p>
 
 <h3>Germany: Vision Zero in the administrative rules</h3>
 <p>Germany adopted Vision Zero in its federal road safety program for 2021–2030, which aims to cut road deaths by 40 % by 2030 and to reduce serious injuries. Since the 2021 revision, the general administrative regulation to the Road Traffic Regulations (VwV-StVO) also names Vision Zero as the basis of all traffic measures:</p>
@@ -192,14 +261,10 @@ $$\frac{F_2}{F_1}=\left(\frac{\bar v_2}{\bar v_1}\right)^{4},\qquad \frac{S_2}{S
 <p>"The Road Traffic Regulations (StVO) regulate and direct public traffic. The highest objective is road safety. In this, 'Vision Zero' (no traffic crashes resulting in death or serious injury) is the basis of all traffic measures."</p>
 <p class="small">Translated by the course authors (machine-assisted). Official legal text, verwaltungsvorschriften-im-internet.de.</p>
 </div>
-<p>The tension is in the statute. An administrative regulation binds authorities' discretion but cannot override the law. § 45(9) StVO still requires that restrictions on moving traffic, such as a lower speed limit, be justified by a local danger that "considerably exceeds" the general risk. Municipalities wanting 30 km/h on main roads have found this hard to show. The 2024 reform of the Road Traffic Act (StVG) and the StVO added climate, health and urban development as permissible grounds, but only provided that "the ease of traffic" is considered and safety is not impaired. Germany is thus a case where the constraint is stated in the rules while the legal burden of proof still sits with the restriction. Germany has a general motorway advisory speed (130 km/h <em>Richtgeschwindigkeit</em>) but no general motorway limit.</p>
-
-<h3>United States: Vision Zero cities and the federal Safe System</h3>
-<p>US Vision Zero began in cities. New York adopted a Vision Zero action plan in 2014, followed by San Francisco, Los Angeles, Chicago and many others, supported by the Vision Zero Network. Results are mixed. National road deaths rose sharply after 2019, and pedestrian deaths reached multi-decade highs. Hoboken, New Jersey, a dense city of about 60,000, is often cited for having recorded no traffic deaths since January 2017 after systematic "daylighting" of intersections (removing parking near crossings), lower limits and signal changes. Treat single-city streaks with care: in small populations, zero is possible by chance.</p>
-<p>At federal level, the US Department of Transportation published the <strong>National Roadway Safety Strategy (NRSS)</strong> in January 2022 with zero deaths as the long-term goal and the Safe System Approach as its framework: safer people, safer roads, safer vehicles, safer speeds and post-crash care, built on the principles that death and serious injury are unacceptable, humans make mistakes, humans are vulnerable, responsibility is shared, safety is proactive, and redundancy is crucial. The 2021 Infrastructure Investment and Jobs Act created the Safe Streets and Roads for All (SS4A) grant program to fund local safety action plans. The US strengths are data and research: FARS, the Highway Safety Manual and crash modification factors are used worldwide. The weaknesses are the scale of exposure, wide multi-lane arterials with high speeds through urban areas, heavy vehicles, and limited use of automated enforcement in many states.</p>
+<p>The tension is in the statute. An administrative regulation guides how authorities use their discretion, but it cannot override the law. § 45(9) StVO still requires that restrictions on moving traffic, such as a lower speed limit, be justified by a local danger that "considerably exceeds" the general risk. Municipalities wanting 30 km/h on main roads have found this hard to show. The 2024 reform of the Road Traffic Act (StVG) and the StVO added climate, health and urban development as permissible grounds, but only provided that "the ease of traffic" is considered and safety is not impaired. Germany is thus a case where the limit is stated in the rules while the legal burden of proof still sits with the restriction. Germany has a recommended motorway speed of 130 km/h (<em>Richtgeschwindigkeit</em>) but no general motorway limit.</p>
 
 <h3>Japan: national five-year plans and "Zone 30 Plus"</h3>
-<p>Japan has run five-year Traffic Safety Basic Plans (交通安全基本計画) since 1971, under the Traffic Safety Policies Basic Act of 1970. Deaths fell from a peak of 16,765 (24-hour) in 1970 to 2,663 in 2024. The 11th plan (第11次交通安全基本計画), decided by the Central Traffic Safety Policy Council on 29 March 2021 for fiscal years 2021–2025, is built on a "people first" philosophy.</p>
+<p>Japan has run five-year Traffic Safety Basic Plans (交通安全基本計画) since 1971, under the Traffic Safety Policies Basic Act of 1970. Deaths fell from a peak of 16,765 (24-hour count) in 1970 to 2,663 in 2024. The 11th plan (第11次交通安全基本計画), decided by the Central Traffic Safety Policy Council on 29 March 2021 for fiscal years 2021–2025, is built on a "people first" philosophy.</p>
 <div class="box translation">
 <div class="box-title">第11次交通安全基本計画 (Cabinet Office, 2021) <span class="lang">(Japanese)</span></div>
 <p class="original" lang="ja">「道路交通については，自動車と比較して弱い立場にある歩行者等の安全を，また，全ての交通について，高齢者，障害者，子供等の交通弱者の安全を，一層確保する必要がある。……このような「人優先」の交通安全思想を基本とし，あらゆる施策を推進していく。」</p>
@@ -208,75 +273,93 @@ $$\frac{F_2}{F_1}=\left(\frac{\bar v_2}{\bar v_1}\right)^{4},\qquad \frac{S_2}{S
 <p>"By 2025, reduce 24-hour road deaths to 2,000 or fewer" (the plan notes this equals about 2,400 on a 30-day basis) "and seriously injured people to 22,000 or fewer."</p>
 <p class="small">Translated by the course authors (machine-assisted). Source: Cabinet Office, 第11次交通安全基本計画, pp. 1 and target section.</p>
 </div>
-<p>The 2025 death target was missed: deaths were 2,663 in 2024, and Cabinet Office review papers acknowledged the shortfall. Japan's distinctive problem is that more than half of its road deaths are people aged 65 or over (56.8 % in 2024), many of them pedestrians. Its main local tool is the <strong>Zone 30</strong> (area-wide 30 km/h, introduced by the National Police Agency in 2011). In August 2021 the road ministry (MLIT) and the National Police Agency launched <strong>Zone 30 Plus</strong> (ゾーン30プラス), which combines the 30 km/h area limit with physical devices such as humps and chokers. These are covered in <a href="m12-street-design.html">Module 12</a>, together with the new 30 km/h default limit on residential streets from September 2026.</p>
+<p>The 2025 death target was missed: deaths were 2,663 in 2024, and Cabinet Office review papers acknowledged the shortfall. Japan's distinctive problem is age. More than half of its road deaths are people aged 65 or over (56.8 % in 2024), many of them pedestrians. Its main local tool is the <strong>Zone 30</strong> (an area-wide 30 km/h limit, introduced by the National Police Agency in 2011). In August 2021 the road ministry (MLIT) and the National Police Agency launched <strong>Zone 30 Plus</strong> (ゾーン30プラス). It combines the 30 km/h area limit with physical devices such as humps and road narrowings. These are covered in <a href="m12-street-design.html">Module 12</a>, together with the new 30 km/h default limit on residential streets from September 2026.</p>
 
-<h3>France: automated enforcement and speed policy</h3>
-<p>France had one of Western Europe's worst safety records around 2000, with about 8,000 road deaths in 2001. President Chirac made road safety a national priority in 2002. The first fixed automated speed cameras (<em>contrôle automatisé</em>) were installed from October 2003, with offences processed centrally and automatically. The national observatory ONISR summarizes the decade:</p>
+<h3>France: enforcement at scale, and its political cost</h3>
+<p>France had one of Western Europe's worst safety records around 2000, with about 8,000 road deaths in 2001. President Chirac made road safety a national priority in 2002. The first fixed automated speed cameras (<em>contrôle automatisé</em>) were installed in late 2003. Offenses are processed centrally and automatically. The national road safety observatory, ONISR, summarizes the decade:</p>
 <div class="box translation">
 <div class="box-title">ONISR, annual reviews 2000–2009 <span class="lang">(French)</span></div>
 <p class="original" lang="fr">"Plus de 30000 vies ont été épargnées durant cette période, dont les trois quarts grâce à la baisse des vitesses pratiquées."</p>
 <p>"More than 30,000 lives were spared during this period, three-quarters of them thanks to the reduction in speeds actually driven."</p>
 <p class="small">Translated by the course authors (machine-assisted). Source: Observatoire national interministériel de la sécurité routière.</p>
 </div>
-<p>Deaths fell to 4,273 in 2009 and to about 3,200 by the mid-2010s, then plateaued (3,193 in 2024). Later measures included the reduction of the limit on two-lane rural roads without a central separator from 90 to 80 km/h in July 2018 (partly reversed when the 2019 mobility law, the LOM, let départements restore 90 km/h on some roads), and city-wide 30 km/h policies (<em>Ville 30</em>) in Grenoble, Paris (from August 2021), Lyon and others. France illustrates a different Safe System lever: not redesigning roads but enforcing speed at scale. It also illustrates the political cost. The 80 km/h limit was one of the grievances of the 2018–2019 <em>gilets jaunes</em> protests, and many speed cameras were vandalised.</p>
+<p>Deaths fell to 4,273 in 2009 and to about 3,200 by the mid-2010s, then plateaued (3,193 in 2024). In July 2018 France lowered the limit on two-lane rural roads without a central separator from 90 to 80 km/h. The 2019 mobility law (the LOM) then let départements restore 90 km/h on some roads. Cities such as Grenoble, Paris (from August 2021) and Lyon adopted 30 km/h as the general limit (<em>Ville 30</em>). France illustrates a Safe System lever other than road design: enforcing speed at scale. It also illustrates the political cost. The 80 km/h limit was one of the grievances of the 2018–2019 <em>gilets jaunes</em> protests, and many speed cameras were vandalized.</p>
 
-<h2>8. Safety in \(W\): price or constraint? <span class="term">C</span> <span class="term">constraints</span></h2>
-<h3>Safety as a price</h3>
-<p>In standard appraisal, crashes enter Term C as \(p_{\text{crash}}E_{\text{crash}}\), where the price of a fatality is the <em>value of a statistical life</em> (VSL), derived from what people are willing to pay for small risk reductions (<a href="m03-externalities.html">Module 3</a>). Consider a single policy variable, the mean speed \(v\) on a rural road. Travel time costs fall with speed, and deaths rise with it (power model). The planner's problem is</p>
-$$\min_v\; C(v)=\underbrace{\mathrm{VTTS}\cdot\frac{Q}{v}}_{\text{time (Term A)}}+\underbrace{\mathrm{VSL}\cdot F_0\Big(\frac{v}{v_0}\Big)^{4}}_{\text{deaths (Term C)}},$$
-<p>with traffic \(Q\) in vehicle-km per year and \(F_0\) deaths per year at reference speed \(v_0\). The first-order condition sets the marginal time cost of slowing down equal to the marginal value of deaths avoided:</p>
-$$\mathrm{VTTS}\cdot\frac{Q}{v^{2}}=\mathrm{VSL}\cdot\frac{4F_0v^{3}}{v_0^{4}}\quad\Rightarrow\quad v^{*}=\left(\frac{\mathrm{VTTS}\cdot Q\cdot v_0^{4}}{4\,\mathrm{VSL}\cdot F_0}\right)^{1/5}.$$
-
-<h3>Safety as a constraint, and its shadow price</h3>
-<p>Vision Zero instead imposes \(F(v)\le\bar F\). The Lagrangian of the cost-minimization problem is</p>
-$$\mathcal{L}(v,\nu)=\mathrm{VTTS}\cdot\frac{Q}{v}+\nu\,\big(F(v)-\bar F\big),\qquad \nu\ge 0 .$$
-<p>If the constraint binds, \(\nu^{*}=\dfrac{\mathrm{VTTS}\cdot Q/v^{2}}{F'(v)}\) evaluated where \(F(v)=\bar F\). The multiplier \(\nu^{*}\) is the <strong>shadow price of a life</strong>: the travel-time cost society accepts at the margin to avoid one more death. With price and constraint together in \(W\), the condition becomes marginal time cost \(=(\mathrm{VSL}+\nu)\,F'(v)\). The constraint is slack (\(\nu=0\)) when pricing alone already achieves \(\bar F\). It binds when it does not, and then the <em>effective</em> value of a life is \(\mathrm{VSL}+\nu\).</p>
+<h2>9. Safety in \(W\): price or limit? <span class="term">C</span> <span class="term">constraints</span></h2>
+<p><a href="m01-objective.html#limits">Module 1, section 9</a> explained the general idea. A limit on deaths does not value a life "infinitely". It fixes the target and lets the cost of meeting it be whatever it turns out to be. That cost, per death avoided at the margin, is the limit's <strong>shadow price</strong>. This section works it out for a single road, to show what the shadow price tells a decision maker.</p>
+<p>Take a rural main road. The only policy choice is the mean speed. Slower traffic costs travel time, which lowers the users' welfare in Term A. Faster traffic causes more deaths, following the power model. Under a <em>price</em>, each death counts as the value of a statistical life, and the best speed balances minutes against deaths. Under a <em>limit</em>, the speed must be low enough to keep deaths below the limit, whatever the minutes cost.</p>
 
 <div class="box note">
 <div class="box-title">Worked example · A rural main road</div>
-<p>Assume \(Q=10^{8}\) vehicle-km/yr, \(\mathrm{VTTS}=€15\) per vehicle-hour, \(F_0=3\) deaths/yr at \(v_0=90\) km/h, and \(\mathrm{VSL}=€4\) million. These are illustrative values, not any country's official ones.</p>
+<p>The road carries 100 million vehicle-km a year. A vehicle-hour is valued at €15, and a statistical life at €4 million. At today's mean speed of 90 km/h, 3 people die on it each year. These are illustrative values, not any country's official ones.</p>
 <ol>
-<li><strong>Pricing only.</strong> \(v^{*}=\big(1.5\times10^{9}\cdot 90^{4}/(4\cdot 4\times10^{6}\cdot 3)\big)^{1/5}\approx 72.8\) km/h, with \(F=3\cdot(72.8/90)^4\approx 1.3\) deaths/yr. At 90 km/h, slowing by 1 km/h costs about €185,000 a year in time and saves deaths worth about €533,000, so the price logic already calls for lower speeds than 90.</li>
-<li><strong>Constraint \(\bar F=0.5\), speed as the only lever.</strong> The speed must fall to \(90\cdot(0.5/3)^{1/4}\approx 57.5\) km/h. The shadow price is \(\nu^{*}=\dfrac{1.5\times10^{9}/57.5^{2}}{4\cdot0.5/57.5}\approx €13.0\) million per death, more than three times the VSL.</li>
-<li><strong>Change the system instead: build a 2+1 road with a cable barrier</strong> that cuts deaths at any given speed by 75 % (\(F_0=0.75\)). The constraint is now met at \(90\cdot(0.5/0.75)^{1/4}\approx 81.3\) km/h, and the shadow price falls to about €9.2 million. The road is both safer and faster than in case 2.</li>
-<li><strong>Price-only with the barrier.</strong> The optimum speed <em>rises</em> to about 96 km/h, and deaths go back up to about 1.0 per year. Under pricing alone, part of the safety gain is "spent" on speed. Sweden in fact raised limits on some 2+1 roads from 90 to 100 km/h.</li>
+<li><strong>Price only.</strong> At 90 km/h, slowing by 1 km/h costs about €185,000 a year in time and saves deaths worth about €533,000. So even the price logic calls for a lower speed. The best speed under the price is about 73 km/h, with about 1.3 deaths a year. Time costs rise from €16.7 million to €20.6 million a year.</li>
+<li><strong>Limit of 0.5 deaths a year, with speed as the only lever.</strong> The mean speed must fall to about 57.5 km/h. Time costs rise to €26.1 million a year. At the margin, each further death avoided costs about <strong>€13 million</strong> in travel time: the shadow price. That is more than three times the value of a statistical life.</li>
+<li><strong>Change the system instead.</strong> Build a 2+1 road with a cable barrier that cuts deaths at any given speed by 75 %. The limit is now met at about 81 km/h. Time costs are €18.4 million a year, and the shadow price falls to about €9 million. The road is both safer and faster than in case 2.</li>
+<li><strong>Price only, with the barrier.</strong> The best speed <em>rises</em> to about 96 km/h, and deaths go back up to about 1.0 a year. Under a price alone, part of the safety gain is "spent" on speed. Sweden did in fact raise the limit on some 2+1 roads from 90 to 100 km/h.</li>
 </ol>
-<p>Lesson: a constraint does not mean infinite value. It means a target, and the shadow price shows how costly the target is with the current tools. A high \(\nu^{*}\) is a signal to change the system (separation, vehicle technology, network design), not just to keep squeezing speed.</p>
+<p>Lesson: a high shadow price is not an argument against the limit. It is a signal that the current tools are poor. It says: change the system (separation, vehicle technology, network design), instead of only squeezing speed.</p>
 </div>
 
-<p>The classic engineering objective, minimum vehicle travel time \(\sum q\,t\), sets \(p_{\text{crash}}=0\) and has no safety constraint. Safety then enters only through design standards, which historically were derived from <em>vehicle</em> dynamics (stopping sight distance, curve radii for a design speed) and so encouraged higher design speeds as "safer". Both the price and the constraint view correct that bias. They differ in who carries the burden of proof, as <a href="m01-objective.html">Module 1</a> noted. They also differ in practice. A VSL-based appraisal can justify a fast new road that adds deaths if it saves enough time. A Vision Zero constraint cannot.</p>
-<p>Equity also enters. Pedestrians, cyclists, children and older people bear a disproportionate share of the harm while generating little of the kinetic energy. The weights \(\omega_g\) in Term A and the equity floor \(A_g\ge A_{\min}\) interact with safety. A child's independent access to school is part of their accessibility, and it is impossible on a street that is too dangerous to cross.</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>The speed problem as a price and as a limit, with the Lagrangian</summary>
+<p>Let \(Q\) be traffic in vehicle-km per year, \(\mathrm{VTTS}\) the value of travel time per vehicle-hour, and \(F_0\) the deaths per year at a reference speed \(v_0\). With the power model, deaths at mean speed \(v\) are \(F(v)=F_0\,(v/v_0)^4\). Travel time per year is \(Q/v\) hours.</p>
+<p><strong>Price.</strong> Minimize the sum of time cost (a loss in Term A) and death cost (Term C):</p>
+$$\min_v\; \mathrm{VTTS}\cdot\frac{Q}{v}+\mathrm{VSL}\cdot F_0\Big(\frac{v}{v_0}\Big)^{4}.$$
+<p>Setting the derivative to zero equates the marginal time cost of slowing down with the marginal value of deaths avoided:</p>
+$$\mathrm{VTTS}\cdot\frac{Q}{v^{2}}=\mathrm{VSL}\cdot\frac{4F_0v^{3}}{v_0^{4}}\quad\Rightarrow\quad v^{*}=\left(\frac{\mathrm{VTTS}\cdot Q\cdot v_0^{4}}{4\,\mathrm{VSL}\cdot F_0}\right)^{1/5}.$$
+<p>With the example's values, \(v^{*}=\big(1.5\times10^{9}\cdot 90^{4}/(4\cdot 4\times10^{6}\cdot 3)\big)^{1/5}\approx 72.8\) km/h.</p>
+<p><strong>Limit.</strong> Impose \(F(v)\le\bar F\). The Lagrangian of the cost-minimization problem is</p>
+$$\mathcal{L}(v,\nu)=\mathrm{VTTS}\cdot\frac{Q}{v}+\nu\,\big(F(v)-\bar F\big),\qquad \nu\ge 0 .$$
+<p>If the limit binds, \(\nu^{*}=\dfrac{\mathrm{VTTS}\cdot Q/v^{2}}{F'(v)}\), evaluated where \(F(v)=\bar F\). With \(F'(v)=4F(v)/v\): \(v=90\cdot(0.5/3)^{1/4}\approx 57.5\) km/h and \(\nu^{*}=\dfrac{1.5\times10^{9}/57.5^{2}}{4\cdot0.5/57.5}\approx €13.0\) million. With the barrier (\(F_0=0.75\)): \(v=90\cdot(0.5/0.75)^{1/4}\approx 81.3\) km/h and \(\nu^{*}\approx €9.2\) million.</p>
+<p><strong>Both at once.</strong> With the price in \(W\) and the limit as a constraint, the condition becomes: marginal time cost \(=(\mathrm{VSL}+\nu)\,F'(v)\). The limit is slack (\(\nu=0\)) when the price alone already achieves \(\bar F\). When it binds, the <em>effective</em> value of a death avoided is \(\mathrm{VSL}+\nu\). This is how Sweden can use crash values in appraisal and a long-term limit at the same time.</p>
+</details>
+
+<p>The classic engineering objective, minimum total vehicle travel time, has no price on crashes and no limit. Safety then enters only through design standards. These were historically derived from <em>vehicle</em> dynamics, such as stopping sight distance and curve radii for a chosen design speed. They therefore encouraged higher design speeds as "safer". Both the price view and the limit view correct that bias. They differ in who carries the burden of proof. A crash-value appraisal can justify a fast new road that adds deaths, if it saves enough time. A limit cannot.</p>
+<p>Equity also enters. Pedestrians, cyclists, children and older people bear a large share of the harm while bringing little of the energy into a crash. The weights on different groups in Term A, and the minimum access every group should have, interact with safety. A child's independent access to school is part of their accessibility. It is impossible on a street that is too dangerous to cross.</p>
 
 <div class="box exercise">
 <div class="box-title">Exercise 11.1 · Shadow price of a speed limit</div>
-<p>Use the worked example in Section 8 with your own country's appraisal values (VTTS and VSL; see <a href="m03-externalities.html">Module 3</a>).</p>
+<p>Use the worked example in section 9 and the formulas in its "Under the hood" box, with your own country's appraisal values for travel time and a statistical life (see <a href="m03-externalities.html">Module 3</a>).</p>
 <ol>
-<li>Compute the price-only optimal speed. Repeat with the power-model exponent at 3.5 and 4.5. How sensitive is \(v^{*}\)?</li>
-<li>Impose \(\bar F=0.5\) deaths/yr and compute the shadow price \(\nu^{*}\) with speed as the only lever.</li>
-<li>A 2+1 conversion costs €1.5 million per km. Over a 40 km road, with a 4 % discount rate and a 40-year life, does it pass a cost–benefit test under pricing alone? Under the constraint, compare its annualized cost with the time cost of meeting \(\bar F\) by speed alone.</li>
+<li>Compute the price-only best speed. Repeat with the power-model exponent at 3.0 and 4.6 (Elvik's urban and rural values). How sensitive is the answer?</li>
+<li>Impose a limit of 0.5 deaths a year and compute the shadow price with speed as the only lever.</li>
+<li>A 2+1 conversion costs €1.5 million per km (an illustrative figure). Over a 40 km road, with a 4 % discount rate and a 40-year life, does it pass a cost–benefit test under the price alone? Under the limit, compare its yearly cost with the extra time cost of meeting the limit by speed alone.</li>
 </ol>
 </div>
 
 <div class="box exercise">
 <div class="box-title">Exercise 11.2 · Haddon matrix for a junction</div>
-<p>Choose a signalized four-arm junction near you where a cyclist has been killed or seriously injured. Fill in all nine cells of the Haddon matrix with candidate measures. Mark each measure as (a) relying on road-user compliance, or (b) working even if a road user makes an error. Which cells would Sustainable Safety's homogeneity principle fill? Would replacing the junction with a roundabout with separated cycle paths meet the "≈ 50 km/h side impact" and "≈ 30 km/h vulnerable user" thresholds?</p>
+<p>Choose a signalized four-arm junction near you where a cyclist has been killed or seriously injured. Fill in all nine cells of the Haddon matrix with candidate measures. Mark each measure as (a) relying on road users to comply, or (b) working even if a road user makes an error. Which cells would Sustainable Safety's homogeneity principle fill? Would replacing the junction with a roundabout with separated cycle paths meet the "≈ 50 km/h side impact" and "≈ 30 km/h vulnerable user" thresholds? Rank your measures by the time they would take to have an effect.</p>
 </div>
 
 <div class="box exercise">
 <div class="box-title">Exercise 11.3 · Comparing countries honestly</div>
-<p>Using the table in Section 7, recompute the US–Sweden comparison per vehicle-kilometer. Find Swedish vehicle-km in national statistics (Trafikanalys) and US VMT from NHTSA. Discuss which measure, per capita or per km, belongs in Term C, and which belongs in a discussion of Term A and land use.</p>
+<p>Using the table in section 8, recompute the US–Sweden comparison per vehicle-kilometer. Find Swedish vehicle-km in national statistics (Trafikanalys) and US vehicle-miles from NHTSA. Which part of the gap is risk per kilometer, and which part is how much people drive? Which part could a road authority change within five years, and which part only land use and transport networks can change?</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 11.4 · Reading a safety audit</div>
+<p>Obtain a road safety audit for a recent project in your city (often available on request, or in council papers). Go through the seven questions in section 7. Which can you answer from the document? Which findings were accepted, and which rejected? Write a half-page note to a council member saying what they should ask before approving the design.</p>
 </div>
 
 <h2>Readings and resources</h2>
 <ul class="resources">
 <li data-type="translation"><a href="https://lagen.nu/prop/1996/97:137">Prop. 1996/97:137 — Nollvisionen och det trafiksäkra samhället (full text, lagen.nu)</a> <span class="lang">(Swedish)</span> <span class="why">The Vision Zero bill adopted by the Riksdag in 1997. Read sections 5.1–5.5 on ethics, human tolerance, responsibility and speed.</span></li>
 <li data-type="link"><a href="https://bransch.trafikverket.se/en/startpage/operations/Operations-road/vision-zero-academy/Publications-related-to-Vision-Zero/">Trafikverket Vision Zero Academy — Publications related to Vision Zero</a> <span class="why">English-language papers and reports from the Swedish Transport Administration, including on 2+1 roads and speed management.</span></li>
+<li data-type="pdf"><a href="https://bransch.trafikverket.se/contentassets/6af107d0cbe94281af73a57b9761c189/16_safety_benefits_vadeby.pdf">Vadeby (VTI) — Results: safety benefits of implemented measures</a> <span class="why">Measured effects of Swedish 2+1 roads, new rural speed limits and speed cameras.</span></li>
 <li data-type="link"><a href="https://www.trafikverket.se/om-oss/nyheter/nationella-nyheter/2025/januari/farre-doda-i-vagtrafiken-men-fler-insatser-behovs-for-att-na-nollvisionen/">Trafikverket (2025) — Färre döda i vägtrafiken, men fler insatser behövs för att nå nollvisionen</a> <span class="lang">(Swedish)</span> <span class="why">Current Swedish status, interim targets and the role of median-separated roads.</span></li>
 <li data-type="translation"><a href="https://duurzaamveiligwegverkeer.nl/">SWOV — DV3: Visie Duurzaam Veilig Wegverkeer 2018–2030</a> <span class="lang">(Dutch; English version at <a href="https://sustainablesafety.nl/">sustainablesafety.nl</a>)</span> <span class="why">The third edition of Sustainable Safety with its principles for design and organization, plus background reports.</span></li>
+<li data-type="link"><a href="https://swov.nl/en/fact/sustainable-safety-has-sustainable-safety-increased-road-safety">SWOV — Has Sustainable Safety increased road safety?</a> <span class="why">Summary of the 1998–2007 evaluation. Full study: Weijermars &amp; Wegman (2011), "Ten years of sustainable safety in the Netherlands: an assessment", <em>Transportation Research Record</em> 2213.</span></li>
 <li data-type="pdf"><a href="https://www.itf-oecd.org/sites/default/files/docs/zero-road-deaths.pdf">ITF/OECD (2016) — Zero Road Deaths and Serious Injuries: Leading a Paradigm Shift to a Safe System</a> <span class="why">The international statement of the Safe System approach, with country case studies and ten recommendations.</span></li>
-<li data-type="pdf"><a href="https://www.transportation.gov/sites/dot.gov/files/2022-01/USDOT_National_Roadway_Safety_Strategy_0.pdf">USDOT (2022) — National Roadway Safety Strategy</a> <span class="why">The US federal adoption of the Safe System Approach and its five objectives.</span></li>
+<li data-type="link"><a href="https://doi.org/10.32866/001c.155976">Schneider, Barbee, Nelson &amp; Gu (2026) — Examining a lost decade for traffic safety in large US cities, <em>Findings</em></a> <span class="why">How US Vision Zero cities fared against other large cities, 2008–2022.</span></li>
+<li data-type="pdf"><a href="https://www.transportation.gov/sites/dot.gov/files/2022-01/USDOT_National_Roadway_Safety_Strategy_0.pdf">USDOT (2022) — National Roadway Safety Strategy</a> <span class="why">The US federal adoption of the Safe System approach and its five objectives.</span></li>
 <li data-type="link"><a href="https://visionzeronetwork.org/">Vision Zero Network (US)</a> <span class="why">Resources on US city Vision Zero programs, action plans and speed management.</span></li>
-<li data-type="data"><a href="https://etsc.eu/wp-content/uploads/ETSC-2025-Annual-PIN-Report-DIGITAL-V2.pdf">ETSC (2025) — 19th Road Safety Performance Index (PIN) Report</a> <span class="why">Source of the European figures in Section 7. Annex tables give deaths, rates and national targets.</span></li>
+<li data-type="link"><a href="https://aaafoundation.org/impact-speed-pedestrians-risk-severe-injury-death/">Tefft (2011) — Impact speed and a pedestrian's risk of severe injury or death (AAA Foundation)</a> <span class="why">Risk curves by impact speed and age.</span></li>
+<li data-type="pdf"><a href="https://www.onisr.securite-routiere.gouv.fr/sites/default/files/2019-02/02-Mod%C3%A9l%20de%20Nilson%20et%20d%27Elvik.pdf">ONISR (2014) — Les modèles de Nilsson et Elvik</a> <span class="lang">(French)</span> <span class="why">Two-page summary of the power model and Elvik's 2009 exponents by road type.</span></li>
+<li data-type="pdf"><a href="https://www.onisr.securite-routiere.gouv.fr/sites/default/files/2019-04/Blais%20et%20Carnis%20%20Speed%20Camera%20journal%20of%20safety%20research.pdf">Blais &amp; Carnis (2015) — Improving the safety effect of speed camera programs through innovations: evidence from the French experience, <em>Journal of Safety Research</em> 55</a> <span class="why">Time-series evaluation of France's automated speed enforcement.</span></li>
+<li data-type="link"><a href="https://eur-lex.europa.eu/eli/dir/2008/96/2019-12-16/eng">Directive 2008/96/EC on road infrastructure safety management (consolidated, with the 2019 amendments)</a> <span class="why">The EU rules on road safety audits, network assessments and vulnerable road users.</span></li>
+<li data-type="data"><a href="https://etsc.eu/wp-content/uploads/ETSC-2025-Annual-PIN-Report-DIGITAL-V2.pdf">ETSC (2025) — 19th Road Safety Performance Index (PIN) Report</a> <span class="why">Source of the European figures in section 8. Annex tables give deaths, rates and national targets.</span></li>
 <li data-type="data"><a href="https://www.who.int/publications/i/item/9789240086517">WHO (2023) — Global status report on road safety 2023</a> <span class="why">Global estimates by country, with legislation and Safe System indicators.</span></li>
 <li data-type="translation"><a href="https://www.verwaltungsvorschriften-im-internet.de/bsvwvbund_26012001_S3236420014.htm">VwV-StVO — Allgemeine Verwaltungsvorschrift zur Straßenverkehrs-Ordnung</a> <span class="lang">(German)</span> <span class="why">Official text. See the note on § 1 for Vision Zero and the notes on §§ 39–45 for how speed limits may be ordered.</span></li>
 <li data-type="link"><a href="https://www.bmv.de/SharedDocs/DE/Artikel/StV/Verkehrssicherheit/verkehrssicherheitsprogramm-2021-bis-2030.html">BMV — Verkehrssicherheitsprogramm der Bundesregierung 2021 bis 2030</a> <span class="lang">(German)</span> <span class="why">Germany's federal road safety program and its 2030 targets.</span></li>
