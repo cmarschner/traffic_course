@@ -3,6 +3,13 @@
 The principles the course is written by. Change requests (`change-requests.md`) are checked
 against them.
 
+## Who it is for
+
+0. **Empower the people who decide, and the citizens who hold them to account.** Readers in
+   order of priority: decision makers and policy makers; urban and transport planners;
+   informed citizens. Lead with what a decision maker needs; keep the method in a layer
+   planners can open and others can skip. See `audience.md`.
+
 ## What the course argues
 
 1. **Transport exists to improve the welfare of the people who use it.** Trips are means.

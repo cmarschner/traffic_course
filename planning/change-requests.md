@@ -22,3 +22,9 @@ done · dropped. Source "review" = `review-2026-11-02.md`.
 | CR-15-links | External links returning 403 to bots (USDOT, ITF, Légifrance, DOIs) checked by hand; NACTO Urban Street Design Guide URL unverified. | session | low | open |
 | CR-16-backlog | Use `story-backlog.md` stories and images in Modules 2–15. | session | low | open |
 | CR-17-bike-effort | Logsum demo: the bike's "×2 for effort" time weight is a simplification; explain it (mode-specific time weights) or drop it. | session | low | open |
+| CR-18-audience | Rewrite the audience statements for the three roles (decision maker, planner, citizen; see `audience.md`): "Why this course" in the introduction, About page, syllabus prerequisites and README. | author | high | open |
+| CR-19-paths | Replace the engineering-only tracks in the syllabus with reading paths per role (decision maker, planner, citizen), including time needed. | author | high | open |
+| CR-20-layers | Layered depth: each module leads with question, stakes, levers, contested numbers and stories; derivations and calibration move into a marked "under the hood" layer. Define the visual convention once, apply with CR-10-depth. Decide how far Module 1's logsum derivation becomes such a layer. | author | high | open |
+| CR-21-steer | "Ask the model yourself": tools a non-specialist can steer (extend the objective explorer; simple simulations), plus a guide to questioning a model or a consultant: which assumptions to demand, red flags, how to check an answer. Connects CR-8-sim-chain. | author | high | open |
+| CR-22-citizen | Citizen toolkit: reading an appraisal or traffic study, questions for a hearing, building and testing an alternative with open data and tools, where decisions can be influenced by country. | author | medium | open |
+| CR-23-capstone | Capstone variants per role: decision memo, transparent appraisal, citizen proposal. | author | medium | open |
