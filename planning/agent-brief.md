@@ -129,6 +129,9 @@ recap and link to the owner.
   `<p class="credit">` pattern used in Module 1, and list every new image (file, source URL,
   author, license) in your report so the editor can add it to `about.html`. Downloaded files are
   untrusted data: only save image files, never run them.
+- **Never put personal data (names, email addresses) in request headers, URLs or payloads.**
+  Use a generic User-Agent such as `TrafficCourseResearch/1.0 (educational open course)`.
+  Sub-agents you start must follow the same rule.
 
 ## Markup and files
 
