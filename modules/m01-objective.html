@@ -187,7 +187,7 @@ $$A_i = \sum_j O_j \, f(c_{ij}).$$
 <thead><tr><th>Person</th><th class="num">Car</th><th class="num">Bus</th><th class="num">Bike</th><th>Chooses</th></tr></thead>
 <tbody></tbody></table></div>
 <p class="small" data-o="note"></p>
-<p class="demo-sub"><strong>How the hidden parts are spread.</strong> The bars count the hidden parts drawn for the 50,000 people below. The line is the shape they are drawn from, a <em>Gumbel distribution</em> (Step 2 explains it). The orange ticks are the hidden parts of the eight people in the table.</p>
+<p class="demo-sub"><strong>How the hidden parts are spread.</strong> The bars count the hidden parts drawn for the 50,000 people below. The line is the shape they are drawn from, a <em>Gumbel distribution</em> (<a href="m04-demand-mode-choice.html#random-utility">Module 4</a> explains it). The orange ticks are the hidden parts of the eight people in the table.</p>
 <svg class="demo-dist" viewBox="0 0 600 190" role="img" aria-label="Histogram of the simulated hidden parts with the Gumbel density curve"></svg>
 <p class="demo-sub"><strong>50,000 simulated people.</strong> Each makes the same kind of choice. Counting their choices answers both questions.</p>
 <div class="table-wrap"><table>
@@ -201,77 +201,36 @@ $$A_i = \sum_j O_j \, f(c_{ij}).$$
 </div>
 
 <p>Two patterns show up. First, the shares are never all-or-nothing. Even a clearly worse option wins some people, because for them the hidden part tips the balance. Second, the average value of the chosen option is higher than the best measured part. Each person picks what is best for <em>them</em>, and sometimes that is not the option that looks best on paper. Adding a good option raises this average further.</p>
-<p>A simulation gives these answers only approximately, and only after drawing many people. The rest of this section finds exact formulas for both: one for the shares (Step 2) and one for the value (Step 4). We build them up in six small steps.</p>
+<p>A simulation gives these answers only approximately, and only after drawing many people. Fortunately, both numbers have exact formulas. <a href="m04-demand-mode-choice.html#random-utility">Module 4</a> derives them step by step. Here we only need what they say.</p>
 
-<h4>Step 1: the analyst's view</h4>
-<p>The planner relies on an analyst, who learns from data how people choose. The analyst has a travel survey. For each trip, it shows which option the person chose. It also shows the travel time and the cost of every option, including those not chosen.</p>
-<p>The analyst sees only the measured parts and the choices. The hidden parts stay hidden. So the analyst makes the same assumptions as the demo: each person picks the option with the highest utility, and the hidden parts are random.</p>
-<p>Formally, write \(U_{nj}\) for the utility that person \(n\) gives option \(j\). We split it into a measured part \(V_{nj}\) and a hidden part \(\varepsilon_{nj}\):</p>
-$$U_{nj} \;=\; V_{nj} \;+\; \varepsilon_{nj}.$$
-<p>The measured part is a weighted sum of the things we can measure:</p>
-$$V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj}.$$
-<p>Here \(t_{nj}\) is the travel time and \(c_{nj}\) the money cost. The weights \(\beta_t\) and \(\beta_c\) say how much one minute and one euro lower the utility. Both are negative, because more time and more cost make an option less attractive. We do not know the weights in advance. Learning them from the survey is the analyst's task.</p>
-<p>Other measurable qualities can be added in the same way, for example the number of transfers or how crowded a train is. We collect them in a list, a <em>vector</em> \(\mathbf{x}_{nj}\), and give each its own weight. The weights form a second vector, \(\boldsymbol{\beta}_x\). The term \(\boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj}\) is short for "each quality times its weight, all added up". The full measured part is then</p>
-$$V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj}.$$
+<h4>Who chooses what: the shares</h4>
+<p>Give each option a weight that grows quickly with its measured part: each extra point of utility multiplies the weight by about 2.7. Then each option's share is its weight divided by the sum of all weights. A better option gets a larger share, but never all of it. This rule is called the <strong>logit</strong> model.</p>
 
-<h4>Step 2: from hidden parts to probabilities</h4>
-<p>Because part of the utility is hidden, the analyst cannot predict a choice with certainty. The analyst can only say how likely each choice is. Option \(j\) is chosen when its utility is the highest, so its probability is</p>
-$$P_{nj} = \Pr\big(U_{nj} \ge U_{nk}\ \text{for every other option } k\big).$$
-<p>To compute this probability, we need an assumption about the hidden parts \(\varepsilon\): which values are likely and which are rare. Such an assumption is called a <em>probability distribution</em>.</p>
-<p>The standard choice is the <strong>Gumbel distribution</strong>. It is named after Emil Gumbel, a German statistician who studied extremes, such as the highest flood of each year. It describes how the largest of many random values is spread. Its shape is a bell, close to the normal distribution, with a slightly longer tail toward high values. In formula form, the chance that a Gumbel value is at most \(x\) is \(\exp(-e^{-x})\). The demo at the start of this section draws its hidden parts from this distribution.</p>
-<figure class="photo chart"><img src="../assets/img/m01-gumbel.svg" width="360" height="230" alt="Chart: the Gumbel density is a slightly skewed bell with a longer tail toward high values, drawn next to a normal bell with the same average and spread."><figcaption>The Gumbel distribution (solid) next to a normal distribution with the same average and spread (dashed). Both are shifted to average zero, as in the demo. The Gumbel bell leans left and has a longer tail toward high values: now and then, someone likes an option far more than its time and cost suggest.</figcaption></figure>
-<p>Why Gumbel and not the normal distribution? Mainly because of convenience. With Gumbel, the probabilities have a simple formula. With the normal distribution they do not, and must be computed numerically (that model is called <em>probit</em>).</p>
-<p>We need one more assumption: the hidden parts of different options are <em>independent</em>. Knowing that someone has an unusually strong liking for the bus tells us nothing about their hidden liking for the car. Note that this is an assumption about the hidden parts, not about the measured ones. Times and costs of different options can be related in any way.</p>
-<p>Under these two assumptions, McFadden showed that the probability of choosing option \(j\) is</p>
-$$P_{nj} \;=\; \frac{e^{V_{nj}}}{\sum_k e^{V_{nk}}}.$$
-<p>Let us read this formula piece by piece:</p>
+<h4>What the choice is worth: the logsum</h4>
+<p>The average value of the option people end up with is just as simple to compute. Add up the weights and take the natural logarithm of the sum. Because it is the logarithm of a sum, it is called the <strong>logsum</strong>. Term A is built on it.</p>
+<p>Two cases show what it means. You can try both in the demo.</p>
 <ul>
-<li>The numerator, \(e^{V_{nj}}\), is always positive. It grows quickly with the measured utility: raising \(V\) by 1 multiplies it by about 2.7.</li>
-<li>The denominator adds up the same quantity for all options. Dividing by it makes the probabilities of all options sum to 1.</li>
-<li>If all options have equal \(V\), each gets the same share. If one option's \(V\) is far above the others, its probability approaches 1.</li>
+<li><strong>One option is clearly best.</strong> Then the logsum is close to that option's measured part. A much worse second option adds almost nothing. Try snow on the bike.</li>
+<li><strong>Several options are equally good.</strong> Then the logsum lies above all of them: by 0.69 points for two equal options and by 1.10 points for three. In the demo, that is worth €11. This extra is the <em>value of choice</em>. With more good options, it is more likely that one of them suits you particularly well today.</li>
 </ul>
-<p>Why does the exponential function appear? It is a consequence of the Gumbel assumption. The full derivation takes about a page (see Train, <a href="https://eml.berkeley.edu/books/choice2.html"><em>Discrete Choice Methods with Simulation</em></a>, chapter 3, free online). Step 4 shows the key property of the Gumbel distribution that makes it work.</p>
-<p>This model is called the <strong>multinomial logit</strong> model. "Multinomial" means that there can be more than two options. "Logit" is short for "logistic unit", a term coined by the statistician Joseph Berkson in 1944. With only two options, the formula becomes the logistic function, the S-shaped curve \(P_1 = 1/(1+e^{-(V_1-V_2)})\). It turns the difference in utility into a probability between 0 and 1.</p>
 
-<h4>Step 3: taking the logarithm</h4>
-<p>The probability formula is hard to read as it stands. The option's own utility sits inside an exponential, and it is divided by a sum over all options. We would like to pull these two parts apart, for two reasons.</p>
-<ul>
-<li><strong>To see what drives a choice.</strong> We want to see how an option's own utility affects its probability, separately from the other options.</li>
-<li><strong>To estimate the weights.</strong> A survey contains many choices. The probability of observing all of them together is the product of their individual probabilities. That is a product of many numbers between 0 and 1, which is unwieldy and quickly becomes too small for a computer to store accurately.</li>
-</ul>
-<p>The logarithm solves both problems. It turns a division into a subtraction: \(\ln(a/b) = \ln a - \ln b\). It turns a product into a sum: \(\ln(ab) = \ln a + \ln b\). And it undoes the exponential: \(\ln e^{V} = V\). Because the logarithm only ever increases, it also keeps the order of things: a larger probability always has a larger logarithm.</p>
-<p>So we take the natural logarithm of both sides of the probability formula. The result is</p>
-$$\ln P_{nj} \;=\; V_{nj} \;-\; \ln \sum_k e^{V_{nk}}.$$
-<p>The second term is the same for every option of person \(n\). It does not depend on which option \(j\) we look at. So, for one person, the option with the highest measured utility \(V\) is also the option with the highest probability.</p>
-<p>The first term, \(V_{nj}\), is linear in the weights \(\beta\). This is why the model is also called a <em>log-linear</em> model: the logarithm of the probability is linear in the unknown weights.</p>
-<p>The analyst can now estimate the weights. The method is called <strong>maximum likelihood</strong>. It picks the weights that make the choices actually observed in the survey as probable as possible. Thanks to the logarithm, this means maximizing a sum rather than a product: the sum of \(\ln P\) over all observed choices. Because the logarithm keeps the order, the weights that maximize the sum also maximize the product. Here, unlike in the comparison above, the second term does not drop out, because it changes when the weights change. Statistical software does this calculation (<a href="m04-demand-mode-choice.html">Module 4</a>).</p>
-<p>The second term has its own name. It is called the <strong>logsum</strong>, because it is the logarithm of a sum:</p>
-$$\text{logsum}_n \;=\; \ln \sum_k e^{V_{nk}}.$$
-<p>It turns out to be exactly the quantity we need for welfare, as the next step shows.</p>
+<h4>From points to money</h4>
+<p>In the demo, one point of utility is worth €10. A logsum of −0.45 points therefore means −€4.50. In real studies, the analyst learns this exchange rate from survey data: how much utility one euro of cost takes away. Dividing the logsum by that rate turns it into money. Economists call the result the <strong>consumer surplus</strong>: the money value of the choices available to a person. When a plan changes travel times or costs, the change in consumer surplus is its benefit to travelers.</p>
 
-<h4>Step 4: the value of the best choice is the logsum</h4>
-<p>The person ends up with the utility of the option they choose. Since they choose the best one, they get the highest utility, \(\max_j U_{nj}\). The analyst does not know this value, because it includes the hidden parts.</p>
-<p>The analyst can, however, compute its average over all possible hidden values. This average is called the <em>expected value</em>, written \(\mathbb{E}[\cdot]\). With Gumbel-distributed hidden parts, it equals the logsum plus a constant:</p>
-$$\mathbb{E}\Big[\max_j\,(V_{nj}+\varepsilon_{nj})\Big] \;=\; \ln\sum_j e^{V_{nj}} \;+\; \gamma .$$
-<p>The constant \(\gamma \approx 0.577\) is called Euler's constant. It is the average of a single Gumbel value. If the hidden parts are shifted so that they average zero, as in the demo, the constant disappears. Either way it is the same in every situation, so it cancels whenever we compare two situations. From now on we drop it.</p>
-<p>Why is this true? The key is a property of the Gumbel distribution: the largest of several independent Gumbel values is again Gumbel-distributed. The box shows this in three lines.</p>
-<div class="box note">
-<div class="box-title">Proof</div>
-<p>Start with one option. Its utility \(U_j = V_j + \varepsilon_j\) is a Gumbel value shifted by \(V_j\). So the chance that it is at most \(x\) is \(\exp(-e^{-(x-V_j)})\).</p>
-<p>The largest utility is at most \(x\) only if every single utility is at most \(x\). Because the hidden parts are independent, we can multiply the individual chances:</p>
-$$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!\Big(-e^{-x}\sum_j e^{V_j}\Big) = \exp\!\Big(-e^{-(x - \ln\sum_j e^{V_j})}\Big).$$
-<p>The last expression is again a Gumbel distribution, now shifted by \(\ln\sum_j e^{V_j}\). The average of a Gumbel value shifted by \(m\) is \(m+\gamma\). ∎</p>
-</div>
-<p>Two special cases help to build intuition:</p>
-<ul>
-<li><strong>One option clearly dominates.</strong> If \(V_1\) is far above \(V_2\), the logsum is close to \(V_1\). A second, poor option adds almost nothing.</li>
-<li><strong>Several equally good options.</strong> If \(k\) options all have the same \(V = v\), the logsum is \(v + \ln k\). The extra \(\ln k\) is the value of choice: with more good options, it becomes more likely that one of them happens to suit you particularly well today.</li>
-</ul>
-<p>One more property will be useful later. If an option's measured utility \(V_j\) rises by a small amount, the logsum rises by that amount times the option's probability \(P_j\). An improvement is worth more, the more people use the improved option.</p>
+<h4>Destinations: more places, more value</h4>
+<p>The options can also be places, such as the districts of a city. A district with 5,000 jobs is like 5,000 options that are equally far away. Bundling them adds the logarithm of 5,000 to the district's measured part. So doubling the jobs in a district adds 0.69 points to it, worth as much as making the trip there €6.90 cheaper.</p>
+<p>This is the <strong>gravity model</strong> of travel: a place attracts trips in proportion to its size, and less the farther away it is. The logsum over all places is the utility-based version of Hansen's accessibility.</p>
+
+<h4>In formulas</h4>
+<p>Now the symbols. Write \(V_{nj}\) for the measured part that person \(n\) gives option \(j\), and \(P_{nj}\) for the probability that the person chooses it, which is the share among many similar people. The weight of an option is \(e^{V_{nj}}\). The two rules above read:</p>
+$$P_{nj} = \frac{e^{V_{nj}}}{\sum_k e^{V_{nk}}},\qquad A_n = \frac{1}{\lambda_n}\,\ln\sum_j e^{V_{nj}} .$$
+<p>The measured part adds up what can be measured, each item times a weight, plus a size term for destinations:</p>
+$$V_{nj} = \beta_t\,t_{nj} + \beta_c\,c_{nj} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj} + \ln O_j ,\qquad \lambda_n = -\beta_c .$$
+<p>Here \(t\) is the travel time and \(c\) the money cost. The vector \(\mathbf{x}\) lists other qualities, such as the number of transfers or crowding. The \(\beta\) are their weights, learned from travel surveys. \(O_j\) is the number of opportunities at destination \(j\). The exchange rate \(\lambda_n\) is the utility of one euro. Why the formulas take this form, and how the weights are estimated, is derived in <a href="m04-demand-mode-choice.html#random-utility">Module 4</a>.</p>
 
 <div class="box demo logsum-demo">
 <div class="box-title">Check · formulas versus simulation</div>
-<p class="small">The same car, bus and bike as in the first demo. Now the results of 50,000 simulated people stand next to the formulas from Steps 2 and 4. The hidden parts are Gumbel values shifted to average zero, so no \(\gamma\) appears.</p>
+<p class="small">The same car, bus and bike as in the first demo. Now the results of 50,000 simulated people stand next to the two formulas above. They agree, up to the randomness of the simulation.</p>
 <div class="demo-controls">
 <label>Car <input type="range" min="-3" max="3" step="0.1" value="-1" data-name="Car"> <output>−1.0</output></label>
 <label>Bus <input type="range" min="-3" max="3" step="0.1" value="-2" data-name="Bus"> <output>−2.0</output></label>
@@ -382,38 +341,17 @@ $$\Pr\Big(\max_j U_j \le x\Big) = \prod_j \exp\!\big(-e^{-(x-V_j)}\big) = \exp\!
 })();
 </script>
 
-<h4>Step 5: from utility to money</h4>
-<p>Utility has no natural unit. To add it to costs and harms, we convert it into money. The cost weight \(\beta_c\) makes this possible: it says how much utility one euro of cost takes away.</p>
-<p>We call the amount of utility one euro is worth \(\lambda_n = -\beta_c\). (The minus sign makes \(\lambda_n\) positive, since \(\beta_c\) is negative.) Economists call \(\lambda_n\) the <em>marginal utility of money</em>.</p>
-<p>In the demo at the start of this section we chose one point of utility to be worth €10, so there \(\lambda = 0.1\) per euro. Dividing the logsum by \(\lambda_n\) turns it into euros. The result is the person's <strong>consumer surplus</strong>: the money value of the choices available to them.</p>
-$$A_n = \frac{1}{\lambda_n}\ln \sum_{j} e^{V_{nj}}.$$
-<p>Only differences between situations are meaningful. When a plan changes the measured utilities, the change in welfare is the change in the logsum, divided by \(\lambda_n\). Williams (1977) and Ben-Akiva and Lerman (1985) established this as the welfare measure of a choice model.</p>
-<p>The traditional appraisal shortcut is the <strong>rule of a half</strong>. It multiplies the improvement by the average of the number of users before and after (<a href="m02-valuing-access.html">Module 2</a>). It is a straight-line approximation of the change in the logsum.</p>
-
 <div class="box exercise">
 <div class="box-title">Worked example · improving the bus</div>
-<p>One trip, two options: car with \(V_{\text{car}}=-1\) and bus with \(V_{\text{bus}}=-2\). The cost weight is \(\beta_c=-0.1\) per euro, so \(\lambda=0.1\).</p>
+<p>The car and the bus from the demo, without the bike: \(V_{\text{car}}=-1\) and \(V_{\text{bus}}=-2\). One point is worth €10, so the cost weight is \(\beta_c=-0.1\) per euro and \(\lambda=0.1\).</p>
 <ul>
 <li>Probabilities: \(P_{\text{car}} = e^{-1}/(e^{-1}+e^{-2}) = 0.731\) and \(P_{\text{bus}} = 0.269\).</li>
 <li>Logsum: \(\ln(e^{-1}+e^{-2}) = \ln(0.368+0.135) = -0.687\). That is 0.313 above the best \(V\), which is \(-1\). The difference is the value of having a choice.</li>
 <li>A bus lane raises \(V_{\text{bus}}\) to \(-1.5\). The new logsum is \(\ln(0.368+0.223) = -0.526\), an increase of 0.161. The new bus share is 0.378.</li>
 <li>In money: \(0.161 / 0.1 = \) <strong>€1.61 per traveler per trip</strong>. This is an average over everyone, including those who keep driving.</li>
-<li>Check with the rule of a half: improvement times average bus share \(= 0.5 \times (0.269+0.378)/2 = 0.162\). Nearly identical.</li>
+<li>Check with the traditional appraisal shortcut, the <em>rule of a half</em> (<a href="m02-valuing-access.html">Module 2</a>). It multiplies the improvement by the average bus share before and after \(= 0.5 \times (0.269+0.378)/2 = 0.162\). Nearly identical.</li>
 </ul>
 </div>
-
-<h4>Step 6: why destinations get a term \(\ln O_j\)</h4>
-<p>So far the options were ways of traveling. The same model works when the options are <em>destinations</em>, such as the districts of a city.</p>
-<p>A district is not a single opportunity. A district with 5,000 jobs offers 5,000 possible workplaces. Let \(O_j\) be the number of opportunities in district \(j\).</p>
-<p>Suppose, for simplicity, that all opportunities in a district have the same measured utility \(v_j\). They have the same travel time and cost from home. Each has its own hidden part, independent of the others. Then choosing the district means choosing the best of its \(O_j\) opportunities. By Step 4, the value of that choice is a logsum over \(O_j\) equal terms:</p>
-$$\ln \sum_{i=1}^{O_j} e^{v_j} \;=\; \ln\!\big(O_j\, e^{v_j}\big) \;=\; v_j + \ln O_j .$$
-<p>So the term \(\ln O_j\) is not an arbitrary choice. It is exactly what bundling identical opportunities into one district produces. It is called the <em>size term</em>. Three consequences follow:</p>
-<ul>
-<li>The probability of choosing a district is proportional to \(O_j\,e^{v_j}\): the number of opportunities times a factor that falls with travel time and cost. This is the <strong>gravity model</strong> of travel demand. The logsum over districts is the utility-based version of Hansen's accessibility from the previous subsection.</li>
-<li>Doubling the jobs in a district doubles its chance of being chosen, all else equal. Splitting a district into two halves leaves the predictions unchanged. That is reassuring, because district boundaries are drawn by the analyst, not by the travelers.</li>
-<li>In practice, the weight on \(\ln O_j\) is estimated from data rather than fixed at 1. A weight below 1 means the opportunities in a district are partly alike, so their hidden parts are not independent. A variant called <em>nested logit</em> handles this (<a href="m04-demand-mode-choice.html">Module 4</a>).</li>
-</ul>
-<p>A complete option is then a destination \(j\) reached by a way of traveling \(m\), with measured utility \(V_{n,jm} = \beta_t\,t_{n,jm} + \beta_c\,c_{n,jm} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{n,jm} + \ln O_j\).</p>
 
 <aside class="person">
 <img src="../assets/img/people/mcfadden.jpg" alt="Portrait of Daniel McFadden" loading="lazy">
@@ -429,7 +367,7 @@ $$\ln \sum_{i=1}^{O_j} e^{v_j} \;=\; \ln\!\big(O_j\, e^{v_j}\big) \;=\; v_j + \l
 <li><strong>It rewards faster and cheaper travel.</strong> Shorter times \(t\) and lower costs \(c\) raise \(V\), and a higher \(V\) raises the logsum. This is the traffic engineer's objective.</li>
 <li><strong>It rewards more destinations within reach.</strong> More opportunities \(O_j\) raise the logsum, whatever way of traveling reaches them. This is the accessibility objective of Japanese rail-oriented cities.</li>
 <li><strong>It rewards new options, even little-used ones.</strong> Adding an option never lowers the logsum. A safe cycle route has value even for people who mostly drive, because it is there when they need it. This is how the choice of mode enters the objective: we value having the option, not reaching a target share of cyclists.</li>
-<li><strong>Improvements count by how many people use them.</strong> As shown in Step 4, raising an option's \(V\) raises the logsum in proportion to that option's probability. In money: \(\partial A_n/\partial V_{nj} = P_{nj}/\lambda_n\). The rule of a half rests on this.</li>
+<li><strong>Improvements count by how many people use them.</strong> As the demo shows, raising an option's \(V\) raises the logsum in proportion to that option's probability. In money: \(\partial A_n/\partial V_{nj} = P_{nj}/\lambda_n\). The rule of a half rests on this.</li>
 <li><strong>It includes induced demand.</strong> Suppose the logsum comes from a model in which people can change routes, ways of traveling and destinations. Then it already contains their response to a plan. Time savings on a fixed list of trips do not.</li>
 </ul>
 
