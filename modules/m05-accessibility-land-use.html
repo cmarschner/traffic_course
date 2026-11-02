@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 5 · Accessibility, land use and induced demand — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Accessibility measures, travel-time budgets, the evidence on induced demand, land-use/transport interaction, transit-oriented development from Osaka to Copenhagen, parking reform, and the land term of the welfare objective.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="What an accessibility map shows that a congestion map does not; how to measure accessibility; the evidence on induced demand and how it is fought over; land-use/transport interaction; transit-oriented development from Osaka to Copenhagen; parking reform and the land term of the welfare objective.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,38 +29,60 @@
 <main>
 <p class="kicker">Part II · People and places · Module 5</p>
 <h1>Accessibility, land use and induced demand</h1>
-<p class="meta">≈ 4 hours · Prerequisites: <a href="m01-objective.html">Module 1</a>, <a href="m04-demand-mode-choice.html">Module 4</a> · Key terms: <span class="term">A</span>, <span class="term">D</span>, equity floor</p>
+<p class="meta">≈ 4 hours · Prerequisites: <a href="m01-objective.html">Module 1</a>; <a href="m04-demand-mode-choice.html">Module 4</a> helps for the "Under the hood" boxes · Key terms: <span class="term">A</span>, <span class="term">D</span>, the access floor</p>
 
-<p class="lede">Transport exists to connect people with places. Over decades, the places move: homes, jobs and shops relocate in response to the network, and the network then responds to them. This module covers the measures that capture that connection (accessibility), the evidence on how traffic responds to new capacity (induced demand), the models and policies that couple land use to transport, and the land term \(rL\) that most appraisals leave out.</p>
+<p class="lede">Transport exists to connect people with places. Over the years, the places move. Homes, jobs and shops relocate in response to the network, and the network then responds to them. This module is about that connection: how to measure what people can reach (accessibility), what happens to traffic when roads are widened (induced demand), how transport and land use shape each other over decades, and what the land under roads and parking is worth.</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>What can people reach from where they live, and how do roads, rail, prices, parking rules and land use change that over years and decades?</dd>
+<dt>What matters</dt><dd>Access, not speed. A congestion map shows where cars are slow. An accessibility map shows what people can reach, including people without a car. New road capacity in congested areas attracts new traffic, so the congestion relief fades while the extra traffic, emissions and paved land remain. Over decades, homes and jobs move in response to the network, so a transport decision is also a land-use decision.</dd>
+<dt>Numbers to question</dt><dd>How much new traffic a road attracts: estimates run from about 0.2% for each 1% of extra capacity on a whole national network to about 1% for 1% on urban motorways. Which applies to your scheme? The time savings forecast for year 30, not year 1. The threshold in "jobs within 30 minutes". The value of the land under roads and parking, which most appraisals set to zero.</dd>
+<dt>Levers</dt><dd>Parking rules and prices act within a few years. Bus network redesigns and street changes act within years. Station-area zoning, land readjustment and new rail lines shape a city over decades.</dd>
+<dt>Ask your analysts</dt><dd>Show me an accessibility map before and after the plan, by mode, and for people without a car. What happens to traffic in year 10? Which induced-demand elasticity did you use, and why that one? Does the forecast let homes and jobs move? What is the land worth, and was it counted once?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
+<li>Explain what an accessibility map shows a decision maker that a congestion map does not.</li>
 <li>Compute cumulative-opportunity, gravity and logsum accessibility for a zone, and explain why they can rank plans differently.</li>
 <li>Separate proximity from transport performance using the ITF Urban Access Framework.</li>
-<li>Summarize the evidence on induced demand (SACTRA 1994, Goodwin 1996, Duranton &amp; Turner 2011, the 2018 UK evidence review) and say what it does and does not imply for welfare.</li>
-<li>Explain how LUTI models close the loop between accessibility and location.</li>
+<li>Summarize the evidence on induced demand (SACTRA 1994, Goodwin 1996, Duranton &amp; Turner 2011, the 2018 UK evidence review), explain why estimates differ, and say what it does and does not imply for welfare.</li>
+<li>Explain how land-use/transport interaction (LUTI) models close the loop between accessibility and location, and why their forecasts are uncertain.</li>
 <li>Compare transit-oriented development in Japan, Hong Kong, Copenhagen, Singapore and Paris, including the critiques.</li>
-<li>Quantify Term D for a road or parking scheme, and explain the case against parking minimums.</li>
+<li>Quantify Term D for a road or parking scheme without counting land twice, and explain the case against parking minimums.</li>
 </ul>
 </div>
 
-<h2>1. Mobility is not accessibility <span class="term">A</span></h2>
-<p>Hansen (1959) defined accessibility as "the potential of opportunities for interaction". The definition shifts attention from how fast people move to how much they can reach. Two cities can have identical average speeds and very different accessibility, because one has destinations closer together. Conversely, a city can raise speeds and lose accessibility if the faster network encourages destinations to spread out.</p>
-<p>Term A of \(W\) is an accessibility measure. Its logsum over destinations, with \(V_{nj} = \beta_t t_{nj} + \beta_c c_{nj} + \ln O_j\), rises when travel gets faster or cheaper <em>and</em> when opportunities \(O_j\) come closer. A land-use change that puts a supermarket within walking distance raises Term A just as surely as a new road does.</p>
+<h2>1. Two maps on the mayor's desk <span class="term">A</span></h2>
+<p>Imagine two maps on a mayor's desk. The first is a <strong>congestion map</strong>, the kind a navigation app produces. Roads are colored green, orange and red by how fast cars move at rush hour. The second is an <strong>accessibility map</strong>. Each neighborhood is colored by how many jobs, schools or doctors its residents can reach within, say, 45 minutes, by bus, by bike or on foot.</p>
+<p>The two maps point to different problems and different remedies.</p>
+<ul>
+<li>The congestion map shows where <em>vehicles</em> are slow. It is silent about people who do not drive. A neighborhood can show no red at all because nobody can get there easily. The natural remedies are road widening and signal timing.</li>
+<li>The accessibility map shows which <em>people</em> are cut off from what. A district where a third of households have no car may light up as the city's worst problem, even though its streets are empty. The natural remedies are a more frequent bus, a clinic in a better place, a safe crossing, or homes nearer to jobs.</li>
+</ul>
+<p>Houston, the city of the <a href="../index.html#katy">Katy Freeway</a>, also shows the second kind of thinking. On 16 August 2015 its transit agency, METRO, replaced its whole bus network overnight with a redesign planned within the existing budget. The new network concentrated service on lines running every 15 minutes on the busiest corridors, seven days a week. The plan's designer, Jarrett Walker, described the result as linking about a million people to about a million jobs with frequent service, "up from less than ½ million". The argument for the redesign was about what people could reach, not about how fast traffic moved. (<a href="https://ssti.us/2015/09/08/transformative-transit-houstons-reconfigured-transit-system/">SSTI, 2015</a>)</p>
+<p>Accessibility maps are now produced routinely in some countries. England's Department for Transport publishes official <a href="https://www.gov.uk/government/statistics/journey-time-statistics-england-2019">journey time statistics</a>: modeled travel times from every small area to eight key local services, such as schools, doctors and employment centers. For 2019 it reported an average minimum travel time to these services of 9 minutes by car and 22 minutes on foot in urban areas, and 14 and 55 minutes in rural areas. In the United States, the University of Minnesota's Accessibility Observatory ranks metropolitan areas by the number of jobs residents can reach by transit (<a href="https://access.umn.edu/ao-research/aaa/transit/2018"><em>Access Across America</em></a>).</p>
+
+<h3>Mobility is not accessibility</h3>
+<p>The idea behind the second map goes back to Walter Hansen, who in 1959 defined accessibility as "the potential of opportunities for interaction" (<a href="m01-objective.html#term-a">Module 1</a> tells his story). The definition shifts attention from how fast people move to how much they can reach. Two cities can have the same average speed and very different accessibility, because in one of them destinations are closer together. A city can even raise its speeds and lose accessibility, if the faster network lets destinations spread out.</p>
+<p>Term A of the welfare function is an accessibility measure. It is built from the <em>logsum</em>, the value of all the options a person has, which <a href="m01-objective.html#term-a">Module 1</a> explains with a simulation. It rises when travel gets faster or cheaper. It also rises when opportunities come closer. A land-use change that puts a supermarket within walking distance raises Term A just as surely as a new road does.</p>
 
 <h2>2. Measuring accessibility</h2>
-<p>For zone \(i\), opportunities \(O_j\) and travel time \(t_{ij}\) by some mode, the three standard measures are:</p>
+<p>An accessibility measure for a place combines two things: the opportunities in each destination (jobs, shops, schools), and how hard each one is to reach. Three standard measures differ in how they combine them.</p>
 <div class="table-wrap"><table>
-<tr><th>Measure</th><th>Formula</th><th>Strengths</th><th>Weaknesses</th></tr>
-<tr><td>Cumulative opportunities</td><td>\(A_i = \sum_j O_j\,\mathbf{1}[t_{ij}\le T]\)</td><td>Easy to communicate ("jobs within 30 minutes by transit")</td><td>Arbitrary threshold; a minute's change can flip large numbers in or out</td></tr>
-<tr><td>Gravity (Hansen)</td><td>\(A_i = \sum_j O_j\,e^{-\gamma t_{ij}}\)</td><td>Smooth; distance decay estimated from data</td><td>Units are hard to interpret; not a welfare measure</td></tr>
-<tr><td>Logsum (utility-based)</td><td>\(A_i = \frac{1}{\lambda}\ln\sum_j e^{\beta_t t_{ij} + \ln O_j}\)</td><td>Money-metric consumer surplus; consistent with demand model and Term A</td><td>Needs an estimated choice model; harder to explain</td></tr>
+<tr><th>Measure</th><th>In words</th><th>Strengths</th><th>Weaknesses</th></tr>
+<tr><td>Cumulative opportunities</td><td>Count everything within a time limit, for example "jobs within 30 minutes by transit".</td><td>Easy to communicate, legislate and audit</td><td>The limit is arbitrary; one minute's change can move large numbers in or out</td></tr>
+<tr><td>Gravity (Hansen)</td><td>Count everything, but give far destinations less weight, falling smoothly with travel time.</td><td>Smooth; how fast the weight falls can be estimated from data</td><td>Its units are hard to interpret; not a measure of welfare</td></tr>
+<tr><td>Logsum (utility-based)</td><td>The value, in money, of being able to choose among all destinations.</td><td>Measures consumer surplus; consistent with the demand model and Term A</td><td>Needs an estimated choice model; harder to explain</td></tr>
 </table></div>
-<p>The gravity measure is the exponential of the logsum measure when \(\gamma = -\beta_t\). They rank zones identically, but differences in the logsum are in money, so they can be added to the other terms of \(W\). Geurs and van Wee (2004) give the standard review of accessibility measures and of the components (land use, transport, temporal, individual) a good measure should reflect.</p>
+<p>The gravity measure and the logsum are close relatives: they rank places identically. The difference is that changes in the logsum are in money. So they can be added to the other terms of \(W\).</p>
 
 <h3>Worked example: three ways to see the same change</h3>
-<p>A residential zone has three employment centers within reach by transit:</p>
+<p>A residential zone has three employment centers within reach by transit. A new rail link cuts the trip downtown from 40 to 30 minutes:</p>
 <div class="table-wrap"><table>
 <tr><th>Center</th><th>Jobs \(O_j\)</th><th>Time now (min)</th><th>Time with new rail link</th></tr>
 <tr><td>Local town center</td><td>50,000</td><td>10</td><td>10</td></tr>
@@ -69,74 +91,116 @@
 </table></div>
 <ul>
 <li><strong>Cumulative (30 min):</strong> 70,000 jobs before, 150,000 after: a 114% increase. With a 29-minute threshold the rail link would show no gain at all.</li>
-<li><strong>Gravity (\(\gamma = 0.08\)/min):</strong> \(50{,}000e^{-0.8} + 20{,}000e^{-2.0} + 80{,}000e^{-3.2} = 28{,}434\) before, \(32{,}430\) after: a 14% increase.</li>
-<li><strong>Logsum:</strong> \(\ln 28{,}434 = 10.255\) before, \(10.387\) after, a change of 0.132 utils per resident per trip. With \(\beta_t = -0.08\)/min, that is equivalent to a time saving of \(0.132/0.08 \approx 1.65\) minutes per commute for every resident, users and non-users of the new link alike, averaged over destination choice. Multiply by trips and the value of time to get the contribution to Term A.</li>
+<li><strong>Gravity</strong> (each minute reduces a destination's weight by about 8%, \(\gamma = 0.08\)/min): \(50{,}000e^{-0.8} + 20{,}000e^{-2.0} + 80{,}000e^{-3.2} = 28{,}434\) before, \(32{,}430\) after: a 14% increase.</li>
+<li><strong>Logsum:</strong> the natural logarithm of the gravity value, \(\ln 28{,}434 = 10.255\) before and \(10.387\) after, a change of 0.132 points of utility. Each minute is worth 0.08 points, so the gain equals a time saving of \(0.132/0.08 \approx 1.65\) minutes per commute, for every resident of the zone. Multiply by trips and the value of time to get the contribution to Term A.</li>
 </ul>
-<p>The cumulative measure exaggerates the change because downtown crosses the threshold. The logsum gives a modest, money-valued number. It is consistent with the rule of half: only the residents who travel downtown gain, and they gain up to 10 minutes.</p>
+<p>The cumulative measure exaggerates the change, because downtown happens to cross the threshold. The logsum gives a modest number in money. It agrees with the rule of a half (<a href="m02-valuing-access.html">Module 2</a>): only the residents who travel downtown gain, up to 10 minutes each, and the share of residents choosing downtown rises from about 11% to about 22%. Ten minutes times the average share, about 17%, is 1.7 minutes per resident.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>The three formulas, and why gravity and logsum rank places identically</summary>
+<p>For zone \(i\), destinations \(j\) with opportunities \(O_j\), and travel time \(t_{ij}\) by some mode:</p>
+<div class="table-wrap"><table>
+<tr><th>Measure</th><th>Formula</th></tr>
+<tr><td>Cumulative opportunities</td><td>\(A_i = \sum_j O_j\,\mathbf{1}[t_{ij}\le T]\), where \(\mathbf{1}[\cdot]\) is 1 if the condition holds and 0 otherwise, and \(T\) is the time limit</td></tr>
+<tr><td>Gravity (Hansen)</td><td>\(A_i = \sum_j O_j\,e^{-\gamma t_{ij}}\)</td></tr>
+<tr><td>Logsum</td><td>\(A_i = \frac{1}{\lambda}\ln\sum_j e^{\beta_t t_{ij} + \ln O_j}\)</td></tr>
+</table></div>
+<p>Inside the logsum, \(e^{\beta_t t_{ij} + \ln O_j} = O_j\,e^{\beta_t t_{ij}}\). With \(\gamma = -\beta_t\), the sum is exactly the gravity measure. The logsum is therefore the logarithm of the gravity measure, divided by \(\lambda\). The logarithm only ever increases, so the two rank places identically. The logarithm also turns ratios into differences: a 14% rise in the gravity measure becomes a fixed gain in utility, \(\ln 1.14 \approx 0.132\), which \(\lambda\) converts into money. The size term \(\ln O_j\) is derived in <a href="m04-demand-mode-choice.html#random-utility">Module 4</a> (Step 6).</p>
+<p>In the worked example, the downtown share is \(80{,}000\,e^{-3.2}/28{,}434 = 11.5\%\) before and \(80{,}000\,e^{-2.4}/32{,}430 = 22.4\%\) after. The rule of a half gives \(10 \times (0.115+0.224)/2 = 1.69\) minutes, against 1.65 from the logsum. The small gap is the rule of a half's straight-line approximation.</p>
+<p>Geurs and van Wee (2004) give the standard review of accessibility measures. They name four components a good measure should reflect: land use (where opportunities are), transport (how hard they are to reach), time (when they are open and when people are free, Hägerstrand's constraints in <a href="m01-objective.html#term-a">Module 1</a>), and individual (who can use which mode).</p>
+</details>
 
 <h3>Proximity versus transport performance</h3>
-<p>The ITF/OECD <strong>Urban Access Framework</strong> separates two sources of accessibility. <em>Proximity</em> counts the opportunities that lie within a given straight-line distance, regardless of transport. <em>Transport performance</em> compares the opportunities actually reachable in a given time with those nearby. A city can score well on accessibility because it is dense (high proximity, typical of Paris or Tokyo) or because its network is fast (high performance, typical of US metropolitan areas by car). The decomposition is diagnostic. If accessibility is low because of low proximity, more speed is an expensive remedy and land-use change may be cheaper. The same logic underlies the 15-minute city and Singapore's 20-minute towns (section 6).</p>
+<p>The ITF/OECD <strong>Urban Access Framework</strong> separates two sources of accessibility. <em>Proximity</em> counts the opportunities that lie within a given straight-line distance, regardless of transport. <em>Transport performance</em> compares the opportunities actually reachable in a given time with those nearby. A city can score well because it is dense (high proximity, typical of Paris or Tokyo) or because its network is fast (high performance, typical of US metropolitan areas by car).</p>
+<p>The split tells a decision maker where to look. If accessibility is low because opportunities are far away, more speed is an expensive remedy, and changing land use may be cheaper. The same logic underlies the 15-minute city and Singapore's 20-minute towns (<a href="#tod">section 6</a>).</p>
 
 <div class="box note">
-<div class="box-title">Equity floor</div>
-<p>The constraint \(A_g \ge A_{\min}\) in \(W\) is usually written in accessibility terms: for example, every household must reach a hospital in 30 minutes, or a neighborhood center in 20 minutes without a car. Cumulative measures are natural for such floors, despite their weaknesses, because they are easy to legislate and audit. The logsum is better for valuing changes above the floor.</p>
+<div class="box-title">The access floor</div>
+<p>The welfare function has a limit \(A_g \ge A_{\min}\): every group keeps a minimum level of access (<a href="m01-objective.html#limits">Module 1</a>). Such floors are usually written as accessibility targets: for example, every household must reach a hospital in 30 minutes, or a neighborhood center in 20 minutes without a car. Cumulative measures are natural for such floors, despite their weaknesses, because they are easy to legislate and audit. The logsum is better for valuing changes above the floor. Karel Martens' <em>Transport Justice</em> (2017) makes the philosophical case for such a sufficiency threshold.</p>
 </div>
 
-<h2>3. Travel-time budgets</h2>
-<p>A striking stylised fact runs through travel surveys across countries and decades: average daily travel time per person stays roughly constant, at around an hour, while distance traveled grows with speed. Zahavi documented it in the 1970s. Marchetti (1994) argued, in a paper reprinted by IIASA, that it reflects anthropological invariants rather than economics, and noted that cities historically grew to the size reachable in about half an hour from the center at the prevailing speed of travel.</p>
-<p>The budget is an empirical regularity, not a law. It varies between groups and countries, and the evidence for strict constancy is contested. Its implication for \(W\) is nonetheless important. If people hold travel time roughly constant, then in the long run <strong>speed gains are taken as longer distances, not as time savings</strong>. The benefit shows up in Term A as more destinations within the budget, a larger choice set, larger homes further out, and is real. But the "time saved" that fixed-demand appraisal reports does not materialize, and the extra distance raises Terms C and D.</p>
+<h2>3. Faster travel, longer trips</h2>
+<p>Travel surveys across many countries and decades show a striking regularity. On average, people spend roughly an hour a day traveling, while the distance they cover grows with speed. This <em>travel-time budget</em> is an empirical regularity, not a law, and <a href="m02-valuing-access.html">Module 2</a> (section 8) discusses the evidence and its limits.</p>
+<p>For land use, the consequence is what matters. If people hold travel time roughly constant, then in the long run <strong>speed gains are taken as longer distances, not as time savings</strong>. Cesare Marchetti noted that cities have historically grown to about the size that can be crossed in half an hour at the speed of the day. The benefit of faster travel is real: more destinations within reach, a larger choice of jobs and homes. But it shows up as access in Term A, not as the "time saved" that a fixed-demand appraisal reports. And the extra distance raises Terms C and D.</p>
 
-<h2>4. Induced demand: theory and evidence</h2>
-<h3>Theory</h3>
-<p>Travel is a good with a downward-sloping demand curve in generalized cost. A capacity increase lowers the cost of driving, and the quantity demanded rises. The extra traffic comes from route changes (reassignment, which is not new traffic network-wide), time-of-day changes, mode shift, longer trips to different destinations, new trips, and in the long run, changed locations and car ownership. Only some of these are "induced" in the strict sense. All of them erode the predicted time saving.</p>
-<p>Induced demand does <em>not</em> mean that a road scheme has zero benefit. The induced trips are worth something to the people who make them: by the rule of half, half the cost reduction per trip. What induced demand does mean is that (a) the benefit is smaller than fixed-demand appraisal reports, (b) the extra vehicle-kilometers bring extra externalities in Term C, and (c) the congestion relief that justified the scheme may not last.</p>
+<h2 id="4-induced-demand-theory-and-evidence">4. Induced demand: theory and evidence</h2>
+<h3>The idea</h3>
+<p>Travel behaves like most things people buy: when it gets cheaper, people use more of it. Here "cheaper" includes time. Widening a congested road lowers the time cost of driving on it, so more people drive on it. The extra traffic comes from several sources:</p>
+<ul>
+<li>drivers switching from other routes (this moves traffic, but adds none to the network as a whole);</li>
+<li>drivers switching from other times of day;</li>
+<li>people switching from bus, train or bike;</li>
+<li>longer trips to destinations further away;</li>
+<li>trips that would not have been made at all;</li>
+<li>and in the long run, homes and businesses moving to places the faster road serves, and households buying more cars.</li>
+</ul>
+<p>Only some of these are "induced" in the strict sense. All of them eat into the predicted time saving.</p>
+<p>Induced demand does <em>not</em> mean that a road scheme has no benefit. The induced trips are worth something to the people who make them. By the rule of a half, each is worth about half the cost saving that existing trips get. What induced demand does mean is threefold. The benefit is smaller than a fixed-demand appraisal reports. The extra vehicle-kilometers bring extra crashes, emissions and noise in Term C. And the congestion relief that justified the scheme may not last.</p>
 
-<h3>Evidence</h3>
+<h3>The evidence</h3>
 <ul>
 <li><strong>SACTRA (1994), <em>Trunk Roads and the Generation of Traffic</em>.</strong> The UK government's Standing Advisory Committee on Trunk Road Assessment concluded that new and improved roads do generate additional traffic, especially where networks are congested and demand is elastic, and that ignoring it biases appraisal. The report led UK guidance to adopt variable-demand modeling.</li>
-<li><strong>Goodwin (1996)</strong>, summarizing the evidence prepared for SACTRA: an elasticity of traffic volume with respect to travel time of about −0.5 in the short term and up to −1.0 in the long term.</li>
-<li><strong>Duranton &amp; Turner (2011), "The fundamental law of road congestion".</strong> Using US metropolitan data from 1983 to 2003 and instrumental variables based on historical route plans, they estimate that vehicle-kilometers on interstates rise roughly one-for-one with lane-kilometers. New capacity in congested metros is filled by more driving, commercial traffic and migration. They also find that adding public transport does not reduce road congestion.</li>
-<li><strong>UK Department for Transport evidence review (WSP for DfT, 2018).</strong> Reviewing 25 newer studies, it confirms that induced traffic exists but finds that its size varies widely. Its tentative central figure for whole networks (US state networks, the Dutch national network) is an elasticity of about 0.2: a 10% increase in capacity leads to about 2% more traffic. It expects higher values in urban areas and on highly congested routes.</li>
+<li><strong>Goodwin (1996)</strong>, summarizing the evidence prepared for SACTRA: an elasticity of traffic volume with respect to travel time of about −0.5 in the short term and up to −1.0 in the long term. In words: a 10% shorter travel time brings about 5% more traffic within a year or so, and up to 10% more over many years.</li>
+<li><strong>Duranton &amp; Turner (2011), "The fundamental law of road congestion".</strong> Using US metropolitan data from 1983 to 2003, and historical route plans to separate cause from effect, they estimate that vehicle-kilometers on interstates rise roughly one-for-one with lane-kilometers. New capacity in congested metropolitan areas is filled by more driving, more commercial traffic and people moving in. They also find that adding public transport does not by itself reduce road congestion.</li>
+<li><strong>UK Department for Transport evidence review (WSP, 2018).</strong> Reviewing newer studies, it confirms that induced traffic exists, but finds that its size varies widely. Its tentative figure for whole networks (US state networks, the Dutch national network) is an elasticity of about 0.2: a 10% increase in road capacity leads to about 2% more traffic. It expects higher values in urban areas and on highly congested routes.</li>
 </ul>
-<p>These numbers are not contradictory. Duranton and Turner measure interstates in congested metropolitan areas over twenty years. The DfT review's 0.2 refers to whole networks including uncongested rural roads. Induced demand is a local, congestion-dependent phenomenon, which is exactly what a variable-demand equilibrium model predicts.</p>
+<p>These numbers do not contradict each other. Duranton and Turner measure interstates in congested metropolitan areas over twenty years. The DfT review's 0.2 refers to whole networks, including uncongested rural roads. Induced demand is a local phenomenon that grows with congestion. That is exactly what a demand model with variable demand and congestion feedback predicts (<a href="m04-demand-mode-choice.html#model-to-a">Module 4</a>).</p>
 
-<div class="box caution">
-<div class="box-title">Case study: the Katy Freeway, read carefully</div>
-<p>Interstate 10 west of downtown Houston was rebuilt between about 2003 and 2008, to up to 26 lanes in places, counting frontage roads and managed lanes. Two sets of numbers circulate:</p>
+<h3>How the evidence is fought over</h3>
+<p>Induced demand is one of the most contested numbers in transport, because it can decide whether a widening passes appraisal. The arguments are usually not about whether it exists, but about three narrower questions.</p>
+<p><strong>Which number applies here?</strong> A project's supporters tend to cite the network-wide figure of about 0.2. Its critics cite the metropolitan figure of about 1. Both are honest estimates of different things. The right question is which kind of road and which level of congestion the scheme resembles.</p>
+<p><strong>Induced traffic or background growth?</strong> When traffic on a widened road rises, some of the rise would have happened anyway, because the region's population and jobs grew. The Katy Freeway in Houston, rebuilt to as many as 26 lanes between 2003 and 2008, is the standard battleground (its story opens this course: <a href="../index.html#katy">Introduction</a>). Travel times fell at first, then rose again within a few years. A researcher at the Texas A&amp;M Transportation Institute attributed the rise to the region's growth. Critics, citing the same traffic data, called it induced demand. A balanced reading: the corridor carries many more vehicles than before, west Houston grew very fast, and the critics chose the comparison years. The case is consistent with induced demand plus background growth. It shows that the scheme did not deliver lasting congestion relief. It does not show, by itself, that the scheme reduced welfare. That would require valuing the extra trips (Term A), the extra emissions and crashes (Term C), the land used (Term D) and the cost (Term E), which no published study has done comprehensively.</p>
+<p><strong>Who must count it, and how?</strong> Here countries have made different institutional choices:</p>
 <ul>
-<li>Shortly after completion, the Texas A&amp;M Transportation Institute and project officials reported large peak-hour time savings, especially in the evening peak, and the <em>Houston Chronicle</em> reported faster commutes.</li>
-<li>Analyses of Houston TranStar data by local advocacy groups found that peak travel times on long segments were substantially longer in 2014 than in 2011, figures later widely cited (for example by City Observatory) as proof of induced demand.</li>
+<li>The <strong>United Kingdom</strong> responded to SACTRA by building induced traffic into appraisal guidance. TAG expects variable-demand modeling for road schemes unless it can be shown to be unnecessary.</li>
+<li><strong>California</strong> took a more direct route. Since SB 743, environmental review measures the transport impact of a project by the vehicle-miles it adds rather than by delay (<a href="m01-objective.html#classic">Module 1</a>). Caltrans's 2020 <a href="https://dot.ca.gov/-/media/dot-media/programs/transportation-planning/documents/sb-743/2020-09-10-1st-edition-taf-fnl-a11y.pdf">Transportation Analysis Framework</a> tells analysts to use a simple <a href="https://travelcalculator.ncst.ucdavis.edu/">induced travel calculator</a> from the University of California, Davis, for added general-purpose and carpool lanes in metropolitan counties: either on its own, or as a benchmark against which a full demand model's result is checked. It applies long-run elasticities taken from the research: 1.0 for interstates (from Duranton and Turner) and 0.75 for other major roads (from a California county study by Cervero and Hansen, 2002). The framework itself warns that these are long-term averages, that individual projects will vary, and it lets analysts document why a project should differ.</li>
+<li>Many other appraisals, in many countries, still hold the trip matrix fixed for road schemes. That is the classic objective of <a href="m01-objective.html#classic">Module 1</a>, and it builds in the bias shown in <a href="m04-demand-mode-choice.html#model-to-a">Module 4</a>.</li>
 </ul>
-<p>A balanced reading: the corridor carries many more vehicles than before, west Houston's population grew very fast, the comparison years were chosen by the critics, and travel time on a segment is not welfare. The case is consistent with induced demand plus background growth, and it shows that the scheme did not deliver lasting congestion relief. It does not show by itself that the scheme reduced welfare. That requires valuing the extra trips (Term A), the extra emissions and crashes (Term C), the land used (Term D) and the cost (Term E), which no published study has done comprehensively.</p>
+<p>A fair summary: a rule of thumb such as California's is crude, but it is checkable by anyone. A full variable-demand model is more precise, but only if its response is tested against evidence like that above. A decision maker can ask for both, and ask why they differ.</p>
+
+<h3>Traffic evaporation</h3>
+<p>The effect also runs in reverse. When road capacity is removed or reallocated, some traffic does not reappear on other routes. People change times, modes, destinations or how often they travel. Studies of road closures and reallocations for the UK government and London Transport (Cairns, Hass-Klau and Goodwin, 1998) found that a substantial part of the displaced traffic did not reappear on alternative routes. Seoul's removal of the Cheonggyecheon elevated road (<a href="../countries/more.html#korea">more countries</a>) and many European city-center reallocations are cited in this literature. The amount that evaporates depends on the alternatives people have, so it is no excuse for ignoring the people whose trips get longer.</p>
+
+<h2>5. Land-use/transport interaction</h2>
+
+<div class="box story"><div class="box-title">History · "I Have Seen the Future"</div>
+<figure class="photo inset"><img src="../assets/img/history/futurama-1939-street-intersection.jpg" width="783" height="796" loading="lazy" alt="Black-and-white photo of a full-size street intersection from the Futurama exhibit: cars parked and driving on a lower level, pedestrians walking on raised walkways above them, modern buildings behind."><figcaption>The street intersection of the "City of Tomorrow" at General Motors' Futurama, 1939: cars below, pedestrians on raised walkways above. <span class="credit">Norman Bel Geddes, <em>Magic Motorways</em> (1940), public domain, via <a href="https://commons.wikimedia.org/wiki/File:Street_intersection_Futurama.jpg">Wikimedia Commons</a>.</span></figcaption></figure>
+<p>At the 1939–40 New York World's Fair, one of the most popular shows was in General Motors' "Highways and Horizons" pavilion. Its <em>Futurama</em>, designed by Norman Bel Geddes, was an immense model of America around 1960, crossed by broad motorways. About 27,500 visitors a day saw it. They left with a pin that read "I Have Seen the Future".</p>
+<p>The model was a land-use plan as much as a transport plan. Its city of tomorrow, for example, lifted pedestrians above the cars. Its forecast was bold for its time: the narration spoke of about 38 million motorcars in the America of 1960. According to the Museum of the City of New York, the real number in 1960 was 74.4 million. The gap is not proof of induced demand. Incomes and population also grew far beyond what anyone expected in 1939. But it is a reminder that a network built for a forecast can help create a different future from the one forecast.</p>
+<p class="credit">Sources: Harry Ransom Center, <a href="https://www.hrc.utexas.edu/exhibitions/2012/i-have-seen-the-future/"><em>I Have Seen the Future: Norman Bel Geddes Designs America</em></a> (2012); Museum of the City of New York, <a href="https://blog.mcny.org/2013/11/26/i-have-seen-the-future-norman-bel-geddes-and-the-general-motors-futurama">"I Have Seen the Future: Norman Bel Geddes and the General Motors Futurama"</a> (2013).</p>
 </div>
 
-<p>The converse effect, sometimes called <em>traffic evaporation</em>, occurs when capacity is removed. Studies of road closures and reallocations (Cairns, Hass-Klau and Goodwin, 1998, for the UK government and London Transport) found that a substantial part of the displaced traffic did not reappear on alternative routes. Seoul's Cheonggyecheon and many European city-center reallocations are cited in this literature.</p>
+<p>Transport and land use form a loop, often called the <strong>land-use/transport feedback cycle</strong>. Accessibility influences where households and firms locate. Where they locate determines what people do and where they travel. Travel determines congestion and travel times. And travel times determine accessibility, which closes the loop.</p>
+<p>A standard demand model (<a href="m04-demand-mode-choice.html">Module 4</a>) holds land use fixed. It covers only half of the loop: from locations to travel. <strong>Land-use/transport interaction (LUTI) models</strong> cover the whole loop. They forecast how a plan moves homes and jobs, and therefore how it changes the opportunities \(O_j\) in Term A, over 20 to 30 years.</p>
+<p>Their forecasts are much more uncertain than those of transport models. They must forecast real-estate markets, zoning decisions and the economy. A decision maker should treat them as scenario tools, not as forecasts. The useful question is whether the ranking of plans survives a range of land-use outcomes. If plan X beats plan Y whether the city grows outward or inward, the ranking is robust. If it wins only in one land-use scenario, that scenario is the real decision.</p>
 
-<h2>5. Land-use/transport interaction (LUTI)</h2>
-<p>The "land-use transport feedback cycle" runs as follows: accessibility influences where households and firms locate; location determines activities and travel demand; demand determines congestion and travel times; and travel times determine accessibility. A four-step or activity-based model holds land use fixed and covers only the second half of the cycle. LUTI models close the loop.</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>Three families of LUTI models</summary>
 <ul>
-<li><strong>Spatial-interaction / entropy models</strong> (Lowry 1964, and the MEPLAN and TRANUS family) allocate activities with logit models whose utility contains accessibility, rents and floor space.</li>
+<li><strong>Spatial-interaction and entropy models</strong> (Lowry 1964, and the MEPLAN and TRANUS family) allocate households and jobs with logit models. The utility of a location contains its accessibility, rents and floor space. These are the closest relatives of the gravity model in <a href="m04-demand-mode-choice.html">Module 4</a>.</li>
 <li><strong>Microsimulation</strong> (UrbanSim, ILUTE and others) simulates individual households, firms and buildings, with real-estate developers choosing what to build where.</li>
-<li><strong>Quantitative spatial economics</strong> models from urban economics, newer and calibrated to commuting flows, estimate how transport improvements raise wages and land values.</li>
+<li><strong>Quantitative spatial economics</strong>, a newer family from urban economics, calibrates general-equilibrium models to observed commuting flows. It estimates how transport improvements change wages, rents and land values.</li>
 </ul>
-<p>For \(W\), the main use of LUTI models is to estimate how a plan changes \(O_j\) and residential locations, and therefore Term A, over 20 to 30 years. Their predictions are much more uncertain than those of transport models: they must forecast real-estate markets, regulation and macroeconomic conditions. Treat them as scenario tools rather than forecasts, and test whether a ranking of plans survives a range of land-use outcomes.</p>
+<p>One caution for appraisal. Better access is gradually <em>capitalized</em> into land values: the places that become easier to reach become more expensive. A rise in land values is therefore largely the same benefit as the users' gain in access, seen from the landowner's side. Counting both double counts (<a href="m02-valuing-access.html">Module 2</a>). Land-value uplift can be used <em>instead</em> of user benefits, as an alternative measure, or as a source of finance (section 6).</p>
+</details>
 
-<h2>6. Transit-oriented development and value capture <span class="term">A</span> <span class="term">D</span> <span class="term">E</span></h2>
-<p>TOD concentrates homes, jobs and services around stations so that many trips can be made on foot and by rail. In \(W\), it raises \(O_j\) near stations (Term A), lowers car use (Term C), economises on land per person (Term D) and, if land value uplift is captured, finances the railway (Term E). Five models are instructive. None transfers wholesale.</p>
+
+<h2 id="tod">6. Transit-oriented development and value capture <span class="term">A</span> <span class="term">D</span> <span class="term">E</span></h2>
+<p><strong>Transit-oriented development</strong> (TOD) concentrates homes, jobs and services around stations, so that many trips can be made on foot and by rail. In \(W\), it raises the opportunities \(O_j\) near stations (Term A), lowers car use (Term C) and economizes on land per person (Term D). The rise in land values near stations can also be <em>captured</em> to finance the railway (Term E). Captured value is a way of paying, not an extra benefit: it is largely the access gain of Term A, turned into higher rents. Five models are instructive. None transfers wholesale.</p>
 
 <h3>Japan: the private railway model</h3>
-<p>In 1910, the Minoo-Arima Electric Railway (the predecessor of Hankyu) opened its line from Umeda and, the same year, began selling suburban housing lots near Ikeda station, sold by monthly instalments to salaried middle-class families. The company's manager, <strong>Kobayashi Ichizō</strong>, built a business on the idea that the railway should create its own demand: housing at the suburban end, a department store at the Umeda terminal, and leisure destinations such as Takarazuka to fill trains off-peak and in the counter-peak direction. Japanese private railways (<em>shitetsu</em>) widely copied this vertically integrated model.</p>
+<p>In 1910, the Minoo-Arima Electric Railway (the predecessor of Hankyu) opened its line from Umeda and, the same year, began selling suburban housing lots near Ikeda station, sold by monthly installments to salaried middle-class families. The company's manager, <strong>Kobayashi Ichizō</strong>, built a business on the idea that the railway should create its own demand: housing at the suburban end, a department store at the Umeda terminal, and leisure destinations such as Takarazuka to fill trains off-peak and in the counter-peak direction. Japanese private railways (<em>shitetsu</em>) widely copied this vertically integrated model.</p>
 <p>After the war, Tokyu developed the <strong>Tama Den-en-toshi</strong> ("Tama garden city") along its Den-en-toshi line southwest of Tokyo. Gotō Keita published the development prospectus in 1953. Tokyu acted as agent for landowner associations in land readjustment schemes (<em>kukaku seiri</em>), in which landowners contribute part of their land for roads, parks and a reserve that is sold to fund infrastructure. Tokyu's company history records the project covering roughly 5,000 hectares, planned for 400,000 residents, with about 540,000 by 2003.</p>
 <p><em>Why it worked</em>: the railway captured land value directly by owning and developing land near stations; Japan's land readjustment law provided a way to assemble land; and fast population growth filled the developments. <em>Limitations</em>: the model produced long commutes and severe crowding on radial lines (<a href="m06-transit-active-modes.html">Module 6</a>); it depended on rising land values; and with Japan's population now shrinking, many outer suburbs face vacancies and aging.</p>
 
 <h3>Japan: compact plus network</h3>
-<p>Japan's response to shrinkage is the <strong>Location Normalization Plan</strong> (立地適正化計画, <em>ritteki</em>), created by the 2014 amendment to the Act on Special Measures concerning Urban Reconstruction. Municipalities designate residential inducement zones and urban-function inducement zones, and link them with reorganised local public transport. MLIT reports that 972 municipalities were preparing or implementing such plans as of 31 July 2026. Because the instrument relies on gentle inducement (subsidies, notification requirements) rather than prohibition, its effect on actual settlement patterns is debated. Since 2020 plans must also include disaster-prevention guidelines, steering development away from flood and landslide zones.</p>
+<p>Japan's response to shrinkage is the <strong>Location Normalization Plan</strong> (立地適正化計画, <em>ritteki</em>), created by the 2014 amendment to the Act on Special Measures concerning Urban Reconstruction. Municipalities designate residential inducement zones and urban-function inducement zones, and link them with reorganized local public transport. MLIT reports that 972 municipalities were preparing or implementing such plans as of 31 July 2026. Because the instrument relies on gentle inducement (subsidies, notification requirements) rather than prohibition, its effect on actual settlement patterns is debated. Since 2020 plans must also include disaster-prevention guidelines, steering development away from flood and landslide zones.</p>
 
 <div class="box translation">
 <div class="box-title">Japanese · MLIT on compact plus network</div>
 <p class="original">医療・福祉施設、商業施設や住居等がまとまって立地し、高齢者をはじめとする住民が公共交通によりこれらの生活利便施設等にアクセスできるなど、福祉や交通なども含めて都市全体の構造を見直し、『コンパクト・プラス・ネットワーク』の考えで進めていくことが重要です。</p>
 <p>"It is important to review the structure of the city as a whole, including welfare and transport, so that medical and welfare facilities, commercial facilities, housing and so on are located together and residents, above all older people, can reach these everyday facilities by public transport, proceeding on the concept of 'compact plus network'."</p>
-<p>In \(W\) terms, this is an explicit equity floor on accessibility for people without a car, pursued by changing \(O_j\) near transit rather than by raising speeds. <em>Source: MLIT, 立地適正化計画とコンパクト・プラス・ネットワーク. Translated by the course authors (machine-assisted).</em></p>
+<p>In \(W\) terms, this is an explicit access floor on accessibility for people without a car, pursued by changing \(O_j\) near transit rather than by raising speeds. <em>Source: MLIT, 立地適正化計画とコンパクト・プラス・ネットワーク. Translated by the course authors (machine-assisted).</em></p>
 </div>
 
 <h3>Hong Kong: Rail plus Property</h3>
@@ -155,7 +219,7 @@
 </div>
 
 <h3>Singapore: 20-minute towns and a 45-minute city</h3>
-<p>Singapore's Land Transport Master Plan 2040 (published 2019) sets accessibility rather than speed targets: all journeys to the nearest neighborhood center by walk–cycle–ride modes in under 20 minutes, and 9 in 10 peak-period walk–cycle–ride journeys completed in under 45 minutes. Walk–cycle–ride means walking, cycling, and riding public or shared transport. These targets work because Singapore plans land use and transport together: new towns are built around MRT stations, and the state owns most land. In \(W\) they are equity floors on Term A, and they are pursued under a binding land constraint and a quota on vehicles.</p>
+<p>Singapore's Land Transport Master Plan 2040 (published 2019) sets accessibility rather than speed targets: all journeys to the nearest neighborhood center by walk–cycle–ride modes in under 20 minutes, and 9 in 10 peak-period walk–cycle–ride journeys completed in under 45 minutes. Walk–cycle–ride means walking, cycling, and riding public or shared transport. These targets work because Singapore plans land use and transport together: new towns are built around MRT stations, and the state owns most land. In \(W\) they are access floors on Term A, and they are pursued under a binding land constraint and a quota on vehicles.</p>
 
 <h3>Paris: the 15-minute city</h3>
 <p>Carlos Moreno, a Sorbonne-based scientist, proposed the <em>ville du quart d'heure</em> around 2016. Mayor Anne Hidalgo made it central to her 2020 campaign. Its idea is that daily needs (living, working, shopping, care, education, leisure) should be reachable within 15 minutes on foot or by bicycle.</p>
@@ -171,49 +235,67 @@
 
 <h2>7. Parking: the land term in plain sight <span class="term">D</span></h2>
 <p>A car is parked about 95% of the time, so the land it occupies at rest matters as much as the road it drives on. A surface parking space with its share of aisles takes roughly 25–30 m² (an illustrative planning figure; layouts vary). Structured parking costs much more to build per space.</p>
-<p><strong>Parking minimums</strong> require new buildings to provide a fixed number of spaces, usually per dwelling or per square meter of floor area. In Germany the duty dates back to the 1939 <em>Reichsgaragenordnung</em> and lives on in state building codes and municipal parking statutes (<em>Stellplatzsatzungen</em>). In the US it is a near-universal feature of zoning codes. Donald Shoup's <em>The High Cost of Free Parking</em> (2005) argued that minimums are set without regard to price or cost, bundle the cost of parking into housing and goods for non-drivers, induce driving, and spread cities out. He proposed three reforms: remove minimums, charge the right price for curb parking (the lowest price that leaves about one or two spaces free per block), and spend the revenue on the streets where it is collected.</p>
-<p>Reform has spread. Buffalo, New York, removed citywide minimums in its 2017 zoning code, generally described as the first major US city to do so. Minneapolis followed in 2021. California's AB 2097 (2022) prohibits public agencies from imposing minimums on most developments within half a mile of major transit stops. The Parking Reform Network maintains a map of reforms worldwide. Early evidence from Buffalo is that many developers still build parking but less of it, especially in mixed-use projects.</p>
+<p><strong>Parking minimums</strong> require new buildings to provide a fixed number of spaces, usually per dwelling or per square meter of floor area. In Germany the duty dates back to the 1939 <em>Reichsgaragenordnung</em> and lives on in state building codes and municipal parking statutes (<em>Stellplatzsatzungen</em>). In the US it is a near-universal feature of zoning codes. Donald Shoup (portrait in <a href="m01-objective.html#term-d">Module 1</a>) argued in <em>The High Cost of Free Parking</em> (2005) that minimums are set without regard to price or cost. They bundle the cost of parking into housing and goods, so that people without cars pay for it too. They induce driving, and they spread cities out. He proposed three reforms: remove minimums, charge the right price for curb parking (the lowest price that leaves about one or two spaces free per block), and spend the revenue on the streets where it is collected. Parking prices are the subject of <a href="m13-pricing.html">Module 13</a>.</p>
+<p>Reform has spread. Buffalo, New York, removed citywide minimums in its 2017 zoning code, generally described as the first major US city to do so. Minneapolis followed in 2021. California's AB 2097 (2022) prohibits public agencies from imposing minimums on most developments within half a mile of major transit stops. The Parking Reform Network maintains a map of reforms worldwide. Early evidence from Buffalo is that many developers still build parking, but less of it, especially in mixed-use projects. That is the point of the reform: the amount of parking is decided by its cost and its users, not fixed by a rule.</p>
 
 <h3>Putting a number on Term D</h3>
-<p>Term D is \(rL\), where \(L\) is land area and \(r\) is its annualized opportunity cost. Using illustrative values:</p>
+<p>Term D is \(rL\), where \(L\) is the land area used for transport and \(r\) is its yearly opportunity cost: the rent the land would earn in its best other use (<a href="m01-objective.html#term-d">Module 1</a>). A simple way to estimate it:</p>
 $$r\,L = (\text{land value per m}^2)\times(\text{area})\times(\text{real discount rate}).$$
-<p>A surface space of 25 m² on land worth €1,000/m², at a 4% real rate, costs \(25 \times 1{,}000 \times 0.04 = €1{,}000\) per year, before construction and maintenance. A city-center road widening that takes 3 m along 1 km uses 3,000 m². At €3,000/m² that is \(€360{,}000\) per year in land opportunity cost, which a standard appraisal sets to zero once the land is public highway. In Singapore or central Tokyo, \(r\) is high enough to dominate. In rural Texas, it is close to zero. This is why Term D, not ideology, explains much of the international difference in road and parking provision.</p>
+<p>A surface space of 25 m² on land worth €1,000/m², at a 4% real rate, costs \(25 \times 1{,}000 \times 0.04 = €1{,}000\) per year, before construction and maintenance. A city-center road widening that takes 3 m along 1 km uses 3,000 m². At €3,000/m² that is \(€360{,}000\) per year in land opportunity cost. A standard appraisal sets it to zero once the land is public highway.</p>
+<p>In Singapore or central Tokyo, \(r\) is high enough to dominate an appraisal. At the edge of a growing Texas metro, it is close to zero. In the course's reading, these differences in land value, more than differences in ideology, explain much of the international variation in road and parking provision.</p>
+<p><strong>Count land once.</strong> If the land for a scheme has to be bought, its purchase price is roughly all its future rents paid in advance. So the land must appear either as a purchase price in the construction cost (Term E) or as a yearly rent in Term D, never both. This course puts all land in Term D, whether it is bought or already public, and leaves it out of the construction cost (<a href="m01-objective.html#term-d">Module 1</a>). When you read an appraisal that includes land purchase in its costs, check that it does not also charge for the land elsewhere.</p>
 
 <div class="box exercise">
 <div class="box-title">Exercise 5.1 · Three accessibility measures</div>
-<p>Using the three-center example in section 2:</p>
+<p>Use the three-center example in section 2.</p>
 <ol>
-<li>Instead of the rail link, the city builds 20,000 new jobs in the local town center (10 minutes). Compute all three measures. Which project looks better under each?</li>
-<li>Repeat with \(\gamma = 0.04\). How sensitive is the ranking to the distance-decay parameter?</li>
-<li>Explain in two sentences why the logsum measure is the one that belongs in \(W\), and why a cumulative measure may still be the right form for an equity floor.</li>
+<li>Instead of the rail link, the city brings 20,000 new jobs to the local town center (10 minutes away). Compute all three measures. Which project looks better under each?</li>
+<li>Repeat with \(\gamma = 0.04\). How sensitive is the ranking to how fast the weight falls with distance?</li>
+<li>Explain in two sentences why the logsum measure is the one that belongs in \(W\), and why a cumulative measure may still be the right form for an access floor.</li>
 </ol>
 </div>
 
 <div class="box exercise">
 <div class="box-title">Exercise 5.2 · Induced demand in an appraisal</div>
-<p>A bypass is forecast under fixed demand to save 4 minutes for 20,000 vehicles a day at €15/h. Assume a long-run elasticity of traffic with respect to travel time of −0.5 (Goodwin) on this corridor.</p>
+<p>A bypass is forecast under fixed demand to save 4 minutes for 20,000 vehicles a day, at €15/h. Assume a long-run elasticity of traffic with respect to travel time of −0.5 (Goodwin) on this corridor.</p>
 <ol>
-<li>Estimate the long-run traffic increase if the base trip takes 30 minutes, and the time saving that remains if equilibrium cuts it to 2.5 minutes.</li>
-<li>Compute user benefits with the rule of half, and compare with the fixed-demand figure.</li>
-<li>Add external costs of €0.10 per extra vehicle-km for 10 km trips. What share of the fixed-demand benefit remains?</li>
+<li>Estimate the long-run traffic increase if the base trip takes 30 minutes. Then assume that, with the extra traffic, the equilibrium time saving shrinks to 2.5 minutes.</li>
+<li>Compute the user benefits with the rule of a half, and compare them with the fixed-demand figure.</li>
+<li>The extra traffic also brings crashes, emissions and noise, at €0.10 per extra vehicle-km, for trips of 10 km. Subtract these. What share of the fixed-demand benefit remains? Why must you <em>not</em> also subtract a cost for the extra delay the new traffic causes?</li>
 <li>Which terms of \(W\) did the fixed-demand appraisal omit?</li>
 </ol>
 </div>
 
 <div class="box exercise">
 <div class="box-title">Exercise 5.3 · TOD transfer</div>
-<p>Choose one of the five TOD models in section 6 and a city you know. List the conditions that made the model work in its home country (land ownership, land-assembly law, population growth, property prices, governance). For each, say whether it holds in your city, and what substitute instrument might work.</p>
+<p>Choose one of the five TOD models in section 6 and a city you know. List the conditions that made the model work in its home country: land ownership, land-assembly law, population growth, property prices, governance. For each, say whether it holds in your city, and what substitute instrument might work.</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 5.4 · Two maps for your town</div>
+<p>Pick two neighborhoods in your town: one where many households have no car, and one where most have two.</p>
+<ol>
+<li>Look at a congestion map for the morning peak in a navigation app. Which neighborhood looks like the bigger problem?</li>
+<li>Using an open routing tool with public timetable (GTFS) and OpenStreetMap data, for example <a href="https://www.opentripplanner.org/">OpenTripPlanner</a>, count the schools, doctors or jobs each neighborhood can reach within 30 minutes by public transport and by bicycle. If your country publishes official accessibility statistics, such as England's journey time statistics, use those instead.</li>
+<li>Write a five-sentence note to your mayor: what does the second map show that the first does not, and which single change would raise access most for the car-free neighborhood?</li>
+</ol>
 </div>
 
 <h2>Readings and resources</h2>
 <ul class="resources">
 <li data-type="pdf"><a href="https://www.itf-oecd.org/what-urban-access-framework">ITF/OECD — What is the Urban Access Framework?</a> <span class="why">Proximity, transport performance and accessibility as separate, measurable concepts.</span></li>
+<li data-type="data"><a href="https://www.gov.uk/government/statistics/journey-time-statistics-england-2019">UK Department for Transport — Journey time statistics, England 2019</a> <span class="why">Official accessibility statistics: modeled travel times to key local services for every small area.</span></li>
+<li data-type="data"><a href="https://access.umn.edu/ao-research/aaa/transit/2018">University of Minnesota Accessibility Observatory — Access Across America</a> <span class="why">Annual rankings of US metropolitan areas by jobs reachable by transit.</span></li>
+<li data-type="link"><a href="https://ssti.us/2015/09/08/transformative-transit-houstons-reconfigured-transit-system/">SSTI — Transformative transit: Houston's reconfigured transit system (2015)</a> <span class="why">A short account of Houston's 2015 bus network redesign.</span></li>
 <li data-type="link"><a href="https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2616">Duranton &amp; Turner (2011) — The Fundamental Law of Road Congestion, <em>American Economic Review</em></a> <span class="why">The leading econometric study of induced driving in US cities.</span></li>
 <li data-type="pdf"><a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/762976/latest-evidence-on-induced-travel-demand-an-evidence-review.pdf">WSP for the UK Department for Transport (2018) — Latest evidence on induced travel demand: an evidence review</a> <span class="why">A cautious review updating SACTRA; the source of the network-wide elasticity of about 0.2.</span></li>
 <li data-type="link"><a href="https://trid.trb.org/View/412156">SACTRA (1994) — Trunk Roads and the Generation of Traffic (TRID record)</a> · <a href="https://trid.trb.org/View/458127">Goodwin (1996) — Empirical evidence on induced traffic (TRID record)</a> <span class="why">Bibliographic records of the two founding UK documents; the full texts are in libraries.</span></li>
+<li data-type="pdf"><a href="https://dot.ca.gov/-/media/dot-media/programs/transportation-planning/documents/sb-743/2020-09-10-1st-edition-taf-fnl-a11y.pdf">Caltrans — Transportation Analysis Framework, 1st edition (2020)</a> · <a href="https://travelcalculator.ncst.ucdavis.edu/">NCST (UC Davis) — California Induced Travel Calculator</a> <span class="why">How California requires induced travel to be estimated for highway projects, and the calculator it recommends.</span></li>
 <li data-type="pdf"><a href="https://pure.iiasa.ac.at/id/eprint/4071/1/RR-95-04.pdf">Marchetti (1994) — Anthropological invariants in travel behavior (IIASA reprint RR-95-04)</a> <span class="why">The classic statement of the constant travel-time budget.</span></li>
 <li data-type="link"><a href="https://www.houstonchronicle.com/news/houston-texas/article/expanded-katy-freeway-shaves-minutes-from-commute-3941203.php"><em>Houston Chronicle</em> — Expanded Katy Freeway shaves minutes from commute</a> · <a href="https://cityobservatory.org/reducing-congestion-katy-didnt-2/">City Observatory — Reducing congestion: Katy didn't</a> <span class="why">The two sides of the Katy Freeway story. Read both, and note who produced each number.</span></li>
 <li data-type="tool"><a href="https://www.urbansim.com/">UrbanSim</a> <span class="why">A widely used microsimulation land-use model; documentation explains the LUTI feedback loop.</span></li>
+<li data-type="tool"><a href="https://www.opentripplanner.org/">OpenTripPlanner</a> <span class="why">Open-source multimodal routing on GTFS and OpenStreetMap data; a common basis for accessibility maps.</span></li>
+<li data-type="link"><a href="https://www.hrc.utexas.edu/exhibitions/2012/i-have-seen-the-future/">Harry Ransom Center — I Have Seen the Future: Norman Bel Geddes Designs America</a> <span class="why">The exhibition on Futurama and its designer.</span></li>
 <li data-type="link"><a href="https://www.info.gov.hk/gia/general/202107/14/P2021071400527p.htm">Hong Kong Government — LCQ3: Developing topside properties at railway stations (2021)</a> <span class="why">Official explanation of Rail plus Property and its role in funding railways.</span></li>
 <li data-type="pdf"><a href="https://www.retsinformation.dk/eli/lta/2019/312/pdf">Fingerplan 2019 — Bekendtgørelse om hovedstadsområdets planlægning</a> <span class="lang">(Danish)</span> <span class="why">The binding planning directive for Greater Copenhagen, including the station-proximity rules.</span></li>
 <li data-type="pdf"><a href="https://www.lta.gov.sg/content/dam/ltagov/who_we_are/our_work/land_transport_master_plan_2040/pdf/LTA%20LTMP%202040%20eReport.pdf">LTA Singapore — Land Transport Master Plan 2040 report</a> · <a href="https://www.lta.gov.sg/content/ltagov/en/who_we_are/our_work/land_transport_master_plan_2040.html">LTMP 2040 overview</a> <span class="why">The source of the 20-minute town and 45-minute city targets.</span></li>
