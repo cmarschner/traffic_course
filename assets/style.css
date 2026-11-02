@@ -280,7 +280,7 @@ main h4 { color: var(--accent); }
 /* ---------- reader layers (CR-20) ---------- */
 /* "In brief": what a decision maker needs from the module, at its top. */
 .box.brief { border-left: 4px solid var(--accent-2); }
-.box.brief dl { margin: 0; display: grid; grid-template-columns: 9.5rem 1fr; gap: .45rem 1rem; }
+.box.brief dl { margin: 0; display: grid; grid-template-columns: 11rem 1fr; gap: .45rem 1rem; }
 .box.brief dt { font-family: var(--sans); font-weight: 700; font-size: .85rem; color: var(--ink-2); padding-top: .15rem; }
 .box.brief dd { margin: 0; }
 @media (max-width: 640px) { .box.brief dl { grid-template-columns: 1fr; gap: .1rem; } .box.brief dd { margin-bottom: .5rem; } }
