@@ -4,6 +4,12 @@ A static website (plain HTML/CSS, no build step) teaching traffic and transport 
 welfare objective function, with the US, Germany, Japan, Singapore, the Netherlands, Sweden and France as main
 role models and translated digests of key non-English sources.
 
+Edited by Clemens Marschner, drafted with the help of Claude (Anthropic).
+
+**Readers**, in order of priority: people who decide (mayors, councillors, ministers and their staff),
+urban and transport planners, and informed citizens. Each module has an "In brief" box, a main text,
+and collapsible "Under the hood" boxes with the method. See `planning/audience.md`.
+
 ## Structure
 
 ```
@@ -14,6 +20,7 @@ modules/m01…m15       course notes
 countries/            role-model country pages (+ more.html for further countries)
 sources/              translated source digests
 assets/               style.css, site.js (KaTeX rendering + auto table of contents), explorer.js
+planning/             tenets, audience, change requests (CR-<n>-<keyword>), review notes, story backlog
 ```
 
 ## Preview locally
@@ -27,6 +34,6 @@ python3 -m http.server 8000   # then open http://localhost:8000
 1. Push this directory to a GitHub repository (the `.nojekyll` file disables Jekyll processing).
 2. Settings → Pages → "Deploy from a branch" → branch `main`, folder `/ (root)`.
 
-## Licence
+## License
 
 Course text: CC BY 4.0. Linked, quoted and translated third-party materials remain the property of their owners.
