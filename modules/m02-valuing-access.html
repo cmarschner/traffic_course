@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 2 · Valuing time, access and choice — Welfare-Centered Transport Planning</title>
-<meta name="description" content="Generalized cost, the value of travel time savings and how seven countries set it, reliability and crowding, consumer surplus, the rule of a half, the logsum, option values, wider economic benefits and the travel-time-budget critique.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="How appraisal turns minutes into money: the value of travel time and how countries set it, reliability, waiting and crowding, the rule of a half, the logsum in practice, wider economic benefits and the travel-time-budget critique.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,56 +29,90 @@
 <main>
 <p class="kicker">Part I · The objective · Module 2</p>
 <h1>Valuing time, access and choice</h1>
-<p class="meta">≈ 4 hours · Prerequisites: <a href="m01-objective.html">Module 1</a>; basic calculus and logit choice · Key terms: <span class="term">A</span>, links to <span class="term">E</span></p>
+<p class="meta">≈ 4 hours · Prerequisites: <a href="m01-objective.html">Module 1</a>. The "Under the hood" boxes use basic algebra and the choice model of <a href="m04-demand-mode-choice.html#random-utility">Module 4</a> · Key terms: <span class="term">A</span>, links to <span class="term">E</span></p>
 
-<p class="lede">Term A of the welfare objective turns travelers' options into money. This module shows how that is done in practice: generalized cost, the value of travel time savings (VTTS) and how seven countries set it, multipliers for waiting, unreliability and crowding, the rule of a half, and the logsum as the exact measure. It ends with a critique: if people's daily travel time is roughly constant, "time savings" are not what transport investment really delivers.</p>
+<p class="lede">Term A of the welfare objective measures what a plan does for the people who travel. In most appraisals, the largest part of it is a single item: time saved, turned into money. This module shows how that is done, and where the choices hide. Which value is an hour worth? Whose hour? Do unreliable, crowded or cold minutes count more? And if people spend about the same time traveling every day, whatever we build, what are we really buying?</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>How much is a faster, more reliable or more comfortable trip worth, and to whom?</dd>
+<dt>What matters</dt><dd>The value of travel time turns minutes into money. In most appraisals, time savings are the largest benefit. Waiting, unreliability and crowding can matter as much as speed. Over decades, people use saved time to travel farther, so the lasting benefit is access, not time.</dd>
+<dt>Numbers to question</dt><dd>The value of an hour: estimated values for a car commute differ about sevenfold across Europe, with income. Whether it rises with trip distance or differs by mode. The multipliers for waiting and crowding. Wider economic benefits, which raised Crossrail's benefit–cost ratio from 1.97 to 3.1. Time savings computed with a fixed number of trips.</dd>
+<dt>Levers</dt><dd>The appraisal rules themselves: one value of time for everyone or values by income, distance and mode; whether walking, cycling, reliability and crowding are valued; whether the demand model lets trips and destinations respond.</dd>
+<dt>Ask your analysts</dt><dd>What share of the benefits are time savings, and on whose trips? Would the ranking change with one value of time for everyone? How much comes from new trips and new destinations? What is the benefit–cost ratio with and without wider economic benefits?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>Write the generalized cost of a trip and derive a VTTS from a logit model as a ratio of coefficients.</li>
-<li>Compare how the UK, Germany, the Netherlands, Sweden, France, the US and Japan derive their official VTTS, and explain why the numbers differ.</li>
-<li>Apply reliability ratios and crowding multipliers.</li>
-<li>Compute user benefits with the rule of a half and with the logsum, and say when the two diverge.</li>
-<li>Explain option values, wider economic benefits and the double-counting risks they bring.</li>
-<li>Use the constant travel-time budget to criticize "time savings" and say what it means for Term A.</li>
+<li>Explain what a value of travel time is, how it is measured, and why the official values of seven countries differ.</li>
+<li>Show with numbers how the choice of a value of time can change the ranking of two projects.</li>
+<li>Apply multipliers for waiting, unreliability and crowding.</li>
+<li>Compute user benefits with the rule of a half, explain where it comes from, and say when it fails and the logsum is needed.</li>
+<li>Explain wider economic benefits and option values, and the double-counting risks they bring.</li>
+<li>Use the constant travel-time budget to criticize "time savings", and say what it means for Term A.</li>
 </ul>
 </div>
 
-<h2>1. Generalized cost</h2>
-<p>A traveler choosing between alternatives weighs money, time and discomfort. Transport analysis collapses these into one number, the <strong>generalized cost</strong> (GC) of alternative \(j\), expressed in money:</p>
-$$GC_j = c_j + \mathrm{VTTS}\cdot\Big(t^{\text{ivt}}_j + w_{\text{wait}}\,t^{\text{wait}}_j + w_{\text{walk}}\,t^{\text{walk}}_j + \text{transfer penalty}_j\Big) + \mathrm{VOR}\cdot\sigma_j + \dots$$
-<p>Here \(c_j\) is out-of-pocket cost (fare, fuel, toll, parking), \(t^{\text{ivt}}\) in-vehicle time, the weights \(w\) scale waiting and walking time relative to in-vehicle time, and \(\sigma_j\) is the standard deviation of travel time, valued at the value of reliability (VOR). Generalized cost is just the systematic utility of Module 1 divided by the marginal utility of money:</p>
-$$V_{nj} = \beta_t t_{nj} + \beta_c c_{nj} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj} + \ln O_j \quad\Longrightarrow\quad -\frac{V_{nj}}{\lambda_n} = c_{nj} + \frac{\beta_t}{\beta_c}\,t_{nj} + \dots, \qquad \lambda_n = -\beta_c.$$
-<p>So the <strong>VTTS is a ratio of coefficients</strong>: \(\mathrm{VTTS} = \beta_t/\beta_c\) (both negative). If a mode-choice model estimates \(\beta_t=-0.03\) per minute and \(\beta_c=-0.15\) per euro, then \(\mathrm{VTTS}=0.2\) €/min \(=12\) €/h. Everything else in this module is about which \(\beta\)s to use, whose they are, and what to do with them.</p>
+<h2>1. Two projects, one budget</h2>
+<p>A regional council has money for one of two projects. The first widens a road between two towns 65 km apart. It saves 6 minutes on each of 20,000 car trips a day. The second gives buses and trams their own lanes in the city. It saves 6 minutes on each of 40,000 short trips a day.</p>
+<p>Which project is better for the people who travel? Counted in hours, the answer is easy: the city project saves twice as many. But appraisals do not count hours. They count money. Every saved hour is multiplied by a <strong>value of travel time</strong>: the amount of money a traveler would give up to arrive an hour sooner. If that value is the same for every trip, the city project wins two to one. If an hour on a long car trip is worth more than an hour on a short bus ride, the answer can flip. <a href="#ranking">Section 3</a> shows that it does, under official rules.</p>
+<p>So the value of an hour is not a technical detail. It is one of the numbers that decide what gets built.</p>
+
+<h3>Generalized cost</h3>
+<p>A traveler weighs money, time and discomfort. Appraisal puts all three into one number, measured in money, called the <strong>generalized cost</strong> of a trip. It is the fare or fuel cost, plus the travel time multiplied by the value of time, plus money values for the other burdens: waiting, walking, changing vehicles, uncertainty about when one will arrive.</p>
+<p>In formula form, for a way of traveling \(j\):</p>
+$$GC_j = c_j + \mathrm{VTTS}\cdot\Big(t^{\text{ivt}}_j + w_{\text{wait}}\,t^{\text{wait}}_j + w_{\text{walk}}\,t^{\text{walk}}_j + \text{transfer penalty}_j\Big) + \mathrm{VOR}\cdot\sigma_j .$$
+<p>Here \(c_j\) is the money cost (fare, fuel, toll, parking). \(t^{\text{ivt}}_j\) is the in-vehicle time. VTTS is the <strong>value of travel time savings</strong>, in money per hour. The weights \(w\) say how much worse a minute of waiting or walking feels than a minute in the vehicle. \(\sigma_j\) measures how much the travel time varies from day to day, and VOR, the <strong>value of reliability</strong>, puts a price on that variation (<a href="#reliability">section 4</a>).</p>
+<p>A project lowers generalized cost. The fall, multiplied by the number of trips, is the core of Term A in almost every national appraisal manual.</p>
 
 <div class="box note">
 <div class="box-title">Two meanings of "value of time"</div>
-<p>A <em>behavioural</em> VTTS is what the people in a model actually trade off. It is used to predict choices and varies with income, purpose and conditions. An <em>appraisal</em> VTTS is the number an appraisal manual prescribes for valuing benefits. Several countries deliberately make the appraisal value less differentiated than the behavioral one, mainly so that rich travelers' time is not worth more in the public budget than poor travelers' time. Section 3 shows how.</p>
+<p>A <em>behavioral</em> value of time is what the people in a model actually trade off. It is used to predict choices, and it varies with income, purpose and conditions. An <em>appraisal</em> value of time is the number an appraisal manual prescribes for valuing benefits. Several countries deliberately make the appraisal value less differentiated than the behavioral one. Their main reason: so that a rich traveler's time does not count for more in the public budget than a poor traveler's time. <a href="#equity">Section 3</a> shows how.</p>
 </div>
 
 <h2>2. Where values of time come from <span class="term">A</span></h2>
+<p>Nobody can observe what an hour is worth to a person. It has to be inferred. Three approaches are in use, and each has a history.</p>
 <h3>Three approaches</h3>
 <ol>
-<li><strong>Stated preference (SP).</strong> Respondents choose between hypothetical trips that differ in time, cost and reliability. A logit model gives \(\beta_t/\beta_c\). This is the dominant method in Europe (UK 2015, Netherlands 2022, Sweden 2007/08, Germany 2013).</li>
-<li><strong>Revealed preference (RP).</strong> Observed choices, for example between a tolled and a free route. Closer to real behavior, but time and cost are often correlated and the variation is small.</li>
-<li><strong>Cost-based ("income" or "resource") approach.</strong> Time is valued at what it costs to produce: the wage rate for working time, sometimes also for leisure time, plus the hourly cost of the vehicle. Japan uses this approach for all trips. Most European countries still use labor cost for freight and professional drivers.</li>
+<li><strong>The cost of producing the time.</strong> The oldest approach values an hour at what it costs: the wage for working time, plus the hourly cost of the vehicle. For business travel this is the <em>cost-saving approach</em>: an hour an employee no longer spends on the road is an hour of extra work, worth the gross wage plus the employer's other labor costs. Japan still values all trips this way. Most European countries use it for freight and professional drivers.</li>
+<li><strong>Stated preference.</strong> Survey respondents choose between hypothetical trips that differ in time, cost and reliability, for example "25 minutes for €4 or 35 minutes for €2". A choice model then reads off how many euros they give up per minute saved. This is now the main method in Europe: national studies in the UK (2015), Sweden (2007/08), Germany (2013) and the Netherlands (2022) all used it.</li>
+<li><strong>Revealed preference.</strong> The analyst observes real choices, for example between a tolled and a free route. These are closer to real behavior, but time and cost often move together, and the variation is small, so the value is hard to pin down.</li>
 </ol>
-<p>For <strong>business travel</strong> the classic method is the <em>cost-saving approach</em>: an hour saved is an hour of extra production worth the gross wage plus overheads. The UK replaced it in its 2015 study with willingness-to-pay values. Germany keeps labor costs for business trips. The difference matters, because business values are typically two to three times non-work values.</p>
+<p>The second and third approaches rest on the choice models of <a href="m01-objective.html#term-a">Module 1</a>. A person's choices reveal how much one minute and one euro each count. The value of time is the ratio of the two. The box shows the step.</p>
 
-<h3>How countries set the VTTS</h3>
-<p>The table compares how the official appraisal values are derived. Numbers are given only where we checked them in the official document. Currencies and price years differ, so <em>do not compare the numbers directly</em>. Convert them with purchasing-power parities and the right deflator first.</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>The value of time as a ratio of two weights</summary>
+<p>A choice model gives each option \(j\) a measured utility \(V_{nj}\) for person \(n\). With travel time \(t\), money cost \(c\) and other qualities collected in a vector \(\mathbf{x}\), it reads</p>
+$$V_{nj} = \beta_t\, t_{nj} + \beta_c\, c_{nj} + \boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj}.$$
+<p>The weights \(\beta_t\) (per minute) and \(\beta_c\) (per euro) are both negative, because time and cost make an option less attractive. <a href="m04-demand-mode-choice.html#random-utility">Module 4</a> shows how they are estimated from data.</p>
+<p>We want the same quantity in money. One euro of cost changes utility by \(\beta_c\), so one unit of utility is worth \(1/(-\beta_c)\) euros. Write \(\lambda_n = -\beta_c\), the <em>marginal utility of money</em>. Dividing \(V\) by \(-\lambda_n\) turns utility into a cost in euros:</p>
+$$-\frac{V_{nj}}{\lambda_n} = c_{nj} + \frac{\beta_t}{\beta_c}\,t_{nj} + \frac{\boldsymbol{\beta}_x^{\top}\mathbf{x}_{nj}}{\beta_c}.$$
+<p>This is the generalized cost. The factor in front of time is the value of time:</p>
+$$\mathrm{VTTS} = \frac{\beta_t}{\beta_c}.$$
+<p>Example: a model estimates \(\beta_t = -0.03\) per minute and \(\beta_c = -0.15\) per euro. Then \(\mathrm{VTTS} = 0.03/0.15 = 0.2\) € per minute, or €12 per hour. The weights for waiting and walking come out the same way: they are ratios of the waiting or walking weight to the in-vehicle weight.</p>
+<p>If \(\beta_c\) differs by income group, so does the value of time. A group with half the cost weight (money matters less to them) has twice the value of time. This is the source of the equity problem in <a href="#equity">section 3</a>.</p>
+</details>
+
+<h3>A rule of thumb that has held for decades</h3>
+<p>Across many countries, the values for commuting and leisure trips that come out of these surveys land at roughly a third of the gross hourly wage. A review of seven countries' official values found non-business values "varying around this figure of 30%" (<a href="https://eprints.whiterose.ac.uk/104595/">Wardman, Chintakayala &amp; de Jong, 2016</a>, citing Mackie and colleagues, 2014). Business values are much higher, typically two to three times the non-work values, because they follow the employer's labor cost.</p>
+<p>How business time is valued is itself a choice. The UK replaced the cost-saving approach with survey-based values in its 2015 study. Germany kept labor costs for business trips. The difference matters, because business trips are a small share of trips but a large share of benefits in many road schemes.</p>
+
+<h2>3. How countries set the value of time <span class="term">A</span></h2>
+<p>The table compares how seven countries derive the official values. Numbers are given only where we checked them in the official document. Currencies and price years differ, so <em>do not compare the numbers directly</em>. Convert them with purchasing-power parities and the right price index first.</p>
 <div class="table-wrap"><table>
 <tr><th>Country · document</th><th>Method (non-work)</th><th>Work / business</th><th>Differentiation</th><th>Example values (checked)</th></tr>
-<tr><td>UK · DfT <a href="https://www.gov.uk/government/publications/tag-unit-a1-3-user-and-provider-impacts">TAG Unit A1.3</a> (May 2026) and TAG Data Book</td><td>SP willingness to pay, national study by ITS Leeds and Accent (2015)</td><td>WTP since 2015 (replacing the cost-saving approach); freight and professional drivers from a 2023 study</td><td>Purpose (commute, other) and, for work, mode and distance. Non-work values are national averages by design (equity)</td><td>Values in the TAG Data Book (2010 prices and values). Sensitivity ranges: commute ±25 %, other non-work ±60 %</td></tr>
-<tr><td>Germany · <a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">Methodenhandbuch zum BVWP 2030</a> (2016) <span class="lang">(German)</span></td><td>RP + SP study by TNS Infratest and IVT, ETH Zürich (2013)</td><td>Labor-cost rates; the study's WTP values were rejected because they were below average labor cost; 75 €/person-h above 500 km</td><td>Distance (a continuous function); same value for all modes on an origin–destination pair</td><td>Non-business, 2012 prices: 4.27 €/person-h at 5 km, 6.41 at 25 km, 9.18 at 65 km, 12.24 at 187.5 km, 15.54 beyond 600 km</td></tr>
-<tr><td>Netherlands · KiM, <a href="https://english.kimnet.nl/documents/2024/04/03/new-values-of-travel-time-reliability-and-comfort-in-the-netherlands">New values of travel time, reliability and comfort</a> (Dutch report Dec. 2023, English summary Apr. 2024)</td><td>SP survey by Significance (reference year 2022)</td><td>Survey-based; business values fell about 20 % after a method change</td><td>Mode and purpose; for the first time walking and cycling; comfort multipliers</td><td>€/h per person, 2022 prices incl. VAT: car 10.42 (commute 10.78, business 21.20, other 9.60); train 10.08; bus/tram/metro 7.12; cycling 11.84; walking 10.39. About 10–20 % lower than the 2010-based values</td></tr>
-<tr><td>Sweden · Trafikverket <a href="https://bransch.trafikverket.se/asek">ASEK 8.0/8.1</a> (2024–26) <span class="lang">(Swedish)</span></td><td>National SP study 2007 (WSP 2010; Börjesson &amp; Eliasson 2012), uprated with real income</td><td>Wage-based (cost) values</td><td>Mode, regional vs. long-distance (100 km), purpose. Differences due to income must be removed (rule AR 9.2)</td><td>Values in the ASEK calculation annex (kalkylbilaga), not reproduced here</td></tr>
-<tr><td>France · DGITM <a href="https://www.ecologie.gouv.fr/sites/default/files/documents/V.2.pdf">fiche-outil V.2, valeurs de référence</a> (version 3 May 2019), following the Quinet report (2013) <span class="lang">(French)</span></td><td>Meta-analysis of French studies, set by government committee</td><td>Higher fixed values for "professionnel"</td><td>Urban vs. interurban; Île-de-France vs. rest; purpose; mode and distance for interurban trips</td><td>Urban, all modes, €2015/h: business 18.6 (Île-de-France 23.7), commute 10.6 (13.4), other 7.2 (9.3), unspecified 8.4 (11.4). Grows with GDP per head, elasticity 0.7</td></tr>
+<tr><td>UK · DfT <a href="https://www.gov.uk/government/publications/tag-unit-a1-3-user-and-provider-impacts">TAG Unit A1.3</a> (May 2026) and TAG Data Book</td><td>Stated-preference willingness to pay, national study by ITS Leeds and Accent (2015)</td><td>Willingness to pay since 2015 (replacing the cost-saving approach); freight and professional drivers from a 2023 study</td><td>Purpose (commute, other) and, for work, mode and distance. Non-work values are national averages by design (equity)</td><td>Values in the TAG Data Book (2010 prices and values). Sensitivity ranges: commute ±25 %, other non-work ±60 %</td></tr>
+<tr><td>Germany · <a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">Methodenhandbuch zum BVWP 2030</a> (2016) <span class="lang">(German)</span></td><td>Revealed- and stated-preference study by TNS Infratest and IVT, ETH Zürich (2013)</td><td>Labor-cost rates; the study's willingness-to-pay values were rejected because they were below average labor cost; 75 €/person-h above 500 km</td><td>Distance (a continuous function); same value for all modes on an origin–destination pair</td><td>Non-business, 2012 prices: 4.27 €/person-h at 5 km, 6.41 at 25 km, 9.18 at 65 km, 12.24 at 187.5 km, 15.54 beyond 600 km</td></tr>
+<tr><td>Netherlands · KiM, <a href="https://english.kimnet.nl/documents/2024/04/03/new-values-of-travel-time-reliability-and-comfort-in-the-netherlands">New values of travel time, reliability and comfort</a> (Dutch report Dec. 2023, English summary Apr. 2024)</td><td>Stated-preference survey by Significance (reference year 2022)</td><td>Survey-based; business values fell about 20 % after a method change</td><td>Mode and purpose; for the first time walking and cycling; comfort multipliers</td><td>€/h per person, 2022 prices incl. VAT: car 10.42 (commute 10.78, business 21.20, other 9.60); train 10.08; bus/tram/metro 7.12; cycling 11.84; walking 10.39. About 10–20 % lower than the 2010-based values</td></tr>
+<tr><td>Sweden · Trafikverket <a href="https://bransch.trafikverket.se/asek">ASEK 8.0/8.1</a> (2024–26) <span class="lang">(Swedish)</span></td><td>National stated-preference study 2007 (WSP 2010; Börjesson &amp; Eliasson 2012), uprated with real income</td><td>Wage-based (cost) values</td><td>Mode, regional vs. long-distance (100 km), purpose. Differences due to income must be removed (rule AR 9.2)</td><td>Values in the ASEK calculation annex (kalkylbilaga), not reproduced here</td></tr>
+<tr><td>France · DGITM <a href="https://www.ecologie.gouv.fr/sites/default/files/documents/V.2.pdf">fiche-outil V.2, valeurs de référence</a> (version 3 May 2019), following the Quinet report (2013) <span class="lang">(French)</span></td><td>Meta-analysis of French studies, set by a government committee</td><td>Higher fixed values for "professionnel"</td><td>Urban vs. interurban; Île-de-France vs. rest; purpose; mode and distance for interurban trips</td><td>Urban, all modes, €2015/h: business 18.6 (Île-de-France 23.7), commute 10.6 (13.4), other 7.2 (9.3), unspecified 8.4 (11.4). Grows with GDP per head, elasticity 0.7</td></tr>
 <tr><td>United States · USDOT <a href="https://www.transportation.gov/office-policy/transportation-policy/revised-departmental-guidance-valuation-travel-time-economic">Revised Departmental Guidance on Valuation of Travel Time</a> (2016), used in the <a href="https://www.transportation.gov/grants/dot-navigator/benefit-cost-analysis-guidance-discretionary-grant-programs">BCA Guidance for Discretionary Grant Programs</a></td><td>Rule of thumb from wages: local personal travel at 50 % of median household income per hour, intercity personal travel at 70 %</td><td>100 % of median gross compensation (wage plus benefits)</td><td>Purpose, local vs. intercity; walking, waiting and transfer time at twice the rate</td><td>Current dollar values are in the latest BCA guidance tables (updated yearly); we could not retrieve the 2025 PDF and do not quote them</td></tr>
-<tr><td>Japan · MLIT <a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ben-eki_2.pdf">費用便益分析マニュアル</a> (Cost–benefit analysis manual, Aug. 2025) <span class="lang">(Japanese)</span></td><td>Resource-value ("income approach", 所得接近法): opportunity cost of occupants' time at wage rates, plus vehicle opportunity cost (rental-car rate) and goods (value × interest)</td><td>Same approach, with fringe benefits added</td><td>Per <em>vehicle</em> by vehicle class; regions may set their own values if published</td><td>Yen per minute per vehicle, 2024 prices: car 43.74; bus 386.79; light goods 52.07; heavy goods 101.93</td></tr>
+<tr><td>Japan · MLIT <a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ben-eki_2.pdf">費用便益分析マニュアル</a> (Cost–benefit analysis manual, Aug. 2025) <span class="lang">(Japanese)</span></td><td>Resource value ("income approach", 所得接近法): opportunity cost of occupants' time at wage rates, plus vehicle opportunity cost (rental-car rate) and goods (value × interest)</td><td>Same approach, with fringe benefits added</td><td>Per <em>vehicle</em> by vehicle class; regions may set their own values if published</td><td>Yen per minute per vehicle, 2024 prices: car 43.74; bus 386.79; light goods 52.07; heavy goods 101.93</td></tr>
 </table></div>
-<p>Three things stand out. First, <strong>Japan values vehicles, Europe values people</strong>: the MLIT value is per vehicle-minute, so a full bus is worth nearly nine cars, but the method is resource cost, not willingness to pay. Second, <strong>Germany makes the VTTS rise with distance</strong> and applies it identically to all modes on a relation, which avoids "mode switchers changing their value of time". Third, <strong>the Netherlands is the only country here with an official VTTS for walking and cycling</strong>. Elsewhere, active-mode time savings tend to be valued at a generic rate or ignored, which biases appraisal against them.</p>
+<p>Three things stand out. First, <strong>Japan values vehicles, Europe values people</strong>. The MLIT value is per vehicle-minute, so a minute saved for a full bus is worth nearly nine car-minutes. The method is the cost of producing the time, not willingness to pay. Second, <strong>Germany makes the value rise with distance</strong> and applies it identically to all modes on a route. This avoids the oddity that a traveler's time changes value when they switch from car to train. Third, <strong>the Netherlands is the only country here with an official value for walking and cycling time</strong>. Elsewhere, time saved by people on foot or on bikes tends to be valued at a generic rate or ignored, which biases appraisal against them.</p>
 
 <div class="box translation">
 <div class="box-title">Japan · what MLIT's time value is made of</div>
@@ -87,47 +121,86 @@ $$V_{nj} = \beta_t t_{nj} + \beta_c c_{nj} + \boldsymbol{\beta}_x^{\top}\mathbf{
 <p class="small">Source: MLIT Road Bureau and City Bureau, 費用便益分析マニュアル, August 2025, §1(3). Translated by the course authors (machine-assisted).</p>
 </div>
 
+<h3>How far apart are countries?</h3>
+<p>Official values are hard to compare, because each country measures something slightly different. A large European study did the comparison for us. Mark Wardman, Phani Chintakayala and Gerard de Jong pooled 3,109 values of time from 389 European studies, conducted between 1963 and 2011. From them they estimated what an hour is worth in each country, for the same kind of trip, in the same currency and price year.</p>
+<figure class="photo chart"><img src="../assets/img/m02-vtts-europe.svg" width="360" height="312" loading="lazy" alt="Bar chart: the value of an hour of urban car commuting in 2010 euros, from 2.64 in Bulgaria and 2.76 in Romania through 7.48 in Germany and 8.49 in the Netherlands to 11.73 in Norway and 18.06 in Luxembourg."><figcaption>The same hour, the same kind of trip: an urban car commute in free-flowing traffic. The values follow income almost one for one. <span class="credit">Data: <a href="https://eprints.whiterose.ac.uk/104595/">Wardman, Chintakayala &amp; de Jong (2016)</a>, Table 9, values implied by their meta-model, € per hour at 2010 incomes and prices.</span></figcaption></figure>
+<p>An hour of commuting is worth about €2.60 in Bulgaria and about €18 in Luxembourg, a factor of seven. The study found that the values rise almost in proportion to income per head, measured at purchasing-power parity. That is why most manuals let the value of time grow over the years with income. France, for example, lets it grow by 0.7 % for every 1 % growth in GDP per head.</p>
+<p>For a decision maker, this has two consequences. A time-saving project scores far higher in a rich country or region than the same project in a poor one, simply because the hours are priced higher. And a road appraised over 40 years gains automatically as incomes rise, because each future minute is priced higher than today's.</p>
+
+<h3 id="ranking">What the choice does to a ranking</h3>
+<p>Back to the council and its two projects. The table values them with three official rules. Within each column, the two projects are valued with the same rule, so the ratio between them is meaningful. Across columns, price years differ, so compare rankings, not euros.</p>
+<div class="table-wrap"><table>
+<tr><th></th><th>Hours saved per day</th><th>One value for all (€10/h)</th><th>Germany: value rises with distance (2012 prices)</th><th>Netherlands: value by mode (2022 prices)</th></tr>
+<tr><td>Road: 20,000 car trips of 65 km, 6 min each</td><td class="num">2,000</td><td class="num">€20,000</td><td class="num">€18,360 (at €9.18/h)</td><td class="num">€20,840 (car, €10.42/h)</td></tr>
+<tr><td>City: 40,000 bus and tram trips of 5 km, 6 min each</td><td class="num">4,000</td><td class="num">€40,000</td><td class="num">€17,080 (at €4.27/h)</td><td class="num">€28,480 (bus/tram/metro, €7.12/h)</td></tr>
+<tr><td><strong>Winner</strong></td><td>City, 2 : 1</td><td>City, 2 : 1</td><td><strong>Road</strong>, by 7 %</td><td>City, by 37 %</td></tr>
+</table></div>
+<p>The same two projects, the same minutes saved, and the ranking flips. Under the German rule, an hour on a 65 km trip is worth more than twice an hour on a 5 km trip, which outweighs the city project's twice-as-many hours. Under the Dutch rule, a bus minute is worth less than a car minute, but not enough to flip the result.</p>
+<p>Each rule has a defensible reason. Long-distance travelers do state higher values in surveys. Bus users do have lower incomes on average. But a council that adopts one of these rules has also, without saying so, chosen which kinds of trips its budget favors.</p>
+
+<h3 id="equity">Whose hour? The equity choice</h3>
+<p>In surveys, people with higher incomes state higher values of time. If appraisal used those values directly, a minute saved for a manager would count more than a minute saved for a cleaner. Two countries explicitly refuse this. Sweden's appraisal guidance, ASEK, published by the national transport administration Trafikverket, states the rule plainly.</p>
+
 <div class="box translation">
 <div class="box-title">Sweden · no rich-traveler premium (ASEK 8.0, AR 9.2)</div>
 <p class="original" lang="sv">Om betalningsviljan för att slippa restid skiljer sig mellan färdmedel ska endast de skillnader som inte beror på skillnader i inkomstnivå beaktas. Differentierade tidsvärden ska därför justeras så att de inte speglar olika gruppers betalningsförmåga.</p>
 <p>"If the willingness to pay to avoid travel time differs between modes, only those differences not due to differences in income level shall be taken into account. Differentiated time values shall therefore be adjusted so that they do not reflect different groups' ability to pay."</p>
 <p class="small">Source: Trafikverket, ASEK 8.0 (2 April 2024), recommendation AR 9.2. Translated by the course authors (machine-assisted).</p>
 </div>
-<p>The UK reaches the same result by another route. TAG A1.3 states that if appraisal used behavioral values related to income, "investment decisions will be biased toward those measures which benefit travelers with higher incomes", and it therefore prescribes national average non-work values. In the notation of \(W\) this is an implicit choice of <strong>equity weights</strong>: using one \(1/\lambda\) for everyone is equivalent to setting \(\omega_g\) proportional to each group's marginal utility of money. See section 8 and <a href="m14-appraisal.html">Module 14</a>.</p>
+<p>The UK reaches the same result by another route. Its official Transport Analysis Guidance (TAG), in unit A1.3, states that if appraisal used behavioral values related to income, "investment decisions will be biased toward those measures which benefit travelers with higher incomes". It therefore prescribes national average values for non-work trips. In the language of <a href="m01-objective.html#term-a">Module 1</a>, this is a hidden choice of <strong>equity weights</strong>. Using one value of time for everyone is the same as giving each income group a weight that offsets its higher or lower willingness to pay. <a href="m14-appraisal.html">Module 14</a> compares how far other countries go.</p>
 
-<h2>3. Reliability, waiting and crowding <span class="term">A</span></h2>
+<h2 id="reliability">4. Reliability, waiting and crowding <span class="term">A</span></h2>
+<p>A commuter who knows the train takes 30 minutes can leave 35 minutes before work. A commuter whose train takes 30 minutes on average, but sometimes 45, must leave earlier, or risk being late. Both have the same average travel time. The second is clearly worse off. Appraisal manuals now value three such burdens beyond the average minute: unreliability, waiting and crowding.</p>
 <h3>Reliability</h3>
-<p>Travelers dislike unpredictable journeys because they must leave early (schedule-delay cost) or risk arriving late. The common "mean–variance" approach adds the standard deviation of travel time \(\sigma\) to generalized cost, valued through the <strong>reliability ratio</strong>:</p>
-$$\mathrm{RR}=\frac{\mathrm{VOR}}{\mathrm{VTTS}},\qquad \Delta GC_{\text{rel}} = \mathrm{RR}\cdot \mathrm{VTTS}\cdot\Delta\sigma .$$
-<p>TAG recommends \(\mathrm{RR}=0.4\) for car and non-freight van trips, 0.58 for heavy goods vehicles and 0.7 for freight vans. The Dutch 2022 study found lower reliability ratios than before for all modes. Germany's BVWP has a separate benefit component for reliability (\(N_Z\)) that relates the spread of delays to the volume/capacity ratio. France publishes a dedicated tool sheet on <em>fiabilité des temps de déplacement</em>. Reliability benefits are especially large for projects that relieve bottlenecks close to capacity, where the travel-time distribution has a long right tail (see <a href="m07-traffic-flow.html">Module 7</a>).</p>
+<p>The common approach measures unreliability by the standard deviation of travel time, \(\sigma\): how far a typical day is from the average. It values one minute of standard deviation as a fraction of an average minute. That fraction is the <strong>reliability ratio</strong>, \(\mathrm{RR}=\mathrm{VOR}/\mathrm{VTTS}\). The change in generalized cost from a change in reliability is then</p>
+$$\Delta GC_{\text{rel}} = \mathrm{RR}\cdot \mathrm{VTTS}\cdot\Delta\sigma .$$
+<p>The UK's TAG recommends \(\mathrm{RR}=0.4\) for car and non-freight van trips, 0.58 for heavy goods vehicles and 0.7 for freight vans. The Dutch 2022 study found lower reliability ratios than before for all modes. Germany's federal transport infrastructure plan (BVWP) has a separate benefit component for reliability (\(N_Z\)) that relates the spread of delays to how full the road is. France publishes a dedicated tool sheet on <em>fiabilité des temps de déplacement</em>.</p>
+<p>Reliability benefits are largest for projects that relieve bottlenecks close to capacity. There, a small disturbance can cause a long queue, so some days are much worse than average (<a href="m07-traffic-flow.html">Module 7</a>). They are also large for rail and bus measures that keep services on time. An appraisal that values only average minutes will undervalue both.</p>
 
 <h3>Walking, waiting and transfers</h3>
-<p>TAG factors waiting time for public transport by 2, and applies the same factor to walking and cycling time when accessing or changing between modes. USDOT also values waiting and transfer time at twice the in-vehicle rate. The multiplier rests on a European meta-analysis by Wardman and co-authors (2013), cited in TAG. A bus improvement that halves the headway from 20 to 10 minutes cuts expected waiting time by about 5 minutes if passengers arrive at random, which is worth about 10 in-vehicle minutes. That is often more than a bus lane saves.</p>
+<p>TAG weights waiting time for public transport by 2. It applies the same factor to walking and cycling time when reaching a station or changing between modes. USDOT also values waiting and transfer time at twice the in-vehicle rate. The multiplier rests on a European review by Wardman and co-authors (2013) that pooled the results of many studies, cited in TAG.</p>
+<p>The consequence is practical. A bus improvement that halves the time between buses from 20 to 10 minutes cuts the expected wait by about 5 minutes, if passengers arrive at random. At twice the in-vehicle rate, that is worth about 10 in-vehicle minutes. It is often more than a bus lane saves.</p>
 
 <h3>Crowding</h3>
-<p>Crowding is a multiplier on in-vehicle time that rises with load factor. The Dutch 2022 values range from 0.93 for sitting in a quiet train to 2.29 for standing in a very busy train. TAG refers rail appraisal to the industry's Passenger Demand Forecasting Handbook. For other modes, TAG says the evidence is not yet robust enough to set values. Crowding values matter for Term A because they make capacity on public transport valuable even when it does not save any time. They also show that an "average" VTTS undervalues time spent in bad conditions, which mostly affects users of public transport.</p>
+<p>Crowding is a multiplier on in-vehicle time that rises with how full the vehicle is. The Dutch 2022 values range from 0.93 for sitting in a quiet train to 2.29 for standing in a very busy train. TAG refers rail appraisal to the industry's Passenger Demand Forecasting Handbook. For other modes, TAG says the evidence is not yet robust enough to set values.</p>
+<p>Crowding values make public-transport capacity valuable even when it saves no time. They also show that an "average" value of time undervalues time spent in bad conditions, which mostly affects public-transport users. Crowding that passengers impose on each other is counted here, in Term A, through these multipliers. It is not a separate cost in Term C (<a href="m01-objective.html#term-c">Module 1</a>).</p>
 
-<h2>4. Consumer surplus and the rule of a half <span class="term">A</span></h2>
-<p>Let \(T(P)\) be the demand for trips between two zones as a function of the generalized cost \(P\). The consumer surplus is the area under the demand curve above the current cost. A project reduces cost from \(P_0\) to \(P_1\) and demand grows from \(T_0\) to \(T_1\). The change in consumer surplus is</p>
-$$\Delta CS = \int_{P_1}^{P_0} T(P)\,dP \;\approx\; \tfrac12\,(T_0+T_1)(P_0-P_1).$$
-<p>The approximation, exact for linear demand, is the <strong>rule of a half</strong>. Existing users gain the full cost saving \(T_0(P_0-P_1)\). New users gain on average half of it, because the marginal new traveler was almost indifferent before. TAG A1.3 writes it in exactly this form, and every national manual in this module uses it in some variant.</p>
+<h2>5. Consumer surplus and the rule of a half <span class="term">A</span></h2>
+<div class="box story"><div class="box-title">History · The bridge and the toll</div>
+<p>In 1844 Jules Dupuit, an engineer in France's Corps des Ponts et Chaussées, asked how to measure the usefulness of public works. His example was a bridge with a toll. The toll revenue, he argued, understates what the bridge is worth. Many people who cross would pay more than the toll if they had to. Their extra benefit is real, even though no one collects it.</p>
+<p>Dupuit measured the usefulness as the area under the demand curve, above the price people pay. Alfred Marshall later named this area <strong>consumer surplus</strong>. Dupuit drew a striking conclusion: public welfare would be greatest with no toll at all. A toll only moves money from users to the bridge owner. But it also deters people who value a crossing at less than the toll, and their lost benefit is gained by no one. This is the same reason why, in <a href="m01-objective.html#term-e">Module 1</a>, revenue is not a benefit. Dupuit went on to supervise the building of the Paris sewer system.</p>
+<p class="credit">Sources: J. Dupuit, "De la mesure de l'utilité des travaux publics", <em>Annales des ponts et chaussées</em>, 2nd series, vol. 8 (1844), English translation by R. H. Barback in <em>International Economic Papers</em> 2 (1952); <a href="https://en.wikipedia.org/wiki/Jules_Dupuit">"Jules Dupuit"</a>, Wikipedia.</p>
+</div>
+<p>Every transport appraisal manual still uses Dupuit's measure. Picture all the trips between two places, lined up by how much each traveler would be willing to pay for the trip. That line is the demand curve. When a project lowers the generalized cost of the trip from \(P_0\) to \(P_1\), two groups gain:</p>
+<ul>
+<li><strong>Existing travelers</strong> gain the full saving, \(P_0 - P_1\), on each of their \(T_0\) trips.</li>
+<li><strong>New travelers</strong>, who did not make the trip before, gain less. The first of them almost made the trip anyway, so gains nearly the full saving. The last of them was only just tempted, so gains almost nothing. On average, a new traveler gains about half the saving.</li>
+</ul>
+<p>Adding the two gives the <strong>rule of a half</strong>, with \(T_1\) the number of trips after the project:</p>
+$$\Delta CS \;\approx\; T_0\,(P_0-P_1) + \tfrac12\,(T_1-T_0)(P_0-P_1) = \tfrac12\,(T_0+T_1)(P_0-P_1).$$
+<p>The rule is exact if the demand curve is a straight line between the two points. TAG A1.3 writes it in exactly this form, and every national manual in this module uses it in some variant.</p>
 
 <div class="box note">
 <div class="box-title">Worked example · rule of a half on a corridor</div>
-<p>A bus corridor carries \(T_0=10\,000\) trips per weekday at a generalized cost of €12.00. A bus-priority scheme cuts the generalized cost to €10.00 (shorter in-vehicle time plus a 5-minute reduction in waiting, valued at twice the VTTS). The demand model predicts \(T_1=11\,000\) trips.</p>
+<p>A bus corridor carries \(T_0=10\,000\) trips per weekday at a generalized cost of €12.00. A bus-priority scheme cuts the generalized cost to €10.00, through shorter in-vehicle time plus a 5-minute reduction in waiting, valued at twice the value of time. The demand model predicts \(T_1=11\,000\) trips.</p>
 <ul>
 <li>Existing users: \(10\,000\times 2.00 = \) €20,000 per day.</li>
 <li>New users: \(\tfrac12\times 1\,000\times 2.00 = \) €1,000 per day.</li>
 <li>Total \(\Delta CS = \tfrac12(10\,000+11\,000)\times2.00 = \) €21,000 per day, or about €5.25 million per year with 250 equivalent days.</li>
 </ul>
-<p>Two warnings. First, the €2.00 is a <em>perceived</em> cost change. If fares are unchanged but the operator's costs fall, that gain belongs to the operator (Term E), not here. Second, if some of the new bus riders left their cars, road users may gain from less congestion. That is a separate user benefit on another market, computed with its own rule of a half. It must not be double-counted as an "external" benefit in Term C.</p>
+<p>Three warnings.</p>
+<ol>
+<li><strong>Fares are transfers.</strong> Suppose the same €2.00 came from a fare cut instead of faster buses. The users' gain is computed the same way. But the €20,000 that existing riders no longer pay is €20,000 less revenue in Term E. The two cancel. What remains is the gain of the 1,000 new riders, minus the cost of carrying them. If public money is dearer than private money (the factor \(\mu\) of <a href="m01-objective.html#term-e">Module 1</a>), the fare cut even loses a little on the transfer.</li>
+<li><strong>Perceived costs only.</strong> The €2.00 is the cost travelers <em>perceive</em>. If the operator's costs fall but fares stay the same, that gain belongs to the operator (Term E), not here.</li>
+<li><strong>Other markets.</strong> If some new bus riders left their cars, the remaining drivers may face less congestion. That is a separate user benefit on the road, computed with its own rule of a half and counted in Term A. It must not be counted again as an "external" benefit in Term C.</li>
+</ol>
 </div>
 
 <h3>Where the rule of a half fails</h3>
 <ul>
-<li><strong>New modes or destinations.</strong> If an alternative did not exist before, \(P_0\) is undefined (formally infinite) and the rule cannot be applied. One needs the logsum or an explicit "choke price".</li>
-<li><strong>Large changes</strong> with strongly convex demand, for example a new high-speed rail line.</li>
-<li><strong>Attributes that are not in GC.</strong> Germany's BVWP 2030 added a benefit component for <em>implizite Nutzen</em> (implicit benefits) to handle exactly this.</li>
+<li><strong>New modes or destinations.</strong> If an option did not exist before, it had no "before" cost. The rule cannot be applied. One needs the logsum (<a href="#logsum">section 6</a>) or an assumed "choke price" at which nobody would use the option.</li>
+<li><strong>Large changes</strong> where demand is far from a straight line, for example a new high-speed rail line that halves travel time.</li>
+<li><strong>Qualities that are not in the generalized cost.</strong> Comfort, image and the hidden reasons people prefer one mode are not measured in minutes or euros. Germany's BVWP 2030 added a benefit component for <em>implizite Nutzen</em> (implicit benefits) to handle exactly this.</li>
 </ul>
 
 <div class="box translation">
@@ -136,93 +209,102 @@ $$\Delta CS = \int_{P_1}^{P_0} T(P)\,dP \;\approx\; \tfrac12\,(T_0+T_1)(P_0-P_1)
 <p>"This benefit component, newly included in the BVWP 2030, takes into account, for example in passenger transport, the fact that road users' decisions between available mobility options are not made solely on the basis of comparisons of travel time and cost."</p>
 <p class="small">Source: Methodenhandbuch zum Bundesverkehrswegeplan 2030, section 4.2.2.6, Veränderung der Impliziten Nutzen (N<sub>I</sub>). The handbook adds that this allows induced and diverted traffic to be treated consistently. Translated by the course authors (machine-assisted).</p>
 </div>
-<p>In Module 1 terms, the implicit benefit captures the part of \(V_{nj}\) that is not time or cost, the \(\boldsymbol{\beta}_x^{\top}\mathbf{x}\) and the unobserved mode-specific constants. It is a step from "time savings" toward the full logsum.</p>
+<p>In Module 1 terms, the implicit benefit captures the part of a mode's appeal that is not time or cost. It is a step from "time savings" toward the full logsum.</p>
 
-<h2>5. The logsum as the welfare measure <span class="term">A</span></h2>
-<p>For a multinomial logit model with scale normalized to one, the expected maximum utility of person \(n\) is</p>
-$$E\big[\max_j U_{nj}\big] = \ln\sum_{j\in C_n} e^{V_{nj}} + \text{const},$$
-<p>and the change in consumer surplus between plan 0 and plan 1 is</p>
+<h2 id="logsum">6. The logsum in appraisal <span class="term">A</span></h2>
+<p><a href="m01-objective.html#term-a">Module 1</a> introduced the logsum: the value of the whole set of options a person has, counting the chance that any of them suits them best on a given day. <a href="m04-demand-mode-choice.html#random-utility">Module 4</a> derives it. This section covers what an appraisal team needs to know to use it.</p>
+<h3>Logsum or rule of a half?</h3>
+<p>For a change in the time or cost of an existing option, the two give almost the same answer. In Module 1's <a href="m01-objective.html#term-a">worked example</a>, a bus lane is worth €1.61 per traveler by the logsum and €1.62 by the rule of a half. The rule of a half is a straight-line version of the logsum, and for moderate changes a straight line is close enough.</p>
+<p>They part ways when the set of options changes. Continue Module 1's example: car and improved bus, with measured utilities \(-1.0\) and \(-1.5\), and one point of utility worth €10. Now a safe cycle route opens, with measured utility \(-2.5\).</p>
+<ul>
+<li>Before the route: logsum \(\ln(e^{-1}+e^{-1.5}) = \ln(0.368+0.223) = -0.526\).</li>
+<li>After: \(\ln(0.368+0.223+0.082) = \ln 0.673 = -0.396\).</li>
+<li>Gain: \(0.130\) points, or <strong>€1.30 per traveler per trip</strong>. Only 12 % of travelers choose the bike, but all of them gain, because the option is there on the days it suits them.</li>
+</ul>
+<p>The rule of a half cannot compute this, because the bike route had no "before" cost. An appraisal that uses only the rule of a half will therefore miss most of the value of new options: a new bus line, a new bridge for pedestrians, a new destination within reach. The logsum is the right tool whenever a plan adds or removes options, or when demand can change destination as well as mode.</p>
+
+<h3>Practical points for an appraisal team</h3>
+<ul>
+<li><strong>Same model, both scenarios.</strong> Compare logsums only from one and the same model, run with and without the project. A re-estimated or re-specified model changes the logsum for reasons that have nothing to do with the project.</li>
+<li><strong>Watch the constants.</strong> Choice models contain a constant for each mode that captures its hidden appeal, such as a "rail bonus". If a project changes a constant, for example by assuming a new tram is more attractive than a bus, that assumption turns directly into benefits. Report such benefits separately, because they are the least well supported part of the model.</li>
+<li><strong>Use the top of the tree.</strong> Many models are <em>nested</em>: the choice of destination sits above the choice of mode, which sits above the choice of route (<a href="m04-demand-mode-choice.html">Module 4</a>). The welfare measure is the logsum at the top, which contains all the levels below.</li>
+<li><strong>Income groups.</strong> If the model has a different cost weight for each income group, compute the gain for each group separately and convert it to money with that group's own value. Then decide, openly, how to add the groups up (<a href="#equity">section 3</a>).</li>
+<li><strong>Destinations count.</strong> With destination choice, adding jobs or shops near people raises the logsum, just as a faster road does. A land-use plan and a road plan are then valued in the same currency (<a href="m05-accessibility-land-use.html">Module 5</a>).</li>
+</ul>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>The logsum formula for appraisal, with nests and income groups</summary>
+<p>For person \(n\) with options \(j\) in choice set \(C_n\), measured utilities \(V_{nj}\) and marginal utility of money \(\lambda_n\), the change in consumer surplus between plan 0 and plan 1 is</p>
 $$\Delta CS_n = \frac{1}{\lambda_n}\left[\ln\sum_{j\in C_n^1} e^{V^1_{nj}} - \ln\sum_{j\in C_n^0} e^{V^0_{nj}}\right].$$
-<p>This is Term A of \(W\). Its derivative with respect to the cost of alternative \(j\) is \(-P_{nj}\), the choice probability, which is why the rule of a half is a first-order approximation to it. The review by <a href="https://doi.org/10.1016/j.tra.2006.10.002">de Jong, Daly, Pieters &amp; van der Hoorn (2007)</a> sets out the conditions. The logsum is an exact consumer-surplus measure if the marginal utility of money \(\lambda_n\) is constant (no income effect on choice), and it works for nested logit and for choice sets that change (new modes, new destinations). The constant drops out when two plans are compared.</p>
+<p>The choice set may differ between the plans, which is how new options enter. The review by <a href="https://doi.org/10.1016/j.tra.2006.10.002">de Jong, Daly, Pieters &amp; van der Hoorn (2007)</a> sets out the conditions. The measure is exact if \(\lambda_n\) does not depend on income within the range of the change, that is, if there is no income effect on choice.</p>
+<p>Why the rule of a half approximates it: the derivative of the logsum with respect to the generalized cost of option \(j\) is \(-P_{nj}\), the probability of choosing \(j\). Integrating the probability over a small change in cost, with the probability taken as a straight line between before and after, gives the rule of a half.</p>
+<p><strong>Nests.</strong> In a nested model with nests \(k\) and nest parameters \(\mu_k\), the welfare measure is the top-level logsum \(\ln\sum_k e^{\mu_k I_k}\), with \(I_k\) the logsum within nest \(k\) (<a href="m04-demand-mode-choice.html">Module 4</a>, "IIA and nested logit").</p>
+<p><strong>Income groups.</strong> With group-specific \(\lambda_g\), compute \(\Delta CS_n\) per group with that group's \(\lambda_g\). The unweighted sum, \(\omega_g=1\) in Module 1's notation, gives more weight to groups with a low \(\lambda_g\), that is, to higher incomes. Using one common \(\lambda\) for everyone is the logsum version of a national-average value of time.</p>
+</details>
 
-<div class="box note">
-<div class="box-title">Worked example · logsum versus rule of a half</div>
-<p>Car and bus, \(V_{\text{car}}=-1.0\), \(V_{\text{bus}}=-2.0\), \(\lambda=0.1\) utils per euro (so 1 util = €10).</p>
-<ol>
-<li><strong>Before:</strong> \(\ln(e^{-1}+e^{-2})=\ln(0.3679+0.1353)=\ln 0.5032=-0.6868\). Bus share \(0.1353/0.5032=26.9\%\).</li>
-<li><strong>After</strong> a bus improvement that raises \(V_{\text{bus}}\) to \(-1.5\) (worth €5 per bus trip): \(\ln(0.3679+0.2231)=\ln 0.5910=-0.5259\). Bus share \(37.8\%\).</li>
-<li><strong>Logsum:</strong> \(\Delta CS = (-0.5259+0.6868)/0.1=\) <strong>€1.61</strong> per person-trip.</li>
-<li><strong>Rule of a half:</strong> \(\tfrac12(0.269+0.378)\times €5 = \) <strong>€1.62</strong>. Almost identical, because the change is moderate and only one alternative changed.</li>
-<li><strong>A new option</strong>, a safe cycle route with \(V_{\text{bike}}=-2.5\): \(\ln(0.5910+0.0821)=-0.3960\), so \(\Delta CS=\)€1.30 per person-trip, even though only 12 % switch. The rule of a half cannot compute this, because the bike had no "before" cost.</li>
-</ol>
-</div>
-
-<h3>Practical points</h3>
+<h3>Option values</h3>
+<p>A rural railway line used by few people may still be valued by many residents who <em>might</em> use it: when the car breaks down, when they can no longer drive, or for their children. Economists distinguish</p>
 <ul>
-<li><strong>Nested models.</strong> Use the top-level logsum of the full nest structure (destination, mode, time of day). The logsums of lower nests enter higher nests with their scale parameters.</li>
-<li><strong>Income effects.</strong> If \(\beta_c\) varies by income group, compute \(\Delta CS\) per segment with that segment's \(\lambda\). The sum with \(\omega_g=1\) then implicitly gives more weight to high-income travelers. This is the same issue as the equity VTTS above.</li>
-<li><strong>Constants and model changes.</strong> Never compare logsums from two differently specified or re-estimated models. Changes in the mode-specific constants, for example a "rail bonus", become benefits and should be reported separately.</li>
-<li><strong>Size terms.</strong> With destination choice, \(\ln O_j\) inside \(V\) makes the logsum rise when opportunities are added near a person. A land-use plan that adds jobs near homes is valued in the same currency as a faster road (<a href="m05-accessibility-land-use.html">Module 5</a>).</li>
+<li><strong>option value</strong>: willingness to pay to keep an alternative available, over and above the expected benefit from using it;</li>
+<li><strong>non-use values</strong>: the value people place on a service they do not expect to use, for example because others need it.</li>
 </ul>
+<p>A review by <a href="https://doi.org/10.1016/j.tranpol.2009.05.002">Laird, Geurs &amp; Nash (2009)</a> discusses these values in rail appraisal, where they are most often invoked to resist closures. The logsum already contains part of the option value: every person has some probability of using the train, so removing it lowers everyone's expected surplus. What it does not contain is insurance against future changes, such as losing the car, or a value for other people's access. Treat claimed option values beyond the logsum as a sensitivity test, not a core benefit. The more defensible route is an explicit <strong>minimum level of access</strong> for people without a car, one of the limits of <a href="m01-objective.html#limits">Module 1</a>.</p>
 
-<h2>6. Option values <span class="term">A</span></h2>
-<p>A rural railway line used by few people may still be valued by many residents who <em>might</em> use it: when the car breaks down, when they can no longer drive, or for their children. The literature distinguishes</p>
+<h2>7. Wider economic benefits</h2>
+<p>User benefits measure what travelers gain. In an economy where every market works perfectly, that is all there is. Lower transport costs pass through to firms, workers and landowners as lower prices, higher wages and higher rents. Counting those as well would count the same gain twice.</p>
+<p>Real economies have <strong>market failures</strong>, and some of them make part of a transport benefit additional. The UK's TAG Unit <a href="https://www.gov.uk/government/publications/tag-unit-a2-1-wider-economic-impacts">A2.1</a> recognizes three:</p>
 <ul>
-<li><strong>option value</strong>: willingness to pay to keep an alternative available, over and above the expected consumer surplus from using it;</li>
-<li><strong>non-use values</strong>: altruistic or existence values of a service one does not expect to use.</li>
+<li><strong>Agglomeration.</strong> Firms are more productive when they are close, in travel time and cost, to many other firms and workers. They share suppliers, find better-matched staff and learn from each other. None of this enters a traveler's choice, so a project that brings firms "closer" raises output beyond the user benefit. <a href="https://doi.org/10.3828/jtep.2007.41.2.173">Anthony Venables (2007)</a> set out the theory for urban transport.</li>
+<li><strong>Imperfect competition.</strong> Where firms charge more than their marginal cost, extra output is worth more than its cost.</li>
+<li><strong>Labor supply and tax.</strong> When commuting gets cheaper, more people take jobs. Part of their extra earnings goes to the government as income tax, which the commuter does not count.</li>
 </ul>
-<p>A review by <a href="https://doi.org/10.1016/j.tranpol.2009.05.002">Laird, Geurs &amp; Nash (2009)</a> discusses these values in rail appraisal, where they are most often invoked to resist closures. In \(W\) the logsum already contains part of the option value. Through the error term, every person has some probability of using the bike or the train, so adding or removing it changes everyone's expected surplus. What it does not contain is risk aversion over future states, such as losing the car, or a value for others' access. Treat claimed option values above the logsum as a sensitivity test, not a core benefit. The more defensible route is an explicit <strong>equity floor</strong> \(A_g\ge A_{\min}\) for car-less groups (<a href="m01-objective.html">Module 1</a>).</p>
-
-<h2>7. Wider economic benefits and agglomeration</h2>
-<p>User benefits measure what travelers gain. In a perfectly competitive economy, that is all there is: lower transport costs pass through to firms and households, and counting land-value or employment increases would double count. Real economies have <strong>market failures</strong> that make some benefits additional:</p>
-<ul>
-<li><strong>Agglomeration.</strong> Firms are more productive when they are "closer", in generalized cost, to many other firms and workers. With effective density \(\rho_i=\sum_j E_j/GC_{ij}^{\alpha}\) and an elasticity of productivity with respect to density of a few percent, a project that reduces \(GC\) raises output beyond the user benefit. <a href="https://doi.org/10.3828/jtep.2007.41.2.173">Venables (2007)</a> is the classic paper. The UK includes these effects as "wider economic impacts" in <a href="https://www.gov.uk/guidance/transport-analysis-guidance">TAG</a>, usually as a sensitivity or "adjusted" benefit–cost ratio.</li>
-<li><strong>Imperfect competition</strong>: output increases in markets where price exceeds marginal cost.</li>
-<li><strong>Labor supply and tax</strong>: when commuting costs fall, more people work, and the government gains income tax that the traveler does not count.</li>
-</ul>
-<p>Germany's BVWP and Japan's MLIT manual do not include agglomeration benefits in the core benefit–cost ratio. The French <em>référentiel</em> has a tool sheet on effects on the location and level of economic activity. Two cautions. Agglomeration benefits are largest in already dense, rich areas, which reinforces the regional bias of time savings. And the elasticities are uncertain enough that they can turn a weak project into an apparently strong one. Report them separately, as Module 1 recommends.</p>
+<p>The amounts can be large. Crossrail, the east–west railway under London that opened in 2022 as the Elizabeth line, had a benefit–cost ratio of 1.97 in its 2011 business case. Including wider economic benefits raised it to 3.1 (<a href="https://www.nao.org.uk/wp-content/uploads/2022/08/Crossrail-summary.pdf">National Audit Office, 2014</a>). For a project at the margin of approval, a step of that size decides the outcome.</p>
+<p>Other traditions are more cautious. Germany's BVWP and Japan's MLIT manual leave agglomeration out of the core benefit–cost ratio. The French <em>référentiel</em> has a tool sheet on effects on the location and level of economic activity. Two cautions apply everywhere. Agglomeration benefits are largest in already dense, rich areas, which adds to the regional bias of time savings (<a href="#ranking">section 3</a>). And the productivity effects are uncertain enough to turn a weak project into an apparently strong one. Report them separately, with and without, as Module 1 recommends.</p>
 
 <h2>8. Critique: do transport projects really save time?</h2>
 <h3>The constant travel-time budget</h3>
-<p>Yacov Zahavi's work in the 1970s and Cesare <a href="https://doi.org/10.1016/0040-1625(94)90041-8">Marchetti (1994)</a> drew attention to a striking regularity: averaged over a population, the time spent traveling per person per day is roughly constant, at about an hour, across cities, countries and decades, even as speeds rose from walking to motorways. What changes with speed is <em>distance</em>. Faster travel lets cities spread, people commute farther and shop at more distant stores. The "Marchetti constant" is an empirical regularity, not a law. Travel-time budgets differ between groups and have drifted in some surveys. But the aggregate evidence is strong enough that <a href="https://doi.org/10.1080/01441640701642348">David Metz (2008)</a> called the travel time saving a "myth": in the long run, the time saved is spent traveling farther.</p>
+<p>Yacov Zahavi's work in the 1970s and Cesare <a href="https://doi.org/10.1016/0040-1625(94)90041-8">Marchetti (1994)</a> drew attention to a striking regularity. Averaged over a population, the time spent traveling per person per day is roughly constant, at about an hour. It is similar across cities, countries and decades, even as speeds rose from walking to motorways. What changes with speed is <em>distance</em>. Faster travel lets cities spread, people commute farther and shop at more distant stores.</p>
+<p>The "Marchetti constant" is an empirical regularity, not a law. Travel-time budgets differ between groups and have drifted in some surveys. But the aggregate evidence is strong enough that <a href="https://doi.org/10.1080/01441640701642348">David Metz (2008)</a> called the travel time saving a "myth": in the long run, the time saved is spent traveling farther.</p>
 
 <h3>What this means for Term A</h3>
 <ol>
-<li><strong>The benefit is real but mislabelled.</strong> If travelers choose to use saved time to reach more distant, better destinations (a better job match, cheaper housing, a larger choice of schools), they are better off. The benefit is <em>access</em>, not time. A logsum computed with destination choice and land-use response captures it correctly. A fixed-matrix time-savings calculation measures the right thing only by accident.</li>
-<li><strong>Fixed-demand time savings overstate benefits.</strong> Under fixed demand, the predicted time savings on existing trips are counted for 40–60 years. If induced traffic erodes the speed gain within a few years (Duranton &amp; Turner's "fundamental law", Module 1), the true benefit is the consumer surplus of the <em>new</em> trips, which by the rule of a half is much smaller. The externalities of those extra trips (Term C) and their land use (Term D) are not counted at all.</li>
-<li><strong>The benefit is capitalized in land.</strong> Over decades, better access raises land rents in the places that become accessible. Counting both user benefits and land-value uplift double counts. Counting land-value uplift <em>instead</em> is an alternative measure, used implicitly in Japanese rail-plus-property development.</li>
-<li><strong>It strengthens the case for accessibility measures.</strong> If time spent is constant, the useful question is how many opportunities can be reached in that hour. That is the logsum, or its simpler relative, cumulative accessibility. See <a href="m05-accessibility-land-use.html">Module 5</a>.</li>
+<li><strong>The benefit is real but mislabeled.</strong> If travelers use saved time to reach better destinations (a better-matched job, cheaper housing, a larger choice of schools), they are better off. The benefit is <em>access</em>, not time. A logsum computed with destination choice and land-use response captures it. A time-savings calculation on a fixed set of trips measures the right thing only by accident.</li>
+<li><strong>Time savings with a fixed number of trips overstate benefits.</strong> Under fixed demand, the predicted time savings on existing trips are counted for 40–60 years. If extra traffic erodes the speed gain within a few years (the "fundamental law" of road congestion, <a href="m05-accessibility-land-use.html">Module 5</a>), the true benefit is mainly the surplus of the <em>new</em> trips, which by the rule of a half is much smaller. The harm those extra trips cause (Term C) and the land they need (Term D) are not counted at all.</li>
+<li><strong>The benefit ends up in land prices.</strong> Over decades, better access raises land rents in the places that become accessible. Counting both user benefits and land-value uplift counts the same gain twice. Counting land-value uplift <em>instead</em> is an alternative measure, used implicitly when Japanese railways fund themselves through property development.</li>
+<li><strong>It strengthens the case for accessibility measures.</strong> If time spent is constant, the useful question is how many opportunities can be reached in that hour. That is the logsum, or its simpler relative, counting jobs within reach (<a href="m05-accessibility-land-use.html">Module 5</a>).</li>
 </ol>
 
 <div class="box caution">
 <div class="box-title">Do not over-correct</div>
-<p>The constant budget is an aggregate, long-run regularity. Individual small time savings are real in the short run, and both Germany's BVWP and Sweden's ASEK explicitly decided to value small savings in full rather than discount them. The defensible conclusion is not "time savings are zero". It is that <strong>Term A should be computed with a model whose demand and destinations can respond</strong>, and that time savings computed with fixed demand should be labeled an upper bound.</p>
+<p>The constant budget is an aggregate, long-run regularity. Individual small time savings are real in the short run. Both Germany's BVWP and Sweden's ASEK explicitly decided to value small savings in full rather than discount them. The defensible conclusion is not "time savings are zero". It is that <strong>Term A should be computed with a model in which demand and destinations can respond</strong>, and that time savings computed with fixed demand should be labeled an upper bound.</p>
 </div>
 
 <h2>9. Connecting back to \(W\)</h2>
 <div class="table-wrap"><table>
 <tr><th>Practice</th><th>What it does to Term A</th><th>Bias relative to \(W\)</th></tr>
-<tr><td>Fixed-demand time savings × VTTS</td><td>Values only time on existing trips</td><td>Overstates road capacity benefits; ignores new destinations and modes</td></tr>
-<tr><td>Rule of a half with variable demand</td><td>First-order approximation to the logsum</td><td>Fails for new alternatives and large changes</td></tr>
-<tr><td>Logsum from equilibrium demand model</td><td>Exact consumer surplus (constant \(\lambda\))</td><td>Only as good as the model's elasticities and choice set</td></tr>
-<tr><td>National-average ("equity") VTTS</td><td>Same \(1/\lambda\) for everyone</td><td>Implicit \(\omega_g\propto\lambda_g\); favors low-income groups relative to behavioral values</td></tr>
-<tr><td>No VTTS for walking and cycling</td><td>Active-mode time and comfort omitted</td><td>Biases against active modes (Netherlands now an exception)</td></tr>
-<tr><td>Per-vehicle values (Japan)</td><td>Occupancy built into vehicle class</td><td>Fine for roads; makes cross-modal comparison harder</td></tr>
+<tr><td>Fixed-demand time savings × value of time</td><td>Values only time on existing trips</td><td>Overstates road capacity benefits; ignores new destinations and modes</td></tr>
+<tr><td>Rule of a half with variable demand</td><td>Straight-line approximation to the logsum</td><td>Fails for new options and large changes</td></tr>
+<tr><td>Logsum from an equilibrium demand model</td><td>Consumer surplus of the whole set of options</td><td>Only as good as the model's responses, constants and choice set</td></tr>
+<tr><td>National-average ("equity") value of time</td><td>Same value of an hour for everyone</td><td>An implicit equity weight; favors low-income groups relative to behavioral values</td></tr>
+<tr><td>Value rising with distance (Germany)</td><td>Long trips' minutes count more</td><td>Favors long-distance and interurban projects over urban ones</td></tr>
+<tr><td>No value for walking and cycling time</td><td>Active-mode time and comfort omitted</td><td>Biases against active modes (the Netherlands is now an exception)</td></tr>
+<tr><td>Per-vehicle values (Japan)</td><td>Occupancy built into the vehicle class</td><td>Fine for roads; makes cross-modal comparison harder</td></tr>
+<tr><td>Wider economic benefits in the core ratio</td><td>Adds productivity gains beyond user benefits</td><td>Risk of double counting; favors dense, rich regions</td></tr>
 </table></div>
 
 <div class="box exercise">
-<div class="box-title">Exercise 2.1 · VTTS from a model, and which value to appraise with</div>
-<p>A mode-choice model estimated on commuters gives \(\beta_c=-0.20\)/€ for low-income and \(-0.10\)/€ for high-income travelers, and \(\beta_t=-0.04\)/min for both.</p>
+<div class="box-title">Exercise 2.1 · Value of time from a model, and which value to appraise with</div>
+<p>A mode-choice model estimated on commuters gives a cost weight \(\beta_c=-0.20\) per euro for low-income and \(-0.10\) per euro for high-income travelers, and a time weight \(\beta_t=-0.04\) per minute for both.</p>
 <ol>
-<li>Compute the behavioral VTTS of each group in €/h.</li>
+<li>Compute the behavioral value of time of each group in €/h.</li>
 <li>A road scheme saves 6 minutes for 2,000 high-income and 500 low-income commuters per day. Compute daily benefits with (a) group-specific values and (b) a single average value weighted by the number of travelers.</li>
-<li>A bus scheme saves 6 minutes for 500 high-income and 2,000 low-income commuters. Repeat. How does the ranking of the two schemes depend on the choice of VTTS? Which country practice in section 2 corresponds to (b)?</li>
+<li>A bus scheme saves 6 minutes for 500 high-income and 2,000 low-income commuters. Repeat. How does the ranking of the two schemes depend on the choice of value? Which country practice in section 3 corresponds to (b)?</li>
 </ol>
 </div>
 
 <div class="box exercise">
 <div class="box-title">Exercise 2.2 · Logsum with a destination choice</div>
-<p>A household chooses among three destinations with \(V_j=\beta_t t_j+\ln O_j\), \(\beta_t=-0.05\)/min, \(\lambda=0.1\)/€. Destination A: \(t=20\), \(O=1000\) jobs. B: \(t=40\), \(O=4000\). C: \(t=60\), \(O=8000\).</p>
+<p>A household chooses among three destinations with \(V_j=\beta_t t_j+\ln O_j\), \(\beta_t=-0.05\) per minute, \(\lambda=0.1\) per euro. Destination A: \(t=20\) min, \(O=1000\) jobs. B: \(t=40\), \(O=4000\). C: \(t=60\), \(O=8000\).</p>
 <ol>
 <li>Compute choice probabilities, the logsum and the average travel time.</li>
 <li>A new road cuts travel time to C to 40 minutes. Recompute. What happens to the average travel time? What is \(\Delta CS\)?</li>
@@ -233,20 +315,28 @@ $$\Delta CS_n = \frac{1}{\lambda_n}\left[\ln\sum_{j\in C_n^1} e^{V^1_{nj}} - \ln
 
 <div class="box exercise">
 <div class="box-title">Exercise 2.3 · Reliability and crowding</div>
-<p>A rail upgrade does not change mean travel time (30 min) but reduces the standard deviation from 8 to 4 minutes and moves the typical commuter from "standing, busy" (multiplier 2.0) to "seated, average" (1.0). With VTTS €11/h and reliability ratio 0.4, compute the change in generalized cost per trip. Which component dominates? What would a pure "time savings" appraisal conclude?</p>
+<p>A rail upgrade does not change the mean travel time (30 min) but reduces the standard deviation from 8 to 4 minutes. It also moves the typical commuter from "standing, busy" (multiplier 2.0) to "seated, average" (1.0). With a value of time of €11/h and a reliability ratio of 0.4, compute the change in generalized cost per trip. Which component dominates? What would a pure "time savings" appraisal conclude?</p>
+</div>
+
+<div class="box exercise">
+<div class="box-title">Exercise 2.4 · Ask the question behind the ranking</div>
+<p>Return to the two projects of section 3. (a) At what ratio between the value of an hour on the 65 km trip and on the 5 km trip are the two projects equal? (b) Suppose both projects cost the same and only one can be built. Write three questions you would put to the consultant before accepting either ranking. (c) Over a 40-year appraisal, values of time grow with income. Does that change the ranking? Why or why not?</p>
 </div>
 
 <h2>Readings and resources</h2>
 <ul class="resources">
-<li data-type="pdf"><a href="https://www.gov.uk/government/publications/tag-unit-a1-3-user-and-provider-impacts">DfT — TAG Unit A1.3: User and Provider Impacts (May 2026)</a> <span class="why">The clearest official text on consumer surplus, the rule of a half, working and non-working VTTS, multipliers and reliability ratios.</span></li>
+<li data-type="pdf"><a href="https://www.gov.uk/government/publications/tag-unit-a1-3-user-and-provider-impacts">DfT — TAG Unit A1.3: User and Provider Impacts (May 2026)</a> <span class="why">The clearest official text on consumer surplus, the rule of a half, working and non-working values of time, multipliers and reliability ratios.</span></li>
 <li data-type="data"><a href="https://www.gov.uk/government/publications/tag-data-book">DfT — TAG Data Book</a> <span class="why">The UK values themselves (spreadsheet), updated several times a year.</span></li>
 <li data-type="link"><a href="https://www.gov.uk/government/publications/values-of-travel-time-savings-updating-the-values-for-non-work-travel">DfT — Values of travel time savings: updating the values for non-work travel</a> <span class="why">The research behind the 2015 UK values.</span></li>
-<li data-type="pdf"><a href="https://english.kimnet.nl/documents/2024/04/03/new-values-of-travel-time-reliability-and-comfort-in-the-netherlands">KiM — New values of travel time, reliability and comfort in the Netherlands (2024)</a> <span class="why">The newest national VTTS study in this course; includes walking, cycling and crowding multipliers; Significance technical report attached.</span></li>
+<li data-type="pdf"><a href="https://english.kimnet.nl/documents/2024/04/03/new-values-of-travel-time-reliability-and-comfort-in-the-netherlands">KiM — New values of travel time, reliability and comfort in the Netherlands (2024)</a> <span class="why">The newest national study in this course; includes walking, cycling and crowding multipliers; Significance technical report attached.</span></li>
+<li data-type="link"><a href="https://eprints.whiterose.ac.uk/104595/">Wardman, Chintakayala &amp; de Jong (2016) — Values of travel time in Europe: review and meta-analysis</a> <span class="why">3,109 values from 389 studies; country-by-country values and their link to income. Free accepted manuscript.</span></li>
 <li data-type="pdf"><a href="https://www.bmv.de/SharedDocs/DE/Anlage/G/BVWP/bvwp-methodenhandbuch.pdf?__blob=publicationFile">BMV — Methodenhandbuch zum Bundesverkehrswegeplan 2030</a> <span class="lang">(German)</span> <span class="why">Section III.3.1.2 on time values, section 4.2.2.6 on implicit benefits. 450+ pages; use the table of contents.</span></li>
 <li data-type="pdf"><a href="https://bransch.trafikverket.se/asek">Trafikverket — ASEK report and calculation annex</a> <span class="lang">(Swedish)</span> <span class="why">Chapter 9 on travel time, with explicit reasoning on income effects and small time savings.</span></li>
-<li data-type="pdf"><a href="https://www.ecologie.gouv.fr/sites/default/files/documents/V.2.pdf">DGITM — Fiche-outil V.2: valeurs de référence prescrites</a> <span class="lang">(French)</span> <span class="why">French time values by purpose, region, mode and distance, with the VSL and carbon values used in Module 3.</span></li>
+<li data-type="pdf"><a href="https://www.ecologie.gouv.fr/sites/default/files/documents/V.2.pdf">DGITM — Fiche-outil V.2: valeurs de référence prescrites</a> <span class="lang">(French)</span> <span class="why">French time values by purpose, region, mode and distance, with the safety and carbon values used in Module 3.</span></li>
 <li data-type="pdf"><a href="https://www.mlit.go.jp/road/ir/ir-hyouka/ben-eki_2.pdf">MLIT — 費用便益分析マニュアル (August 2025)</a> <span class="lang">(Japanese)</span> <span class="why">Short and explicit: the travel-time benefit formula and per-vehicle time values on pages 6–7.</span></li>
 <li data-type="link"><a href="https://www.transportation.gov/office-policy/transportation-policy/revised-departmental-guidance-valuation-travel-time-economic">USDOT — Revised Departmental Guidance on Valuation of Travel Time in Economic Analysis</a> <span class="why">The US wage-share approach.</span></li>
+<li data-type="link"><a href="https://www.gov.uk/government/publications/tag-unit-a2-1-wider-economic-impacts">DfT — TAG Unit A2.1: Wider Economic Impacts</a> <span class="why">How the UK values agglomeration, labor supply and output effects.</span></li>
+<li data-type="pdf"><a href="https://www.nao.org.uk/wp-content/uploads/2022/08/Crossrail-summary.pdf">National Audit Office — Crossrail (2014), summary</a> <span class="why">A short official account of a business case with and without wider economic benefits.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/j.tra.2006.10.002">de Jong, Daly, Pieters &amp; van der Hoorn (2007) — The logsum as an evaluation measure</a> <span class="why">Theory and practice of the logsum as consumer surplus.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1080/01441640701642348">Metz (2008) — The myth of travel time saving, Transport Reviews</a> <span class="why">The critique of section 8, argued from the constant travel-time budget.</span></li>
 <li data-type="link"><a href="https://doi.org/10.1016/0040-1625(94)90041-8">Marchetti (1994) — Anthropological invariants in travel behavior</a> <span class="why">Origin of the "Marchetti constant".</span></li>

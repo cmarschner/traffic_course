@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 3 · Externalities and their prices — Welfare-Centered Transport Planning</title>
-<meta name="description" content="The physics, epidemiology and economics of transport externalities: climate, air pollution, noise, crashes, congestion, severance and land; how they are quantified and priced in the EU and in national guidance; Pigouvian internalization; health benefits of active travel.">
-<link rel="stylesheet" href="../assets/style.css?v=15">
+<meta name="description" content="How the harm traffic does to others is measured and priced: how unit values for crashes, climate, air pollution, noise, severance and land are built, marginal versus average costs, why countries' values differ, where congestion belongs, and which numbers a decision maker should question.">
+<link rel="stylesheet" href="../assets/style.css?v=16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<script defer src="../assets/site.js?v=15"></script>
+<script defer src="../assets/site.js?v=16"></script>
 </head>
 <body>
 <header class="site-header"><div class="inner">
@@ -29,60 +29,124 @@
 <main>
 <p class="kicker">Part I · The objective · Module 3</p>
 <h1>Externalities and their prices</h1>
-<p class="meta">≈ 4 hours · Prerequisites: <a href="m01-objective.html">Modules 1</a> and <a href="m02-valuing-access.html">2</a> · Key terms: <span class="term">C</span>, <span class="term">B</span>, <span class="term">D</span>, constraints</p>
+<p class="meta">≈ 4 hours · Prerequisites: <a href="m01-objective.html">Modules 1</a> and <a href="m02-valuing-access.html">2</a> · Key terms: <span class="term">C</span>, <span class="term">D</span>, links to <span class="term">B</span> and the limits</p>
 
-<p class="lede">Term C of the welfare objective, \(\sum_k p_k E_k(\theta)\), subtracts the harm that travel does to people who did not choose it. For each harm \(k\) we need two things: a physical quantity \(E_k\) (tonnes, decibels, deaths, vehicle-hours) and a price \(p_k\). This module explains where both come from, how official price lists differ, why congestion needs special care, and how land and health fit into the same accounting.</p>
+<p class="lede">Term C of the welfare objective subtracts the harm that travel does to people who did not choose it: the child crossing the road, the family under the flight path of a motorway, the people who will live with a warmer climate. <a href="m01-objective.html#term-c">Module 1</a> wrote it as a sum, \(C=\sum_k p_k E_k\): for each kind of harm \(k\), a physical quantity \(E_k\) times a price per unit \(p_k\). This module is about the prices. Where does a number like "€3.6 million per death" or "€100 per tonne of CO₂" come from? Why do countries use such different numbers? And which of them should a decision maker refuse to take on trust?</p>
+
+<div class="box brief">
+<div class="box-title">In brief</div>
+<dl>
+<dt>The question</dt><dd>What does a trip cost the people who did not make it, and how can that cost be priced fairly?</dd>
+<dt>What matters</dt><dd>Crashes, climate, air pollution, noise, severance and land. Each enters as a quantity times a unit value. Unit values are built from surveys, health studies and policy targets: they are choices informed by evidence, not constants of nature. Congestion is not on the list. The delay drivers cause each other is already in everyone's travel times (Term A). It sets the right congestion charge instead.</dd>
+<dt>Numbers to question</dt><dd>The value of a statistical life (€3.6 million in the EU reference, about $14 million in US guidance). The carbon value and how fast it rises. Air-pollution damage per kilogram, which differs fivefold between metropolitan and rural areas. Whether a value is marginal or average. The price year.</dd>
+<dt>Levers</dt><dd>Choose between pricing a harm and setting a limit on it. Use values that depend on place and time. Charge the marginal harm where it occurs. Lower speeds and better street design reduce the quantities themselves.</dd>
+<dt>Ask your analysts</dt><dd>Which unit values did you use, from which source, in which price year? Marginal or average? Did you count the harm caused by the extra traffic the project attracts? Is any delay counted twice? Does the ranking survive a low and a high carbon value?</dd>
+</dl>
+</div>
 
 <div class="box key">
 <div class="box-title">Learning outcomes</div>
 <ul>
-<li>Distinguish external from internal costs, and marginal from average costs, for each category of Term C.</li>
-<li>Describe the chain from activity to emissions or exposure to damage for climate, air pollution, noise and crashes, and name the standard tools (HBEFA, COPERT, noise mapping, crash models).</li>
-<li>Use the EU <em>Handbook on the External Costs of Transport</em> and national values (France, Germany, Sweden, US, Japan) critically, with their price years.</li>
-<li>Compute the marginal external congestion cost from a BPR function and explain why it is not the same as total delay.</li>
-<li>Explain Pigouvian internalization, parking and land as hidden externalities (Term D), and the HEAT method for health benefits (Term B).</li>
+<li>Decide whether a cost is external, and whether it is already counted in Term A.</li>
+<li>Explain the three ways a unit value is built (damage, avoidance and replacement cost), and how a value of a statistical life is derived from small risks.</li>
+<li>Distinguish marginal from average costs, and say which one a given decision needs.</li>
+<li>Use the EU <em>Handbook on the External Costs of Transport</em> and national values (France, Germany, Sweden, US, Japan) critically, and explain why the values differ between countries.</li>
+<li>Explain why congestion and crowding are not subtracted in Term C, and what the external delay is used for instead.</li>
+<li>Name the unit values that move an appraisal most, and test a ranking against them.</li>
 </ul>
 </div>
 
-<h2>1. What makes a cost external <span class="term">C</span></h2>
-<p>A cost is <strong>external</strong> if the person whose decision causes it does not bear it and does not take it into account. The test is decision-based, not physical. My exhaust harms me a little and my neighbors a lot. My time stuck in traffic is internal to me, but the delay my car adds to everyone else is external. The table classifies the categories of Term C:</p>
+<h2>1. Who pays for a car trip? <span class="term">C</span></h2>
+<p>Take a 10 km drive across a European city at midday, alone, in a new petrol car. The driver pays for the fuel and spends the time. Others pay too, without being asked. Pedestrians and cyclists carry a small risk of being hit. People along the route breathe a little exhaust and hear a little more noise. Everyone, now and later, inherits a little more CO₂.</p>
+<p>The European Commission's <em>Handbook on the External Costs of Transport</em> puts numbers on these shares. For a passenger-km in a new, fuel-efficient petrol car in dense city traffic by day, it lists 1.41 euro cents for crashes, 1.00 for climate, 0.5 for noise and 0.14 for air pollution. Over the 10 km trip that is about 30 cents of harm to others. The Handbook lists one more item: 41.2 cents per passenger-km, about €4 for the trip, for the delay the car causes to other drivers (<a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">Handbook</a>, Table 125).</p>
+<p>This module is mostly about the 30 cents: where each number comes from, and how much it can be trusted. The €4 is real too, but it is a different kind of cost. It falls on other travelers, whose travel times the model already counts. <a href="#congestion">Section 9</a> explains where it belongs.</p>
+
+<h3>What makes a cost external</h3>
+<p>A cost is <strong>external</strong> if the person whose decision causes it does not bear it and does not take it into account. The test is about decisions, not physics. My exhaust harms me a little and my neighbors a lot. The table sorts the harms of Term C into what the traveler already weighs and what falls on others:</p>
 <div class="table-wrap"><table>
 <tr><th>Category</th><th>Internal part (already in Term A)</th><th>External part (Term C)</th></tr>
-<tr><td>Congestion</td><td>Own delay at average travel time \(t(q)\)</td><td>Extra delay imposed on others: \(q\,t'(q)\) per extra vehicle</td></tr>
 <tr><td>Crashes</td><td>Own risk, as far as perceived; insurance premiums</td><td>Risk imposed on others (especially pedestrians and cyclists); medical, police and other costs paid by society</td></tr>
-<tr><td>Climate</td><td>Fuel cost, fuel and carbon taxes (a price signal, not a cost to society)</td><td>Damage, or avoidance cost, of each tonne of CO₂e</td></tr>
+<tr><td>Climate</td><td>Fuel cost, including fuel and carbon taxes (a transfer, not a cost to society)</td><td>Damage, or avoidance cost, of each tonne of CO₂-equivalent</td></tr>
 <tr><td>Air pollution</td><td>A little own exposure</td><td>Health, crop and material damage to others</td></tr>
-<tr><td>Noise</td><td>Almost none</td><td>Annoyance, sleep disturbance, cardiovascular disease among residents</td></tr>
-<tr><td>Severance</td><td>None</td><td>Detours, delay and lost independent mobility for people crossing the road</td></tr>
-<tr><td>Land and parking</td><td>Parking fees, if any</td><td>Opportunity cost of land given free or below cost (Term D)</td></tr>
+<tr><td>Noise</td><td>Almost none</td><td>Annoyance, sleep disturbance, heart disease among residents</td></tr>
+<tr><td>Severance</td><td>Pedestrians' detours and waiting, <em>if</em> the model includes walking trips</td><td>What the model misses: trips not made, children kept indoors, neighbors who no longer meet</td></tr>
+<tr><td>Land and parking</td><td>Parking fees, if any</td><td>Rent of land given free or below cost (Term D, <a href="#land">section 10</a>)</td></tr>
+<tr><td>Congestion and crowding</td><td colspan="2">Both the own delay and the delay imposed on others are in Term A, through everyone's modeled travel times. Not subtracted again in C (<a href="#congestion">section 9</a>)</td></tr>
 </table></div>
-<p>Two accounting rules follow from Module 1. First, <strong>never count the same harm twice</strong>. Own delay is already in the logsum. Only the marginal external delay belongs here. Second, <strong>taxes are not costs</strong>. A fuel tax is a transfer from driver to government. It enters Term A as part of \(c\) and Term E as revenue \(R\). It reduces the externality only if it changes behavior. The degree to which existing taxes already "pay" for externalities is a separate question, called <em>internalisation</em> (section 9).</p>
+<p>Two accounting rules from <a href="m01-objective.html">Module 1</a> apply throughout. First, <strong>count each harm once</strong>, in the place where the person who bears it is counted. Second, <strong>taxes are not costs</strong>. A fuel tax is a transfer from driver to government. It lowers the driver's surplus in Term A and arrives as revenue \(R\) in Term E, and the two cancel. A tax reduces harm only if it changes behavior.</p>
 
-<h2>2. The European reference: the Handbook on External Costs</h2>
-<p>The European Commission's <a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">Handbook on the External Costs of Transport</a> (version 2019 – 1.1, published 2020, prepared by a consortium led by CE Delft for DG MOVE) is the most complete public source of unit values. It estimates the total external costs of transport in the EU28 in 2016 at <strong>€716 billion (4.8 % of GDP) excluding congestion</strong>, and <strong>€987 billion (6.6 % of GDP) including €271 billion of road congestion</strong>. Accidents are the largest category (29 %), followed by congestion (27 %), climate change and air pollution (14 % each), noise (7 %), well-to-tank emissions (5 %) and habitat damage (4 %). Road transport causes 83 % of the total including aviation and shipping.</p>
-<p>The Handbook gives total, average and marginal costs by mode, country and traffic situation, in 2016 euros. Use the marginal values for pricing and project appraisal, and the totals only for "who pays what" debates. Its key inputs are a VSL of €3.6 million for the EU28, based on the OECD's 2012 meta-analysis, and a climate value of €100/tCO₂e up to 2030 (range 60–189) rising to €269 for 2040–2060 (range 156–498), both in 2016 euros.</p>
-
-<h2>3. Climate <span class="term">C</span> <span class="term">constraints</span></h2>
-<h3>Physics and quantities</h3>
-<p>Tailpipe CO₂ is almost exactly proportional to fuel burned, because nearly all the carbon in the fuel ends up as CO₂. That is roughly 2.3 kg per litre of gasoline and 2.6–2.7 kg per litre of diesel. Emissions per vehicle-km therefore depend on speed, acceleration, gradient, load and vehicle technology. The standard European tools are the <a href="https://www.hbefa.net/">Handbook Emission Factors for Road Transport (HBEFA)</a>, used in Germany, Austria, Switzerland, Sweden, Norway and France, and <a href="https://copert.emisia.com/">COPERT</a>, the model behind most EU national inventories and the <a href="https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023">EMEP/EEA emission inventory guidebook</a>. Both give factors by vehicle segment, emission standard and traffic situation. For appraisal, add upstream ("well-to-tank") emissions from fuel and electricity production, which can dominate for battery-electric vehicles on a fossil-heavy grid.</p>
-
-<h3>Price: damage cost or shadow price of a target?</h3>
-<p>There are two ways to set \(p_{\mathrm{CO_2}}\):</p>
+<h2>2. How a unit value is built</h2>
+<p>Nobody sells clean air or a quiet night, so there is no market price to look up. Analysts use three approaches instead. The EU Handbook describes them as follows.</p>
 <ol>
-<li><strong>Social cost of carbon (damage cost).</strong> The present value of all future damages from one more tonne emitted today, from integrated assessment models. It depends strongly on the discount rate and on how damages to poorer and future people are weighted.</li>
-<li><strong>Avoidance cost, or the shadow price of a target.</strong> The marginal cost of meeting a legally set emissions path. This is the Lagrange multiplier on the carbon budget \(E_{\mathrm{CO_2}}\le \bar E_{\mathrm{CO_2}}\) of Module 1. France and Sweden, and the EU Handbook, take this route.</li>
+<li><strong>Damage cost.</strong> Trace the harm to the people who suffer it, and ask what they would pay to avoid it. For air pollution, this is a chain: emissions, then the concentrations they cause, then the people exposed, then the extra illness and deaths, then a money value for each. Most economists prefer this approach. The Handbook uses it for crashes, air pollution and noise.</li>
+<li><strong>Avoidance cost.</strong> Start from a target that society has already set, such as a cut in CO₂ emissions. Find the cheapest way to meet it. The cost of the last tonne avoided is the value of a tonne. This is the <em>shadow price</em> of the target (<a href="m01-objective.html#limits">Module 1</a>). The Handbook uses it for climate.</li>
+<li><strong>Replacement cost.</strong> Value a harm at what it costs to repair, such as cleaning soiled buildings. Simple, but it says nothing about what people would pay.</li>
 </ol>
-<p>Both are legitimate. They answer different questions. If a binding carbon budget exists, the shadow price is the logically consistent \(p_{\mathrm{CO_2}}\). A project that emits more forces abatement elsewhere at that marginal cost.</p>
+<p>"What people would pay" is measured in two ways. In <em>stated-preference</em> surveys, people choose between hypothetical options, for example a safer and a cheaper route. In <em>revealed-preference</em> studies, analysts read values from real markets. House prices along noisy and quiet streets, for example, show what buyers pay for quiet.</p>
+
+<h3>The value of a statistical life</h3>
+<p>The most contested unit value is the price of a road death. It is not the value of a particular person's life. It is built from small risks, like this.</p>
+<p>Suppose a measure lowers each person's yearly risk of dying in a crash by 1 in 10,000, and each of 10,000 people would pay €360 a year for it. Together they would pay €3.6 million. On average, the measure saves one life among them each year. We do not know whose. So €3.6 million is the <strong>value of a statistical life</strong> (VSL): what a group is willing to pay, in total, for risk reductions that together prevent one death.</p>
+<p>Two methods produce such values, and they give different answers.</p>
+<ul>
+<li><strong>Surveys</strong> ask people directly what they would pay for safer products or roads. Most European values come from these. The EU Handbook's €3.6 million (2016 euros) comes from the OECD's 2012 review of such surveys worldwide.</li>
+<li><strong>Wage–risk studies</strong> compare jobs. If a riskier job pays more, the extra pay shows what workers demand for accepting the risk. Most US values come from these studies. The Handbook notes that they tend to give much higher values than surveys.</li>
+</ul>
+<p>Injuries are valued as fractions of the VSL. The Handbook values a serious injury at 13 % and a slight injury at 1 % of the VSL. France uses 12.5 % and 0.5 %.</p>
+
+<h3>Moving values between countries</h3>
+<p>Few countries run their own surveys for every harm. Most borrow values from studies elsewhere and adjust them for income. This is called <em>benefit transfer</em>. People with higher incomes are willing to pay more to avoid a risk, so a value from a richer country is scaled down, and one from a poorer country scaled up.</p>
+<p>The scaling is governed by one number, the <strong>income elasticity</strong>: the percentage by which the value rises when income rises by 1 %. The EU Handbook uses 0.8, following an OECD review that found 0.7 to 0.9 for health and environmental values. So a country with half the average income gets a value about 43 % lower (\(0.5^{0.8}\approx 0.57\)). That is why the Handbook's VSL is the same method everywhere in the EU but a different number in each country.</p>
+
+<details class="method">
+<summary><span class="label">Under the hood</span>The transfer formula, and what is inside the Handbook's crash cost</summary>
+<p><strong>Benefit transfer.</strong> With willingness to pay \(\mathit{WTP}_s\) at the study site, income \(I_s\) there and \(I_p\) in the policy country, the transferred value is</p>
+$$\mathit{WTP}_p = \mathit{WTP}_s\left(\frac{I_p}{I_s}\right)^{\varepsilon},$$
+<p>with income measured as GDP per head at purchasing-power parity and \(\varepsilon = 0.8\) in the EU Handbook. The same formula, applied over time instead of across places, is how manuals let values grow with real income.</p>
+<p><strong>Inside a crash cost.</strong> The Handbook splits the cost of a fatality into human costs (from the VSL), medical, administrative and production costs, and material damage. To avoid counting lost production twice, it deducts the victim's lost consumption from the VSL: on average €668,000, so the human cost of a fatality in the EU28 is €2.9 million. It then decides which parts are external. Human costs of people in <em>other</em> vehicles are fully external; those of the car's own occupants are internal. Half of the medical and administrative costs are assumed to be uninsured and thus external, and 55 % of the production loss. Germany's federal transport infrastructure plan (BVWP) makes a similar split: of its €2.48 million per fatality (2012), €1.16 million are resource costs and €1.32 million a willingness-to-pay "risk value".</p>
+</details>
+
+<h2>3. Marginal or average?</h2>
+<p>A unit value can mean two different things. The <strong>average cost</strong> is the total harm divided by all the traffic. The <strong>marginal cost</strong> is the extra harm from one more vehicle, at a given place and time. They can differ by a large factor, and each answers a different question.</p>
+<ul>
+<li><strong>Noise.</strong> Because decibels are logarithmic, one more car on a road with 20,000 vehicles a day adds almost nothing. One more car on a quiet street at night adds a lot. The marginal cost is highest exactly where the average cost is lowest (<a href="#noise">section 7</a>).</li>
+<li><strong>Crashes.</strong> More traffic means more encounters, but also slower, more careful driving. The Handbook assumes that on urban roads one more vehicle leaves everyone else's risk per kilometer unchanged, and that on motorways and other roads it slightly lowers it. The harm one more vehicle does to others is then mainly the risk it brings itself, not a rise in everyone else's risk.</li>
+<li><strong>Air pollution.</strong> The damage per kilogram is roughly the same for the first and the last kilogram in a place, but it varies strongly between places (<a href="#air">section 6</a>).</li>
+<li><strong>Delay between drivers.</strong> At a near-full road, one more car adds much more delay to others than the average car does. The Handbook puts the total delay on Europe's roads in 2016 at €271 billion, compared with free-flowing traffic. The part that pricing could actually recover, the economists' <em>deadweight loss</em>, is about €46 billion. (As <a href="#congestion">section 9</a> explains, neither is subtracted in Term C.)</li>
+</ul>
+<p>The rule of use: <strong>charges and per-vehicle values should be marginal</strong>, for the right place and time. Totals and averages answer a different question: whether a mode, as a whole, pays for the harm it causes. A project appraisal is best done a third way: compute the change in each physical quantity (tonnes, people exposed, expected deaths) between the scenarios, and multiply by a price per unit of harm. Then the marginal-or-average question disappears for the quantities, and only the price per unit remains.</p>
+
+<h2>4. The European reference: the Handbook on External Costs</h2>
+<p>The European Commission's <a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">Handbook on the External Costs of Transport</a> (version 2019 – 1.1, published 2020, prepared by a consortium led by CE Delft for DG MOVE) is the most complete public source of unit values. It gives total, average and marginal costs by mode, country and traffic situation, in 2016 euros.</p>
+<p>Its headline: the external costs of transport in the EU28 in 2016 were <strong>€716 billion, 4.8 % of GDP</strong>, excluding congestion. Accidents are the largest category, followed by climate change and air pollution, then noise, well-to-tank emissions (from producing fuel and electricity) and habitat damage. Road transport causes 83 % of the total, including aviation and shipping. The Handbook adds €271 billion of road delay, for a total of €987 billion (6.6 % of GDP). For the reasons in section 9, this course reads the €716 billion as the Term C total, and the €271 billion as a measure of something else.</p>
+<p>Its key inputs are a VSL of €3.6 million for the EU28, and a climate value of €100 per tonne of CO₂-equivalent up to 2030 (range 60–189), rising to €269 for 2040–2060 (range 156–498), all in 2016 euros.</p>
+
+<h2>5. Climate <span class="term">C</span> <span class="term">limits</span></h2>
+<h3>The quantity</h3>
+<p>Tailpipe CO₂ is almost exactly proportional to fuel burned, because nearly all the carbon in the fuel ends up as CO₂. That is roughly 2.3 kg per liter of gasoline and 2.6–2.7 kg per liter of diesel. Emissions per vehicle-km therefore depend on speed, acceleration, gradient, load and vehicle technology. The standard European tools are the <a href="https://www.hbefa.net/">Handbook Emission Factors for Road Transport (HBEFA)</a>, used in Germany, Austria, Switzerland, Sweden, Norway and France, and <a href="https://copert.emisia.com/">COPERT</a>, the model behind most EU national inventories and the <a href="https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023">EMEP/EEA emission inventory guidebook</a>. Both give factors by vehicle type, emission standard and traffic situation. For appraisal, add the emissions from producing fuel and electricity. They can dominate for battery-electric cars on a fossil-heavy grid (<a href="m01-objective.html#term-c">Module 1</a>, "How electric cars change Term C").</p>
+
+<h3>The price: what countries use</h3>
+<p><a href="m01-objective.html#term-c">Module 1</a> explains the two ways to put a price on a tonne of CO₂: the damage it causes (the social cost of carbon), or the cost of meeting a target (its shadow price). It also lists the current scientific and official estimates. The table here shows what national appraisal manuals actually use.</p>
 
 <div class="table-wrap"><table>
 <tr><th>Jurisdiction · source</th><th>Approach</th><th>Values (checked, with price year)</th></tr>
 <tr><td>EU · Handbook on External Costs (2019/20)</td><td>Avoidance cost, literature-based</td><td>€100/t up to 2030; €269/t for 2040–2060 (€2016)</td></tr>
-<tr><td>France · Quinet commission, <a href="https://www.strategie-plan.gouv.fr/publications/de-laction-climat">La valeur de l'action pour le climat</a> (2019); DGITM fiche V.2 <span class="lang">(French)</span></td><td>Shadow price of the net-zero path, Hotelling rule after 2030</td><td>54 €2018/t in 2018, 250 in 2030, 500 in 2040; for 2050 a "prudent range" of 600–900 €2018. DGITM converts to €2015: 53 (2018), 246 (2030), 491 (2040), then +4.5 %/yr to 763 (2050) and 1,184 (2060), constant afterwards</td></tr>
-<tr><td>Germany · UBA, <a href="https://www.umweltbundesamt.de/publikationen/handbuch-umweltkosten">Handbuch Umweltkosten – Methodenkonvention 4.0</a> (2026) <span class="lang">(German)</span></td><td>Damage cost (GIVE model), two time-preference rates</td><td>350 €2025/t for emissions in 2026 at 1 % pure time preference; 1,000 €2025/t with equal weighting of generations (0 %); rising over time</td></tr>
+<tr><td>France · Quinet commission, <a href="https://www.strategie-plan.gouv.fr/publications/de-laction-climat">La valeur de l'action pour le climat</a> (2019); DGITM fiche V.2 <span class="lang">(French)</span></td><td>Shadow price of the net-zero path</td><td>54 €2018/t in 2018, 250 in 2030, 500 in 2040; for 2050 a "prudent range" of 600–900 €2018. DGITM converts to €2015: 53 (2018), 246 (2030), 491 (2040), then +4.5 %/yr to 763 (2050) and 1,184 (2060), constant afterwards. A 2025 revision is listed in <a href="m01-objective.html#term-c">Module 1</a></td></tr>
+<tr><td>Germany · Federal Environment Agency (UBA), <a href="https://www.umweltbundesamt.de/publikationen/handbuch-umweltkosten">Handbuch Umweltkosten – Methodenkonvention 4.0</a> (2026) <span class="lang">(German)</span></td><td>Damage cost (GIVE model), two time-preference rates</td><td>350 €2025/t for emissions in 2026 at 1 % pure time preference; 1,000 €2025/t with equal weighting of generations (0 %); rising over time</td></tr>
 <tr><td>Germany · BVWP 2030 (2016)</td><td>Takes the then UBA mid value for 2030</td><td>145 €/t (2012 price level), held constant over the appraisal</td></tr>
-<tr><td>Sweden · ASEK 8.0 (2024)</td><td>Shadow price of the 2045 target, built into the fuel prices in the national forecast</td><td>No separate CO₂ benefit line for land transport; only aviation's non-CO₂ effects are valued explicitly</td></tr>
+<tr><td>Sweden · ASEK 8.0 (2024), Trafikverket's appraisal guidance</td><td>Shadow price of the 2045 target, built into the fuel prices of the national forecast</td><td>No separate CO₂ benefit line for land transport; only aviation's non-CO₂ effects are valued explicitly</td></tr>
 <tr><td>United States · federal Interagency Working Group</td><td>Damage cost (integrated assessment models)</td><td>See the history below. Since January 2025 no federal value is in force</td></tr>
 </table></div>
+
+<h3>Why the values differ</h3>
+<p>Among the values in force, the highest in the table (UBA's €1,000) is ten times the lowest (the EU Handbook's €100 up to 2030). Five choices explain most of the gap, and each can be put to an analyst as a question.</p>
+<ol>
+<li><strong>Damage or target?</strong> France and the EU Handbook price the target. Germany's environment agency prices the damage. Neither is wrong; they answer different questions (<a href="m01-objective.html#term-c">Module 1</a>).</li>
+<li><strong>How much the future counts.</strong> Most climate damage happens decades from now. UBA's value triples, from €350 to €1,000, when all generations are weighted equally instead of discounting the future at 1 % a year.</li>
+<li><strong>Whose damage counts.</strong> A value that counts only damage within one country is far lower than one that counts damage worldwide. The US switched to "domestic-only" values in 2017 (below).</li>
+<li><strong>Which year.</strong> Most values rise over time. Germany's BVWP held its value constant over the whole appraisal; France lets it grow 4.5 % a year after 2040. Over a 40-year road project, that difference alone can matter more than the starting value.</li>
+<li><strong>Price year.</strong> €100 in 2016 euros and €350 in 2025 euros are not directly comparable. Convert before comparing.</li>
+</ol>
 
 <div class="box translation">
 <div class="box-title">France · the value of climate action</div>
@@ -92,21 +156,14 @@
 </div>
 
 <div class="box translation">
-<div class="box-title">Germany · UBA's recommended climate cost</div>
-<p class="original" lang="de">Das Umweltbundesamt (UBA) empfiehlt auf Grundlage des Handbuch Umweltkosten für im Jahr 2026 emittierte Treibhausgase einen Kostensatz von 350 Euro 2025 pro Tonne Kohlendioxid (t CO2) zu verwenden (1% Zeitpräferenzrate).</p>
-<p>"On the basis of the Handbook of Environmental Costs, the German Environment Agency (UBA) recommends using a cost rate of 350 euros (2025 prices) per tonne of carbon dioxide for greenhouse gases emitted in 2026 (1 % time-preference rate)."</p>
-<p class="small">Source: <a href="https://www.umweltbundesamt.de/daten/umwelt-wirtschaft/gesellschaftliche-kosten-von-umweltbelastungen">UBA, Gesellschaftliche Kosten von Umweltbelastungen</a> (accessed October 2026). Translated by the course authors (machine-assisted).</p>
-</div>
-
-<div class="box translation">
 <div class="box-title">Sweden · carbon priced through the forecast, not added afterwards</div>
 <p class="original" lang="sv">Värderingen av koldioxidutsläpp ska speglas i de priser på bensin och diesel som utgör förutsättningar för trafikprognoser [...]. Eftersom koldioxidvärderingen därmed är internaliserad i resenärs- och godstransportnyttan ska ingen explicit värdering av klimatrelaterade effekter göras.</p>
 <p>"The valuation of carbon dioxide emissions shall be reflected in the gasoline and diesel prices that are assumptions for the traffic forecasts [...]. Since the carbon valuation is thereby internalized in the passenger and freight benefit, no explicit valuation of climate-related effects shall be made."</p>
 <p class="small">Source: Trafikverket, ASEK 8.0 (2024), recommendation AR 14.3. Translated by the course authors (machine-assisted).</p>
 </div>
-<p>The Swedish rule is a neat illustration of Module 1's point about internalization: once a price is inside \(c_{nj}\), the externality is in Term A and must not be subtracted again in C. It also has a consequence worth discussing: a road project then looks "climate-neutral" in the benefit–cost ratio, because the forecast assumes the climate policy succeeds anyway.</p>
+<p>The Swedish rule deserves a careful reading in terms of \(W\). The forecast assumes fuel prices high enough to meet the 2045 target. That price lowers travelers' surplus in Term A, but as a tax it is a transfer, so it is not itself the climate cost. What the rule really does is treat climate as a <em>limit</em>: the forecast assumes the target is met anyway, so a project's remaining emissions are not charged again. The consequence is worth discussing. A road project looks "climate-neutral" in the benefit–cost ratio, because the forecast assumes that climate policy succeeds whatever the project does. If the policy does not happen, the project's emissions were never priced.</p>
 
-<h3>The US social cost of carbon: a history in five steps</h3>
+<div class="box story"><div class="box-title">History · The US social cost of carbon in five steps</div>
 <ol>
 <li><strong>2010.</strong> A federal Interagency Working Group (IWG) publishes a central value of about $21 per tonne of CO₂ for 2010 emissions (2007 dollars, 3 % discount rate).</li>
 <li><strong>2017.</strong> Executive Order 13783 disbands the IWG and withdraws its documents. Agencies switch to "domestic-only" interim values of a few dollars per tonne.</li>
@@ -114,143 +171,157 @@
 <li><strong>2023.</strong> The EPA's updated estimate, using newer damage functions and a 2 % near-term discount rate, gives about $190/t for 2020 emissions (2020 dollars).</li>
 <li><strong>2025.</strong> Executive Order 14154, <a href="https://www.whitehouse.gov/presidential-actions/2025/01/unleashing-american-energy/">Unleashing American Energy</a> (20 January 2025), disbands the IWG again and withdraws its estimates "as no longer representative of governmental policy".</li>
 </ol>
-<p>A factor of nine between 2010 and 2023 values, and two withdrawals, illustrate the central lesson of Term C: <strong>the price \(p_k\) is a policy choice informed by science, not a natural constant</strong>. Appraisals should test their ranking over the plausible range, and the carbon budget constraint offers a way to make the result less dependent on the number.</p>
-
-<h2>4. Air pollution <span class="term">C</span></h2>
-<p>Road traffic emits nitrogen oxides (NOₓ), fine particles (PM₂.₅, from exhaust and increasingly from brake, tire and road wear), and precursors of ozone and secondary particles. The standard valuation method is the <strong>impact-pathway approach</strong>, developed in the EU's ExternE projects:</p>
-$$\text{emission} \rightarrow \text{dispersion} \rightarrow \Delta\text{concentration} \rightarrow \Delta\text{exposure (population)} \rightarrow \text{concentration–response} \rightarrow \Delta\text{deaths, illness} \rightarrow \text{€}.$$
-<p>Because exposure depends on how many people breathe the air near the source, the damage per kilogram varies enormously with location. For Austria, the EU Handbook gives a PM₂.₅ damage cost from transport of €466/kg in metropolitan areas, €151/kg in other cities and €87/kg in rural areas (€2016). A per-vehicle-km value that ignores location is therefore close to meaningless for urban project appraisal. The WHO's 2021 air-quality guideline for annual PM₂.₅ is 5 µg/m³, far below the EU limit values that applied until the 2024 revision of the Ambient Air Quality Directive, which tightens them from 2030.</p>
-<p>In \(W\), air pollution is the clearest case where the externality depends on the <em>place</em> \(\theta\) puts traffic. A bypass that moves the same vehicle-km from a town center to open country reduces \(p_{\text{air}}E_{\text{air}}\) even if total emissions rise.</p>
-
-<h2>5. Noise <span class="term">C</span></h2>
-<p>Sound levels are logarithmic: \(L=10\log_{10}(I/I_0)\) dB. Doubling traffic volume adds about 3 dB. Halving the distance to a line source adds about 3 dB. Above roughly 30–40 km/h, tire–road noise dominates engine noise in cars, which is why speed reductions and road surfaces matter more than engine technology for urban car noise. European noise mapping under the <a href="https://eur-lex.europa.eu/eli/dir/2002/49/oj">Environmental Noise Directive 2002/49/EC</a> uses the day-evening-night level \(L_{\text{den}}\), with 5 dB and 10 dB penalties for evening and night.</p>
-<p>The WHO <a href="https://www.who.int/europe/publications/i/item/9789289053563">Environmental Noise Guidelines for the European Region</a> (2018) strongly recommend keeping road-traffic noise below 53 dB \(L_{\text{den}}\) and 45 dB \(L_{\text{night}}\), on the evidence for annoyance, sleep disturbance and ischaemic heart disease. Valuation multiplies exposed persons by a price per dB above a threshold. The EU Handbook's values for road traffic, combining annoyance and health, rise from €17 per dB per person per year in the 50–54 dB band to €63 at 65–69 dB and €72 at 75 dB or above (€2016).</p>
-<div class="box note">
-<div class="box-title">Marginal noise cost is low where it is already loud</div>
-<p>Because of the logarithm, one more car on a road with 20,000 vehicles a day adds almost nothing in dB. One more car on a quiet residential street adds a lot. Marginal noise costs are therefore highest at night and in quiet areas, which is the opposite of where total noise costs are concentrated. Routing policy should use marginal values. Noise-barrier and speed-limit decisions should use total exposure.</p>
+<p>A factor of nine between the 2010 and 2023 values, and two withdrawals, show the central lesson of this module: <strong>a unit value is a policy choice informed by science, not a natural constant</strong>. Appraisals should test their ranking over the plausible range. A carbon budget, written as a limit, makes the result less dependent on any one number.</p>
 </div>
 
-<h2>6. Crashes <span class="term">C</span> <span class="term">constraints</span></h2>
-<h3>Physics and risk</h3>
-<p>Crash severity is governed by the kinetic energy \(\tfrac12 mv^2\) to be absorbed and by how human bodies tolerate it. Two empirical regularities are central to <a href="m11-safety.html">Module 11</a>. Pedestrian fatality risk rises steeply with impact speed between about 30 and 60 km/h. Nilsson's "power model" relates changes in mean speed to changes in fatalities with an exponent of about 4. The number of crashes on a link is usually modeled as a function of exposure (vehicle-km, conflicting flows at junctions) using safety performance functions. Germany's BVWP and Japan's MLIT manual both use cost rates per vehicle-km that differ by road type. Japan's manual gives a separate formula for each combination of road class, urban area and median.</p>
+<h2 id="air">6. Air pollution <span class="term">C</span></h2>
+<p>Road traffic emits nitrogen oxides (NOₓ) and fine particles (PM₂.₅). The particles come from exhausts and, increasingly, from brakes, tires and road wear. Traffic also emits gases that later form ozone and further particles in the air. The standard valuation method is the damage-cost chain of section 2, developed in the EU's ExternE research projects and called the <strong>impact-pathway approach</strong>:</p>
+$$\text{emission} \rightarrow \text{dispersion} \rightarrow \Delta\text{concentration} \rightarrow \Delta\text{exposure} \rightarrow \Delta\text{deaths, illness} \rightarrow \text{€}.$$
+<p>The fourth step is decisive: the damage depends on how many people breathe the air near the source. For Austria, the EU Handbook gives a PM₂.₅ damage cost from transport of €466 per kg in metropolitan areas, €151 in other cities and €87 in rural areas (€2016). A kilogram emitted in a metropolitan area does more than five times the damage of one emitted in a rural area. A single value per vehicle-km that ignores location is close to meaningless for urban decisions.</p>
+<p>The World Health Organization's 2021 guideline for annual PM₂.₅ is 5 µg/m³. It is far below the EU limit values that applied until the 2024 revision of the Ambient Air Quality Directive, which tightens them from 2030.</p>
+<p>In \(W\), air pollution is the clearest case where the harm depends on <em>where</em> a plan puts traffic. A bypass that moves the same vehicle-km from a town center to open country reduces the air-pollution cost, even if total emissions rise.</p>
+
+<h2 id="noise">7. Noise <span class="term">C</span></h2>
+<p>Sound levels are measured in decibels (dB), a logarithmic scale. Doubling the traffic adds about 3 dB. Halving the distance to a busy road also adds about 3 dB. Above roughly 30–40 km/h, the noise of tires on the road dominates engine noise in cars. That is why speed limits and road surfaces matter more than engine technology for urban car noise. European noise maps under the <a href="https://eur-lex.europa.eu/eli/dir/2002/49/oj">Environmental Noise Directive 2002/49/EC</a> use a day-evening-night level \(L_{\text{den}}\), which adds 5 dB to evening and 10 dB to night-time noise to reflect how much more it disturbs.</p>
+<p>The WHO's <a href="https://www.who.int/europe/publications/i/item/9789289053563">Environmental Noise Guidelines for the European Region</a> (2018) strongly recommend keeping road-traffic noise below 53 dB \(L_{\text{den}}\) and 45 dB at night, based on the evidence for annoyance, sleep disturbance and heart disease. Valuation multiplies the number of people exposed by a price per decibel above a threshold. The EU Handbook's values for road traffic, combining annoyance and health, rise from €17 per dB per person per year in the 50–54 dB band to €63 at 65–69 dB and €72 at 75 dB or above (€2016).</p>
+<div class="box note">
+<div class="box-title">Marginal noise cost is low where it is already loud</div>
+<p>One more car on a road with 20,000 vehicles a day adds almost nothing in decibels. One more car on a quiet residential street adds a lot. Marginal noise costs are therefore highest at night and in quiet areas, which is the opposite of where total noise costs are concentrated. Routing and charging should use marginal values. Decisions about noise barriers and speed limits on busy roads should use total exposure.</p>
+</div>
+
+<h2>8. Crashes <span class="term">C</span> <span class="term">limits</span></h2>
+<h3>The quantity</h3>
+<p>Crash severity is governed by the energy that has to be absorbed, \(\tfrac12 mv^2\), and by how much the human body can tolerate. Two regularities are central to <a href="m11-safety.html">Module 11</a>: pedestrian fatality risk rises steeply with impact speed between about 30 and 60 km/h, and Nilsson's "power model" links changes in mean speed to changes in deaths with an exponent of about 4 (<a href="m01-objective.html#term-c">Module 1</a>). The number of crashes on a road is usually modeled from exposure (vehicle-km, conflicting flows at junctions) with statistical relations called safety performance functions. Germany's federal transport infrastructure plan (BVWP) and the appraisal manual of Japan's transport ministry (MLIT) both use cost rates per vehicle-km that differ by road type. Japan's manual gives a separate formula for each combination of road class, urban area and median.</p>
 
 <h3>What is external?</h3>
-<p>The external part of crash costs has three components: risk imposed on other road users, especially when masses and speeds differ (a car is a small risk to its occupants and a large one to pedestrians); costs paid by society rather than by those involved (emergency services, health care not covered by insurance, lost production and taxes); and the "risk elasticity" effect, where one more vehicle changes the crash risk of everyone else. The EU Handbook treats the risk to others and the costs not covered by insurance as external.</p>
+<p>Three parts of crash costs are external. The first is the risk imposed on other road users, which is largest when masses and speeds differ: a car is a small risk to its occupants and a large one to pedestrians. The second is costs paid by society rather than by those involved: emergency services, uninsured health care, lost production and taxes. The third is the change in everyone else's risk when one more vehicle joins (section 3).</p>
 
 <h3>Prices</h3>
 <div class="table-wrap"><table>
 <tr><th>Source</th><th>Value of a statistical life / fatality (checked)</th><th>Notes</th></tr>
-<tr><td>EU Handbook (2019/20)</td><td>€3.6 million, EU28 (€2016)</td><td>From the OECD (2012) meta-analysis, adjusted per country by income</td></tr>
-<tr><td>France · DGITM fiche V.2 (2019)</td><td>€3.2 million (€2015); hospitalised injury 12.5 % and slight injury 0.5 % of the VSL</td><td>Grows with GDP per head</td></tr>
+<tr><td>EU Handbook (2019/20)</td><td>€3.6 million, EU28 (€2016)</td><td>From the OECD (2012) review of surveys, adjusted per country by income</td></tr>
+<tr><td>France · DGITM fiche V.2 (2019)</td><td>€3.2 million (€2015); hospitalized injury 12.5 % and slight injury 0.5 % of the VSL</td><td>Grows with GDP per head</td></tr>
 <tr><td>Germany · BVWP 2030 (2016)</td><td>€2.48 million per fatality (2012), of which €1.16 million resource costs and €1.32 million "risk value" (willingness to pay)</td><td>Rates from BASt, applied also to rail and waterways</td></tr>
 <tr><td>United States · <a href="https://www.transportation.gov/office-policy/transportation-policy/revised-departmental-guidance-on-valuation-of-a-statistical-life-in-economic-analysis">USDOT VSL guidance</a></td><td>$13.7 million (base year 2024); the page lists $14.2 million for 2025</td><td>Updated annually with prices and real income</td></tr>
 <tr><td>Sweden · ASEK</td><td>In the calculation annex (not reproduced)</td><td>Willingness-to-pay "risk value" plus material costs, with injury values by severity</td></tr>
 <tr><td>Japan · MLIT manual (2025)</td><td>No VSL shown; crash losses per vehicle-km and per junction passage, by road type</td><td>Only crash reduction, time and vehicle operating costs are counted (Module 14)</td></tr>
 </table></div>
-<p>The US value is about three to four times the European ones, even after allowing for exchange rates and income. The difference comes from methods: US values rest largely on labor-market (wage–risk) studies, European ones on stated-preference surveys. With a VSL, a project that saves time can "buy" extra deaths. That is why Sweden and the Netherlands frame safety as a constraint (Vision Zero, Sustainable Safety), as Module 1 explained.</p>
+<p>In money, the US value is roughly three times the EU Handbook's, even allowing for the different price years. Higher US incomes explain only part of the gap. The rest is method: US values rest largely on wage–risk studies, European ones on surveys (section 2). Within Europe, Germany's value is the lowest in the table. Its willingness-to-pay part, €1.32 million, is well below the EU Handbook's human cost of €2.9 million.</p>
+<p>The choice matters most where safety competes with speed. With a VSL, enough minutes saved can "pay for" an extra death. Exercise 3.3 asks how many. That is why Sweden and the Netherlands frame safety as a limit instead (Vision Zero, Sustainable Safety), as <a href="m01-objective.html#limits">Module 1</a> explains.</p>
 
-<h2>7. Congestion: marginal versus average <span class="term">C</span></h2>
-<p>Let \(t(q)\) be the travel time on a link as a function of flow \(q\). Total travel time is \(q\,t(q)\). The cost of one more vehicle to the system is</p>
-$$\frac{d\,[q\,t(q)]}{dq} = \underbrace{t(q)}_{\text{internal: own time}} + \underbrace{q\,t'(q)}_{\text{external: delay to others}} .$$
-<p>The first term is what the driver experiences. The second is the <strong>marginal external congestion cost</strong> (MECC). Only this second term belongs in Term C, and it is <em>not</em> the same as "total delay" compared with free-flow conditions. Delay-based "cost of congestion" figures, such as the EU Handbook's €271 billion, measure something else: the total delay relative to free flow. The economically relevant loss, the <strong>deadweight loss</strong> of unpriced congestion, is much smaller. The Handbook reports both.</p>
+<h2 id="congestion">9. Congestion and crowding: counted in Term A</h2>
+<p>The Handbook's 41 cents per passenger-km for city congestion (section 1) dwarfs every other harm on its list. Why, then, is congestion not part of Term C in this course?</p>
+<p>The answer is in <a href="m01-objective.html#term-c">Module 1, "Where is congestion?"</a>. In short: when one more driver joins a busy road, every other driver loses a little time. That loss is real. But Term A is computed from everyone's travel times as the model predicts them, with all the traffic on the road. So the other drivers' lost minutes are already in Term A. Subtracting them again in Term C would count them twice. The same holds for crowding on buses and trains: the discomfort passengers cause each other is in Term A, through the crowding multipliers of <a href="m02-valuing-access.html#reliability">Module 2</a>.</p>
+<p>The delay a driver imposes on others still matters, for two other purposes.</p>
+<ul>
+<li><strong>It sets the right congestion charge.</strong> Each driver ignores the delay they cause others, so too many people drive at the peak. A charge equal to that delay, in money, makes each driver weigh it. This is the <em>marginal external congestion cost</em>, the basis of congestion pricing (<a href="m13-pricing.html">Module 13</a>).</li>
+<li><strong>It shows what pricing could gain.</strong> The deadweight loss, €46 billion a year in the Handbook's estimate for the EU28, is the welfare that ideal pricing could recover. The total delay compared with free flow, €271 billion, is not a loss anyone could avoid: no affordable network runs at free-flow speed all day.</li>
+</ul>
+<p>One exception. Some appraisals hold travel times fixed, for example a spreadsheet that multiplies extra vehicle-km by Handbook unit values without running a traffic model. Then the model's travel times do not show the extra delay, and the marginal congestion cost per vehicle-km must be added. The rule: <strong>count each delay once</strong>, either through modeled travel times in Term A, or as a separate per-km cost, never both.</p>
 
-<div class="box note">
-<div class="box-title">Worked example · BPR link</div>
-<p>The US Bureau of Public Roads (BPR) function is \(t(q)=t_0\left[1+0.15\,(q/C)^4\right]\). Then \(q\,t'(q)=t_0\cdot 0.15\cdot 4\,(q/C)^4 = 4\,[t(q)-t_0]\): the external cost is four times the average delay.</p>
-<p>Take \(t_0=10\) min, capacity \(C=2{,}000\) veh/h, VTTS per vehicle €15/h (= €0.25/min).</p>
+<details class="method">
+<summary><span class="label">Under the hood</span>How large is the delay one car imposes? A worked example on a link</summary>
+<p>Let \(t(q)\) be the travel time on a road as a function of the flow \(q\), in vehicles per hour. Total travel time is \(q\,t(q)\). One more vehicle adds</p>
+$$\frac{d\,[q\,t(q)]}{dq} = \underbrace{t(q)}_{\text{own time}} + \underbrace{q\,t'(q)}_{\text{delay to others}} .$$
+<p>The first part is what the driver experiences and weighs. The second is the marginal external congestion cost. Both end up in Term A through the modeled travel times. The second is the basis of the charge.</p>
+<p>The US Bureau of Public Roads (BPR) link function is \(t(q)=t_0\left[1+0.15\,(q/Q)^4\right]\), with free-flow time \(t_0\) and capacity \(Q\). Then \(q\,t'(q)=t_0\cdot 0.15\cdot 4\,(q/Q)^4 = 4\,[t(q)-t_0]\): the delay imposed on others is four times each driver's own delay. Take \(t_0=10\) min, \(Q=2{,}000\) veh/h and a value of time of €15 per vehicle-hour (€0.25/min).</p>
 <div class="table-wrap"><table>
-<tr><th>\(q\) (veh/h)</th><th>\(q/C\)</th><th>average time \(t\) (min)</th><th>average delay (min)</th><th>MECC (min/veh)</th><th>MECC (€/veh)</th></tr>
+<tr><th>\(q\) (veh/h)</th><th>\(q/Q\)</th><th>own time \(t\) (min)</th><th>own delay (min)</th><th>delay to others (min/veh)</th><th>in money (€/veh)</th></tr>
 <tr><td class="num">1,000</td><td class="num">0.5</td><td class="num">10.09</td><td class="num">0.09</td><td class="num">0.38</td><td class="num">0.09</td></tr>
 <tr><td class="num">1,800</td><td class="num">0.9</td><td class="num">10.98</td><td class="num">0.98</td><td class="num">3.94</td><td class="num">0.98</td></tr>
 <tr><td class="num">2,200</td><td class="num">1.1</td><td class="num">12.20</td><td class="num">2.20</td><td class="num">8.78</td><td class="num">2.20</td></tr>
 </table></div>
-<p>At \(q/C=1.1\), a driver experiences 12.2 minutes but imposes another 8.8 minutes on others: the marginal social cost is 21 minutes, 72 % above the private cost. At half capacity the external cost is negligible. Congestion externalities are concentrated in place and time. That is why time-varying, location-specific pricing (<a href="m13-pricing.html">Module 13</a>) is so much more efficient than a flat fuel tax.</p>
-<p>The BPR function is a static approximation. In queues and on networks the external cost depends on the bottleneck dynamics (<a href="m07-traffic-flow.html">Module 7</a>). The principle stays the same.</p>
-</div>
+<p>At \(q/Q=1.1\), a driver spends 12.2 minutes but imposes another 8.8 minutes on others. At half capacity the external delay is negligible. The right charge is therefore concentrated in place and time, which is why charges that vary by time and location (<a href="m13-pricing.html">Module 13</a>) do so much better than a flat fuel tax. The BPR function is a static approximation; in queues the external delay depends on the bottleneck (<a href="m07-traffic-flow.html">Module 7</a>). Exercise 3.1 uses these parameters.</p>
+</details>
 
-<p>The EU Handbook's synthesis tables show how dominant congestion becomes at the margin in cities. For a 2016 Euro 6 gasoline car in dense metropolitan traffic during the day, it lists marginal external costs of roughly 1.4 €-cent per passenger-km for accidents, 1.0 for climate and 0.14 for air pollution, against about 41 €-cent for congestion (Table 125). Values for interurban and night traffic are far lower.</p>
-
-<h2>8. Severance, land and parking <span class="term">C</span> <span class="term">D</span></h2>
+<h2 id="land">10. Severance, land and parking <span class="term">C</span> <span class="term">D</span></h2>
 <h3>Severance</h3>
-<p>A busy road is a barrier. People walk around it, children are not allowed to cross it, and neighbors on opposite sides interact less. Donald Appleyard's San Francisco studies (<em>Livable Streets</em>, 1981) found that residents of heavy-traffic streets reported far fewer friends and acquaintances across the street than residents of light-traffic streets. Severance is the least standardized category of Term C. Some guides value it through the extra walking time and waiting at crossings, others through stated-preference values or not at all. In \(W\) it can be measured honestly as a change in pedestrians' logsum: the "crossing" alternatives become costlier.</p>
-
-<h3>Land as an externality</h3>
-<p>Roads and parking occupy land whose opportunity cost is rarely charged to users. This is Term D, \(rL(\theta)\). It becomes an <em>externality</em> in the strict sense when the cost is shifted to others: through minimum parking requirements that raise the price of housing and goods for everyone, including people without cars, or through free on-street parking that encourages "cruising" for a space. Donald Shoup's <em>The High Cost of Free Parking</em> (2005) made three arguments that remain the basis of parking reform:</p>
-<ol>
-<li>Minimum parking requirements bundle the cost of parking into rents and prices, so non-drivers subsidize drivers.</li>
-<li>Free or underpriced curb parking creates cruising traffic, which adds congestion, emissions and danger. Shoup's figure that about 30 % of downtown traffic was cruising came from a small set of older studies and has been contested. Later measurements in many cities found much lower shares.</li>
-<li>Curb parking should be priced to keep roughly one space per block free, and the revenue spent locally ("parking benefit districts").</li>
-</ol>
-<p>A parked car needs on the order of 12–15 m² for the stall itself, and roughly twice that including access aisles in a parking lot. At urban land prices this can be worth more than the car. Setting \(r=0\) for public road and parking space is one of the five simplifications of the classic objective (Module 1).</p>
-
-<h2>9. Pigouvian internalization <span class="term">C</span> <span class="term">E</span></h2>
-<p>Arthur Pigou's rule (1920) is simple. If each trip imposes a marginal external cost \(\mathrm{MEC}\), a charge \(\tau=\mathrm{MEC}\) evaluated at the optimum makes travelers face the full social cost, and the resulting traffic level maximizes welfare. In the BPR example, the optimal toll at the optimal flow equals \(q^*t'(q^*)\cdot\mathrm{VTTS}\). In terms of \(W\):</p>
-<ul>
-<li>The charge raises \(c_{nj}\) and reduces Term A for those who pay.</li>
-<li>The revenue enters Term E as \(R\), with the premium \(1+\mu\) if it replaces distorting taxes.</li>
-<li>Behavior changes, so \(E_k\) falls and Term C improves. The net welfare gain is the reduction in deadweight loss.</li>
-</ul>
-<p>Real instruments are imperfect proxies. Fuel taxes target CO₂ well, because emissions are proportional to fuel, but congestion, noise and local air pollution poorly, because these depend on time and place. Distance-based truck tolls (Germany's Lkw-Maut, which since 2023 includes a CO₂ component) are closer. Cordon and area charges (Singapore, Stockholm, London, New York) target congestion in place and time. Parking prices target land. Whether existing taxes "cover" external costs on average is a common debate, but for efficiency only the marginal comparison at each time and place matters. Module 13 develops the instruments.</p>
-
-<h2>10. Health benefits of active travel <span class="term">B</span></h2>
-<p>Term B is the positive counterpart of Term C: walking and cycling yield health benefits that travelers largely do not count when choosing a mode. The WHO's <a href="https://www.heatwalkingcycling.org/">Health Economic Assessment Tool (HEAT)</a> for walking and cycling is the standard method, documented in the WHO <a href="https://www.who.int/europe/publications/i/item/9789289058377">HEAT methods and user guide</a>. Its core is a relative risk of all-cause mortality as a function of minutes of activity per week, from meta-analyses of cohort studies:</p>
-$$\Delta \text{deaths} \approx N\cdot m\cdot(1-\mathrm{RR})\cdot\frac{x}{x_{\text{ref}}},\qquad \text{benefit}=\Delta\text{deaths}\times\mathrm{VSL},$$
-<p>where \(N\) is the number of active travelers in the age range HEAT covers, \(m\) their background mortality rate, \(x\) their weekly minutes of activity and \(x_{\text{ref}}\) the reference exposure of the meta-analysis. HEAT scales the risk reduction with exposure and caps it, so very high activity levels do not produce unlimited benefits. Recent versions also include the extra air-pollution exposure and crash risk of active travelers, and the carbon effect of mode shift.</p>
-
-<div class="box note">
-<div class="box-title">Worked example · order of magnitude</div>
-<p>A new cycle network leads 2,000 adults to cycle 100 minutes per week who did not before. With a relative risk of 0.90 for 100 minutes per week (the order of magnitude of HEAT's default for cycling), a background mortality of 0.4 % per year in that age group and a VSL of €3.6 million:</p>
-$$\Delta\text{deaths}=2000\times0.004\times0.10=0.8\ \text{per year},\qquad 0.8\times €3.6\text{m}\approx €2.9\text{ million per year}.$$
-<p>That is before any time savings, comfort or reduced car use are counted. This is why Term B often dominates Dutch and Danish cycling appraisals, and why omitting it biases appraisal against active modes. Check the HEAT documentation for the current relative risks, age ranges and the cap on minutes before relying on these numbers.</p>
+<div class="box story"><div class="box-title">History · Three streets in San Francisco</div>
+<p>In the late 1960s the planner Donald Appleyard and his students compared three residential streets in San Francisco. They were alike in most respects except traffic: about 2,000, 8,000 and 16,000 vehicles a day. Residents of the light street knew their neighbors on both sides and used the street to talk and play. Residents of the heavy street kept to their houses. On the light street, residents counted about three times as many local friends and twice as many acquaintances as on the heavy street. Appleyard published the work in <em>Livable Streets</em> (1981).</p>
+<p class="credit">Sources: Project for Public Spaces, <a href="https://pps.org/article/dappleyard">"Donald Appleyard"</a>; Bruce Appleyard, <a href="https://utcm.tti.tamu.edu/LivabilityConference/presentations/pdfs/Appleyard.pdf">"Livable Streets" presentation</a>, Texas A&amp;M Transportation Institute.</p>
 </div>
-<p>France has a tool sheet on <a href="https://www.ecologie.gouv.fr/sites/default/files/documents/IV.2.pdf">effects on health</a> in its appraisal referential. Many national manuals still omit physical-activity benefits from the core benefit–cost ratio. Note the double-counting risk: if the mode-choice model already contains a "health" or "enjoyment" constant that travelers perceive, only the part they do not perceive belongs in Term B.</p>
+<p>A busy road is a barrier. People walk around it, children are not allowed to cross it, and neighbors on opposite sides meet less. This is <strong>severance</strong>, the least standardized category of Term C. Some guides value it through the extra walking and waiting at crossings, others through survey values, and many not at all.</p>
+<p>The rule of counting once applies here too. If the model includes walking trips and their crossing times, the detours and waits are already in pedestrians' Term A. If it also lets people change where they walk to, or whether they go at all, the trips no longer made are in Term A too. Term C should then hold only what the model misses: children kept indoors, older people who stop going out, the friendships Appleyard counted. Most models include none of this, which is why severance is so often invisible.</p>
 
-<h2>11. Connecting back to \(W\)</h2>
+<h3>Land</h3>
+<p>Roads and parking occupy land that could hold homes, shops or parks. Its value is Term D, \(rL\), where \(L\) is the area and \(r\) its yearly rent in the best other use (<a href="m01-objective.html#term-d">Module 1</a>). The unit value \(r\) can be read from market rents, or from land prices times an interest rate. It ranges from almost nothing at a city's edge to very large sums in its center. An urban parking space of 12–15 m², or roughly twice that with access aisles, can occupy land worth as much as the car parked on it.</p>
+<p>Count land once. Land bought for a new road goes either into the construction cost (Term E) as a purchase price, or into Term D as a yearly rent, never both. This course puts all land in D, so that roads built long ago and roads built tomorrow are treated alike.</p>
+<p>Land becomes an externality in the strict sense when its cost is shifted to others. Minimum parking requirements bundle the cost of parking into rents and prices, so people without cars pay for drivers' spaces. Free curb parking leads drivers to cruise in search of a space, which adds traffic. Donald Shoup's figure that about 30 % of downtown traffic was cruising came from a small set of older studies and has been contested; later measurements in many cities found much lower shares. Parking policy is developed in <a href="m05-accessibility-land-use.html">Module 5</a> and <a href="m13-pricing.html">Module 13</a>.</p>
+
+<h2>11. From unit values to charges and health <span class="term">E</span> <span class="term">B</span></h2>
+<h3>Charges</h3>
+<p>Arthur Pigou's rule (1920; <a href="m01-objective.html#term-c">Module 1</a>) says: charge each trip its marginal external cost, and travelers will weigh the harm they cause. In terms of \(W\), the charge lowers Term A for those who pay and arrives as revenue in Term E. As a transfer, it cancels, apart from the factor \(\mu\) when the revenue replaces distorting taxes. The welfare gain comes only from changed behavior: fewer or different trips, so the quantities \(E_k\) fall.</p>
+<p>Real charges are rough proxies for the marginal harm. Fuel taxes match CO₂ well, because emissions are proportional to fuel, but match noise and local air pollution poorly, because these depend on time and place. Distance-based truck tolls, such as Germany's Lkw-Maut with its CO₂ component since 2023, come closer. Whether existing taxes "cover" external costs on average is a common debate, but for efficiency only the marginal comparison at each place and time matters (section 3). <a href="m13-pricing.html">Module 13</a> develops the instruments.</p>
+<h3>The same values in Term B</h3>
+<p>Walking and cycling bring health benefits that travelers largely ignore when choosing how to travel. This is Term B, the positive counterpart of Term C. The WHO's <a href="https://www.heatwalkingcycling.org/">Health Economic Assessment Tool (HEAT)</a> estimates the deaths avoided and values them with the same VSL as crashes. So the VSL chosen for Term C also scales Term B. <a href="m06-transit-active-modes.html">Module 6</a> covers HEAT. One caution: if the mode-choice model already contains a constant for the enjoyment or perceived health of cycling, only the part travelers do not perceive belongs in Term B.</p>
+
+<h2>12. Which values should a decision maker question?</h2>
+<p>A decision maker does not need to rebuild the unit values. They need to know which ones move the result, and ask for the result under other values. Seven questions cover most of the risk.</p>
+<ol>
+<li><strong>Which carbon value, and which path over time?</strong> Ask for the ranking at a low value (around €100 per tonne) and a high one (around €350, or the French path). If the ranking flips, the carbon value is the decision, and it should be made openly.</li>
+<li><strong>Which value of a statistical life?</strong> A project that trades minutes for risk can look good at €2.5 million and bad at €5 million. Ask whether safety should be a limit instead.</li>
+<li><strong>Are the values for the right place?</strong> Air-pollution and noise values should depend on how many people live nearby. National averages hide where the harm falls.</li>
+<li><strong>Marginal or average?</strong> Charges need marginal values for the right place and time. Averages answer a different question.</li>
+<li><strong>Was the harm of new traffic counted?</strong> A road that attracts extra traffic adds crashes, emissions and noise. If the model held demand fixed, these are missing.</li>
+<li><strong>Is any delay counted twice?</strong> If the appraisal both runs a traffic model and adds a per-km congestion cost, the delay is in twice.</li>
+<li><strong>Which price years and currencies?</strong> Values from different sources must be converted to one year and currency before they are added.</li>
+</ol>
+<p>Two further harms are often left out entirely: severance and land. An appraisal that prices them at zero is not neutral. It favors the modes and designs that use the most space.</p>
+
+<h2>13. Connecting back to \(W\)</h2>
 <div class="table-wrap"><table>
-<tr><th>Term C component</th><th>\(E_k\) measured by</th><th>\(p_k\) source</th><th>Bias of the classic objective (\(p_k=0\))</th></tr>
-<tr><td>Climate</td><td>fuel/energy × emission factor (HBEFA, COPERT), plus upstream</td><td>shadow price of target, or SCC</td><td>Ignores induced vehicle-km</td></tr>
-<tr><td>Air pollution</td><td>emissions × dispersion × exposed population</td><td>damage cost per kg, by location</td><td>Ignores where traffic runs</td></tr>
-<tr><td>Noise</td><td>persons exposed per dB band (\(L_{\text{den}}\))</td><td>€/dB/person/year</td><td>Favors higher speeds and volumes near homes</td></tr>
-<tr><td>Crashes</td><td>exposure × risk, by user type</td><td>VSL and injury values, or a safety constraint</td><td>Treats safety as design compliance only</td></tr>
-<tr><td>Congestion (external)</td><td>\(q\,t'(q)\) per vehicle</td><td>VTTS</td><td>Confuses total delay with external cost</td></tr>
-<tr><td>Severance</td><td>crossing demand × detour and wait</td><td>VTTS or SP values</td><td>Invisible</td></tr>
-<tr><td>Land (Term D)</td><td>m² of road and parking</td><td>land rent \(r\)</td><td>\(r=0\)</td></tr>
-<tr><td>Health (Term B, positive)</td><td>minutes of walking and cycling</td><td>HEAT relative risks × VSL</td><td>Invisible</td></tr>
+<tr><th>Component</th><th>Quantity \(E_k\) measured by</th><th>Unit value \(p_k\) from</th><th>Bias when left out (\(p_k=0\))</th></tr>
+<tr><td>Climate (C)</td><td>fuel or energy × emission factor (HBEFA, COPERT), plus upstream</td><td>shadow price of a target, or damage cost</td><td>Ignores induced vehicle-km</td></tr>
+<tr><td>Air pollution (C)</td><td>emissions × dispersion × exposed population</td><td>damage cost per kg, by location</td><td>Ignores where traffic runs</td></tr>
+<tr><td>Noise (C)</td><td>people exposed per dB band (\(L_{\text{den}}\))</td><td>€ per dB per person per year</td><td>Favors higher speeds and volumes near homes</td></tr>
+<tr><td>Crashes (C)</td><td>exposure × risk, by user type</td><td>VSL and injury values, or a safety limit</td><td>Treats safety as design compliance only</td></tr>
+<tr><td>Severance (C)</td><td>what the model's pedestrian trips do not capture</td><td>value of time or survey values</td><td>Invisible</td></tr>
+<tr><td>Land (D)</td><td>m² of road and parking</td><td>land rent \(r\)</td><td>\(r=0\): favors space-hungry modes</td></tr>
+<tr><td>Health (B, positive)</td><td>minutes of walking and cycling</td><td>HEAT relative risks × VSL</td><td>Invisible</td></tr>
+<tr><td>Congestion and crowding</td><td colspan="3">In Term A through modeled travel times and crowding multipliers. The delay imposed on others sets the charge (Module 13). Add it as a cost only if the model holds travel times fixed.</td></tr>
 </table></div>
 
 <div class="box exercise">
-<div class="box-title">Exercise 3.1 · Optimal toll on a BPR link</div>
-<p>Inverse demand on a link is \(P(q)=30-0.01\,q\) (€ per trip, \(q\) in veh/h). The private cost of a trip is \(\mathrm{VTTS}\cdot t(q)\) with the BPR parameters of section 7 and VTTS €15/h per vehicle.</p>
+<div class="box-title">Exercise 3.1 · Count the delay once</div>
+<p>Demand on a road link is described by the price at which \(q\) vehicles per hour would use it: \(P(q)=30-0.01\,q\) (€ per trip). The cost each driver bears is their own travel time, \(\mathrm{VTTS}\cdot t(q)\), with the BPR parameters of section 9 and a value of time of €15 per vehicle-hour.</p>
 <ol>
-<li>Find the unpriced equilibrium (demand price = private cost) numerically.</li>
-<li>Find the optimum (demand price = marginal social cost) and the Pigouvian toll.</li>
-<li>Compute the deadweight loss of the unpriced equilibrium, and compare it with the "total delay cost" relative to free flow. Which number belongs in Term C?</li>
+<li>Find the unpriced equilibrium (demand price = own cost) numerically.</li>
+<li>Find the best flow (demand price = own cost + delay to others) and the charge that achieves it.</li>
+<li>Compute the deadweight loss of the unpriced equilibrium, and the "total delay cost" relative to free flow.</li>
+<li>Which of these numbers is already contained in Term A when the model computes everyone's travel time? Which one is the charge? Explain why neither is subtracted in Term C.</li>
+<li>An appraisal holds travel times fixed at the unpriced equilibrium and a project adds 100 vehicles per hour. What must it add, and why?</li>
 </ol>
 </div>
 
 <div class="box exercise">
 <div class="box-title">Exercise 3.2 · A town bypass</div>
-<p>A bypass moves 12,000 vehicles per day out of a town center, adds 1.5 km per trip and induces 1,500 new daily trips of 10 km. In the center, 800 residents move from the 65–69 dB band to the 55–59 dB band. Using the EU Handbook values quoted in this module and stated assumptions for fuel consumption and PM₂.₅ emission factors, estimate the annual change in Term C for climate (try both €100/t and the French 2030 value), noise and air pollution. Which component dominates, and how does the answer change with the carbon value?</p>
+<p>A bypass moves 12,000 vehicles per day out of a town center, adds 1.5 km per trip and attracts 1,500 new daily trips of 10 km. In the center, 800 residents move from the 65–69 dB band to the 55–59 dB band. Using the EU Handbook values in this module and stated assumptions for fuel consumption and PM₂.₅ emission factors:</p>
+<ol>
+<li>Estimate the annual change in Term C for climate (try both €100/t and the French 2030 value), noise and air pollution. Use the metropolitan and rural PM₂.₅ values for the center and the bypass.</li>
+<li>Which component dominates? How does the answer change with the carbon value?</li>
+<li>The new trips also add some delay on the bypass. Where is that delay counted?</li>
+</ol>
 </div>
 
 <div class="box exercise">
-<div class="box-title">Exercise 3.3 · Price or constraint?</div>
-<p>Using the VSL values in section 6, compute how many minutes of travel time must be saved, at a VTTS of €12/h, to "pay for" one additional statistical death under (a) the French, (b) the German BVWP and (c) the US value. Discuss in the light of Module 1's distinction between pricing crashes and constraining them.</p>
+<div class="box-title">Exercise 3.3 · Price or limit?</div>
+<p>Using the VSL values in section 8, compute how many hours of travel time must be saved, at a value of time of €12/h, to "pay for" one additional statistical death under (a) the EU Handbook, (b) the German BVWP and (c) the US value. Express each as minutes per trip for a road carrying 20,000 trips a day for a year. Discuss in the light of Module 1's distinction between pricing crashes and limiting them.</p>
 </div>
 
 <h2>Readings and resources</h2>
 <ul class="resources">
-<li data-type="pdf"><a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">European Commission / CE Delft — Handbook on the External Costs of Transport, version 2019 – 1.1</a> <span class="why">The reference for Term C in Europe: methods, totals and marginal costs by mode, country and situation.</span></li>
+<li data-type="pdf"><a href="https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1">European Commission / CE Delft — Handbook on the External Costs of Transport, version 2019 – 1.1</a> <span class="why">The reference for Term C in Europe: valuation methods, benefit transfer, totals, and marginal costs by mode, country and situation.</span></li>
 <li data-type="link"><a href="https://www.strategie-plan.gouv.fr/publications/de-laction-climat">France Stratégie — La valeur de l'action pour le climat (Quinet commission, 2019)</a> <span class="lang">(French)</span> <span class="why">The clearest official derivation of a carbon value as the shadow price of a target.</span></li>
 <li data-type="pdf"><a href="https://www.ecologie.gouv.fr/sites/default/files/documents/V.2.pdf">DGITM — Fiche-outil V.2: valeurs de référence prescrites</a> <span class="lang">(French)</span> <span class="why">French VSL, carbon, noise and pollution values in one short document.</span></li>
 <li data-type="link"><a href="https://www.umweltbundesamt.de/daten/umwelt-wirtschaft/gesellschaftliche-kosten-von-umweltbelastungen">Umweltbundesamt — Gesellschaftliche Kosten von Umweltbelastungen</a> <span class="lang">(German)</span> <span class="why">Current German climate and environmental cost rates, with the Methodenkonvention 4.0 handbook.</span></li>
 <li data-type="pdf"><a href="https://bransch.trafikverket.se/asek">Trafikverket — ASEK</a> <span class="lang">(Swedish)</span> <span class="why">Chapters on crashes, noise, air pollution and climate, with explicit reasoning for each rule.</span></li>
 <li data-type="link"><a href="https://www.transportation.gov/office-policy/transportation-policy/revised-departmental-guidance-on-valuation-of-a-statistical-life-in-economic-analysis">USDOT — Guidance on the Value of a Statistical Life</a> <span class="why">The US VSL and its annual updates.</span></li>
-<li data-type="tool"><a href="https://www.hbefa.net/">HBEFA — Handbook Emission Factors for Road Transport</a> <span class="why">Emission factors by vehicle segment and traffic situation (license required for the full database).</span></li>
+<li data-type="link"><a href="https://doi.org/10.1787/9789264130807-en">OECD — Mortality Risk Valuation in Environment, Health and Transport Policies (2012)</a> <span class="why">The review of surveys behind the European VSL, with guidance on transferring values between countries.</span></li>
+<li data-type="tool"><a href="https://www.hbefa.net/">HBEFA — Handbook Emission Factors for Road Transport</a> <span class="why">Emission factors by vehicle type and traffic situation (license required for the full database).</span></li>
 <li data-type="tool"><a href="https://copert.emisia.com/">COPERT</a> <span class="why">The EU standard road-emission model.</span></li>
 <li data-type="pdf"><a href="https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023">EMEP/EEA air pollutant emission inventory guidebook 2023</a> <span class="why">Free methods and emission factors, including non-exhaust particles.</span></li>
 <li data-type="pdf"><a href="https://www.who.int/europe/publications/i/item/9789289053563">WHO — Environmental Noise Guidelines for the European Region (2018)</a> <span class="why">Exposure–response evidence and guideline levels.</span></li>
-<li data-type="tool"><a href="https://www.heatwalkingcycling.org/">WHO — HEAT for walking and cycling</a> <span class="why">Free online tool for Term B.</span></li>
+<li data-type="tool"><a href="https://www.heatwalkingcycling.org/">WHO — HEAT for walking and cycling</a> <span class="why">Free online tool for Term B (see Module 6).</span></li>
 <li data-type="link"><a href="https://doi.org/10.1257/jel.45.2.373">Parry, Walls &amp; Harrington (2007) — Automobile externalities and policies, Journal of Economic Literature</a> <span class="why">A compact economic survey of the categories in this module and of pricing instruments.</span></li>
 <li data-type="book"><span>Shoup — <em>The High Cost of Free Parking</em> (Planners Press, 2005; updated 2011)</span> <span class="why">The classic on parking and land as hidden externalities.</span></li>
 <li data-type="book"><span>Appleyard — <em>Livable Streets</em> (University of California Press, 1981)</span> <span class="why">The foundational empirical study of traffic and street life, including severance.</span></li>
