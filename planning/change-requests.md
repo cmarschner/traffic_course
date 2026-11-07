@@ -1,7 +1,7 @@
 # Change requests
 
 IDs have the form `CR-<n>-<keyword>`. Numbers are never reused. Status: open · in progress ·
-done · dropped. Source "review" = `review-2026-11-02.md`.
+done · dropped. Source "review" = `review-2026-11-02.md`; "review-gemini" = `review-2026-11-07-gemini.md`.
 
 | ID | Summary | Source | Priority | Status |
 |---|---|---|---|---|
@@ -29,6 +29,12 @@ done · dropped. Source "review" = `review-2026-11-02.md`.
 | CR-22-citizen | Citizen toolkit: reading an appraisal or traffic study, questions for a hearing, building and testing an alternative with open data and tools, where decisions can be influenced by country. | author | medium | done |
 | CR-23-capstone | Capstone variants per role: decision memo, transparent appraisal, citizen proposal. | author | medium | done |
 | CR-24-logsum-intuition | Module 1 keeps the intuition of the logsum (demo, shares, value of choice, money, destinations, formulas at the end, check box, worked example); the six-step derivation moves to Module 4, section 4 ("Random utility, step by step", anchor `#random-utility`). First application of CR-20-layers. | author | high | done |
+| CR-25-freight | Freight and city logistics: delivery vans, cargo bikes, consolidation centers, loading and curb management, delivery windows. Value goods' time and reliability in A, vans' externalities in C, curb space in D. Owner: new section in Module 12 or 13; recap in Module 3. | review-gemini | high | open |
+| CR-26-new-mobility | Automated vehicles, ride-hailing, Mobility-as-a-Service and shared micromobility, read through W: lower value of in-vehicle time, empty kilometers and induced traffic, new options in the logsum, safety claims, pricing as the steering tool, public data access. Evidence, not forecasts. Owner: Module 13 or 5; one paragraph in Module 4. | review-gemini | high | open |
+| CR-27-resilience | Climate adaptation and resilience: flooding, heat, network redundancy. How appraisal treats rare disruptions (expected damage, reliability, option value) and why a static yearly W undercounts them. Owner: Module 14, with a link from Module 2 (reliability). | review-gemini | medium | open |
+| CR-28-rural | Rural and low-density areas: minimum access standards, demand-responsive and on-demand transport, school and health trips, car dependence where density will not come. At least one rural or exurban worked case. Owner: Module 5 or 6; the A_min limit of Module 1. | review-gemini | medium | open |
+| CR-29-labor | Transport workers in W: wages as cost in E, driver shortages as a limit on service, platform delivery and ride-hail workers' safety and pay. Short treatment. Owner: Module 6; mention in Module 1 ("whose welfare"). | review-gemini | low | open |
+| CR-30-trip-patterns | Gaps found while checking the Gemini review: care and escort trips and gendered travel patterns (one mention in the course); telework and its effect on peak demand since 2020 (one mention). Owner: Module 4 (demand), Module 2 (equity). | session | medium | open |
 
 ## Status notes (2026-11-03, overnight run)
 
